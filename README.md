@@ -39,7 +39,7 @@ problem_sets/
 
 docs/textbook/
   A〜G_*_textbook.md            第1次試験7科目の初心者向け教科書（全論点を基本概念→具体例→ひっかけポイント→過去問参照の構成で解説、7科目完成）
-  slides/                       7科目・全226論点の図解PowerPointスライド
+  slides/                       A科目・全36論点の図解PowerPointスライド
 ```
 
 ## まず読むべきドキュメント
@@ -51,7 +51,7 @@ docs/textbook/
 ## 学習の進め方
 
 - ゼロから学ぶ場合は `docs/textbook/<科目記号>_*_textbook.md` を最初に読む。各論点を「基本概念→具体例→ひっかけポイント→過去問で確認する」の順で解説しており、これを読めば `problem_sets/1st_stage/exercises/` の演習が解けるレベルに到達することを目標にしている。7科目（A:経済学、B:財務・会計、C:企業経営理論、D:運営管理、E:経営法務、F:経営情報システム、G:中小企業経営・政策）すべて完成済み。
-- 図で全体像をつかむ場合は `docs/textbook/slides/` の科目別PowerPointを使う。全226論点を、比較・フロー・マトリクス・階層・循環などの図解で整理している。
+- 図で全体像をつかむ場合は `docs/textbook/slides/` のPowerPointを使う。現在はA科目の全36論点を、比較・フロー・マトリクス・階層・循環などの図解で整理している。
 - 教科書で基礎を固めたら `problem_sets/1st_stage/exercises/` で演習を解き、`docs/10_study_schedule.md` の学習スケジュールに沿って進める。
 
 ## 問題集の作り方

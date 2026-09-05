@@ -1385,26 +1385,37 @@ def main() -> None:
         "--subject",
         choices=sorted(SUBJECTS),
         action="append",
-        help="生成する科目記号。複数回指定可能（省略時は全科目）",
+        help="生成する科目記号。複数回指定可能（省略時はA科目）",
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="全7科目を生成する",
     )
     args = parser.parse_args()
-    subjects = args.subject or list(SUBJECTS)
+    if args.all and args.subject:
+        parser.error("--all と --subject は同時に指定できません")
+    subjects = list(SUBJECTS) if args.all else (args.subject or ["A"])
 
-    books: list[Textbook] = []
-    outputs: list[Path] = []
     for subject in subjects:
         config = SUBJECTS[subject]
         source = TEXTBOOK_DIR / config["file"]
         book = parse_textbook(source, subject)
         output = OUTPUT_DIR / source.name.replace("_textbook.md", "_visual_slides.pptx")
         counts = build_deck(book, output)
-        books.append(book)
-        outputs.append(output)
         visual_summary = ", ".join(f"{key}:{value}" for key, value in sorted(counts.items()))
         print(f"{subject}: {len(book.topics)}論点 → {output} ({visual_summary})")
 
-    if len(subjects) == len(SUBJECTS):
-        write_readme(books, outputs)
+    existing_books: list[Textbook] = []
+    existing_outputs: list[Path] = []
+    for subject, config in SUBJECTS.items():
+        output = OUTPUT_DIR / config["file"].replace("_textbook.md", "_visual_slides.pptx")
+        if output.exists():
+            existing_books.append(
+                parse_textbook(TEXTBOOK_DIR / config["file"], subject)
+            )
+            existing_outputs.append(output)
+    write_readme(existing_books, existing_outputs)
 
 
 if __name__ == "__main__":
