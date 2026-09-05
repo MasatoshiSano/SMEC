@@ -13,6 +13,9 @@ docs/
   03_exam_statistics.md        合格率・受験者数の推移（令和2〜7年度、公式統計）
   04_study_materials_guide.md  市販教材・学習法のリンク集
   05_sources.md                全情報の入手元URL・取得日一覧（★まずこれを見ること）
+  06_chusho_hakusho_summary.md 中小企業白書2026年版の要点まとめ（政策科目対策）
+  07_key_formulas_and_frameworks.md 1次試験7科目の重要公式・フレームワーク集
+  08_2nd_stage_solving_framework.md 第2次試験の解答プロセス・事例別フレームワーク
   official_guides/             第1次・第2次試験案内PDF原本（令和8年度）
   official_stats/              申込者・合格者統計PDF原本（令和2〜7年度）
 
