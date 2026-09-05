@@ -17,15 +17,19 @@ docs/
   07_key_formulas_and_frameworks.md 1次試験7科目の重要公式・フレームワーク集
   08_2nd_stage_solving_framework.md 第2次試験の解答プロセス・事例別フレームワーク
   official_guides/             第1次・第2次試験案内PDF原本（令和8年度）
-  official_stats/              申込者・合格者統計PDF原本（令和2〜7年度）
+  official_stats/              申込者・合格者統計PDF原本（平成19〜令和7年度、全年度網羅）
 
 past_exams/
   1st_stage/                   第1次試験 過去問（平成19年度〜令和8年度、科目A〜G）
+  1st_stage_answers/           第1次試験 正解・配点（令和5〜8年度）
   2nd_stage/questions/         第2次試験 過去問（平成19年度〜令和7年度、事例A〜D）
-  2nd_stage/shushi/            第2次試験「出題の趣旨」（令和2〜7年度）
+  2nd_stage/shushi/            第2次試験「出題の趣旨」（平成19年度〜令和7年度、全年度網羅）
 
 references/
-  whitepaper/                  中小企業白書2026年版（概要・目次・中小企業/小規模企業施策）
+  whitepaper/                  中小企業白書（2022〜2026年版）
+
+scripts/
+  crawl_pdfs.py, download_mondai.sh, *_urls.txt  収集を再現するためのスクリプトとURL一覧
 
 problem_sets/
   1st_stage/                   第1次試験 論点別見出し（過去問完全マスター方式、7科目）
@@ -49,6 +53,7 @@ problem_sets/
 
 ## 既知の制約・今後の更新事項
 
-- 第2次試験の「出題の趣旨」は公式サイトで令和2年度分までしか同一パターンで遡及取得できなかった（令和元年度以前は未収録）。
 - 令和8年度第2次試験は2026年10月25日実施予定のため、本リポジトリ作成時点（2026年9月5日）ではまだ過去問・統計が存在しない。実施後にダウンロードして追加すること。
 - 中小企業白書は分量の都合上、概要・目次・施策編のみを収録。全文が必要な場合は `docs/05_sources.md` に記載の索引ページから追加取得すること。
+- 第2次試験の統計資料（平成19〜令和元年度分）は数値が画像として埋め込まれておりテキスト抽出できていない。正確な数値は `docs/official_stats/2nd/` の原本PDFを直接参照すること（`docs/03_exam_statistics.md` 参照）。
+- `problem_sets/1st_stage/` の論点別見出しは、頻出ランク（A/B/C）・出題年度が未確定のフェーズ1状態。過去問を分析してランクを確定するフェーズ2作業を進行中。

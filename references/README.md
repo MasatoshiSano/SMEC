@@ -1,12 +1,16 @@
 # 参考資料
 
-## whitepaper/ - 中小企業白書2026年版（令和8年度版）
+## whitepaper/ - 中小企業白書（2022〜2026年版）
 
-出典：中小企業庁 https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/PDF/chusho.html （詳細は `../docs/05_sources.md`）
+出典：中小企業庁 https://www.chusho.meti.go.jp/pamflet/hakusyo/ 配下の各年版索引ページ（詳細は `../docs/05_sources.md`）
 
+**2026年版（令和8年度版、最新）**
 - `R08_chusho_hakusho_gaiyo.pdf` : 白書全体の概要（第1次試験「中小企業経営・中小企業政策」の出題範囲に直結）
 - `R08_chusho_hakusho_mokuji.pdf` : 目次・凡例
 - `R08_chusho_seisaku_chusho.pdf` : 中小企業施策（補助金・支援制度の全体像）
 - `R08_chusho_seisaku_shokibo.pdf` : 小規模企業施策
 
-白書は毎年内容が更新されるため、翌年度の試験対策では最新版に差し替えること。全文（`00Hakusyo_zentai.pdf`）はサイズが大きいため未収録。必要な場合は上記索引ページから取得する。
+**過去4年分（概要版）**
+- `2022_chusho_shokibo_hakusyo_gaiyou.pdf` / `2023_...` / `2024_...` / `2025_...` : 各年版の中小企業白書・小規模企業白書の概要版
+
+過去年度分を収録しているのは、当該年度の1次試験・2次試験で「その年の白書」が出題範囲だったため、過去問を解く際に対応する年度の白書と突き合わせて学習できるようにする狙い。白書は毎年内容が更新されるため、直近の試験対策では最新版（2026年版）を優先すること。全文（`00Hakusyo_zentai.pdf`）はサイズが大きいため未収録。必要な場合は上記索引ページから取得する。
