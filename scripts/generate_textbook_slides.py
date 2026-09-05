@@ -107,6 +107,7 @@ class Textbook:
     intro: list[str]
     topics: list[Topic]
     parts: list[str]
+    part_intros: dict[str, list[str]]
     summary: list[str]
 
 
@@ -166,6 +167,7 @@ def parse_textbook(path: Path, subject: str) -> Textbook:
 
     topics: list[Topic] = []
     parts: list[str] = []
+    part_intros: dict[str, list[str]] = {}
     intro: list[str] = []
     summary: list[str] = []
     current_part = "全体"
@@ -173,6 +175,7 @@ def parse_textbook(path: Path, subject: str) -> Textbook:
     current_section = "core"
     in_intro = False
     in_summary = False
+    in_part_intro = False
 
     for line in lines[1:]:
         stripped = line.strip()
@@ -180,10 +183,12 @@ def parse_textbook(path: Path, subject: str) -> Textbook:
             current_topic = None
             in_summary = True
             in_intro = False
+            in_part_intro = False
             continue
         if stripped.startswith("## この教科書の使い方"):
             in_intro = True
             in_summary = False
+            in_part_intro = False
             continue
 
         part_match = part_re.match(stripped)
@@ -191,15 +196,18 @@ def parse_textbook(path: Path, subject: str) -> Textbook:
             current_topic = None
             in_intro = False
             in_summary = False
+            in_part_intro = True
             current_part = clean_markdown(part_match.group(1))
             if current_part not in parts:
                 parts.append(current_part)
+                part_intros[current_part] = []
             continue
 
         topic_match = topic_re.match(stripped)
         if topic_match:
             in_intro = False
             in_summary = False
+            in_part_intro = False
             number = int(topic_match.group(2))
             current_topic = Topic(
                 code=f"{subject}-{number}",
@@ -229,12 +237,14 @@ def parse_textbook(path: Path, subject: str) -> Textbook:
             intro.append(line)
         elif in_summary and stripped and stripped != "---":
             summary.append(line)
+        elif in_part_intro and stripped and stripped != "---":
+            part_intros[current_part].append(line)
 
     numbers = [topic.number for topic in topics]
     expected = list(range(1, SUBJECTS[subject]["expected"] + 1))
     if numbers != expected:
         raise ValueError(f"{path.name}: 論点番号が不連続です: {numbers}")
-    return Textbook(subject, title, intro, topics, parts, summary)
+    return Textbook(subject, title, intro, topics, parts, part_intros, summary)
 
 
 def markdown_table(lines: Iterable[str]) -> list[list[str]]:
@@ -262,6 +272,197 @@ def section_text(lines: Iterable[str], limit: int = 140) -> str:
         if value and not value.startswith("problem_sets/") and value not in pieces:
             pieces.append(value)
     return shorten(" ".join(pieces), limit)
+
+
+SECTION_LABELS = {
+    "guide": "使い方",
+    "part": "全体像",
+    "core": "基本概念",
+    "table": "表・整理",
+    "example": "具体例",
+    "trap": "注意",
+    "practice": "過去問",
+    "summary": "まとめ",
+}
+
+SECTION_STYLES = {
+    "guide": ("F8FAFC", MUTED),
+    "part": ("F8FAFC", MUTED),
+    "core": ("F8FAFC", INK),
+    "table": ("F5F3FF", "5B21B6"),
+    "example": (EXAMPLE_BG, EXAMPLE),
+    "trap": (WARNING_BG, WARNING),
+    "practice": ("F0FDF4", "15803D"),
+    "summary": ("FFFBEB", "A15C07"),
+}
+
+
+def content_units(lines: Iterable[str], section: str) -> list[tuple[str, str]]:
+    """本文を省略しない表示単位へ変換する。"""
+    units: list[tuple[str, str]] = []
+    for line in lines:
+        stripped = line.strip()
+        if not stripped or stripped in {"---", "$$"}:
+            continue
+        if stripped.startswith("|") and stripped.endswith("|"):
+            cells = [clean_markdown(cell) for cell in stripped.strip("|").split("|")]
+            if all(
+                re.fullmatch(r":?-{3,}:?", cell.replace(" ", ""))
+                for cell in cells
+            ):
+                continue
+            value = " ｜ ".join(cell for cell in cells if cell)
+            kind = "table"
+        else:
+            value = clean_markdown(stripped)
+            kind = section
+        if value:
+            units.append((kind, value))
+    return units
+
+
+def coverage_units(book: Textbook) -> list[str]:
+    """スライドにそのまま含めるべき教科書本文の一覧を返す。"""
+    units: list[str] = []
+    units.extend(text for _, text in content_units(book.intro, "guide"))
+    for part in book.parts:
+        units.extend(
+            text for _, text in content_units(book.part_intros.get(part, []), "part")
+        )
+    for topic in book.topics:
+        for section in ("core", "example", "trap", "practice"):
+            units.extend(
+                text
+                for _, text in content_units(topic.sections[section], section)
+            )
+    units.extend(text for _, text in content_units(book.summary, "summary"))
+    return units
+
+
+def detail_height(text: str) -> float:
+    line_count = max(1, (len(text) + 59) // 60)
+    return min(2.45, max(0.72, 0.38 + line_count * 0.27))
+
+
+def paginate_units(
+    units: list[tuple[str, str]], max_height: float = 5.45
+) -> list[list[tuple[str, str]]]:
+    pages: list[list[tuple[str, str]]] = []
+    page: list[tuple[str, str]] = []
+    used = 0.0
+    for unit in units:
+        height = detail_height(unit[1])
+        addition = height + (0.12 if page else 0)
+        if page and (used + addition > max_height or len(page) >= 7):
+            pages.append(page)
+            page = []
+            used = 0.0
+            addition = height
+        page.append(unit)
+        used += addition
+    if page:
+        pages.append(page)
+    return pages
+
+
+def add_detail_pages(
+    prs: Presentation,
+    heading: str,
+    subtitle: str,
+    units: list[tuple[str, str]],
+    config: dict,
+) -> int:
+    """教科書本文を省略せず、読みやすいカードに分けて追加する。"""
+    if not units:
+        return 0
+    pages = paginate_units(units)
+    accent = config["accent"]
+    for page_index, page in enumerate(pages, start=1):
+        slide = add_slide_base(prs, accent)
+        add_box(
+            slide,
+            0.48,
+            0.28,
+            1.12,
+            0.40,
+            "DETAIL",
+            fill=accent,
+            line=accent,
+            size=12,
+            color=WHITE,
+            bold=True,
+            align=PP_ALIGN.CENTER,
+        )
+        add_text(
+            slide,
+            1.75,
+            0.25,
+            9.80,
+            0.48,
+            heading,
+            size=22,
+            color=INK,
+            bold=True,
+        )
+        add_text(
+            slide,
+            9.95,
+            0.75,
+            2.62,
+            0.22,
+            f"{subtitle}｜{page_index}/{len(pages)}",
+            size=9.5,
+            color=accent,
+            bold=True,
+            align=PP_ALIGN.RIGHT,
+        )
+
+        y = 1.14
+        for kind, text in page:
+            height = detail_height(text)
+            fill_color, text_color = SECTION_STYLES.get(
+                kind, SECTION_STYLES["core"]
+            )
+            card = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                Inches(0.55),
+                Inches(y),
+                Inches(12.23),
+                Inches(height),
+            )
+            card.fill.solid()
+            card.fill.fore_color.rgb = rgb(fill_color)
+            card.line.color.rgb = rgb(lighten(text_color, 0.58))
+            card.line.width = Pt(1)
+            add_box(
+                slide,
+                0.68,
+                y + 0.13,
+                1.08,
+                min(0.46, height - 0.26),
+                SECTION_LABELS.get(kind, "要点"),
+                fill=text_color,
+                line=text_color,
+                size=9.5,
+                color=WHITE,
+                bold=True,
+                align=PP_ALIGN.CENTER,
+            )
+            add_text(
+                slide,
+                1.93,
+                y + 0.10,
+                10.58,
+                height - 0.20,
+                text,
+                size=11.5 if len(text) > 180 else 12.5,
+                color=INK,
+                valign=MSO_ANCHOR.TOP,
+            )
+            y += height + 0.12
+
+        add_footer(slide, config["file"], len(prs.slides), accent)
+    return len(pages)
 
 
 def split_label_body(text: str) -> tuple[str, str]:
@@ -1204,7 +1405,12 @@ def add_howto_slide(prs: Presentation, book: Textbook, config: dict) -> None:
 
 
 def add_part_slide(
-    prs: Presentation, part: str, index: int, topic_count: int, config: dict
+    prs: Presentation,
+    part: str,
+    index: int,
+    topic_count: int,
+    intro_lines: list[str],
+    config: dict,
 ) -> None:
     accent, soft = config["accent"], config["soft"]
     slide = add_slide_base(prs, accent)
@@ -1235,17 +1441,32 @@ def add_part_slide(
         1.30,
         2.18,
         10.70,
-        1.45,
+        1.05,
         re.sub(r"（[A-G]-\d+〜[A-G]-\d+）", "", part),
         size=33,
         color=INK,
         bold=True,
         align=PP_ALIGN.CENTER,
     )
+    intro_text = " ".join(
+        text for _, text in content_units(intro_lines, "part")
+    )
+    if intro_text:
+        add_text(
+            slide,
+            1.35,
+            3.30,
+            10.63,
+            1.10,
+            intro_text,
+            size=14,
+            color=MUTED,
+            align=PP_ALIGN.CENTER,
+        )
     add_box(
         slide,
         4.66,
-        4.34,
+        4.72,
         4.0,
         0.82,
         f"{topic_count} 論点",
@@ -1313,7 +1534,13 @@ def build_deck(book: Textbook, output: Path) -> dict[str, int]:
 
     add_title_slide(prs, book, config)
     add_howto_slide(prs, book, config)
-    slide_number = 2
+    add_detail_pages(
+        prs,
+        "この教科書の使い方｜全文",
+        "学習ガイド",
+        content_units(book.intro, "guide"),
+        config,
+    )
     diagram_counts: dict[str, int] = {}
 
     grouped: dict[str, list[Topic]] = {part: [] for part in book.parts}
@@ -1323,17 +1550,39 @@ def build_deck(book: Textbook, output: Path) -> dict[str, int]:
     for part_index, (part, topics) in enumerate(grouped.items(), start=1):
         if not topics:
             continue
-        add_part_slide(prs, part, part_index, len(topics), config)
-        slide_number += 1
+        add_part_slide(
+            prs,
+            part,
+            part_index,
+            len(topics),
+            book.part_intros.get(part, []),
+            config,
+        )
         for topic in topics:
             slide = add_slide_base(prs, config["accent"])
             add_topic_header(slide, topic, config["accent"])
             visual = render_visual(slide, topic, config["accent"], config["soft"])
             diagram_counts[visual] = diagram_counts.get(visual, 0) + 1
             add_context_panels(slide, topic, config["accent"])
-            slide_number += 1
-            add_footer(slide, config["file"], slide_number, config["accent"])
+            add_footer(slide, config["file"], len(prs.slides), config["accent"])
+            units: list[tuple[str, str]] = []
+            for section in ("core", "example", "trap", "practice"):
+                units.extend(content_units(topic.sections[section], section))
+            add_detail_pages(
+                prs,
+                f"{topic.code}｜{topic.title}",
+                topic.part,
+                units,
+                config,
+            )
 
+    add_detail_pages(
+        prs,
+        f"{config['name']}｜まとめ全文",
+        "まとめ",
+        content_units(book.summary, "summary"),
+        config,
+    )
     add_summary_slide(prs, book, config)
     output.parent.mkdir(parents=True, exist_ok=True)
     prs.save(output)
@@ -1344,7 +1593,7 @@ def write_readme(books: list[Textbook], outputs: list[Path]) -> None:
     rows = [
         "# 教科書 図解スライド",
         "",
-        "各教科書の全論点を、比較・フロー・マトリクス・階層・循環などの図解で整理したPowerPoint資料です。",
+        "教科書の全論点を図解し、基本概念・表・公式・具体例・ひっかけポイント・過去問参照を省略せず詳細スライドに収録したPowerPoint資料です。",
         "",
         "| 科目 | 元の教科書 | スライド | 論点数 |",
         "|---|---|---|---:|",
