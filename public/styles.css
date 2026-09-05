@@ -1,0 +1,90 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --panel-2: #273449;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --ok: #22c55e;
+  --err: #ef4444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(1200px 600px at 50% -10%, #1e293b, var(--bg));
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px;
+}
+
+.app { width: 100%; max-width: 560px; }
+
+.app__header { text-align: center; margin-bottom: 28px; }
+.app__header h1 { margin: 0; font-size: 40px; letter-spacing: 2px; }
+.app__subtitle { color: var(--muted); margin: 6px 0 12px; }
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.badge--pending { background: #334155; color: var(--muted); }
+.badge--ok { background: rgba(34, 197, 94, 0.15); color: var(--ok); }
+.badge--err { background: rgba(239, 68, 68, 0.15); color: var(--err); }
+
+.new-item { display: flex; gap: 10px; margin-bottom: 20px; }
+.new-item__input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 15px;
+}
+.new-item__input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+.new-item__button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+.new-item__button:hover { background: var(--accent-hover); }
+
+.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+.item__title { flex: 1; font-size: 15px; }
+.item--done .item__title { text-decoration: line-through; color: var(--muted); }
+.item__toggle, .item__delete {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.item__toggle { background: var(--panel-2); color: var(--text); }
+.item__delete { background: rgba(239, 68, 68, 0.15); color: var(--err); }
+
+.items__empty { text-align: center; color: var(--muted); margin-top: 18px; }
+.items__empty.hidden { display: none; }
