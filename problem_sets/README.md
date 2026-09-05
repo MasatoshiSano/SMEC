@@ -16,7 +16,7 @@
 
 - **フェーズ1（完了）**：見出し（論点リスト）の作成。
 - **フェーズ2（完了）**：過去問PDF（2016〜2025年度、直近10年）を7科目全問分析し、論点ごとの出題年度・頻出ランク（A/B/C）を確定。
-- **フェーズ3（試作中）**：頻出論点から順に、解答・解説を付けた演習形式に仕上げる。現在は財務・会計（B）・企業経営理論（C）の2科目・各6問の試作版（`1st_stage/exercises/`）。フォーマットの詳細は `1st_stage/exercises/README.md` 参照。
+- **フェーズ3（一巡完了）**：頻出論点から順に、解答・解説を付けた演習形式に仕上げる。7科目それぞれ6問（計42問）を作成済み（`1st_stage/exercises/`）。フォーマットの詳細は `1st_stage/exercises/README.md` 参照。各科目6問は最頻出論点の一部に過ぎないため、今後さらに拡充する余地がある（下記「今後の展開方針」参照）。
 
 ## ディレクトリ構成
 
@@ -31,10 +31,15 @@ problem_sets/
     E_business_law.md
     F_information_systems.md
     G_sme_management_policy.md
-    exercises/           論点別演習（設問・解答・解説）。フェーズ3試作版
+    exercises/           論点別演習（設問・解答・解説）。7科目×6問(計42問)完了
       README.md
+      A_economics_exercises.md
       B_finance_accounting_exercises.md
       C_business_administration_exercises.md
+      D_operations_management_exercises.md
+      E_business_law_exercises.md
+      F_information_systems_exercises.md
+      G_sme_management_policy_exercises.md
 ```
 
 第2次試験（事例I〜IV）は形式が異なる（論述式・与件文型のため論点別ランク付けになじまない）ため、対策方針は `docs/08_2nd_stage_solving_framework.md` の事例別フレームワークを引き続き参照する。
