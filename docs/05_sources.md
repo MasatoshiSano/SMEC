@@ -80,3 +80,28 @@
 - 過去問題・出題の趣旨・統計資料は、JF-CMCA公式サイトで無償公開されている一次資料をそのまま保存したものである。個人の学習目的での保管・参照を前提とし、再配布・商用利用は行わないこと。
 - 中小企業白書は中小企業庁が公開する政府刊行物であり、出典を明記の上での引用・利用が想定されている。
 - 市販の参考書・問題集（TAC、LEC、スタディング、同友館「ふぞろいな合格答案」など）は著作物であるため、本リポジトリには実体を含めず、書誌情報とリンクのみを記録する。
+
+## 9. 追加収集分（欠落補完）
+
+初回収集で未収録だった一次資料を追加取得した。すべてJF-CMCA・中小企業庁が無償公開する一次資料である。取得日：2026-09-05。
+
+| 追加資料 | 発行元 | URL（パターン／一覧ページ） | 保存先 |
+|---|---|---|---|
+| 第1次試験 正解と配点（令和5〜7年度＝R05〜R07） | JF-CMCA | 一覧: `https://www.jf-cmca.jp/contents/010_c_/010_c_r0X_shiken/R0X_1ji_shiken_kaitou.html`／本体: `https://www.jf-cmca.jp/attach/test/r0X/1ji_seikai/<西暦><a〜g>.pdf` | `past_exams/1st_stage_answers/r05〜r07/` |
+| 第2次試験「出題の趣旨」（平成19〜令和元年度＝H19〜R01） | JF-CMCA | 一覧: `https://www.jf-cmca.jp/contents/010_c_/001_shiken_kakokekka_syusi.html`／本体: `https://www.jf-cmca.jp/attach/test/<年度>/<年度>_2ji_shushi/<年度>_2ji_shushi_jirei1〜4.pdf` | `past_exams/2nd_stage/shushi/h19〜h30, r01/` |
+| 公式統計（第1次・第2次、平成19〜31年度＝H19〜H31） | JF-CMCA | 一覧: `001_shiken_kakokekka_1.html`（1次）／`001_shiken_kakokekka_2.html`（2次）／本体: `https://www.jf-cmca.jp/attach/test/<年度>/<年度>_1ji_toukei.pdf`・`_2ji_toukei.pdf` | `docs/official_stats/1st/`・`docs/official_stats/2nd/` |
+| 中小企業白書・小規模企業白書 概要版（2022〜2025年版） | 中小企業庁 | `https://www.chusho.meti.go.jp/pamflet/hakusyo/<西暦>/PDF/<西暦>gaiyou.pdf` | `references/whitepaper/<西暦>_chusho_shokibo_hakusyo_gaiyou.pdf` |
+
+これにより、第2次「出題の趣旨」は**平成19年度〜令和7年度の全年度**、公式統計は**平成19年度〜令和7年度**、白書概要は**2022〜2026年版**を収録し、初回収集時の未収録範囲を解消した。
+
+### 収集の再現用スクリプト
+
+収集手順を再現・検証できるよう、取得に用いたスクリプトとURL一覧を `scripts/` に保存している。
+
+- `scripts/crawl_pdfs.py` … 年度別HTMLページを巡回し、相対リンクを絶対URLに解決してPDFリンクを抽出する。
+- `scripts/download_mondai.sh` … URL一覧を受け取り、レート制御（0.3秒間隔）付きで一括ダウンロードする。
+- `scripts/mondai_urls.txt` … 過去問（第1次148・第2次76＝計224）の全ソースURL一覧。
+- `scripts/ref_urls.txt` … 統計・試験案内・受験者数推移PDFのソースURL一覧。
+- `scripts/misc_urls.txt` … 出題の趣旨・正解表・試験案内のソースURL一覧。
+
+**ネットワーク上の注意**：旧ドメイン `www.j-smeca.jp` は本収集環境のDNSで解決できず、現行ドメイン `www.jf-cmca.jp` から取得した（組織改称・ドメイン移行のため）。中小企業庁サイトはブラウザ相当のUser-Agentを付与しないと403を返す場合がある。
