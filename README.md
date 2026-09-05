@@ -26,6 +26,9 @@ past_exams/
 
 references/
   whitepaper/                  中小企業白書2026年版（概要・目次・中小企業/小規模企業施策）
+
+problem_sets/
+  1st_stage/                   第1次試験 論点別見出し（過去問完全マスター方式、7科目）
 ```
 
 ## まず読むべきドキュメント
@@ -33,6 +36,10 @@ references/
 1. `docs/05_sources.md` - すべての情報の出典（このリポジトリの信頼性の根拠）
 2. `docs/00_exam_system_overview.md` - 試験制度の全体像、特に**令和8年度からの口述試験廃止**などの制度変更
 3. `docs/01_1st_stage_syllabus.md` / `docs/02_2nd_stage_outline.md` - 出題範囲
+
+## 問題集の作り方
+
+`problem_sets/README.md` に方針を記載。市販の「過去問完全マスター」方式（論点別×頻出度A/B/Cランク）を採用し、現在はフェーズ1（論点見出しの作成）が完了、フェーズ2（過去問を分析して頻出ランクを確定）が次のステップ。
 
 ## データの性質・著作権について
 
