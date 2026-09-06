@@ -2,6 +2,21 @@
 
 各教科書の全論点を、全体構造・セクション別要点・学習のツボを図解でコンパクトに整理したPowerPoint資料です。
 
+## 標準図解テンプレート
+
+| ファイル | 内容 |
+|---|---|
+| [`SMEC_visual_diagram_template.pptx`](SMEC_visual_diagram_template.pptx) | 汎用図解12パターン＋経済学専用グラフ6パターン（全21枚、ガイド3枚を含む） |
+| [`TEMPLATE_GUIDE.md`](TEMPLATE_GUIDE.md) | 配色・文字・余白・パターン選択基準・禁止事項 |
+
+テンプレートはすべてPowerPoint上で編集できる図形で作成しています。
+
+```bash
+python3 scripts/generate_smec_visual_template.py
+```
+
+## 科目別スライド
+
 | 科目 | 元の教科書 | スライド | 論点数 | 構成 |
 |---|---|---|---:|---|
 | A. 経済学・経済政策 | [`A_economics_textbook.md`](../A_economics_textbook.md) | [`A_economics_visual_slides.pptx`](A_economics_visual_slides.pptx) | 36 | 表紙・全体マップ・8セクション要点・まとめ (計11枚) |
