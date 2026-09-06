@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""SMEC向けの汎用図解12種＋経済学専用グラフ6種を生成する。"""
+"""知的で編集的なSMEC標準図解テンプレートを生成する。"""
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
+from pptx.oxml.ns import qn
+from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Inches, Pt
 
 
@@ -17,47 +20,55 @@ OUTPUT = ROOT / "docs" / "textbook" / "slides" / "SMEC_visual_diagram_template.p
 
 SLIDE_W = 13.333
 SLIDE_H = 7.5
-FONT = "WenQuanYi Micro Hei"
+FONT = "Noto Sans"
 
-INK = "161616"
-NAVY = "0F172A"
-BLUE = "0F62FE"
-CYAN = "1192E8"
-TEAL = "009D9A"
-GREEN = "24A148"
-YELLOW = "F1C21B"
-ORANGE = "FF832B"
-RED = "DA1E28"
-PURPLE = "8A3FFC"
-GRAY_10 = "F4F4F4"
-GRAY_20 = "E0E0E0"
-GRAY_50 = "8D8D8D"
-GRAY_70 = "525252"
+# Editorial Cobalt
+PAPER = "F7F7F4"
 WHITE = "FFFFFF"
+INK = "17212B"
+MUTED = "52606D"
+LINE = "D5DBE1"
+GRID = "E8EBEE"
+COBALT = "245B9E"
+COBALT_MID = "7EA2C9"
+COBALT_PALE = "E9F0F7"
+TEAL = "16776F"
+TEAL_PALE = "E7F0ED"
+RUST = "B24A3B"
+RUST_PALE = "F5EAE7"
+GOLD = "8A620F"
 
 
 def rgb(value: str) -> RGBColor:
     return RGBColor.from_string(value)
 
 
-def add_text(
+def set_east_asian_font(run, typeface: str = FONT) -> None:
+    """PowerPointの東アジア文字用フォントも明示する。"""
+    r_pr = run._r.get_or_add_rPr()
+    east_asian = r_pr.find(qn("a:ea"))
+    if east_asian is None:
+        east_asian = OxmlElement("a:ea")
+        r_pr.append(east_asian)
+    east_asian.set("typeface", typeface)
+
+
+def text(
     slide,
     x: float,
     y: float,
     w: float,
     h: float,
-    text: str,
+    value: str,
     *,
-    size: float = 16,
+    size: float = 15,
     color: str = INK,
     bold: bool = False,
     align: PP_ALIGN = PP_ALIGN.LEFT,
-    valign: MSO_ANCHOR = MSO_ANCHOR.MIDDLE,
-    margin: float = 0.04,
+    valign: MSO_ANCHOR = MSO_ANCHOR.TOP,
+    margin: float = 0,
 ):
-    shape = slide.shapes.add_textbox(
-        Inches(x), Inches(y), Inches(w), Inches(h)
-    )
+    shape = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
     frame = shape.text_frame
     frame.clear()
     frame.word_wrap = True
@@ -70,1232 +81,900 @@ def add_text(
     paragraph.alignment = align
     paragraph.space_after = Pt(0)
     run = paragraph.add_run()
-    run.text = text
+    run.text = value
     run.font.name = FONT
     run.font.size = Pt(size)
     run.font.bold = bold
     run.font.color.rgb = rgb(color)
+    set_east_asian_font(run)
     return shape
 
 
-def add_box(
+def rect(
     slide,
     x: float,
     y: float,
     w: float,
     h: float,
-    text: str = "",
     *,
     fill: str = WHITE,
-    line: str = GRAY_20,
-    size: float = 15,
-    color: str = INK,
-    bold: bool = False,
-    align: PP_ALIGN = PP_ALIGN.CENTER,
-    radius: bool = True,
+    line_color: str | None = LINE,
+    line_width: float = 0.6,
 ):
-    shape_type = MSO_SHAPE.ROUNDED_RECTANGLE if radius else MSO_SHAPE.RECTANGLE
     shape = slide.shapes.add_shape(
-        shape_type, Inches(x), Inches(y), Inches(w), Inches(h)
+        MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h)
     )
     shape.fill.solid()
     shape.fill.fore_color.rgb = rgb(fill)
-    shape.line.color.rgb = rgb(line)
-    shape.line.width = Pt(1)
-    if text:
-        frame = shape.text_frame
-        frame.clear()
-        frame.word_wrap = True
-        frame.margin_left = Inches(0.10)
-        frame.margin_right = Inches(0.10)
-        frame.margin_top = Inches(0.07)
-        frame.margin_bottom = Inches(0.07)
-        frame.vertical_anchor = MSO_ANCHOR.MIDDLE
-        paragraph = frame.paragraphs[0]
-        paragraph.alignment = align
-        run = paragraph.add_run()
-        run.text = text
-        run.font.name = FONT
-        run.font.size = Pt(size)
-        run.font.bold = bold
-        run.font.color.rgb = rgb(color)
+    if line_color is None:
+        shape.line.fill.background()
+    else:
+        shape.line.color.rgb = rgb(line_color)
+        shape.line.width = Pt(line_width)
     return shape
 
 
-def add_line(
-    slide,
-    x1: float,
-    y1: float,
-    x2: float,
-    y2: float,
-    *,
-    color: str = GRAY_50,
-    width: float = 1.5,
-):
-    connector = slide.shapes.add_connector(
-        MSO_CONNECTOR.STRAIGHT,
-        Inches(x1),
-        Inches(y1),
-        Inches(x2),
-        Inches(y2),
-    )
-    connector.line.color.rgb = rgb(color)
-    connector.line.width = Pt(width)
-    return connector
-
-
-def add_circle(
+def circle(
     slide,
     x: float,
     y: float,
     d: float,
-    text: str,
     *,
-    fill: str = BLUE,
-    color: str = WHITE,
-    size: float = 15,
+    fill: str = COBALT,
+    line_color: str | None = None,
 ):
     shape = slide.shapes.add_shape(
         MSO_SHAPE.OVAL, Inches(x), Inches(y), Inches(d), Inches(d)
     )
     shape.fill.solid()
     shape.fill.fore_color.rgb = rgb(fill)
-    shape.line.fill.background()
-    frame = shape.text_frame
-    frame.clear()
-    frame.vertical_anchor = MSO_ANCHOR.MIDDLE
-    paragraph = frame.paragraphs[0]
-    paragraph.alignment = PP_ALIGN.CENTER
-    run = paragraph.add_run()
-    run.text = text
-    run.font.name = FONT
-    run.font.size = Pt(size)
-    run.font.bold = True
-    run.font.color.rgb = rgb(color)
+    if line_color is None:
+        shape.line.fill.background()
+    else:
+        shape.line.color.rgb = rgb(line_color)
+        shape.line.width = Pt(0.7)
     return shape
 
 
-def add_base(prs: Presentation):
+def line(
+    slide,
+    x1: float,
+    y1: float,
+    x2: float,
+    y2: float,
+    *,
+    color: str = LINE,
+    width: float = 1,
+):
+    shape = slide.shapes.add_connector(
+        MSO_CONNECTOR.STRAIGHT,
+        Inches(x1),
+        Inches(y1),
+        Inches(x2),
+        Inches(y2),
+    )
+    shape.line.color.rgb = rgb(color)
+    shape.line.width = Pt(width)
+    return shape
+
+
+def triangle(
+    slide,
+    x: float,
+    y: float,
+    w: float = 0.13,
+    h: float = 0.16,
+    *,
+    color: str = MUTED,
+    rotation: float = 90,
+):
+    shape = slide.shapes.add_shape(
+        MSO_SHAPE.ISOSCELES_TRIANGLE,
+        Inches(x),
+        Inches(y),
+        Inches(w),
+        Inches(h),
+    )
+    shape.rotation = rotation
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = rgb(color)
+    shape.line.fill.background()
+    return shape
+
+
+def base_slide(prs: Presentation):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     slide.background.fill.solid()
-    slide.background.fill.fore_color.rgb = rgb(WHITE)
+    slide.background.fill.fore_color.rgb = rgb(PAPER)
     return slide
 
 
-def add_header(
-    slide,
+def pattern_slide(
+    prs: Presentation,
     code: str,
     category: str,
-    action_title: str,
+    title_value: str,
+    use_case: str,
+    rule: str,
     *,
-    accent: str = BLUE,
-) -> None:
-    add_box(
+    accent: str = COBALT,
+):
+    slide = base_slide(prs)
+    text(
         slide,
-        0.50,
-        0.30,
-        0.92,
-        0.36,
-        code,
-        fill=accent,
-        line=accent,
-        size=12,
-        color=WHITE,
-        bold=True,
-    )
-    add_text(
-        slide,
-        1.60,
-        0.30,
-        2.40,
-        0.36,
-        category,
-        size=11,
-        color=GRAY_70,
-        bold=True,
-    )
-    add_text(
-        slide,
-        0.50,
-        0.78,
-        12.15,
         0.62,
-        action_title,
+        0.34,
+        2.50,
+        0.22,
+        f"{code}  /  {category}",
+        size=9,
+        color=accent,
+        bold=True,
+    )
+    text(
+        slide,
+        0.62,
+        0.71,
+        12.05,
+        0.63,
+        title_value,
         size=24,
-        color=NAVY,
+        color=INK,
         bold=True,
-        valign=MSO_ANCHOR.TOP,
     )
-    add_line(slide, 0.50, 1.48, 12.83, 1.48, color=GRAY_20, width=1)
-
-
-def add_takeaway(
-    slide,
-    text: str,
-    number: int,
-    *,
-    accent: str = BLUE,
-) -> None:
-    add_box(
+    line(slide, 0.62, 1.42, 12.71, 1.42, color=LINE, width=0.8)
+    line(slide, 0.62, 6.70, 12.71, 6.70, color=LINE, width=0.6)
+    text(
         slide,
-        0.50,
-        6.50,
-        12.33,
-        0.55,
-        f"KEY TAKEAWAY｜{text}",
-        fill=GRAY_10,
-        line=GRAY_20,
-        size=11.5,
-        color=NAVY,
-        bold=True,
-        align=PP_ALIGN.LEFT,
-        radius=False,
-    )
-    add_text(
-        slide,
-        0.52,
-        7.16,
-        10.5,
-        0.18,
-        "SMEC Visual Slide System｜すべて編集可能なPowerPoint図形",
-        size=8,
-        color=GRAY_50,
-    )
-    add_text(
-        slide,
-        12.15,
-        7.14,
-        0.60,
+        0.62,
+        6.82,
+        10.90,
         0.20,
-        f"{number:02d}",
+        f"用途｜{use_case}　　作図ルール｜{rule}",
+        size=8.5,
+        color=MUTED,
+    )
+    text(
+        slide,
+        12.05,
+        6.80,
+        0.66,
+        0.22,
+        f"{len(prs.slides):02d}",
         size=9,
         color=accent,
         bold=True,
         align=PP_ALIGN.RIGHT,
     )
+    return slide
 
 
-def add_title_slide(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_box(
-        slide,
-        0,
-        0,
-        4.10,
-        7.50,
-        "",
-        fill=NAVY,
-        line=NAVY,
-        radius=False,
-    )
-    for x, y, d, fill in [
-        (0.60, 0.80, 1.10, BLUE),
-        (2.10, 1.40, 0.68, CYAN),
-        (1.15, 2.65, 1.50, TEAL),
-        (2.70, 3.85, 0.95, PURPLE),
-        (0.60, 5.15, 1.25, ORANGE),
-    ]:
-        add_circle(slide, x, y, d, "", fill=fill)
-    add_text(
-        slide,
-        4.85,
-        1.05,
-        7.55,
-        0.35,
-        "SMEC DESIGN SYSTEM",
-        size=15,
-        color=BLUE,
-        bold=True,
-    )
-    add_text(
-        slide,
-        4.80,
-        1.65,
-        7.70,
-        1.45,
-        "図で理解するための\n標準スライドテンプレート",
-        size=34,
-        color=NAVY,
-        bold=True,
-        valign=MSO_ANCHOR.TOP,
-    )
-    add_text(
-        slide,
-        4.85,
-        3.45,
-        7.20,
-        0.80,
-        "汎用図解 12パターン\n＋ 経済学専用グラフ 6パターン",
-        size=21,
-        color=GRAY_70,
-        bold=True,
-        valign=MSO_ANCHOR.TOP,
-    )
-    add_box(
-        slide,
-        4.85,
-        5.25,
-        2.05,
-        0.52,
-        "18 PATTERNS",
-        fill=BLUE,
-        line=BLUE,
-        size=13,
-        color=WHITE,
-        bold=True,
-    )
-    add_box(
-        slide,
-        7.10,
-        5.25,
-        2.05,
-        0.52,
-        "100% EDITABLE",
-        fill=WHITE,
-        line=BLUE,
-        size=13,
-        color=BLUE,
-        bold=True,
-    )
-    add_text(
-        slide,
-        4.85,
-        6.65,
-        7.30,
-        0.28,
-        "公開デザインシステムを参考にしたSMEC独自仕様",
-        size=11,
-        color=GRAY_50,
-    )
+def note(slide, x: float, y: float, w: float, title_value: str, body: str) -> None:
+    text(slide, x, y, w, 0.24, title_value, size=9.5, color=COBALT, bold=True)
+    text(slide, x, y + 0.35, w, 0.72, body, size=12.5, color=MUTED)
 
 
-def add_design_rules(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
+def node(
+    slide,
+    x: float,
+    y: float,
+    w: float,
+    title_value: str,
+    body: str = "",
+    *,
+    accent: str = COBALT,
+    fill: str = WHITE,
+    h: float = 1.04,
+) -> None:
+    rect(slide, x, y, w, h, fill=fill, line_color=LINE)
+    rect(slide, x, y, 0.06, h, fill=accent, line_color=None)
+    text(
         slide,
-        "RULES",
-        "デザイン原則",
-        "統一感は「グリッド・色・文字・1枚1メッセージ」の固定から生まれる",
+        x + 0.18,
+        y + 0.15,
+        w - 0.33,
+        0.26,
+        title_value,
+        size=12.5,
+        color=INK,
+        bold=True,
     )
-    cards = [
-        ("01", "ACTION TITLE", "タイトルだけで結論が伝わる\n名詞ではなく文章で書く", BLUE),
-        ("02", "ONE MESSAGE", "1枚につき主張は1つ\n図は主張を証明するために置く", TEAL),
-        ("03", "GRID SYSTEM", "12列グリッドを基準に整列\n余白は0.5インチ以上", PURPLE),
-        ("04", "COLOR ROLE", "青＝主張／緑＝望ましい\n赤＝注意／灰＝補助情報", ORANGE),
-    ]
-    for i, (num, title, body, color) in enumerate(cards):
-        x = 0.58 + i * 3.12
-        add_box(
+    if body:
+        text(
             slide,
-            x,
-            1.82,
-            2.85,
-            3.72,
-            "",
-            fill=WHITE,
-            line=GRAY_20,
-        )
-        add_circle(slide, x + 0.22, 2.08, 0.62, num, fill=color, size=13)
-        add_text(
-            slide,
-            x + 0.22,
-            2.92,
-            2.40,
-            0.36,
-            title,
-            size=14,
-            color=color,
-            bold=True,
-        )
-        add_text(
-            slide,
-            x + 0.22,
-            3.48,
-            2.40,
-            1.26,
+            x + 0.18,
+            y + 0.52,
+            w - 0.33,
+            h - 0.62,
             body,
-            size=14,
-            color=INK,
-            valign=MSO_ANCHOR.TOP,
+            size=10.5,
+            color=MUTED,
         )
-    add_takeaway(
+
+
+def add_axes(
+    slide,
+    x: float,
+    y: float,
+    w: float,
+    h: float,
+    x_label: str,
+    y_label: str,
+) -> None:
+    line(slide, x, y + h, x + w, y + h, color=MUTED, width=0.9)
+    line(slide, x, y + h, x, y, color=MUTED, width=0.9)
+    text(
         slide,
-        "装飾を増やすより、同じルールを全ページで守る方がプロ品質に近づく。",
-        len(prs.slides),
+        x + w - 0.85,
+        y + h + 0.10,
+        0.85,
+        0.20,
+        x_label,
+        size=9,
+        color=MUTED,
+        align=PP_ALIGN.RIGHT,
     )
+    text(slide, x - 0.10, y - 0.27, 1.15, 0.20, y_label, size=9, color=MUTED)
+
+
+def add_cover(prs: Presentation) -> None:
+    slide = base_slide(prs)
+    rect(slide, 0, 0, 0.16, SLIDE_H, fill=COBALT, line_color=None)
+    text(slide, 0.74, 0.60, 3.20, 0.25, "SMEC  /  VISUAL LANGUAGE", size=10, color=COBALT, bold=True)
+    text(
+        slide,
+        0.74,
+        1.38,
+        8.00,
+        1.62,
+        "複雑な論点を、\n一枚の構造に変える。",
+        size=36,
+        color=INK,
+        bold=True,
+    )
+    text(
+        slide,
+        0.78,
+        3.46,
+        6.95,
+        0.70,
+        "中小企業診断士 教科書のための\n標準図解スライドシステム",
+        size=18,
+        color=MUTED,
+    )
+    line(slide, 0.78, 5.08, 8.35, 5.08, color=LINE, width=0.8)
+    text(slide, 0.78, 5.35, 1.50, 0.40, "12", size=28, color=COBALT, bold=True)
+    text(slide, 1.58, 5.52, 1.80, 0.20, "汎用図解", size=10, color=MUTED)
+    text(slide, 3.40, 5.35, 1.50, 0.40, "06", size=28, color=TEAL, bold=True)
+    text(slide, 4.20, 5.52, 2.30, 0.20, "経済学専用", size=10, color=MUTED)
+    text(slide, 8.88, 1.12, 3.65, 0.36, "18 PATTERNS", size=11, color=MUTED, bold=True, align=PP_ALIGN.RIGHT)
+    text(slide, 9.02, 1.65, 3.55, 1.45, "18", size=82, color=COBALT, bold=True, align=PP_ALIGN.RIGHT)
+    text(slide, 9.10, 3.35, 3.45, 0.54, "図解の共通文法", size=20, color=INK, bold=True, align=PP_ALIGN.RIGHT)
+    text(
+        slide,
+        9.10,
+        4.18,
+        3.45,
+        1.20,
+        "グリッド\nタイポグラフィ\n意味のある色",
+        size=15,
+        color=MUTED,
+        align=PP_ALIGN.RIGHT,
+    )
+    text(slide, 0.78, 6.82, 4.50, 0.20, "Editorial Cobalt  /  v2.0", size=8.5, color=MUTED)
+
+
+def add_principles(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
+        "00",
+        "DESIGN PRINCIPLES",
+        "統一感は装飾ではなく、反復される判断基準から生まれる",
+        "全スライド",
+        "色・文字・整列・余白を固定する",
+    )
+    principles = [
+        ("01", "結論を先に書く", "タイトルだけを追っても、論理の流れが分かる"),
+        ("02", "図に仕事をさせる", "文章の要約ではなく、関係・変化・比較を見せる"),
+        ("03", "色に意味を持たせる", "青は主張、ティールは比較、赤は例外だけに使う"),
+        ("04", "余白を情報にする", "囲みを減らし、距離と整列でグループを示す"),
+    ]
+    for index, (number, title_value, body) in enumerate(principles):
+        x = 0.74 + (index % 2) * 6.05
+        y = 1.85 + (index // 2) * 2.15
+        text(slide, x, y, 0.58, 0.38, number, size=20, color=COBALT, bold=True)
+        line(slide, x + 0.72, y + 0.17, x + 1.20, y + 0.17, color=COBALT, width=1.5)
+        text(slide, x + 1.42, y - 0.02, 4.25, 0.40, title_value, size=16, color=INK, bold=True)
+        text(slide, x + 1.42, y + 0.55, 4.25, 0.70, body, size=12.5, color=MUTED)
 
 
 def add_selector(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
-        "INDEX",
-        "パターン選択",
-        "伝えたい関係を先に決めれば、使う図解パターンは自動的に絞り込める",
+    slide = pattern_slide(
+        prs,
+        "00",
+        "PATTERN SELECTOR",
+        "伝えたい関係を定義すれば、選ぶべき図解は一つに絞れる",
+        "図解パターンの選択",
+        "内容ではなく関係性から型を選ぶ",
     )
     rows = [
-        ("構成要素を並べる", "G01 定義カード / G09 ツリー"),
-        ("違いを示す", "G02 比較 / G08 2×2マトリクス"),
-        ("順序や変化を示す", "G03 プロセス / G07 タイムライン"),
-        ("理由や影響を示す", "G04 因果 / G05 循環"),
-        ("レベルや関係を示す", "G06 階層 / G10 ネットワーク"),
-        ("数値・式で示す", "G11 数式 / G12 KPI・表"),
-        ("経済グラフで示す", "E01〜E06 専用パターン"),
+        ("WHAT", "何を伝えるか", "PATTERN", "使う型"),
+        ("STRUCTURE", "構成・分類", "G01 / G06 / G09", "定義・階層・ツリー"),
+        ("DIFFERENCE", "違い・位置づけ", "G02 / G08", "比較・2×2"),
+        ("CHANGE", "順序・時間", "G03 / G05 / G07", "プロセス・循環・時系列"),
+        ("INFLUENCE", "原因・相互作用", "G04 / G10", "因果・ネットワーク"),
+        ("EVIDENCE", "数式・数値", "G11 / G12", "数式・KPI"),
+        ("ECONOMICS", "経済曲線", "E01 — E06", "専用グラフ"),
     ]
-    for i, (question, answer) in enumerate(rows):
-        y = 1.76 + i * 0.62
-        add_box(
-            slide,
-            0.68,
-            y,
-            4.10,
-            0.46,
-            question,
-            fill=GRAY_10,
-            line=GRAY_20,
-            size=12.5,
-            color=NAVY,
-            bold=True,
-            align=PP_ALIGN.LEFT,
-            radius=False,
-        )
-        add_box(
-            slide,
-            4.95,
-            y,
-            7.70,
-            0.46,
-            answer,
-            fill=WHITE,
-            line=GRAY_20,
-            size=12.5,
-            color=BLUE,
-            bold=True,
-            align=PP_ALIGN.LEFT,
-            radius=False,
-        )
-    add_takeaway(
-        slide,
-        "内容に図を当てはめるのではなく、「何の関係を説明するか」から型を選ぶ。",
-        len(prs.slides),
-    )
+    widths = [1.72, 2.52, 2.32, 4.65]
+    for row_index, row in enumerate(rows):
+        y = 1.76 + row_index * 0.63
+        x = 0.78
+        for col_index, value in enumerate(row):
+            fill = COBALT_PALE if row_index == 0 else (PAPER if row_index % 2 else WHITE)
+            rect(slide, x, y, widths[col_index], 0.54, fill=fill, line_color=LINE, line_width=0.4)
+            text(
+                slide,
+                x + 0.10,
+                y + 0.15,
+                widths[col_index] - 0.20,
+                0.22,
+                value,
+                size=9.5 if row_index == 0 else 11.5,
+                color=COBALT if row_index == 0 or col_index == 2 else INK,
+                bold=row_index == 0 or col_index in (0, 2),
+            )
+            x += widths[col_index]
 
 
-def pattern_definition(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_definition(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G01",
-        "定義・要素カード",
-        "複雑な概念も「定義・構成・判断基準」の3点に分けると理解しやすい",
+        "DEFINITION",
+        "GDPは「国内」「一定期間」「新たな付加価値」の3条件で定義される",
+        "概念の導入、用語定義",
+        "3〜5要素、囲みではなく列で分割",
     )
     items = [
-        ("定義", "GDPは国内で新たに生み出された付加価値の合計", BLUE),
-        ("構成", "生産・分配・支出の3面から見ても合計は等しい", TEAL),
-        ("判断基準", "新しい価値を生んだか、市場取引されたかを確認", PURPLE),
+        ("01", "国内", "生産者の国籍ではなく、活動した場所で判断する"),
+        ("02", "一定期間", "ある時点の資産ではなく、期間中の生産を測る"),
+        ("03", "付加価値", "中間投入を除き、二重計上を避ける"),
     ]
-    for i, (label, body, color) in enumerate(items):
-        x = 0.68 + i * 4.12
-        add_box(slide, x, 1.88, 3.82, 3.85, "", fill=WHITE, line=GRAY_20)
-        add_circle(slide, x + 1.51, 2.16, 0.80, str(i + 1), fill=color, size=18)
-        add_text(
-            slide,
-            x + 0.28,
-            3.18,
-            3.26,
-            0.46,
-            label,
-            size=18,
-            color=color,
-            bold=True,
-            align=PP_ALIGN.CENTER,
-        )
-        add_text(
-            slide,
-            x + 0.35,
-            3.92,
-            3.12,
-            1.05,
-            body,
-            size=14,
-            color=INK,
-            align=PP_ALIGN.CENTER,
-            valign=MSO_ANCHOR.TOP,
-        )
-    add_takeaway(
-        slide,
-        "新概念の導入、用語説明、章の冒頭に使う。カード数は3〜5個まで。",
-        len(prs.slides),
-    )
+    for index, (number, title_value, body) in enumerate(items):
+        x = 0.78 + index * 4.12
+        if index:
+            line(slide, x - 0.34, 1.92, x - 0.34, 5.70, color=LINE, width=0.7)
+        text(slide, x, 1.88, 0.62, 0.38, number, size=19, color=COBALT, bold=True)
+        text(slide, x, 2.58, 3.45, 0.44, title_value, size=18, color=INK, bold=True)
+        text(slide, x, 3.35, 3.30, 1.28, body, size=13.5, color=MUTED)
+        line(slide, x, 5.20, x + 2.60, 5.20, color=COBALT, width=2)
 
 
-def pattern_comparison(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_comparison(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G02",
-        "左右比較",
-        "似た概念は共通の比較軸に揃えると、違いを一目で判別できる",
+        "COMPARISON",
+        "名目GDPは金額を、実質GDPは生産量の変化を捉える",
+        "似た概念・制度・理論の比較",
+        "共通の比較軸を同じ行に置く",
     )
-    add_box(
-        slide,
-        0.72,
-        1.78,
-        5.70,
-        0.62,
-        "名目GDP",
-        fill=BLUE,
-        line=BLUE,
-        size=20,
-        color=WHITE,
-        bold=True,
-    )
-    add_box(
-        slide,
-        6.92,
-        1.78,
-        5.70,
-        0.62,
-        "実質GDP",
-        fill=TEAL,
-        line=TEAL,
-        size=20,
-        color=WHITE,
-        bold=True,
-    )
-    comparisons = [
+    text(slide, 2.55, 1.74, 4.05, 0.35, "名目GDP", size=17, color=COBALT, bold=True)
+    text(slide, 7.35, 1.74, 4.05, 0.35, "実質GDP", size=17, color=TEAL, bold=True)
+    rows = [
         ("価格", "その年の価格", "基準年の価格"),
         ("物価変動", "含む", "取り除く"),
-        ("主な用途", "経済規模の金額比較", "実質的な成長率の比較"),
+        ("主な用途", "経済規模の金額比較", "実質的な成長率"),
+        ("問い", "いくら生産したか", "どれだけ増えたか"),
     ]
-    for i, (axis, left, right) in enumerate(comparisons):
-        y = 2.68 + i * 0.88
-        add_box(
-            slide,
-            0.72,
-            y,
-            1.40,
-            0.62,
-            axis,
-            fill=GRAY_10,
-            line=GRAY_20,
-            size=12,
-            color=GRAY_70,
-            bold=True,
-            radius=False,
-        )
-        add_box(
-            slide,
-            2.20,
-            y,
-            4.22,
-            0.62,
-            left,
-            fill=WHITE,
-            line=GRAY_20,
-            size=14,
-            color=NAVY,
-            radius=False,
-        )
-        add_box(
-            slide,
-            6.92,
-            y,
-            5.70,
-            0.62,
-            right,
-            fill=WHITE,
-            line=GRAY_20,
-            size=14,
-            color=NAVY,
-            radius=False,
-        )
-    add_takeaway(
-        slide,
-        "「AとBの違い」は、両側で同じ比較軸を使い、対称配置にする。",
-        len(prs.slides),
-    )
+    for row_index, (axis, left, right) in enumerate(rows):
+        y = 2.38 + row_index * 0.80
+        rect(slide, 0.78, y, 1.42, 0.62, fill=COBALT_PALE if row_index == 3 else PAPER, line_color=LINE)
+        text(slide, 0.92, y + 0.20, 1.12, 0.21, axis, size=10, color=MUTED, bold=True)
+        rect(slide, 2.20, y, 4.68, 0.62, fill=WHITE, line_color=LINE)
+        rect(slide, 6.88, y, 4.70, 0.62, fill=WHITE, line_color=LINE)
+        text(slide, 2.55, y + 0.18, 3.95, 0.24, left, size=12.5, color=INK)
+        text(slide, 7.35, y + 0.18, 3.95, 0.24, right, size=12.5, color=INK)
 
 
-def pattern_process(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_process(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G03",
-        "プロセス・手順",
-        "判断手順は左から右へ流し、各段階の入力と結果を明示する",
+        "PROCESS",
+        "経済問題は「条件→モデル→方向→結論」の順に解けば迷わない",
+        "解法、手続、業務フロー",
+        "左から右、動詞でラベルを書く",
     )
+    y = 3.35
+    line(slide, 1.15, y, 12.05, y, color=LINE, width=1.4)
     steps = [
-        ("状況確認", "数値・条件を読む"),
-        ("モデル選択", "使う理論を決める"),
-        ("方向判定", "曲線のシフトを見る"),
-        ("結論", "価格・数量を答える"),
+        ("01", "条件を読む", "外生変数を特定"),
+        ("02", "モデルを選ぶ", "需要供給／IS-LM"),
+        ("03", "方向を描く", "曲線をシフト"),
+        ("04", "結論を出す", "価格・数量を判定"),
     ]
-    for i, (label, body) in enumerate(steps):
-        x = 0.62 + i * 3.08
-        add_circle(slide, x + 0.90, 2.04, 0.62, str(i + 1), fill=BLUE, size=14)
-        add_box(
-            slide,
-            x,
-            2.90,
-            2.55,
-            2.10,
-            "",
-            fill=GRAY_10 if i % 2 == 0 else WHITE,
-            line=BLUE,
-        )
-        add_text(
-            slide,
-            x + 0.16,
-            3.22,
-            2.23,
-            0.38,
-            label,
-            size=16,
-            color=BLUE,
-            bold=True,
-            align=PP_ALIGN.CENTER,
-        )
-        add_text(
-            slide,
-            x + 0.25,
-            3.90,
-            2.05,
-            0.55,
-            body,
-            size=13,
-            color=INK,
-            align=PP_ALIGN.CENTER,
-        )
-        if i < len(steps) - 1:
-            arrow = slide.shapes.add_shape(
-                MSO_SHAPE.CHEVRON,
-                Inches(x + 2.65),
-                Inches(3.58),
-                Inches(0.34),
-                Inches(0.70),
-            )
-            arrow.fill.solid()
-            arrow.fill.fore_color.rgb = rgb(CYAN)
-            arrow.line.fill.background()
-    add_takeaway(
-        slide,
-        "手続、解法、業務フローに使う。4〜6段階で、動詞から書き始める。",
-        len(prs.slides),
-    )
+    for index, (number, title_value, body) in enumerate(steps):
+        x = 1.00 + index * 3.02
+        circle(slide, x, y - 0.13, 0.26, fill=COBALT)
+        text(slide, x - 0.08, 2.03, 0.50, 0.28, number, size=12, color=COBALT, bold=True)
+        text(slide, x - 0.08, 2.47, 2.35, 0.36, title_value, size=15, color=INK, bold=True)
+        text(slide, x - 0.08, 3.82, 2.35, 0.56, body, size=11.5, color=MUTED)
+        if index < 3:
+            text(slide, x + 2.40, 3.17, 0.28, 0.28, "→", size=17, color=COBALT, bold=True)
 
 
-def pattern_cause_effect(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_cause(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G04",
-        "因果関係",
-        "原因から結果までの連鎖を分解すると、経済政策の波及経路が見える",
+        "CAUSE & EFFECT",
+        "政府支出の増加は所得と消費の連鎖を通じてGDPを押し上げる",
+        "政策効果、原因と結果",
+        "矢印上に作用を示す動詞を置く",
     )
-    nodes = [
-        (0.70, 2.12, 2.35, 0.90, "原因\n政府支出が増加", BLUE),
-        (3.55, 2.12, 2.35, 0.90, "一次効果\n総需要が増加", CYAN),
-        (6.40, 2.12, 2.35, 0.90, "波及効果\n所得・消費が増加", TEAL),
-        (9.25, 2.12, 3.15, 0.90, "結果\nGDPが乗数倍増加", GREEN),
+    items = [
+        ("政府支出", "増える"),
+        ("企業・家計所得", "受け取る"),
+        ("消費支出", "再び増える"),
+        ("GDP", "乗数倍になる"),
     ]
-    for i, (x, y, w, h, text, color) in enumerate(nodes):
-        add_box(
-            slide,
-            x,
-            y,
-            w,
-            h,
-            text,
-            fill=color,
-            line=color,
-            size=14,
-            color=WHITE,
-            bold=True,
-        )
-        if i < len(nodes) - 1:
-            arrow = slide.shapes.add_shape(
-                MSO_SHAPE.CHEVRON,
-                Inches(x + w + 0.12),
-                Inches(y + 0.18),
-                Inches(0.45),
-                Inches(0.54),
-            )
-            arrow.fill.solid()
-            arrow.fill.fore_color.rgb = rgb(GRAY_50)
-            arrow.line.fill.background()
-    add_box(
-        slide,
-        3.10,
-        4.10,
-        7.15,
-        1.08,
-        "反作用｜利子率上昇 → 民間投資減少（クラウディングアウト）",
-        fill="FFF1F1",
-        line=RED,
-        size=16,
-        color=RED,
-        bold=True,
-    )
-    add_takeaway(
-        slide,
-        "原因・媒介・結果・反作用を分けると、暗記ではなく仕組みで理解できる。",
-        len(prs.slides),
-    )
+    for index, (title_value, verb) in enumerate(items):
+        x = 0.75 + index * 3.05
+        node(slide, x, 2.63, 2.44, title_value, accent=COBALT if index < 3 else TEAL, h=1.18)
+        if index < len(items) - 1:
+            line(slide, x + 2.44, 3.22, x + 2.92, 3.22, color=MUTED, width=1)
+            triangle(slide, x + 2.78, 3.13, color=MUTED)
+            text(slide, x + 2.28, 2.70, 0.95, 0.20, verb, size=8.5, color=MUTED, align=PP_ALIGN.CENTER)
+    rect(slide, 3.54, 4.55, 6.22, 0.78, fill=RUST_PALE, line_color=None)
+    text(slide, 3.78, 4.78, 5.75, 0.26, "反作用｜利子率上昇が民間投資を減らす場合もある", size=12, color=RUST, bold=True)
 
 
-def pattern_cycle(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_cycle(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G05",
-        "循環モデル",
-        "繰り返される活動は、中心概念の周囲に4段階で配置すると記憶に残る",
+        "CYCLE",
+        "景気は回復・好況・後退・不況を繰り返しながら変動する",
+        "循環、フィードバック",
+        "時計回り、4〜5段階に限定",
     )
-    center_x, center_y = 5.32, 2.70
-    add_circle(slide, center_x, center_y, 2.10, "景気循環", fill=NAVY, size=21)
-    cycle_nodes = [
-        (5.53, 1.66, "回復", BLUE),
-        (8.58, 2.96, "好況", GREEN),
-        (5.53, 4.76, "後退", ORANGE),
-        (2.45, 2.96, "不況", PURPLE),
+    center_x, center_y = 6.05, 3.46
+    circle(slide, center_x - 0.62, center_y - 0.62, 1.24, fill=INK)
+    text(slide, center_x - 0.44, center_y - 0.12, 0.88, 0.24, "景気", size=15, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
+    positions = [
+        (5.25, 1.78, "回復", "生産・雇用が改善"),
+        (8.87, 3.02, "好況", "需要・物価が上昇"),
+        (5.25, 4.87, "後退", "在庫・金利が重荷"),
+        (1.73, 3.02, "不況", "投資・雇用が減少"),
     ]
-    for i, (x, y, label, color) in enumerate(cycle_nodes):
-        add_box(
-            slide,
-            x,
-            y,
-            1.68,
-            0.72,
-            label,
-            fill=color,
-            line=color,
-            size=17,
-            color=WHITE,
-            bold=True,
-        )
-        next_x, next_y, _, _ = cycle_nodes[(i + 1) % len(cycle_nodes)]
-        add_line(
-            slide,
-            x + 0.84,
-            y + 0.36,
-            next_x + 0.84,
-            next_y + 0.36,
-            color=GRAY_50,
-            width=1.8,
-        )
-    add_takeaway(
-        slide,
-        "PDCA、景気循環、フィードバックに使う。時計回りに統一する。",
-        len(prs.slides),
-    )
+    for index, (x, y, title_value, body) in enumerate(positions):
+        node(slide, x, y, 2.30, title_value, body, accent=COBALT if index != 2 else RUST, h=0.92)
+        next_x, next_y, _, _ = positions[(index + 1) % 4]
+        line(slide, x + 1.15, y + 0.46, next_x + 1.15, next_y + 0.46, color=LINE, width=1)
 
 
-def pattern_hierarchy(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_hierarchy(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G06",
-        "階層・ピラミッド",
-        "上位概念から具体例へ絞り込むと、包含関係と優先順位を同時に示せる",
+        "HIERARCHY",
+        "経済学はマクロとミクロに分かれ、個別論点へ段階的に具体化される",
+        "包含関係、抽象度、組織階層",
+        "上位から下位へ、幅ではなく字下げで示す",
     )
     levels = [
-        (3.98, 1.88, 5.38, 0.72, "経済学", NAVY, WHITE),
-        (2.90, 2.83, 7.55, 0.72, "マクロ経済学 ｜ ミクロ経済学", BLUE, WHITE),
-        (1.80, 3.78, 9.75, 0.72, "市場・政策・国際・消費者・企業・分配", CYAN, WHITE),
-        (0.70, 4.73, 11.95, 0.72, "36の個別論点と過去問パターン", GRAY_10, NAVY),
+        (0.90, 1.85, 11.45, "経済学", "一国全体と個別主体の選択を扱う", COBALT),
+        (1.72, 2.86, 10.05, "マクロ経済学 / ミクロ経済学", "分析対象による二分", COBALT),
+        (2.54, 3.87, 8.65, "市場・政策・国際・消費者・企業", "主要な分析領域", TEAL),
+        (3.36, 4.88, 7.25, "36の論点と定型問題", "試験で問われる具体知識", TEAL),
     ]
-    for x, y, w, h, text, fill, color in levels:
-        add_box(
-            slide,
-            x,
-            y,
-            w,
-            h,
-            text,
-            fill=fill,
-            line=fill if fill != GRAY_10 else GRAY_20,
-            size=16,
-            color=color,
-            bold=True,
-            radius=False,
-        )
-    add_takeaway(
-        slide,
-        "概念分類、戦略レベル、優先順位に使う。上位ほど抽象、下位ほど具体。",
-        len(prs.slides),
-    )
+    for x, y, w, title_value, body, accent in levels:
+        line(slide, x - 0.30, y, x - 0.30, y + 0.72, color=accent, width=2)
+        text(slide, x, y, w * 0.42, 0.30, title_value, size=14, color=INK, bold=True)
+        text(slide, x + w * 0.46, y + 0.02, w * 0.50, 0.28, body, size=10.5, color=MUTED)
+        line(slide, x, y + 0.56, x + w, y + 0.56, color=LINE, width=0.6)
 
 
-def pattern_timeline(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_timeline(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G07",
-        "タイムライン",
-        "出来事を時間軸に置くと、理論が生まれた背景と変化の順序を捉えられる",
+        "TIMELINE",
+        "経済理論は危機と政策課題への応答として発展してきた",
+        "歴史、制度変更、ライフサイクル",
+        "年代は左から右、節点は最大5個",
     )
-    add_line(slide, 1.05, 3.56, 12.25, 3.56, color=BLUE, width=3)
+    y = 3.62
+    line(slide, 1.00, y, 12.15, y, color=MUTED, width=1.2)
     events = [
-        ("1930s", "世界恐慌", "ケインズ理論", BLUE),
-        ("1970s", "石油危機", "スタグフレーション", ORANGE),
-        ("1980s", "政策転換", "マネタリズム", PURPLE),
-        ("2000s", "低金利", "非伝統的金融政策", TEAL),
+        ("1930s", "世界恐慌", "ケインズ"),
+        ("1970s", "石油危機", "期待の導入"),
+        ("1980s", "インフレ抑制", "マネタリズム"),
+        ("2000s", "ゼロ金利", "非伝統的政策"),
     ]
-    for i, (year, event, theory, color) in enumerate(events):
-        x = 0.98 + i * 3.08
-        add_circle(slide, x + 0.90, 3.28, 0.58, "", fill=color)
-        box_y = 1.85 if i % 2 == 0 else 4.12
-        add_box(
-            slide,
-            x,
-            box_y,
-            2.38,
-            1.30,
-            "",
-            fill=WHITE,
-            line=color,
-        )
-        add_text(
-            slide,
-            x + 0.16,
-            box_y + 0.13,
-            2.06,
-            0.30,
-            year,
-            size=14,
-            color=color,
-            bold=True,
-            align=PP_ALIGN.CENTER,
-        )
-        add_text(
-            slide,
-            x + 0.15,
-            box_y + 0.54,
-            2.08,
-            0.58,
-            f"{event}\n{theory}",
-            size=12,
-            color=INK,
-            align=PP_ALIGN.CENTER,
-            valign=MSO_ANCHOR.TOP,
-        )
-    add_takeaway(
-        slide,
-        "歴史、制度変更、ライフサイクルに使う。時間は必ず左から右へ流す。",
-        len(prs.slides),
-    )
+    for index, (year, event, theory) in enumerate(events):
+        x = 1.05 + index * 3.02
+        circle(slide, x, y - 0.10, 0.20, fill=COBALT if index != 1 else RUST)
+        top = index % 2 == 0
+        ty = 2.02 if top else 4.06
+        text(slide, x - 0.02, ty, 1.05, 0.28, year, size=13, color=COBALT, bold=True)
+        text(slide, x - 0.02, ty + 0.43, 2.34, 0.30, event, size=13.5, color=INK, bold=True)
+        text(slide, x - 0.02, ty + 0.86, 2.34, 0.26, theory, size=10.5, color=MUTED)
 
 
-def pattern_matrix(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_matrix(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G08",
-        "2×2マトリクス",
-        "2つの判断軸を交差させると、4つの状態を漏れなく整理できる",
+        "2 × 2 MATRIX",
+        "低成長・高失業の局面では需要刺激策の優先度が高まる",
+        "2軸分類、ポジショニング",
+        "注目象限だけを淡色で強調",
     )
-    x, y, w, h = 2.32, 1.78, 8.72, 4.28
-    add_box(slide, x, y, w / 2, h / 2, "高成長 × 低失業\n需要超過・インフレ注意", fill="E8F1FF", line=WHITE, size=16, color=BLUE, bold=True, radius=False)
-    add_box(slide, x + w / 2, y, w / 2, h / 2, "高成長 × 高失業\n構造的失業を点検", fill="E5F6FF", line=WHITE, size=16, color=CYAN, bold=True, radius=False)
-    add_box(slide, x, y + h / 2, w / 2, h / 2, "低成長 × 低失業\n供給制約を点検", fill="D9FBFB", line=WHITE, size=16, color=TEAL, bold=True, radius=False)
-    add_box(slide, x + w / 2, y + h / 2, w / 2, h / 2, "低成長 × 高失業\n景気刺激策を検討", fill="FFF1F1", line=WHITE, size=16, color=RED, bold=True, radius=False)
-    add_text(slide, 0.76, 3.17, 1.28, 0.42, "成長率", size=14, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, 5.55, 6.08, 2.20, 0.30, "失業率 →", size=14, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
-    add_takeaway(
-        slide,
-        "軸は独立した2変数にする。各象限の名称だけでなく判断も添える。",
-        len(prs.slides),
-    )
+    x, y, w, h = 2.12, 1.86, 8.45, 4.25
+    rect(slide, x, y, w, h, fill=WHITE, line_color=LINE)
+    rect(slide, x + w / 2, y + h / 2, w / 2, h / 2, fill=COBALT_PALE, line_color=None)
+    line(slide, x + w / 2, y, x + w / 2, y + h, color=LINE, width=0.8)
+    line(slide, x, y + h / 2, x + w, y + h / 2, color=LINE, width=0.8)
+    labels = [
+        (x + 0.30, y + 0.30, "高成長 × 低失業", "過熱・インフレを監視"),
+        (x + w / 2 + 0.30, y + 0.30, "高成長 × 高失業", "構造的失業を点検"),
+        (x + 0.30, y + h / 2 + 0.30, "低成長 × 低失業", "供給制約を点検"),
+        (x + w / 2 + 0.30, y + h / 2 + 0.30, "低成長 × 高失業", "需要刺激策を検討"),
+    ]
+    for index, (tx, ty, title_value, body) in enumerate(labels):
+        text(slide, tx, ty, 3.55, 0.30, title_value, size=13, color=COBALT if index == 3 else INK, bold=True)
+        text(slide, tx, ty + 0.48, 3.55, 0.30, body, size=10.5, color=MUTED)
+    text(slide, 0.76, 3.73, 1.05, 0.25, "成長率 ↑", size=10, color=MUTED, bold=True, align=PP_ALIGN.CENTER)
+    text(slide, 5.36, 6.18, 2.15, 0.22, "失業率 →", size=10, color=MUTED, bold=True, align=PP_ALIGN.CENTER)
 
 
-def pattern_tree(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_tree(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G09",
-        "ツリー・分類",
-        "概念をMECEに枝分かれさせると、全体像と用語の所属を同時に確認できる",
+        "TREE",
+        "物価指数は対象とウェイトの違いで3種類に分類できる",
+        "分類、原因分解、論点体系",
+        "同じ階層では分類基準を混ぜない",
     )
-    add_box(slide, 0.72, 3.05, 2.16, 0.82, "物価指数", fill=NAVY, line=NAVY, size=18, color=WHITE, bold=True)
-    categories = [
-        (4.10, 1.78, "CPI", "消費者が購入する財・サービス", BLUE),
-        (4.10, 3.05, "CGPI", "企業間で取引される商品", TEAL),
-        (4.10, 4.32, "GDPデフレーター", "GDP全体の物価動向", PURPLE),
+    node(slide, 0.78, 3.03, 2.05, "物価指数", "何の価格を測るか", accent=COBALT, h=1.00)
+    branches = [
+        ("CPI", "消費者の購入価格", 1.83),
+        ("CGPI", "企業間取引価格", 3.10),
+        ("GDPデフレーター", "GDP全体の価格", 4.37),
     ]
-    for x, y, title, body, color in categories:
-        add_line(slide, 2.88, 3.46, x, y + 0.44, color=GRAY_50, width=1.5)
-        add_box(slide, x, y, 2.32, 0.88, title, fill=color, line=color, size=15, color=WHITE, bold=True)
-        add_box(slide, 6.75, y, 5.35, 0.88, body, fill=GRAY_10, line=GRAY_20, size=13, color=NAVY, align=PP_ALIGN.LEFT)
-        add_line(slide, 6.42, y + 0.44, 6.75, y + 0.44, color=GRAY_50)
-    add_takeaway(
-        slide,
-        "分類、論点体系、原因分解に使う。同じ階層では分類基準を混ぜない。",
-        len(prs.slides),
-    )
+    line(slide, 3.30, 2.30, 3.30, 5.22, color=LINE, width=1)
+    line(slide, 2.83, 3.53, 3.30, 3.53, color=LINE, width=1)
+    for title_value, body, y in branches:
+        line(slide, 3.30, y + 0.45, 4.02, y + 0.45, color=LINE, width=1)
+        node(slide, 4.02, y, 2.65, title_value, body, accent=TEAL, h=0.90)
+        line(slide, 6.67, y + 0.45, 7.25, y + 0.45, color=LINE, width=1)
+        text(
+            slide,
+            7.48,
+            y + 0.17,
+            4.45,
+            0.48,
+            {
+                "CPI": "ラスパイレス方式・基準年数量",
+                "CGPI": "企業が購入する原材料や中間財",
+                "GDPデフレーター": "パーシェ方式に近い・比較年数量",
+            }[title_value],
+            size=11.5,
+            color=MUTED,
+        )
 
 
-def pattern_network(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_network(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G10",
-        "ネットワーク・関係図",
-        "中心概念と周辺主体の相互作用を示すと、複雑な市場関係を俯瞰できる",
+        "NETWORK",
+        "市場では家計・企業・政府・海外が価格と所得を介して結びつく",
+        "主体間関係、ステークホルダー",
+        "中心1・周辺最大5、線の意味を明記",
     )
-    add_circle(slide, 5.37, 2.58, 2.10, "市場", fill=NAVY, size=22)
-    nodes = [
-        (0.85, 1.82, "消費者", BLUE),
-        (9.78, 1.82, "企業", TEAL),
-        (0.85, 4.35, "政府", PURPLE),
-        (9.78, 4.35, "海外", ORANGE),
+    circle(slide, 5.72, 2.81, 1.78, fill=INK)
+    text(slide, 6.02, 3.47, 1.18, 0.26, "市場", size=17, color=WHITE, bold=True, align=PP_ALIGN.CENTER)
+    actors = [
+        (0.94, 1.90, "家計", "消費・労働"),
+        (9.90, 1.90, "企業", "生産・投資"),
+        (0.94, 4.62, "政府", "税・支出"),
+        (9.90, 4.62, "海外", "輸出・輸入"),
     ]
-    for x, y, label, color in nodes:
-        add_line(slide, 6.42, 3.63, x + 1.35, y + 0.55, color=GRAY_50, width=1.6)
-        add_box(slide, x, y, 2.70, 1.10, label, fill=color, line=color, size=18, color=WHITE, bold=True)
-    add_box(slide, 4.02, 5.18, 4.80, 0.64, "価格・数量・所得・情報が相互に流れる", fill=GRAY_10, line=GRAY_20, size=13, color=NAVY, bold=True)
-    add_takeaway(
-        slide,
-        "ステークホルダー、5フォース、SCMに使う。線の意味は凡例で明示する。",
-        len(prs.slides),
-    )
+    for index, (x, y, title_value, body) in enumerate(actors):
+        node(slide, x, y, 2.35, title_value, body, accent=COBALT if index < 2 else TEAL, h=0.94)
+        line(slide, 6.61, 3.70, x + 1.18, y + 0.47, color=LINE, width=1)
+    text(slide, 5.10, 5.38, 3.10, 0.24, "財・サービス / お金 / 情報", size=10, color=MUTED, align=PP_ALIGN.CENTER)
 
 
-def pattern_formula(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_formula(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G11",
-        "数式・投入産出",
-        "数式は「入力→関係式→出力」に分けると、記号の意味と計算手順が見える",
+        "FORMULA",
+        "GDPデフレーターは名目値を実質値で割り、物価変動を取り出す",
+        "数式、入力と出力",
+        "式を中央、変数定義を周囲に配置",
     )
-    add_box(slide, 0.76, 2.15, 3.10, 2.70, "", fill=GRAY_10, line=GRAY_20)
-    add_text(slide, 1.02, 2.40, 2.58, 0.36, "INPUT", size=13, color=BLUE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, 1.05, 3.08, 2.52, 1.18, "名目GDP\n実質GDP", size=19, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
-    arrow = slide.shapes.add_shape(MSO_SHAPE.CHEVRON, Inches(4.12), Inches(3.08), Inches(0.62), Inches(0.82))
-    arrow.fill.solid()
-    arrow.fill.fore_color.rgb = rgb(CYAN)
-    arrow.line.fill.background()
-    add_box(slide, 4.98, 2.15, 4.15, 2.70, "", fill="E8F1FF", line=BLUE)
-    add_text(slide, 5.24, 2.40, 3.62, 0.36, "FORMULA", size=13, color=BLUE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, 5.22, 3.13, 3.65, 0.90, "GDPデフレーター\n＝ 名目GDP ÷ 実質GDP × 100", size=18, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
-    arrow = slide.shapes.add_shape(MSO_SHAPE.CHEVRON, Inches(9.38), Inches(3.08), Inches(0.62), Inches(0.82))
-    arrow.fill.solid()
-    arrow.fill.fore_color.rgb = rgb(TEAL)
-    arrow.line.fill.background()
-    add_box(slide, 10.24, 2.15, 2.35, 2.70, "", fill="D9FBFB", line=TEAL)
-    add_text(slide, 10.50, 2.40, 1.82, 0.36, "OUTPUT", size=13, color=TEAL, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, 10.50, 3.26, 1.82, 0.60, "物価水準\n（指数）", size=18, color=NAVY, bold=True, align=PP_ALIGN.CENTER)
-    add_takeaway(
-        slide,
-        "記号を並べるだけでなく、何を入れると何が分かるかを図示する。",
-        len(prs.slides),
-    )
+    text(slide, 0.82, 1.88, 2.00, 0.22, "INPUT", size=9, color=MUTED, bold=True)
+    text(slide, 0.82, 2.40, 2.30, 0.38, "名目GDP", size=16, color=INK, bold=True)
+    text(slide, 0.82, 3.08, 2.30, 0.38, "実質GDP", size=16, color=INK, bold=True)
+    line(slide, 3.25, 1.88, 3.25, 5.64, color=LINE, width=0.8)
+    text(slide, 3.74, 1.88, 4.95, 0.22, "RELATION", size=9, color=COBALT, bold=True)
+    text(slide, 3.74, 2.66, 5.10, 0.86, "GDPデフレーター\n＝ 名目GDP ÷ 実質GDP × 100", size=22, color=COBALT, bold=True, align=PP_ALIGN.CENTER)
+    line(slide, 9.17, 1.88, 9.17, 5.64, color=LINE, width=0.8)
+    text(slide, 9.64, 1.88, 2.25, 0.22, "OUTPUT", size=9, color=TEAL, bold=True)
+    text(slide, 9.64, 2.66, 2.28, 0.38, "物価水準", size=17, color=INK, bold=True)
+    text(slide, 9.64, 3.27, 2.28, 0.70, "100より大きい\n→ 基準年より物価上昇", size=12, color=MUTED)
 
 
-def pattern_kpi(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def generic_kpi(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "G12",
-        "KPI・表・指標比較",
-        "重要数値はカードと小さなグラフを組み合わせ、比較の基準を明示する",
+        "KPI & TABLE",
+        "成長・雇用・物価を同じ基準で並べると、景気の全体像が読める",
+        "統計、KPI、数値比較",
+        "主指標のみ強調、表とチャートを競合させない",
     )
-    kpis = [
-        ("実質GDP", "+1.2%", "前年比", BLUE),
-        ("完全失業率", "2.6%", "低下＝改善傾向", TEAL),
-        ("CPI", "+2.4%", "前年同月比", ORANGE),
+    indicators = [
+        ("実質GDP", "+1.2%", "前年比"),
+        ("完全失業率", "2.6%", "季節調整値"),
+        ("CPI", "+2.4%", "前年同月比"),
     ]
-    for i, (label, value, note, color) in enumerate(kpis):
-        x = 0.66 + i * 3.02
-        add_box(slide, x, 1.82, 2.72, 1.46, "", fill=WHITE, line=GRAY_20)
-        add_text(slide, x + 0.18, 2.02, 2.34, 0.28, label, size=12, color=GRAY_70, bold=True)
-        add_text(slide, x + 0.18, 2.38, 2.34, 0.46, value, size=25, color=color, bold=True)
-        add_text(slide, x + 0.18, 2.88, 2.34, 0.22, note, size=9.5, color=GRAY_50)
-    add_box(slide, 9.72, 1.82, 2.92, 3.88, "", fill=GRAY_10, line=GRAY_20)
-    values = [42, 58, 49, 72]
-    labels = ["Q1", "Q2", "Q3", "Q4"]
-    for i, (value, label) in enumerate(zip(values, labels)):
-        x = 10.08 + i * 0.58
-        bar_h = value / 36
-        add_box(slide, x, 5.14 - bar_h, 0.38, bar_h, "", fill=BLUE if i < 3 else TEAL, line=BLUE if i < 3 else TEAL, radius=False)
-        add_text(slide, x - 0.04, 5.22, 0.46, 0.24, label, size=9, color=GRAY_70, align=PP_ALIGN.CENTER)
-    table_rows = [
-        ("指標", "見るポイント", "注意"),
-        ("GDP", "実質成長率", "名目と区別"),
-        ("失業率", "労働力人口も確認", "意欲喪失効果"),
-        ("物価", "指数の対象範囲", "算式の違い"),
+    for index, (label_value, value, unit) in enumerate(indicators):
+        x = 0.80 + index * 2.55
+        text(slide, x, 1.87, 2.10, 0.24, label_value, size=10, color=MUTED, bold=True)
+        text(slide, x, 2.27, 2.10, 0.50, value, size=25, color=COBALT if index == 0 else INK, bold=True)
+        text(slide, x, 2.88, 2.10, 0.22, unit, size=8.5, color=MUTED)
+    line(slide, 8.38, 1.82, 8.38, 5.65, color=LINE, width=0.8)
+    bars = [1.15, 1.76, 1.42, 2.32]
+    for index, bar_h in enumerate(bars):
+        x = 9.10 + index * 0.68
+        rect(slide, x, 5.14 - bar_h, 0.34, bar_h, fill=COBALT if index == 3 else COBALT_MID, line_color=None)
+        text(slide, x - 0.02, 5.25, 0.40, 0.20, f"Q{index + 1}", size=8, color=MUTED, align=PP_ALIGN.CENTER)
+    text(slide, 9.08, 1.86, 2.85, 0.26, "実質GDP成長率の推移", size=11.5, color=INK, bold=True)
+    rows = [
+        ("指標", "確認点"),
+        ("GDP", "名目と実質を区別"),
+        ("失業率", "労働力人口も確認"),
+        ("物価", "指数の対象範囲"),
     ]
-    for r, row in enumerate(table_rows):
-        y = 3.62 + r * 0.52
-        for c, value in enumerate(row):
-            widths = [1.38, 3.05, 3.98]
-            x = 0.66 + sum(widths[:c])
-            add_box(
-                slide,
-                x,
-                y,
-                widths[c],
-                0.46,
-                value,
-                fill=NAVY if r == 0 else (GRAY_10 if r % 2 else WHITE),
-                line=WHITE if r == 0 else GRAY_20,
-                size=10.5,
-                color=WHITE if r == 0 else INK,
-                bold=r == 0 or c == 0,
-                align=PP_ALIGN.LEFT if c else PP_ALIGN.CENTER,
-                radius=False,
-            )
-    add_takeaway(
-        slide,
-        "数値カードは3〜4個、表は4列×6行程度まで。強調色は1つに絞る。",
-        len(prs.slides),
-    )
-
-
-def add_axes(slide, x: float, y: float, w: float, h: float, x_label: str, y_label: str) -> None:
-    add_line(slide, x, y + h, x + w, y + h, color=NAVY, width=1.6)
-    add_line(slide, x, y + h, x, y, color=NAVY, width=1.6)
-    add_text(slide, x + w - 0.90, y + h + 0.12, 0.95, 0.24, x_label, size=10.5, color=NAVY, align=PP_ALIGN.RIGHT)
-    add_text(slide, x - 0.16, y - 0.30, 1.05, 0.24, y_label, size=10.5, color=NAVY)
+    for row_index, (left, right) in enumerate(rows):
+        y = 3.62 + row_index * 0.52
+        fill = COBALT_PALE if row_index == 0 else PAPER
+        rect(slide, 0.80, y, 1.38, 0.45, fill=fill, line_color=LINE, line_width=0.4)
+        rect(slide, 2.18, y, 5.47, 0.45, fill=fill, line_color=LINE, line_width=0.4)
+        text(slide, 0.94, y + 0.14, 1.08, 0.18, left, size=9.5, color=COBALT if row_index == 0 else INK, bold=True)
+        text(slide, 2.38, y + 0.14, 5.07, 0.18, right, size=9.5, color=COBALT if row_index == 0 else MUTED, bold=row_index == 0)
 
 
 def econ_supply_demand(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+    slide = pattern_slide(
+        prs,
         "E01",
-        "需要・供給曲線",
-        "需要と供給の交点で価格と数量が同時に決まる",
+        "SUPPLY & DEMAND",
+        "需要と供給の交点が、均衡価格と均衡数量を同時に決める",
+        "市場均衡、価格・数量決定",
+        "需要＝青、供給＝赤茶で固定",
         accent=TEAL,
     )
-    x, y, w, h = 1.10, 1.90, 6.55, 3.95
+    x, y, w, h = 0.95, 1.82, 7.20, 4.02
     add_axes(slide, x, y, w, h, "数量 Q", "価格 P")
-    add_line(slide, x + 0.35, y + 0.35, x + w - 0.35, y + h - 0.35, color=BLUE, width=3)
-    add_line(slide, x + 0.35, y + h - 0.35, x + w - 0.35, y + 0.35, color=RED, width=3)
-    add_text(slide, x + 5.80, y + 3.05, 0.50, 0.28, "S", size=14, color=BLUE, bold=True)
-    add_text(slide, x + 5.80, y + 0.62, 0.50, 0.28, "D", size=14, color=RED, bold=True)
-    eq_x, eq_y = x + w / 2, y + h / 2
-    add_circle(slide, eq_x - 0.10, eq_y - 0.10, 0.20, "", fill=NAVY)
-    add_line(slide, eq_x, eq_y, eq_x, y + h, color=GRAY_50, width=1)
-    add_line(slide, x, eq_y, eq_x, eq_y, color=GRAY_50, width=1)
-    add_box(slide, 8.30, 2.08, 4.00, 0.80, "需要 D：価格↑ → 需要量↓", fill="FFF1F1", line=RED, size=15, color=RED, bold=True)
-    add_box(slide, 8.30, 3.18, 4.00, 0.80, "供給 S：価格↑ → 供給量↑", fill="E8F1FF", line=BLUE, size=15, color=BLUE, bold=True)
-    add_box(slide, 8.30, 4.28, 4.00, 0.80, "交点 E：均衡価格・均衡数量", fill=GRAY_10, line=NAVY, size=15, color=NAVY, bold=True)
-    add_takeaway(
-        slide,
-        "軸、曲線名、交点、補助線の4点を必ず表示する。",
-        len(prs.slides),
-        accent=TEAL,
-    )
+    line(slide, x + 0.30, y + 0.35, x + w - 0.30, y + h - 0.35, color=RUST, width=2.2)
+    line(slide, x + 0.30, y + h - 0.35, x + w - 0.30, y + 0.35, color=COBALT, width=2.2)
+    text(slide, x + 6.12, y + 3.22, 0.55, 0.22, "S", size=12, color=RUST, bold=True)
+    text(slide, x + 6.12, y + 0.48, 0.55, 0.22, "D", size=12, color=COBALT, bold=True)
+    ex, ey = x + w / 2, y + h / 2
+    circle(slide, ex - 0.06, ey - 0.06, 0.12, fill=INK)
+    line(slide, ex, ey, ex, y + h, color=LINE, width=0.6)
+    line(slide, x, ey, ex, ey, color=LINE, width=0.6)
+    text(slide, ex + 0.16, ey - 0.30, 0.85, 0.22, "E₀", size=10, color=INK, bold=True)
+    note(slide, 8.72, 2.02, 3.30, "DEMAND", "価格が上がるほど、需要量は減る")
+    note(slide, 8.72, 3.34, 3.30, "SUPPLY", "価格が上がるほど、供給量は増える")
+    note(slide, 8.72, 4.66, 3.30, "EQUILIBRIUM", "超過需要も超過供給もない")
 
 
 def econ_shift(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+    slide = pattern_slide(
+        prs,
         "E02",
-        "曲線シフトと均衡変化",
-        "需要増加は需要曲線を右へ動かし、均衡価格と均衡数量をともに押し上げる",
+        "CURVE SHIFT",
+        "需要の増加は曲線を右へ動かし、価格と数量をともに押し上げる",
+        "比較静学、外生変数の変化",
+        "同一曲線は同一色相の濃淡で表す",
         accent=TEAL,
     )
-    x, y, w, h = 0.95, 1.85, 7.10, 4.05
+    x, y, w, h = 0.95, 1.82, 7.20, 4.02
     add_axes(slide, x, y, w, h, "数量 Q", "価格 P")
-    add_line(slide, x + 0.55, y + 0.30, x + w - 0.45, y + h - 0.40, color=BLUE, width=2.8)
-    add_line(slide, x + 0.35, y + h - 0.55, x + w - 1.10, y + 0.40, color=GRAY_50, width=2.2)
-    add_line(slide, x + 1.15, y + h - 0.55, x + w - 0.30, y + 0.40, color=RED, width=3)
-    add_text(slide, x + 5.78, y + 3.15, 0.44, 0.24, "S", size=13, color=BLUE, bold=True)
-    add_text(slide, x + 5.15, y + 0.62, 0.62, 0.24, "D₀", size=13, color=GRAY_50, bold=True)
-    add_text(slide, x + 6.05, y + 0.62, 0.62, 0.24, "D₁", size=13, color=RED, bold=True)
-    arrow = slide.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, Inches(5.18), Inches(2.00), Inches(1.02), Inches(0.40))
-    arrow.fill.solid()
-    arrow.fill.fore_color.rgb = rgb(RED)
-    arrow.line.fill.background()
-    add_box(slide, 8.58, 2.02, 3.70, 0.70, "原因｜所得増加・嗜好変化など", fill=GRAY_10, line=GRAY_20, size=13, color=NAVY, bold=True)
-    add_box(slide, 8.58, 3.10, 3.70, 0.70, "需要曲線｜D₀ → D₁（右方）", fill="FFF1F1", line=RED, size=13, color=RED, bold=True)
-    add_box(slide, 8.58, 4.18, 3.70, 0.70, "結果｜価格↑・数量↑", fill="D9FBFB", line=TEAL, size=15, color=TEAL, bold=True)
-    add_takeaway(
-        slide,
-        "曲線上の移動と曲線自体のシフトを、色と矢印で区別する。",
-        len(prs.slides),
-        accent=TEAL,
-    )
+    line(slide, x + 0.30, y + 0.35, x + w - 0.30, y + h - 0.35, color=RUST, width=2.2)
+    line(slide, x + 0.30, y + h - 0.64, x + w - 1.00, y + 0.42, color=COBALT_MID, width=1.5)
+    line(slide, x + 1.18, y + h - 0.64, x + w - 0.12, y + 0.42, color=COBALT, width=2.2)
+    text(slide, x + 5.08, y + 0.53, 0.65, 0.22, "D₀", size=10, color=COBALT_MID, bold=True)
+    text(slide, x + 6.02, y + 0.53, 0.65, 0.22, "D₁", size=10, color=COBALT, bold=True)
+    text(slide, x + 6.12, y + 3.22, 0.55, 0.22, "S", size=10, color=RUST, bold=True)
+    line(slide, 5.65, 2.16, 6.36, 2.16, color=COBALT, width=1.2)
+    triangle(slide, 6.25, 2.08, color=COBALT)
+    notes = [
+        ("CAUSE", "所得増加・嗜好変化"),
+        ("SHIFT", "D₀ → D₁（右方）"),
+        ("RESULT", "均衡価格 ↑ / 均衡数量 ↑"),
+    ]
+    for index, (heading, body) in enumerate(notes):
+        note(slide, 8.72, 2.04 + index * 1.22, 3.40, heading, body)
 
 
-def econ_keynesian_cross(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def econ_keynesian(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "E03",
-        "45度線分析",
-        "総需要が45度線と交わる点で均衡GDPが決まり、支出増加は乗数効果を生む",
+        "KEYNESIAN CROSS",
+        "政府支出の増加は総需要を上方へ動かし、均衡GDPを乗数倍押し上げる",
+        "45度線分析、乗数効果",
+        "45度線は灰、総需要線は青で固定",
         accent=TEAL,
     )
-    x, y, w, h = 0.95, 1.90, 7.20, 3.95
-    add_axes(slide, x, y, w, h, "GDP（所得）Y", "総需要 AE")
-    add_line(slide, x, y + h, x + w - 0.40, y + 0.40, color=GRAY_50, width=2)
-    add_text(slide, x + 5.82, y + 0.40, 0.90, 0.28, "45度線", size=11, color=GRAY_50, bold=True)
-    add_line(slide, x + 0.35, y + 3.05, x + w - 0.45, y + 1.22, color=BLUE, width=3)
-    add_line(slide, x + 0.35, y + 2.40, x + w - 0.45, y + 0.57, color=TEAL, width=3)
-    add_text(slide, x + 5.94, y + 1.12, 0.68, 0.24, "AE₀", size=12, color=BLUE, bold=True)
-    add_text(slide, x + 5.94, y + 0.47, 0.68, 0.24, "AE₁", size=12, color=TEAL, bold=True)
-    add_box(slide, 8.60, 2.00, 3.60, 0.72, "政府支出 G が増加", fill="D9FBFB", line=TEAL, size=15, color=TEAL, bold=True)
-    add_box(slide, 8.60, 3.08, 3.60, 0.72, "総需要線 AE が上方シフト", fill="E8F1FF", line=BLUE, size=14, color=BLUE, bold=True)
-    add_box(slide, 8.60, 4.16, 3.60, 0.96, "均衡GDPの増加\nΔY ＝ 1/(1−c) × ΔG", fill=GRAY_10, line=NAVY, size=16, color=NAVY, bold=True)
-    add_takeaway(
-        slide,
-        "45度線は支出＝所得を表す。シフト前後の均衡点を比較する。",
-        len(prs.slides),
-        accent=TEAL,
-    )
+    x, y, w, h = 0.95, 1.82, 7.20, 4.02
+    add_axes(slide, x, y, w, h, "所得 Y", "総需要 AE")
+    line(slide, x, y + h, x + w - 0.36, y + 0.36, color=MUTED, width=1.2)
+    line(slide, x + 0.30, y + 3.12, x + w - 0.40, y + 1.30, color=COBALT_MID, width=1.5)
+    line(slide, x + 0.30, y + 2.48, x + w - 0.40, y + 0.66, color=COBALT, width=2.2)
+    text(slide, x + 5.90, y + 1.32, 0.72, 0.22, "AE₀", size=10, color=COBALT_MID, bold=True)
+    text(slide, x + 5.90, y + 0.68, 0.72, 0.22, "AE₁", size=10, color=COBALT, bold=True)
+    text(slide, x + 5.65, y + 0.22, 0.90, 0.22, "45°", size=9, color=MUTED)
+    note(slide, 8.72, 2.05, 3.35, "POLICY", "政府支出 G を増やす")
+    note(slide, 8.72, 3.34, 3.35, "SHIFT", "総需要 AE が上方へ移動")
+    note(slide, 8.72, 4.63, 3.35, "MULTIPLIER", "ΔY ＝ 1/(1−c) × ΔG")
 
 
 def econ_is_lm(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+    slide = pattern_slide(
+        prs,
         "E04",
-        "IS-LM分析",
-        "財政政策はISを右へ、金融政策はLMを右へ動かし、GDPと利子率を変える",
+        "IS–LM",
+        "拡張的財政政策はISを右へ動かし、GDPと利子率を上昇させる",
+        "財政・金融政策の比較",
+        "政策→曲線→交点→Y・rの順で示す",
         accent=TEAL,
     )
-    x, y, w, h = 0.92, 1.90, 7.25, 3.95
+    x, y, w, h = 0.95, 1.82, 7.20, 4.02
     add_axes(slide, x, y, w, h, "GDP Y", "利子率 r")
-    add_line(slide, x + 0.45, y + 0.40, x + w - 0.45, y + h - 0.40, color=RED, width=3)
-    add_line(slide, x + 0.45, y + h - 0.40, x + w - 0.45, y + 0.40, color=BLUE, width=3)
-    add_line(slide, x + 1.15, y + h - 0.40, x + w - 0.05, y + 0.40, color=TEAL, width=2.4)
-    add_text(slide, x + 5.95, y + 3.04, 0.70, 0.24, "LM", size=12, color=RED, bold=True)
-    add_text(slide, x + 5.92, y + 0.55, 0.70, 0.24, "IS₀", size=12, color=BLUE, bold=True)
-    add_text(slide, x + 6.58, y + 0.55, 0.70, 0.24, "IS₁", size=12, color=TEAL, bold=True)
-    add_box(slide, 8.55, 1.95, 3.75, 0.82, "財政政策：IS → 右", fill="D9FBFB", line=TEAL, size=15, color=TEAL, bold=True)
-    add_box(slide, 8.55, 3.05, 3.75, 0.82, "結果：GDP ↑・利子率 ↑", fill=GRAY_10, line=GRAY_20, size=15, color=NAVY, bold=True)
-    add_box(slide, 8.55, 4.15, 3.75, 1.02, "注意：利子率上昇が\n民間投資を押し出す", fill="FFF1F1", line=RED, size=14, color=RED, bold=True)
-    add_takeaway(
-        slide,
-        "政策→曲線→交点→Y・rの順に追う。傾きと政策効果は別スライドにする。",
-        len(prs.slides),
-        accent=TEAL,
-    )
+    line(slide, x + 0.42, y + 0.44, x + w - 0.30, y + h - 0.36, color=RUST, width=2.2)
+    line(slide, x + 0.30, y + h - 0.42, x + w - 1.00, y + 0.42, color=COBALT_MID, width=1.5)
+    line(slide, x + 1.10, y + h - 0.42, x + w - 0.20, y + 0.42, color=COBALT, width=2.2)
+    text(slide, x + 5.98, y + 3.24, 0.62, 0.22, "LM", size=10, color=RUST, bold=True)
+    text(slide, x + 5.06, y + 0.52, 0.66, 0.22, "IS₀", size=10, color=COBALT_MID, bold=True)
+    text(slide, x + 5.96, y + 0.52, 0.66, 0.22, "IS₁", size=10, color=COBALT, bold=True)
+    notes = [
+        ("POLICY", "政府支出 G が増加"),
+        ("SHIFT", "IS₀ → IS₁（右方）"),
+        ("RESULT", "GDP ↑ / 利子率 ↑"),
+        ("OFFSET", "民間投資は一部減少"),
+    ]
+    for index, (heading, body) in enumerate(notes):
+        note(slide, 8.72, 1.82 + index * 1.05, 3.35, heading, body)
 
 
 def econ_surplus(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+    slide = pattern_slide(
+        prs,
         "E05",
-        "余剰・死荷重",
-        "課税で取引量が減ると、税収にならない余剰が死荷重として失われる",
+        "SURPLUS",
+        "課税で失われた余剰のうち、税収にならない部分が死荷重になる",
+        "課税、独占、関税、余剰分析",
+        "余剰・税収・死荷重の色を固定",
         accent=TEAL,
     )
-    x, y, w, h = 0.95, 1.86, 7.15, 4.00
+    x, y, w, h = 0.95, 1.82, 7.20, 4.02
     add_axes(slide, x, y, w, h, "数量 Q", "価格 P")
-    add_line(slide, x + 0.35, y + 0.35, x + w - 0.35, y + h - 0.35, color=BLUE, width=2.8)
-    add_line(slide, x + 0.35, y + h - 0.35, x + w - 0.35, y + 0.35, color=RED, width=2.8)
-    # 余剰領域を半透明の代わりに淡色三角形で表現
-    tri1 = slide.shapes.add_shape(MSO_SHAPE.ISOSCELES_TRIANGLE, Inches(3.12), Inches(2.15), Inches(2.95), Inches(1.60))
-    tri1.rotation = 180
-    tri1.fill.solid()
-    tri1.fill.fore_color.rgb = rgb("D0E2FF")
-    tri1.line.color.rgb = rgb(BLUE)
-    tri2 = slide.shapes.add_shape(MSO_SHAPE.ISOSCELES_TRIANGLE, Inches(3.12), Inches(3.75), Inches(2.95), Inches(1.60))
-    tri2.fill.solid()
-    tri2.fill.fore_color.rgb = rgb("A7F0BA")
-    tri2.line.color.rgb = rgb(GREEN)
-    add_text(slide, 3.72, 2.74, 1.75, 0.30, "消費者余剰", size=12, color=BLUE, bold=True, align=PP_ALIGN.CENTER)
-    add_text(slide, 3.72, 4.46, 1.75, 0.30, "生産者余剰", size=12, color=GREEN, bold=True, align=PP_ALIGN.CENTER)
-    add_box(slide, 8.52, 2.00, 3.78, 0.78, "税の導入 → 取引量減少", fill=GRAY_10, line=GRAY_20, size=14, color=NAVY, bold=True)
-    add_box(slide, 8.52, 3.10, 3.78, 0.78, "余剰の一部 → 政府税収", fill="FFF8E1", line=YELLOW, size=14, color=NAVY, bold=True)
-    add_box(slide, 8.52, 4.20, 3.78, 0.90, "残り → 死荷重\n社会全体から消失", fill="FFF1F1", line=RED, size=15, color=RED, bold=True)
-    add_takeaway(
-        slide,
-        "消費者余剰・生産者余剰・税収・死荷重は色を固定して使う。",
-        len(prs.slides),
-        accent=TEAL,
+    line(slide, x + 0.30, y + 0.35, x + w - 0.30, y + h - 0.35, color=RUST, width=2.2)
+    line(slide, x + 0.30, y + h - 0.35, x + w - 0.30, y + 0.35, color=COBALT, width=2.2)
+    # 図形で余剰の領域を示す（教材用の概念図）
+    top = slide.shapes.add_shape(
+        MSO_SHAPE.ISOSCELES_TRIANGLE,
+        Inches(x + 2.15),
+        Inches(y + 0.65),
+        Inches(3.00),
+        Inches(1.35),
     )
+    top.rotation = 180
+    top.fill.solid()
+    top.fill.fore_color.rgb = rgb(COBALT_PALE)
+    top.line.fill.background()
+    bottom = slide.shapes.add_shape(
+        MSO_SHAPE.ISOSCELES_TRIANGLE,
+        Inches(x + 2.15),
+        Inches(y + 2.02),
+        Inches(3.00),
+        Inches(1.35),
+    )
+    bottom.fill.solid()
+    bottom.fill.fore_color.rgb = rgb(TEAL_PALE)
+    bottom.line.fill.background()
+    text(slide, x + 2.72, y + 1.30, 1.90, 0.22, "消費者余剰", size=10, color=COBALT, bold=True, align=PP_ALIGN.CENTER)
+    text(slide, x + 2.72, y + 2.58, 1.90, 0.22, "生産者余剰", size=10, color=TEAL, bold=True, align=PP_ALIGN.CENTER)
+    note(slide, 8.72, 2.03, 3.38, "TRANSFER", "余剰の一部は政府税収へ移る")
+    note(slide, 8.72, 3.42, 3.38, "LOSS", "取引減少分は誰の利益にもならない")
+    rect(slide, 8.72, 4.72, 3.40, 0.76, fill=RUST_PALE, line_color=None)
+    text(slide, 8.96, 4.96, 2.96, 0.24, "死荷重 ＝ 純粋な社会的損失", size=12, color=RUST, bold=True)
 
 
-def econ_cycle_chart(prs: Presentation) -> None:
-    slide = add_base(prs)
-    add_header(
-        slide,
+def econ_cycle(prs: Presentation) -> None:
+    slide = pattern_slide(
+        prs,
         "E06",
-        "景気循環・時系列",
-        "トレンドと循環変動を分けて描くと、景気局面と転換点を判別できる",
+        "BUSINESS CYCLE",
+        "実質GDPは長期トレンドの周囲を循環し、山と谷で局面が転換する",
+        "景気循環、時系列",
+        "実績線1色＋トレンド灰色＋直接ラベル",
         accent=TEAL,
     )
-    x, y, w, h = 0.92, 1.82, 8.25, 4.08
+    x, y, w, h = 0.95, 1.82, 8.30, 4.02
     add_axes(slide, x, y, w, h, "時間 t", "実質GDP")
-    add_line(slide, x + 0.20, y + h - 0.35, x + w - 0.30, y + 0.55, color=GRAY_50, width=1.8)
+    # 後退局面
+    rect(slide, x + 2.15, y, 1.76, h, fill="EFEEEE", line_color=None)
+    rect(slide, x + 6.13, y, 1.34, h, fill="EFEEEE", line_color=None)
+    line(slide, x + 0.15, y + h - 0.38, x + w - 0.24, y + 0.58, color=MUTED, width=1)
     points = [
-        (x + 0.25, y + 3.45),
-        (x + 1.30, y + 2.55),
-        (x + 2.35, y + 1.55),
-        (x + 3.30, y + 2.25),
-        (x + 4.25, y + 2.95),
-        (x + 5.25, y + 1.82),
-        (x + 6.25, y + 0.88),
-        (x + 7.20, y + 1.42),
-        (x + 7.85, y + 1.92),
+        (x + 0.20, y + 3.45),
+        (x + 1.20, y + 2.48),
+        (x + 2.25, y + 1.50),
+        (x + 3.20, y + 2.35),
+        (x + 4.20, y + 2.82),
+        (x + 5.25, y + 1.68),
+        (x + 6.28, y + 0.82),
+        (x + 7.20, y + 1.62),
+        (x + 8.02, y + 1.98),
     ]
     for first, second in zip(points, points[1:]):
-        add_line(slide, first[0], first[1], second[0], second[1], color=BLUE, width=3)
-    add_text(slide, x + 2.00, y + 1.05, 0.72, 0.28, "山", size=13, color=RED, bold=True)
-    add_text(slide, x + 4.00, y + 3.02, 0.72, 0.28, "谷", size=13, color=TEAL, bold=True)
-    stages = [
-        ("回復", "生産・雇用↑", BLUE),
-        ("好況", "需要増・物価↑", GREEN),
-        ("後退", "在庫増・投資↓", ORANGE),
-        ("不況", "失業↑・政策対応", PURPLE),
-    ]
-    for i, (label, body, color) in enumerate(stages):
-        y_box = 1.90 + i * 1.00
-        add_box(slide, 9.58, y_box, 2.70, 0.76, "", fill=WHITE, line=color)
-        add_box(slide, 9.70, y_box + 0.12, 0.75, 0.50, label, fill=color, line=color, size=12, color=WHITE, bold=True)
-        add_text(slide, 10.62, y_box + 0.12, 1.42, 0.50, body, size=11.5, color=NAVY, bold=True)
-    add_takeaway(
-        slide,
-        "実績線、長期トレンド、山・谷、4局面を同じグラフ上で区別する。",
-        len(prs.slides),
-        accent=TEAL,
-    )
+        line(slide, first[0], first[1], second[0], second[1], color=COBALT, width=2.3)
+    text(slide, x + 2.05, y + 1.12, 0.70, 0.22, "山", size=10, color=RUST, bold=True)
+    text(slide, x + 3.94, y + 2.98, 0.70, 0.22, "谷", size=10, color=TEAL, bold=True)
+    text(slide, x + 7.38, y + 0.76, 0.72, 0.22, "実績", size=9, color=COBALT, bold=True)
+    text(slide, x + 7.38, y + 1.24, 0.72, 0.22, "トレンド", size=9, color=MUTED)
+    text(slide, 9.72, 2.02, 2.35, 0.24, "SHADED AREA", size=9, color=MUTED, bold=True)
+    text(slide, 9.72, 2.42, 2.35, 0.56, "景気後退局面", size=14, color=INK, bold=True)
+    text(slide, 9.72, 3.42, 2.35, 0.24, "TURNING POINT", size=9, color=MUTED, bold=True)
+    text(slide, 9.72, 3.82, 2.35, 0.82, "山：拡張→後退\n谷：後退→拡張", size=12.5, color=INK)
 
 
 def build_deck(output: Path) -> None:
     prs = Presentation()
     prs.slide_width = Inches(SLIDE_W)
     prs.slide_height = Inches(SLIDE_H)
-    prs.core_properties.title = "SMEC 標準図解スライドテンプレート"
+    prs.core_properties.title = "SMEC標準図解スライドテンプレート Editorial Cobalt"
     prs.core_properties.subject = "汎用図解12種＋経済学専用グラフ6種"
     prs.core_properties.author = "SMEC Project"
-    prs.core_properties.keywords = "SMEC, 中小企業診断士, PowerPoint, 図解, テンプレート"
 
-    add_title_slide(prs)
-    add_design_rules(prs)
+    add_cover(prs)
+    add_principles(prs)
     add_selector(prs)
 
-    generic_patterns = [
-        pattern_definition,
-        pattern_comparison,
-        pattern_process,
-        pattern_cause_effect,
-        pattern_cycle,
-        pattern_hierarchy,
-        pattern_timeline,
-        pattern_matrix,
-        pattern_tree,
-        pattern_network,
-        pattern_formula,
-        pattern_kpi,
-    ]
-    economics_patterns = [
+    patterns: list[Callable[[Presentation], None]] = [
+        generic_definition,
+        generic_comparison,
+        generic_process,
+        generic_cause,
+        generic_cycle,
+        generic_hierarchy,
+        generic_timeline,
+        generic_matrix,
+        generic_tree,
+        generic_network,
+        generic_formula,
+        generic_kpi,
         econ_supply_demand,
         econ_shift,
-        econ_keynesian_cross,
+        econ_keynesian,
         econ_is_lm,
         econ_surplus,
-        econ_cycle_chart,
+        econ_cycle,
     ]
-    for pattern in generic_patterns + economics_patterns:
+    for pattern in patterns:
         pattern(prs)
 
     output.parent.mkdir(parents=True, exist_ok=True)
