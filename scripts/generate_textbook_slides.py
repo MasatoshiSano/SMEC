@@ -861,6 +861,84 @@ def render_cards(slide, items, accent, soft) -> None:
         )
 
 
+def render_section_overview(slide, topics: list[Topic], accent: str, soft: str) -> None:
+    count = len(topics)
+    cols = 3 if count >= 5 else 2
+    rows = (count + cols - 1) // cols
+    gap_x, gap_y = 0.22, 0.18
+    total_w, total_h = 12.25, 4.45
+    card_w = (total_w - gap_x * (cols - 1)) / cols
+    card_h = (total_h - gap_y * (rows - 1)) / rows
+
+    for index, topic in enumerate(topics):
+        row, col = divmod(index, cols)
+        x = 0.55 + col * (card_w + gap_x)
+        y = 1.15 + row * (card_h + gap_y)
+
+        # カードベース
+        card = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(card_w), Inches(card_h)
+        )
+        card.fill.solid()
+        card.fill.fore_color.rgb = rgb(WHITE)
+        card.line.color.rgb = rgb(lighten(accent, 0.55))
+        card.line.width = Pt(1.2)
+
+        # 左端アクセントバー
+        bar = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(0.08), Inches(card_h)
+        )
+        bar.fill.solid()
+        bar.fill.fore_color.rgb = rgb(accent)
+        bar.line.fill.background()
+
+        # 論点コードバッジ
+        badge = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x + 0.16), Inches(y + 0.12), Inches(0.85), Inches(0.32)
+        )
+        badge.fill.solid()
+        badge.fill.fore_color.rgb = rgb(accent)
+        badge.line.fill.background()
+        set_shape_text(
+            badge,
+            topic.code,
+            size=11,
+            color=WHITE,
+            bold=True,
+            align=PP_ALIGN.CENTER,
+            margin=0.04,
+        )
+
+        # 論点タイトル
+        add_text(
+            slide,
+            x + 1.08,
+            y + 0.10,
+            card_w - 1.18,
+            0.36,
+            shorten(topic.title, 26),
+            size=13.5,
+            color=INK,
+            bold=True,
+            valign=MSO_ANCHOR.TOP,
+        )
+
+        # コア解説テキスト（基本概念から抽出）
+        desc = section_text(topic.sections["core"], 80)
+        if desc:
+            add_text(
+                slide,
+                x + 0.16,
+                y + 0.52,
+                card_w - 0.28,
+                card_h - 0.58,
+                desc,
+                size=11.5,
+                color=MUTED,
+                valign=MSO_ANCHOR.TOP,
+            )
+
+
 def render_process(slide, items, accent, soft) -> None:
     items = items[:5]
     count = len(items)
@@ -1493,19 +1571,13 @@ def add_summary_slide(prs: Presentation, book: Textbook, config: dict) -> None:
         color=INK,
         bold=True,
     )
-    summary_items: list[tuple[str, str]] = []
-    for line in book.summary:
-        stripped = line.strip()
-        if re.match(r"^(?:[-*+]|\d+[.)])\s+", stripped):
-            summary_items.append(split_label_body(stripped))
-    if not summary_items:
-        summary_items = [
-            ("理解", "図で概念同士の関係を捉える"),
-            ("確認", "教科書本文で定義と条件を確認する"),
-            ("演習", "問題を解いて知識を使える形にする"),
-            ("復習", "注意ポイントから弱点へ戻る"),
-        ]
-    render_cycle(slide, summary_items[:4], accent, soft)
+    summary_items = [
+        ("1. 理解", "図で概念同士の関係とグラフの動く向きを捉える"),
+        ("2. 確認", "教科書本文で定義と適用条件を確認する"),
+        ("3. 演習", "problem_setsの過去問演習で知識を使える形にする"),
+        ("4. 復習", "ひっかけ注意ポイントから弱点を再確認する"),
+    ]
+    render_process(slide, summary_items, accent, soft)
     add_box(
         slide,
         0.85,
@@ -1520,9 +1592,164 @@ def add_summary_slide(prs: Presentation, book: Textbook, config: dict) -> None:
         bold=True,
         align=PP_ALIGN.CENTER,
     )
+    add_footer(slide, config["file"], len(prs.slides), accent)
 
 
-def build_deck(book: Textbook, output: Path) -> dict[str, int]:
+def build_summary_deck(
+    prs: Presentation, book: Textbook, config: dict, output: Path
+) -> dict[str, int]:
+    """科目全体を8〜10枚程度のエッセンス図解に凝縮したスライドを生成する。"""
+    accent, soft = config["accent"], config["soft"]
+    diagram_counts: dict[str, int] = {}
+
+    # 1. 表紙
+    add_title_slide(prs, book, config)
+
+    # 2. 学習全体像・ロードマップ
+    slide = add_slide_base(prs, accent)
+    add_box(
+        slide,
+        0.48,
+        0.28,
+        1.12,
+        0.40,
+        "OVERVIEW",
+        fill=accent,
+        line=accent,
+        size=12,
+        color=WHITE,
+        bold=True,
+        align=PP_ALIGN.CENTER,
+    )
+    add_text(
+        slide,
+        1.75,
+        0.25,
+        9.80,
+        0.48,
+        f"{config['name']}｜科目全体マップ＆学習のツボ",
+        size=22,
+        color=INK,
+        bold=True,
+    )
+    add_text(
+        slide,
+        10.5,
+        0.75,
+        2.10,
+        0.22,
+        f"全{len(book.parts)}セクション・{len(book.topics)}論点",
+        size=9.5,
+        color=accent,
+        bold=True,
+        align=PP_ALIGN.RIGHT,
+    )
+
+    overview_items = [
+        ("第1部〜第4部", "マクロ経済学：GDP決定、IS-LM、貿易・為替、主要学派の対比"),
+        ("第5部〜第6部", "ミクロ経済学（基礎）：需要供給均衡、余剰分析、効用・費用関数"),
+        ("第7部〜第8部", "ミクロ経済学（応用）：不完全競争、ゲーム理論、外部性、所得分配"),
+        ("学習の鉄則", "用語の定義を正確に暗記 × グラフのシフト方向を自分で描く"),
+    ]
+    render_cards(slide, overview_items, accent, soft)
+    add_box(
+        slide,
+        0.55,
+        5.83,
+        12.23,
+        1.07,
+        "攻略のツボ｜出題パターンは定型的。「45度線・IS-LM・余剰・ナッシュ均衡・比較優位」の5大頻出モデルを手を動かして解けるようにする。",
+        fill=soft,
+        line=accent,
+        size=13,
+        color=accent,
+        bold=True,
+        align=PP_ALIGN.CENTER,
+    )
+    add_footer(slide, config["file"], len(prs.slides), accent)
+
+    # 3. 各部（セクション）ごとのエッセンススライド
+    grouped: dict[str, list[Topic]] = {part: [] for part in book.parts}
+    for topic in book.topics:
+        grouped.setdefault(topic.part, []).append(topic)
+
+    for part_index, (part, topics) in enumerate(grouped.items(), start=1):
+        if not topics:
+            continue
+        slide = add_slide_base(prs, accent)
+        add_box(
+            slide,
+            0.48,
+            0.28,
+            1.12,
+            0.40,
+            f"SEC {part_index:02d}",
+            fill=accent,
+            line=accent,
+            size=12,
+            color=WHITE,
+            bold=True,
+            align=PP_ALIGN.CENTER,
+        )
+        clean_part_title = re.sub(r"（[A-G]-\d+〜[A-G]-\d+）", "", part)
+        add_text(
+            slide,
+            1.75,
+            0.25,
+            9.80,
+            0.48,
+            f"第{part_index}部：{clean_part_title}",
+            size=22,
+            color=INK,
+            bold=True,
+        )
+        topic_codes = f"{topics[0].code}〜{topics[-1].code} ({len(topics)}論点)"
+        add_text(
+            slide,
+            10.2,
+            0.75,
+            2.40,
+            0.22,
+            topic_codes,
+            size=9.5,
+            color=accent,
+            bold=True,
+            align=PP_ALIGN.RIGHT,
+        )
+
+        # セクション内の各論点のコアエッセンスをカード形式で整理
+        render_section_overview(slide, topics, accent, soft)
+        diagram_counts["section_overview"] = diagram_counts.get("section_overview", 0) + 1
+
+        # セクションの導入文または重要ポイントを下部に配置
+        part_intro = " ".join(text for _, text in content_units(book.part_intros.get(part, []), "part"))
+        if not part_intro:
+            part_intro = f"本セクションでは{len(topics)}論点を網羅。基本定義を押さえ、過去問演習で定着を図る。"
+        add_box(
+            slide,
+            0.55,
+            5.83,
+            12.23,
+            1.07,
+            f"重要ポイント｜{shorten(part_intro, 120)}",
+            fill=soft,
+            line=lighten(accent, 0.45),
+            size=12.5,
+            color=INK,
+            bold=False,
+            align=PP_ALIGN.LEFT,
+        )
+        add_footer(slide, config["file"], len(prs.slides), accent)
+
+    # 4. まとめ
+    add_summary_slide(prs, book, config)
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    prs.save(output)
+    return diagram_counts
+
+
+def build_deck(book: Textbook, output: Path, mode: str = "full") -> dict[str, int]:
     config = SUBJECTS[book.subject]
     prs = Presentation()
     prs.slide_width = SLIDE_W
@@ -1532,15 +1759,19 @@ def build_deck(book: Textbook, output: Path) -> dict[str, int]:
     prs.core_properties.author = "SMEC Project"
     prs.core_properties.keywords = "中小企業診断士, 教科書, 図解, スライド"
 
+    if mode == "summary":
+        return build_summary_deck(prs, book, config, output)
+
     add_title_slide(prs, book, config)
     add_howto_slide(prs, book, config)
-    add_detail_pages(
-        prs,
-        "この教科書の使い方｜全文",
-        "学習ガイド",
-        content_units(book.intro, "guide"),
-        config,
-    )
+    if mode == "full":
+        add_detail_pages(
+            prs,
+            "この教科書の使い方｜全文",
+            "学習ガイド",
+            content_units(book.intro, "guide"),
+            config,
+        )
     diagram_counts: dict[str, int] = {}
 
     grouped: dict[str, list[Topic]] = {part: [] for part in book.parts}
@@ -1565,24 +1796,26 @@ def build_deck(book: Textbook, output: Path) -> dict[str, int]:
             diagram_counts[visual] = diagram_counts.get(visual, 0) + 1
             add_context_panels(slide, topic, config["accent"])
             add_footer(slide, config["file"], len(prs.slides), config["accent"])
-            units: list[tuple[str, str]] = []
-            for section in ("core", "example", "trap", "practice"):
-                units.extend(content_units(topic.sections[section], section))
-            add_detail_pages(
-                prs,
-                f"{topic.code}｜{topic.title}",
-                topic.part,
-                units,
-                config,
-            )
+            if mode == "full":
+                units: list[tuple[str, str]] = []
+                for section in ("core", "example", "trap", "practice"):
+                    units.extend(content_units(topic.sections[section], section))
+                add_detail_pages(
+                    prs,
+                    f"{topic.code}｜{topic.title}",
+                    topic.part,
+                    units,
+                    config,
+                )
 
-    add_detail_pages(
-        prs,
-        f"{config['name']}｜まとめ全文",
-        "まとめ",
-        content_units(book.summary, "summary"),
-        config,
-    )
+    if mode == "full":
+        add_detail_pages(
+            prs,
+            f"{config['name']}｜まとめ全文",
+            "まとめ",
+            content_units(book.summary, "summary"),
+            config,
+        )
     add_summary_slide(prs, book, config)
     output.parent.mkdir(parents=True, exist_ok=True)
     prs.save(output)
@@ -1593,17 +1826,18 @@ def write_readme(books: list[Textbook], outputs: list[Path]) -> None:
     rows = [
         "# 教科書 図解スライド",
         "",
-        "教科書の全論点を図解し、基本概念・表・公式・具体例・ひっかけポイント・過去問参照を省略せず詳細スライドに収録したPowerPoint資料です。",
+        "各教科書の全論点を、全体構造・セクション別要点・学習のツボを図解でコンパクトに整理したPowerPoint資料です。",
         "",
-        "| 科目 | 元の教科書 | スライド | 論点数 |",
-        "|---|---|---|---:|",
+        "| 科目 | 元の教科書 | スライド | 論点数 | 構成 |",
+        "|---|---|---|---:|---|",
     ]
     for book, output in zip(books, outputs):
         config = SUBJECTS[book.subject]
         rows.append(
             f"| {book.subject}. {config['name']} | "
             f"[`{config['file']}`](../{config['file']}) | "
-            f"[`{output.name}`]({output.name}) | {len(book.topics)} |"
+            f"[`{output.name}`]({output.name}) | {len(book.topics)} | "
+            f"表紙・全体マップ・{len(book.parts)}セクション要点・まとめ (計{len(book.parts) + 3}枚) |"
         )
     rows.extend(
         [
@@ -1615,10 +1849,17 @@ def write_readme(books: list[Textbook], outputs: list[Path]) -> None:
             "python3 scripts/generate_textbook_slides.py",
             "```",
             "",
-            "特定科目だけ生成する場合は、科目記号を指定します。",
+            "特定科目だけ生成する場合、またはモードを切り替える場合:",
             "",
             "```bash",
-            "python3 scripts/generate_textbook_slides.py --subject C",
+            "# 要点ダイジェスト版（デフォルト、10〜11枚）",
+            "python3 scripts/generate_textbook_slides.py --subject A --mode summary",
+            "",
+            "# 各論点ごとの図解スライド版（36〜46枚）",
+            "python3 scripts/generate_textbook_slides.py --subject A --mode visual",
+            "",
+            "# 教科書全文詳細つき完全版（133枚）",
+            "python3 scripts/generate_textbook_slides.py --subject A --mode full",
             "```",
             "",
             "スライドは教科書本文を基に生成しています。法令・統計・制度の数値は、受験年度の公式情報も確認してください。",
@@ -1641,6 +1882,12 @@ def main() -> None:
         action="store_true",
         help="全7科目を生成する",
     )
+    parser.add_argument(
+        "--mode",
+        choices=["summary", "visual", "full"],
+        default="summary",
+        help="スライド生成モード: summary(約10枚の要点版・デフォルト), visual(全論点図解36〜46枚), full(全論点図解＋詳細133枚)",
+    )
     args = parser.parse_args()
     if args.all and args.subject:
         parser.error("--all と --subject は同時に指定できません")
@@ -1651,9 +1898,9 @@ def main() -> None:
         source = TEXTBOOK_DIR / config["file"]
         book = parse_textbook(source, subject)
         output = OUTPUT_DIR / source.name.replace("_textbook.md", "_visual_slides.pptx")
-        counts = build_deck(book, output)
+        counts = build_deck(book, output, mode=args.mode)
         visual_summary = ", ".join(f"{key}:{value}" for key, value in sorted(counts.items()))
-        print(f"{subject}: {len(book.topics)}論点 → {output} ({visual_summary})")
+        print(f"{subject}: {len(book.topics)}論点 [{args.mode}モード] → {output} ({visual_summary})")
 
     existing_books: list[Textbook] = []
     existing_outputs: list[Path] = []
