@@ -1,0 +1,230 @@
+<title>財務専用グラフ3種</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--green:#2f8f5b;--line:#e6e6e6;--ghost:#f4f4f4;}
+*{box-sizing:border-box;}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
+.intro{max-width:960px;margin:0 auto;padding:56px 24px 30px;text-align:center;}
+.intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 .8em;font-family:"Space Mono",monospace;}
+.intro h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 .5em;}
+.intro p{color:var(--ink-soft);font-size:.9rem;line-height:1.8;margin:0;}
+.roadmap{max-width:960px;margin:18px auto 0;padding:14px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.78rem;color:var(--ink-soft);line-height:1.9;text-align:left;}
+.roadmap b{color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;}
+
+.gallery{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:52px;padding:36px 24px 0;}
+.pat-block{border-top:1px solid var(--line);padding-top:24px;}
+.pat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;flex-wrap:wrap;}
+.pat-num{font-family:"Space Mono",monospace;font-weight:700;font-size:.8rem;color:var(--ink-soft);}
+.pat-name{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.08rem;}
+.pat-usecase{font-size:.72rem;color:var(--red);font-weight:700;margin-bottom:12px;}
+
+/* .mockはコンテナクエリの基準。文字サイズは全てcqw指定で、カードの実際の描画幅に追従して縮む。
+   基準デザイン幅=約972px。 */
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:1.85cqw 2.26cqw 0.93cqw;border-bottom:0.16cqw solid var(--ink);flex:0 0 auto;gap:1.44cqw;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:0.98cqw;color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:1.7cqw;font-weight:900;margin-top:2px;}
+.head .overview{font-size:1.03cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:0.93cqw;color:#fff;background:var(--ink);padding:0.31cqw 0.93cqw;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:1.23cqw 2.26cqw 1.65cqw;display:flex;}
+
+.gside{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.tside{flex:0 0 30%;display:flex;flex-direction:column;justify-content:center;gap:0.82cqw;padding-left:1.65cqw;border-left:1px solid var(--line);}
+.tside .row{font-size:0.93cqw;color:var(--ink-soft);line-height:1.55;}
+.tside .row b{color:var(--ink);}
+
+.gcap-wrap{display:flex;flex-direction:column;width:100%;gap:0.62cqw;min-height:0;}
+.gcap-graph{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;}
+.gcap-text{font-size:0.93cqw;color:var(--ink-soft);line-height:1.55;text-align:center;max-width:92%;margin:0 auto;flex:0 0 auto;}
+
+svg text{font-family:"Noto Sans JP",sans-serif;}
+
+/* SVGは自分のviewBoxの縦横比を保ったまま、親が確保できたスペースの中に収まるだけ縮小する
+   (object-fit:containと同じ考え方)。枠側で高さを強制しないので、見出しが2行になって
+   本文側が狭くなっても、グラフが縮むだけで前後の要素とぶつからない。 */
+.chart-frame{width:100%;height:100%;flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.chart-frame svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+</style>
+
+<div class="intro">
+  <p class="eyebrow">SUBJECT-SPECIFIC EXTENSION ― FINANCE / ACCOUNTING (B)</p>
+  <h1>財務専用グラフ 3パターン</h1>
+  <p>経済学（A科目）に続いて、財務・会計（B科目）で必須の3パターンです。テンプレートの中核・配色・文字サイズの仕組みは共通です。</p>
+</div>
+<div class="roadmap">
+  <b>今後の拡張予定：</b> 企業経営＝SWOT／5フォース／組織構造　・　運営管理＝工程図／レイアウト／在庫推移　・　情報＝ネットワーク／ER図／処理フロー
+</div>
+
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <pattern id="finGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24,0 L0,0 0,24" fill="none" stroke="#eef0f2" stroke-width="1"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="gallery">
+
+  <!-- F1. 損益分岐点(CVP)図 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">F1</span><span class="pat-name">損益分岐点図（CVP分析）</span></div>
+    <p class="pat-usecase">構図：図を左（メイン）に、右に線の意味の凡例を添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-14 ／ 損益分岐点分析（CVP分析）</div><div class="title">損益分岐点図</div><div class="overview">売上高線と総原価線の交点が損益分岐点。それより左は損失、右は利益が生じる。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="gside">
+          <div class="chart-frame" style="max-width:520px;">
+          <svg viewBox="0 0 400 250">
+            <rect x="40" y="10" width="340" height="210" fill="url(#finGrid)"/>
+
+            <polygon points="40,170 217.8,108.9 40,220" fill="#FF3B1F" opacity=".1"/>
+            <polygon points="217.8,108.9 360,60 360,20" fill="#2f8f5b" opacity=".1"/>
+
+            <line x1="40" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="380,220 372,216 372,224" fill="#171717"/>
+            <line x1="40" y1="220" x2="40" y2="10" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="40,10 36,18 44,18" fill="#171717"/>
+            <text x="386" y="224" font-size="11" font-weight="700">販売数量 Q</text>
+            <text x="10" y="8" font-size="11" font-weight="700">金額</text>
+
+            <line x1="40" y1="170" x2="360" y2="170" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="2 3"/>
+            <text x="18" y="174" font-size="9">F</text>
+
+            <line x1="40" y1="170" x2="360" y2="60" stroke="#171717" stroke-width="2"/>
+            <text x="300" y="52" font-size="11" font-weight="700">総原価線</text>
+            <line x1="40" y1="220" x2="360" y2="20" stroke="#FF3B1F" stroke-width="2"/>
+            <text x="300" y="14" font-size="11" font-weight="700" fill="#FF3B1F">売上高線</text>
+
+            <line x1="217.8" y1="108.9" x2="217.8" y2="220" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="40" y1="108.9" x2="217.8" y2="108.9" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="217.8" cy="108.9" r="4.5" fill="#171717"/>
+            <text x="224" y="101" font-size="11" font-weight="700">損益分岐点</text>
+            <text x="200" y="234" font-size="9">BEP数量</text>
+
+            <text x="90" y="200" font-size="12" font-weight="700" fill="#FF3B1F">損失</text>
+            <text x="290" y="90" font-size="12" font-weight="700" fill="#2f8f5b">利益</text>
+          </svg>
+          </div>
+        </div>
+        <div class="tside">
+          <div class="row"><b>固定費（F）</b>：販売量に関わらず一定</div>
+          <div class="row"><b>総原価線</b>：固定費＋変動費。右上がり</div>
+          <div class="row"><b>売上高線</b>：単価×数量。原点から右上がり</div>
+          <div class="row"><b>損益分岐点</b>：総原価＝売上高となる点。利益もゼロ</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- F2. キャッシュフロー(ウォーターフォール図) -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">F2</span><span class="pat-name">キャッシュフロー（ウォーターフォール図）</span></div>
+    <p class="pat-usecase">構図：図を大きく中央に、下にキャプションを1行添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-19 ／ キャッシュフロー計算書</div><div class="title">現金の増減とキャッシュフロー計算書</div><div class="overview">期首の現金残高に、営業・投資・財務の3区分のキャッシュフローが積み重なって期末残高になる。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:520px;">
+            <svg viewBox="0 0 400 250">
+              <rect x="20" y="10" width="370" height="210" fill="url(#finGrid)"/>
+              <line x1="20" y1="220" x2="390" y2="220" stroke="#171717" stroke-width="1.6"/>
+
+              <line x1="95" y1="110" x2="110" y2="110" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="165" y1="44" x2="180" y2="44" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="235" y1="88" x2="250" y2="88" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="305" y1="99" x2="320" y2="99" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+
+              <rect x="40" y="110" width="55" height="110" fill="#171717"/>
+              <text x="67" y="103" text-anchor="middle" font-size="11" font-weight="700">100</text>
+
+              <rect x="110" y="44" width="55" height="66" fill="#2f8f5b"/>
+              <text x="137" y="37" text-anchor="middle" font-size="11" font-weight="700" fill="#2f8f5b">＋60</text>
+
+              <rect x="180" y="88" width="55" height="44" fill="#FF3B1F"/>
+              <text x="207" y="81" text-anchor="middle" font-size="11" font-weight="700" fill="#FF3B1F">－40</text>
+
+              <rect x="250" y="99" width="55" height="11" fill="#FF3B1F"/>
+              <text x="277" y="92" text-anchor="middle" font-size="11" font-weight="700" fill="#FF3B1F">－10</text>
+
+              <rect x="320" y="99" width="55" height="121" fill="#171717"/>
+              <text x="347" y="92" text-anchor="middle" font-size="11" font-weight="700">110</text>
+
+              <g font-size="10" text-anchor="middle" fill="#171717">
+                <text x="67" y="234">期首残高</text>
+                <text x="137" y="234">営業CF</text>
+                <text x="207" y="234">投資CF</text>
+                <text x="277" y="234">財務CF</text>
+                <text x="347" y="234">期末残高</text>
+              </g>
+            </svg>
+            </div>
+          </div>
+          <div class="gcap-text">営業CF（＋）は本業でのキャッシュ獲得、投資CF（－）は設備投資など、財務CF（－）は借入返済や配当を表す（数値は説明用の例）。期首＋営業＋投資＋財務＝期末残高。</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- F3. 財務諸表の連動(三表連動) -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">F3</span><span class="pat-name">財務諸表の連動（三表連動）</span></div>
+    <p class="pat-usecase">構図：図を中央に、下にキャプションを1行添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-01 ／ 財務諸表の基礎</div><div class="title">損益計算書・貸借対照表・キャッシュフロー計算書の連動</div><div class="overview">3つの財務諸表はそれぞれ独立した表ではなく、当期純利益や現金残高を通じて相互につながっている。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:480px;">
+            <svg viewBox="0 0 400 250">
+              <g stroke="#171717" stroke-width="1.6" fill="none" marker-end="url(#finArrow)">
+                <line x1="180" y1="60" x2="230" y2="60"/>
+                <line x1="90" y1="85" x2="150" y2="165"/>
+                <line x1="250" y1="165" x2="280" y2="85"/>
+              </g>
+              <defs><marker id="finArrow" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#171717"/></marker></defs>
+
+              <rect x="40" y="35" width="140" height="50" fill="#dfe7f6" stroke="#171717" stroke-width="1.4"/>
+              <text x="110" y="56" text-anchor="middle" font-size="12" font-weight="700">損益計算書</text>
+              <text x="110" y="72" text-anchor="middle" font-size="9" fill="#54617a">P/L</text>
+
+              <rect x="230" y="35" width="140" height="50" fill="#dfe7f6" stroke="#171717" stroke-width="1.4"/>
+              <text x="300" y="56" text-anchor="middle" font-size="12" font-weight="700">貸借対照表</text>
+              <text x="300" y="72" text-anchor="middle" font-size="9" fill="#54617a">B/S</text>
+
+              <rect x="120" y="165" width="160" height="50" fill="#FF3B1F" opacity=".1" stroke="#FF3B1F" stroke-width="1.4"/>
+              <text x="200" y="186" text-anchor="middle" font-size="12" font-weight="700">キャッシュフロー計算書</text>
+              <text x="200" y="202" text-anchor="middle" font-size="9" fill="#b23018">C/F</text>
+
+              <text x="205" y="52" text-anchor="middle" font-size="9.5" font-weight="700">当期純利益→利益剰余金</text>
+              <text x="70" y="130" text-anchor="middle" font-size="9.5" font-weight="700" transform="rotate(-58 70 130)">減価償却費等を調整</text>
+              <text x="330" y="130" text-anchor="middle" font-size="9.5" font-weight="700" transform="rotate(58 330 130)">期末現金残高が一致</text>
+            </svg>
+            </div>
+          </div>
+          <div class="gcap-text">損益計算書の当期純利益は貸借対照表の利益剰余金に積み上がり、キャッシュフロー計算書の期末現金残高は貸借対照表の現金勘定と一致する。</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>

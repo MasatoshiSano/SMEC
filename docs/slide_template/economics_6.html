@@ -1,0 +1,420 @@
+<title>経済学専用グラフ6種</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;}
+*{box-sizing:border-box;}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
+.intro{max-width:960px;margin:0 auto;padding:56px 24px 30px;text-align:center;}
+.intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 .8em;font-family:"Space Mono",monospace;}
+.intro h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 .5em;}
+.intro p{color:var(--ink-soft);font-size:.9rem;line-height:1.8;margin:0;}
+.roadmap{max-width:960px;margin:18px auto 0;padding:14px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.78rem;color:var(--ink-soft);line-height:1.9;text-align:left;}
+.roadmap b{color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;}
+
+.gallery{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:52px;padding:36px 24px 0;}
+.pat-block{border-top:1px solid var(--line);padding-top:24px;}
+.pat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;flex-wrap:wrap;}
+.pat-num{font-family:"Space Mono",monospace;font-weight:700;font-size:.8rem;color:var(--ink-soft);}
+.pat-name{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.08rem;}
+.pat-usecase{font-size:.72rem;color:var(--red);font-weight:700;margin-bottom:12px;}
+
+/* .mockはコンテナクエリの基準にする。中の文字サイズはすべてcqw(コンテナ幅に対する%)で
+   指定し、カード自体が16:9を保ったまま縮んでも文字が追従して縮み、はみ出さないようにする。
+   基準はデザイン時のカード幅=約972px。 */
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:1.85cqw 2.26cqw 0.93cqw;border-bottom:0.16cqw solid var(--ink);flex:0 0 auto;gap:1.44cqw;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:0.98cqw;color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:1.7cqw;font-weight:900;margin-top:2px;}
+.head .overview{font-size:1.03cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:0.93cqw;color:#fff;background:var(--ink);padding:0.31cqw 0.93cqw;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:1.23cqw 2.26cqw 1.65cqw;display:flex;}
+
+/* diagram + side text (right) */
+.gside{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.tside{flex:0 0 30%;display:flex;flex-direction:column;justify-content:center;gap:0.82cqw;padding-left:1.65cqw;border-left:1px solid var(--line);}
+.tside .row{font-size:0.93cqw;color:var(--ink-soft);line-height:1.55;}
+.tside .row b{color:var(--ink);}
+
+/* diagram + caption below */
+.gcap-wrap{display:flex;flex-direction:column;width:100%;gap:0.62cqw;min-height:0;}
+.gcap-graph{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;}
+.gcap-text{font-size:0.93cqw;color:var(--ink-soft);line-height:1.55;text-align:center;max-width:90%;margin:0 auto;flex:0 0 auto;}
+
+.slide-foot-note{padding:0 2.26cqw 1.23cqw;font-size:0.93cqw;color:var(--ink-soft);line-height:1.5;flex:0 0 auto;}
+
+svg text{font-family:"Noto Sans JP",sans-serif;}
+
+/* SVGは自分のviewBoxの縦横比を保ったまま、親が確保できたスペースの中に収まるだけ縮小する
+   (object-fit:containと同じ考え方)。枠側で高さを強制しないので、見出しが2行になって
+   本文側が狭くなっても、グラフが縮むだけで前後の要素とぶつからない。 */
+.chart-frame{width:100%;height:100%;flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.chart-frame svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+
+/* E2: 左右2枚パネル(シフト前/後) */
+.split-wrap{flex:1;display:flex;align-items:stretch;gap:0.62cqw;min-height:0;}
+.split-panel{flex:1;display:flex;flex-direction:column;align-items:stretch;gap:0.41cqw;min-width:0;min-height:0;}
+.split-panel .cap{font-family:"Space Mono",monospace;font-size:0.93cqw;color:var(--ink-soft);}
+.split-arrow{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:0 0.41cqw;}
+.split-arrow .glyph{font-size:2.26cqw;color:var(--red);line-height:1;}
+.split-arrow .lab{font-size:0.82cqw;color:var(--red);font-weight:700;white-space:nowrap;}
+</style>
+
+<div class="intro">
+  <p class="eyebrow">SUBJECT-SPECIFIC EXTENSION ― ECONOMICS (A)</p>
+  <h1>経済学専用グラフ 6パターン</h1>
+  <p>テンプレートの中核（12種類の汎用図解パターン）は変えず、科目固有の作法があるグラフだけを科目別に追加していきます。まずは経済学（A科目）で必須の6パターンです。表記・軸の取り方は過去問の慣例に合わせています。</p>
+</div>
+<div class="roadmap">
+  <b>今後の拡張予定：</b> 財務＝損益分岐点／キャッシュフロー／財務諸表連動　・　企業経営＝SWOT／5フォース／組織構造　・　運営管理＝工程図／レイアウト／在庫推移　・　情報＝ネットワーク／ER図／処理フロー
+</div>
+
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <pattern id="econGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24,0 L0,0 0,24" fill="none" stroke="#eef0f2" stroke-width="1"/>
+    </pattern>
+    <pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#FF3B1F" stroke-width="2.2"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="gallery">
+
+  <!-- 1. 需要・供給曲線 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">E1</span><span class="pat-name">需要・供給曲線</span></div>
+    <p class="pat-usecase">構図：図を左（またはメイン）に大きく、右に凡例的な補足を添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-21 ／ 市場均衡・不均衡</div><div class="title">需要曲線と供給曲線</div><div class="overview">価格が上がるほど需要量は減り、供給量は増える。両曲線が交わる点で需要量と供給量が一致する。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gside">
+          <div class="chart-frame" style="max-width:520px;">
+          <svg viewBox="0 0 400 250">
+            <rect x="40" y="20" width="340" height="200" fill="url(#econGrid)"/>
+            <g stroke="#d8dbdf" stroke-width="1">
+              <line x1="32" y1="120" x2="40" y2="120"/>
+              <line x1="210" y1="220" x2="210" y2="228"/>
+            </g>
+            <line x1="40" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="380,220 372,216 372,224" fill="#171717"/>
+            <line x1="40" y1="220" x2="40" y2="20" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="40,20 36,28 44,28" fill="#171717"/>
+            <text x="386" y="224" font-size="11" font-weight="700">数量 Q</text>
+            <text x="20" y="16" font-size="11" font-weight="700">価格 P</text>
+
+            <line x1="60" y1="40" x2="360" y2="200" stroke="#171717" stroke-width="2"/>
+            <text x="365" y="205" font-size="12" font-weight="700">D</text>
+            <line x1="60" y1="200" x2="360" y2="40" stroke="#FF3B1F" stroke-width="2"/>
+            <text x="365" y="42" font-size="12" font-weight="700" fill="#FF3B1F">S</text>
+
+            <polygon points="40,20 210,120 40,120" fill="#2e5495" opacity=".08"/>
+            <polygon points="40,220 210,120 40,120" fill="#171717" opacity=".05"/>
+
+            <line x1="40" y1="120" x2="210" y2="120" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="210" y1="120" x2="210" y2="220" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="210" cy="120" r="4.5" fill="#171717"/>
+            <text x="217" y="112" font-size="11" font-weight="700">E</text>
+            <text x="18" y="124" font-size="9.5">P*</text>
+            <text x="203" y="234" font-size="9.5">Q*</text>
+          </svg>
+          </div>
+        </div>
+        <div class="tside">
+          <div class="row"><b>需要曲線（D）</b>：価格↓なら数量↑。右下がり</div>
+          <div class="row"><b>供給曲線（S）</b>：価格↑なら数量↑。右上がり</div>
+          <div class="row"><b>均衡点（E）</b>：需要量＝供給量となる点。価格P*・数量Q*が決まる</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 2. 曲線のシフトと均衡変化 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">E2</span><span class="pat-name">曲線のシフトと均衡変化</span></div>
+    <p class="pat-usecase">構図：元の均衡と新しい均衡を同一グラフ上に重ね、右に変化の要約を添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-21 ／ 市場均衡・不均衡</div><div class="title">需要曲線の右シフトと均衡変化</div><div class="overview">所得の増加などで需要曲線が右にシフトすると、供給曲線が同じでも均衡価格・均衡数量はともに上昇する。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="split-wrap">
+          <div class="split-panel">
+            <span class="cap">BEFORE ― シフト前</span>
+            <div class="chart-frame" >
+            <svg viewBox="0 0 210 175">
+              <rect x="20" y="10" width="180" height="150" fill="url(#econGrid)"/>
+              <line x1="20" y1="160" x2="200" y2="160" stroke="#171717" stroke-width="1.4"/>
+              <polygon points="200,160 193,157 193,163" fill="#171717"/>
+              <line x1="20" y1="160" x2="20" y2="10" stroke="#171717" stroke-width="1.4"/>
+              <polygon points="20,10 17,17 23,17" fill="#171717"/>
+              <text x="203" y="164" font-size="9.5" font-weight="700">Q</text>
+              <text x="8" y="8" font-size="9.5" font-weight="700">P</text>
+
+              <line x1="30" y1="20" x2="170" y2="150" stroke="#171717" stroke-width="1.8"/>
+              <text x="173" y="153" font-size="10.5" font-weight="700">D₀</text>
+              <line x1="30" y1="150" x2="170" y2="20" stroke="#171717" stroke-width="1.8"/>
+              <text x="173" y="24" font-size="10.5" font-weight="700">S</text>
+
+              <line x1="20" y1="85" x2="100" y2="85" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="100" y1="85" x2="100" y2="160" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+              <circle cx="100" cy="85" r="4" fill="#171717"/>
+              <text x="106" y="78" font-size="10.5" font-weight="700">E₀</text>
+            </svg>
+            </div>
+          </div>
+
+          <div class="split-arrow">
+            <span class="glyph">⇒</span>
+            <span class="lab">需要↑<br>でシフト</span>
+          </div>
+
+          <div class="split-panel">
+            <span class="cap" style="color:#FF3B1F;">AFTER ― シフト後</span>
+            <div class="chart-frame" >
+            <svg viewBox="0 0 210 175">
+              <rect x="20" y="10" width="180" height="150" fill="url(#econGrid)"/>
+              <line x1="20" y1="160" x2="200" y2="160" stroke="#171717" stroke-width="1.4"/>
+              <polygon points="200,160 193,157 193,163" fill="#171717"/>
+              <line x1="20" y1="160" x2="20" y2="10" stroke="#171717" stroke-width="1.4"/>
+              <polygon points="20,10 17,17 23,17" fill="#171717"/>
+              <text x="203" y="164" font-size="9.5" font-weight="700">Q</text>
+              <text x="8" y="8" font-size="9.5" font-weight="700">P</text>
+
+              <line x1="30" y1="20" x2="170" y2="150" stroke="#c7c7c7" stroke-width="1.4" stroke-dasharray="4 3"/>
+              <text x="173" y="153" font-size="9.5" fill="#a3a3a3">D₀</text>
+              <line x1="30" y1="150" x2="170" y2="20" stroke="#171717" stroke-width="1.8"/>
+              <text x="173" y="24" font-size="10.5" font-weight="700">S</text>
+              <line x1="55" y1="20" x2="195" y2="150" stroke="#FF3B1F" stroke-width="2"/>
+              <text x="176" y="15" font-size="10.5" font-weight="700" fill="#FF3B1F">D₁</text>
+
+              <polygon points="100,85 112.5,73.4 112.5,160 100,160" fill="#FF3B1F" opacity=".08"/>
+              <circle cx="100" cy="85" r="3.5" fill="#c7c7c7"/>
+              <circle cx="112.5" cy="73.4" r="4.5" fill="#FF3B1F"/>
+              <text x="118" y="70" font-size="10.5" font-weight="700" fill="#FF3B1F">E₁</text>
+            </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-foot-note">需要曲線が右へシフト＝同じ価格でもより多く買いたい状態。供給曲線Sは動かないため、新しい均衡E₁は右上（価格も数量も上昇）に移る。</div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 3. 45度線分析 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">E3</span><span class="pat-name">45度線分析（ケインズ・クロス）</span></div>
+    <p class="pat-usecase">構図：図をやや大きめに中央配置し、下にキャプションを1行添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-7 ／ 生産物市場とGDP決定理論</div><div class="title">45度線分析（均衡国民所得の決定）</div><div class="overview">総支出線と45度線の交点で、総所得と総支出が一致する均衡国民所得が決まる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:400px;">
+            <svg viewBox="0 0 400 250">
+              <rect x="50" y="10" width="330" height="210" fill="url(#econGrid)"/>
+              <line x1="50" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+              <polygon points="380,220 372,216 372,224" fill="#171717"/>
+              <line x1="50" y1="220" x2="50" y2="10" stroke="#171717" stroke-width="1.6"/>
+              <polygon points="50,10 46,18 54,18" fill="#171717"/>
+              <text x="384" y="224" font-size="11" font-weight="700">国民所得 Y</text>
+              <text x="10" y="8" font-size="11" font-weight="700">総支出 E</text>
+
+              <line x1="50" y1="220" x2="250" y2="20" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="4 3"/>
+              <text x="255" y="18" font-size="10.5" fill="#8a8a8a">45°（E＝Y）</text>
+
+              <line x1="50" y1="190" x2="350" y2="110" stroke="#FF3B1F" stroke-width="1.8"/>
+              <text x="355" y="108" font-size="11" font-weight="700" fill="#FF3B1F">C+I+G</text>
+
+              <line x1="50" y1="179" x2="91" y2="179" stroke="#171717" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="91" y1="179" x2="91" y2="220" stroke="#171717" stroke-width="1" stroke-dasharray="3 3"/>
+              <circle cx="91" cy="179" r="4" fill="#171717"/>
+              <text x="98" y="172" font-size="11" font-weight="700">均衡点</text>
+              <text x="84" y="234" font-size="9.5">Y*</text>
+            </svg>
+            </div>
+          </div>
+          <div class="gcap-text">総支出線（C+I+G）の傾き＝限界消費性向（1より小さい）のため45度線より緩やか。両者の交点の左では「所得＜支出」で在庫が減り生産が増加、右では逆に生産が減少し、均衡点Y*に収束する。</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 4. IS-LM分析 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">E4</span><span class="pat-name">IS-LM分析</span></div>
+    <p class="pat-usecase">構図：図を左（メイン）に、右に2曲線の意味の解説を添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-9 ／ IS-LM曲線・分析</div><div class="title">IS-LM分析</div><div class="overview">財市場を均衡させるIS曲線と、貨幣市場を均衡させるLM曲線の交点で、均衡GDPと均衡利子率が同時に決まる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gside">
+          <div class="chart-frame" style="max-width:520px;">
+          <svg viewBox="0 0 400 250">
+            <rect x="50" y="20" width="330" height="200" fill="url(#econGrid)"/>
+            <line x1="50" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="380,220 372,216 372,224" fill="#171717"/>
+            <line x1="50" y1="220" x2="50" y2="20" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="50,20 46,28 54,28" fill="#171717"/>
+            <text x="386" y="224" font-size="11" font-weight="700">Y</text>
+            <text x="30" y="16" font-size="11" font-weight="700">r</text>
+
+            <line x1="100" y1="40" x2="400" y2="190" stroke="#c7c7c7" stroke-width="1.4" stroke-dasharray="4 3"/>
+            <text x="342" y="164" font-size="10" fill="#a3a3a3">IS'</text>
+            <line x1="100" y1="190" x2="400" y2="40" stroke="#c7c7c7" stroke-width="1.4" stroke-dasharray="4 3"/>
+            <text x="342" y="66" font-size="10" fill="#a3a3a3">LM'</text>
+
+            <line x1="70" y1="40" x2="370" y2="190" stroke="#171717" stroke-width="2"/>
+            <text x="374" y="195" font-size="12" font-weight="700">IS</text>
+            <line x1="70" y1="190" x2="370" y2="40" stroke="#FF3B1F" stroke-width="2"/>
+            <text x="374" y="42" font-size="12" font-weight="700" fill="#FF3B1F">LM</text>
+
+            <path d="M295,150 L315,150" stroke="#171717" stroke-width="1.6" marker-end="url(#isArrow)"/>
+            <path d="M275,90 L295,90" stroke="#FF3B1F" stroke-width="1.6" marker-end="url(#lmArrow)"/>
+            <defs>
+              <marker id="isArrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#171717"/></marker>
+              <marker id="lmArrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#FF3B1F"/></marker>
+            </defs>
+
+            <line x1="50" y1="115" x2="220" y2="115" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="220" y1="115" x2="220" y2="220" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="220" cy="115" r="4.5" fill="#171717"/>
+            <text x="227" y="107" font-size="11" font-weight="700">E</text>
+            <text x="24" y="119" font-size="9.5">r*</text>
+            <text x="213" y="234" font-size="9.5">Y*</text>
+          </svg>
+          </div>
+        </div>
+        <div class="tside">
+          <div class="row"><b>IS曲線</b>：財市場の均衡。右下がり</div>
+          <div class="row"><b>LM曲線</b>：貨幣市場の均衡。右上がり</div>
+          <div class="row"><b style="color:#171717;">財政政策</b>→ISが右へシフト</div>
+          <div class="row"><b style="color:#FF3B1F;">金融政策</b>→LMが右へシフト</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 5. 余剰・死荷重 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">E5</span><span class="pat-name">余剰・死荷重</span></div>
+    <p class="pat-usecase">構図：図を左（メイン）に、右に各領域の凡例を添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-23 ／ 経済余剰（消費者余剰・生産者余剰）</div><div class="title">余剰分析と死荷重（数量規制のケース）</div><div class="overview">競争均衡では総余剰（消費者余剰＋生産者余剰）が最大となるが、数量規制で取引量が制限されると死荷重が発生する。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gside">
+          <div class="chart-frame" style="max-width:520px;">
+          <svg viewBox="0 0 400 250">
+            <rect x="40" y="10" width="340" height="210" fill="url(#econGrid)"/>
+            <polygon points="40,20 200,115 40,115" fill="#dfe7f6"/>
+            <polygon points="40,210 200,115 40,115" fill="#eef0f0"/>
+            <polygon points="140,79.4 140,150.6 200,115" fill="url(#dwlHatch)"/>
+            <polygon points="140,79.4 140,150.6 200,115" fill="#FF3B1F" opacity=".08"/>
+
+            <line x1="40" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="380,220 372,216 372,224" fill="#171717"/>
+            <line x1="40" y1="220" x2="40" y2="10" stroke="#171717" stroke-width="1.6"/>
+            <polygon points="40,10 36,18 44,18" fill="#171717"/>
+            <text x="386" y="224" font-size="11" font-weight="700">Q</text>
+            <text x="20" y="8" font-size="11" font-weight="700">P</text>
+
+            <line x1="40" y1="20" x2="360" y2="210" stroke="#171717" stroke-width="1.8"/>
+            <text x="365" y="214" font-size="12" font-weight="700">D</text>
+            <line x1="40" y1="210" x2="360" y2="20" stroke="#171717" stroke-width="1.8"/>
+            <text x="365" y="24" font-size="12" font-weight="700">S</text>
+
+            <line x1="140" y1="220" x2="140" y2="79.4" stroke="#171717" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="40" y1="115" x2="200" y2="115" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="200" cy="115" r="4" fill="#171717"/>
+            <text x="132" y="233" font-size="9.5">Q₁</text>
+            <text x="194" y="233" font-size="9.5">Q*</text>
+          </svg>
+          </div>
+        </div>
+        <div class="tside">
+          <div class="row" style="color:#2e5495;"><b>■ 消費者余剰</b>：買い手が得する部分</div>
+          <div class="row" style="color:#6b6b6b;"><b>■ 生産者余剰</b>：売り手が得する部分</div>
+          <div class="row" style="color:#FF3B1F;"><b>■ 死荷重</b>：Q₁への数量規制で失われる余剰</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 6. 時系列・景気循環 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">E6</span><span class="pat-name">時系列・景気循環</span></div>
+    <p class="pat-usecase">構図：図を大きく中央に、下にキャプションを1行添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-13 ／ 景気変動と景気循環</div><div class="title">景気循環の4局面</div><div class="overview">経済活動は一直線に成長するのではなく、好況・後退・不況・回復という波を繰り返しながら長期トレンドに沿って推移する。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:460px;">
+            <svg viewBox="0 0 400 250">
+              <rect x="40" y="20" width="350" height="210" fill="url(#econGrid)"/>
+
+              <path d="M40,200 C75,160 95,130 122,130 C145,130 155,140 165,147 L40,200 Z" fill="#FF3B1F" opacity=".08"/>
+              <path d="M248,112 C260,90 270,60 288,60 C315,60 350,75 370,90 L370,60 Z" fill="#FF3B1F" opacity=".08"/>
+              <path d="M165,147 C180,156 195,160 205,165 C222,170 235,140 248,112 Z" fill="#2e5495" opacity=".1"/>
+
+              <line x1="40" y1="230" x2="390" y2="230" stroke="#171717" stroke-width="1.6"/>
+              <polygon points="390,230 382,226 382,234" fill="#171717"/>
+              <line x1="40" y1="230" x2="40" y2="20" stroke="#171717" stroke-width="1.6"/>
+              <polygon points="40,20 36,28 44,28" fill="#171717"/>
+              <text x="393" y="234" font-size="11" font-weight="700">時間</text>
+              <text x="8" y="16" font-size="11" font-weight="700">経済活動水準</text>
+
+              <line x1="40" y1="200" x2="370" y2="60" stroke="#8a8a8a" stroke-width="1.3" stroke-dasharray="4 3"/>
+              <text x="300" y="90" font-size="10" fill="#8a8a8a">成長トレンド</text>
+
+              <path d="M40,200 C75,160 95,130 122,130 C145,130 155,140 165,147 C180,156 195,160 205,165 C222,170 235,140 248,112 C260,90 270,60 288,60 C315,60 350,75 370,90" fill="none" stroke="#FF3B1F" stroke-width="2.2"/>
+
+              <circle cx="122" cy="130" r="4" fill="#171717"/>
+              <text x="105" y="118" font-size="10" font-weight="700">山（好況）</text>
+              <circle cx="205" cy="165" r="4" fill="#171717"/>
+              <text x="188" y="188" font-size="10" font-weight="700">谷（不況）</text>
+              <circle cx="288" cy="60" r="4" fill="#171717"/>
+              <text x="271" y="48" font-size="10" font-weight="700">山（好況）</text>
+              <text x="150" y="205" font-size="9" fill="#8a8a8a">後退期</text>
+              <text x="238" y="205" font-size="9" fill="#8a8a8a">回復期</text>
+            </svg>
+            </div>
+          </div>
+          <div class="gcap-text">好況（山）→後退→不況（谷）→回復という4局面を繰り返すのが景気循環。試験では各局面の特徴（生産・雇用・物価の動き）が問われる。</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>

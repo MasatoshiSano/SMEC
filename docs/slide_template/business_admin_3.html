@@ -1,0 +1,261 @@
+<title>企業経営専用グラフ3種</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--green:#2f8f5b;--line:#e6e6e6;--ghost:#f4f4f4;}
+*{box-sizing:border-box;}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
+.intro{max-width:960px;margin:0 auto;padding:56px 24px 30px;text-align:center;}
+.intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 .8em;font-family:"Space Mono",monospace;}
+.intro h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 .5em;}
+.intro p{color:var(--ink-soft);font-size:.9rem;line-height:1.8;margin:0;}
+.roadmap{max-width:960px;margin:18px auto 0;padding:14px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.78rem;color:var(--ink-soft);line-height:1.9;text-align:left;}
+.roadmap b{color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;}
+
+.gallery{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:52px;padding:36px 24px 0;}
+.pat-block{border-top:1px solid var(--line);padding-top:24px;}
+.pat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;flex-wrap:wrap;}
+.pat-num{font-family:"Space Mono",monospace;font-weight:700;font-size:.8rem;color:var(--ink-soft);}
+.pat-name{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.08rem;}
+.pat-usecase{font-size:.72rem;color:var(--red);font-weight:700;margin-bottom:12px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:1.85cqw 2.26cqw 0.93cqw;border-bottom:0.16cqw solid var(--ink);flex:0 0 auto;gap:1.44cqw;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:0.98cqw;color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:1.7cqw;font-weight:900;margin-top:2px;}
+.head .overview{font-size:1.03cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:0.93cqw;color:#fff;background:var(--ink);padding:0.31cqw 0.93cqw;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:1.23cqw 2.26cqw 1.65cqw;display:flex;}
+
+.gside{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.tside{flex:0 0 32%;display:flex;flex-direction:column;justify-content:center;gap:0.7cqw;padding-left:1.65cqw;border-left:1px solid var(--line);}
+.tside .row{font-size:0.88cqw;color:var(--ink-soft);line-height:1.5;}
+.tside .row b{color:var(--ink);}
+
+.gcap-wrap{display:flex;flex-direction:column;width:100%;gap:0.62cqw;min-height:0;}
+.gcap-graph{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;}
+.gcap-text{font-size:0.93cqw;color:var(--ink-soft);line-height:1.55;text-align:center;max-width:92%;margin:0 auto;flex:0 0 auto;}
+
+svg text{font-family:"Noto Sans JP",sans-serif;}
+
+.chart-frame{width:100%;height:100%;flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.chart-frame svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+
+/* 2枚パネル(組織図比較) */
+.split-wrap{flex:1;display:flex;align-items:stretch;gap:1.5cqw;min-height:0;}
+.split-panel{flex:1;display:flex;flex-direction:column;align-items:stretch;gap:0.41cqw;min-width:0;min-height:0;}
+.split-panel .cap{font-family:"Space Mono",monospace;font-size:0.93cqw;color:var(--ink-soft);text-align:center;}
+</style>
+
+<div class="intro">
+  <p class="eyebrow">SUBJECT-SPECIFIC EXTENSION ― BUSINESS ADMINISTRATION (C)</p>
+  <h1>企業経営専用グラフ 3パターン</h1>
+  <p>経済学（A科目）・財務（B科目）に続いて、企業経営理論（C科目）で定番の3パターンです。5フォースと組織構造は12種類の汎用パターンでも扱いましたが、ここでは科目専用として強度の可視化・実際の組織図での比較まで踏み込みます。</p>
+</div>
+<div class="roadmap">
+  <b>今後の拡張予定：</b> 運営管理＝工程図／レイアウト／在庫推移　・　情報＝ネットワーク／ER図／処理フロー
+</div>
+
+<div class="gallery">
+
+  <!-- G1. SWOT分析 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">G1</span><span class="pat-name">SWOT分析</span></div>
+    <p class="pat-usecase">構図：図を左（メイン）に、右にクロスSWOTの補足を添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-1 ／ 戦略の考え方（外部・内部環境分析）</div><div class="title">SWOT分析</div><div class="overview">内部要因（強み・弱み）と外部要因（機会・脅威）を整理し、戦略の方向性を検討する枠組み。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="gside">
+          <div class="chart-frame" style="max-width:420px;">
+          <svg viewBox="0 0 360 250">
+            <line x1="180" y1="10" x2="180" y2="220" stroke="#171717" stroke-width="1.6"/>
+            <line x1="60" y1="115" x2="360" y2="115" stroke="#171717" stroke-width="1.6"/>
+
+            <rect x="60" y="10" width="120" height="105" fill="#dfe7f6"/>
+            <rect x="180" y="10" width="180" height="105" fill="#eef0f0"/>
+            <rect x="60" y="115" width="120" height="105" fill="#eef0f0"/>
+            <rect x="180" y="115" width="180" height="105" fill="#FF3B1F" opacity=".08"/>
+
+            <text x="120" y="45" text-anchor="middle" font-size="16" font-weight="900">強み</text>
+            <text x="120" y="63" text-anchor="middle" font-size="10" fill="#54617a">Strengths</text>
+            <text x="270" y="45" text-anchor="middle" font-size="16" font-weight="900">弱み</text>
+            <text x="270" y="63" text-anchor="middle" font-size="10" fill="#54617a">Weaknesses</text>
+            <text x="120" y="150" text-anchor="middle" font-size="16" font-weight="900">機会</text>
+            <text x="120" y="168" text-anchor="middle" font-size="10" fill="#54617a">Opportunities</text>
+            <text x="270" y="150" text-anchor="middle" font-size="16" font-weight="900" fill="#b23018">脅威</text>
+            <text x="270" y="168" text-anchor="middle" font-size="10" fill="#b23018">Threats</text>
+
+            <text x="120" y="235" text-anchor="middle" font-size="10.5" font-weight="700">プラス要因</text>
+            <text x="270" y="235" text-anchor="middle" font-size="10.5" font-weight="700">マイナス要因</text>
+            <text x="30" y="65" font-size="10.5" font-weight="700" transform="rotate(-90 30 65)">内部要因</text>
+            <text x="30" y="170" font-size="10.5" font-weight="700" transform="rotate(-90 30 170)">外部要因</text>
+          </svg>
+          </div>
+        </div>
+        <div class="tside">
+          <div class="row"><b>強み×機会</b>＝SO戦略：積極攻勢</div>
+          <div class="row"><b>弱み×機会</b>＝WO戦略：弱点克服</div>
+          <div class="row"><b>強み×脅威</b>＝ST戦略：差別化</div>
+          <div class="row"><b>弱み×脅威</b>＝WT戦略：専守防衛・撤退</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- G2. 5フォース分析(強度の可視化) -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">G2</span><span class="pat-name">5フォース分析：強さの可視化</span></div>
+    <p class="pat-usecase">構図：図を大きく中央に、下にキャプションを1行添える</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-6 ／ 競争戦略：業界の構造分析</div><div class="title">5フォース分析：強さの可視化</div><div class="overview">5つの力それぞれの強弱を書き込むことで、業界の収益性の実態をより具体的に判断できる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:560px;">
+            <svg viewBox="0 0 460 250">
+              <g font-family="Zen Kaku Gothic New">
+                <rect x="20" y="18" width="180" height="26" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="28" y="35" font-size="11" font-weight="700">既存競合の脅威</text>
+                <rect x="210" y="22" width="120" height="10" fill="#f0f0f0"/><rect x="210" y="22" width="96" height="10" fill="#FF3B1F"/>
+                <text x="336" y="31" font-size="9.5" fill="#b23018">強</text>
+
+                <rect x="20" y="60" width="180" height="26" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="28" y="77" font-size="11" font-weight="700">新規参入の脅威</text>
+                <rect x="210" y="64" width="120" height="10" fill="#f0f0f0"/><rect x="210" y="64" width="30" height="10" fill="#2f8f5b"/>
+                <text x="336" y="73" font-size="9.5" fill="#2f8f5b">弱（参入障壁高）</text>
+
+                <rect x="20" y="102" width="180" height="26" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="28" y="119" font-size="11" font-weight="700">代替品の脅威</text>
+                <rect x="210" y="106" width="120" height="10" fill="#f0f0f0"/><rect x="210" y="106" width="72" height="10" fill="#c9a227"/>
+                <text x="336" y="115" font-size="9.5" fill="#8a7419">中</text>
+
+                <rect x="20" y="144" width="180" height="26" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="28" y="161" font-size="11" font-weight="700">売り手の交渉力</text>
+                <rect x="210" y="148" width="120" height="10" fill="#f0f0f0"/><rect x="210" y="148" width="42" height="10" fill="#2f8f5b"/>
+                <text x="336" y="157" font-size="9.5" fill="#2f8f5b">弱</text>
+
+                <rect x="20" y="186" width="180" height="26" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="28" y="203" font-size="11" font-weight="700">買い手の交渉力</text>
+                <rect x="210" y="190" width="120" height="10" fill="#f0f0f0"/><rect x="210" y="190" width="90" height="10" fill="#FF3B1F"/>
+                <text x="336" y="199" font-size="9.5" fill="#b23018">強</text>
+              </g>
+              <line x1="380" y1="10" x2="380" y2="220" stroke="#e6e6e6" stroke-width="1"/>
+              <text x="392" y="30" font-size="10" font-weight="700">総合評価</text>
+              <text x="392" y="50" font-size="9.5" fill="#54617a">競合・買い手の力が</text>
+              <text x="392" y="65" font-size="9.5" fill="#54617a">強く、収益性は</text>
+              <text x="392" y="80" font-size="9.5" fill="#b23018" font-weight="700">やや低い業界</text>
+            </svg>
+            </div>
+          </div>
+          <div class="gcap-text">各力の横に強度バーを書き込むと、単なる5つの力の定義確認にとどまらず「この業界は儲かりやすいか」を判断する分析ツールとして使える（バーは説明用の例）。</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- G3. 組織構造の比較(組織図) -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">G3</span><span class="pat-name">組織構造の比較（組織図）</span></div>
+    <p class="pat-usecase">構図：左右2枚の組織図を並べ、構造そのものの違いを見せる</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-16 ／ 組織構造の形態</div><div class="title">職能別組織 vs 事業部制組織（組織図）</div><div class="overview">事業部制では各事業部が営業・製造・経理を個別に持つため、職能別組織より機能が重複しコストがかさむ。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="split-wrap">
+          <div class="split-panel">
+            <span class="cap">職能別組織</span>
+            <div class="chart-frame">
+            <svg viewBox="0 0 260 200">
+              <g stroke="#171717" stroke-width="1.4">
+                <line x1="130" y1="41" x2="130" y2="65"/>
+                <line x1="55" y1="65" x2="205" y2="65"/>
+                <line x1="55" y1="65" x2="55" y2="90"/>
+                <line x1="130" y1="65" x2="130" y2="90"/>
+                <line x1="205" y1="65" x2="205" y2="90"/>
+              </g>
+              <rect x="100" y="15" width="60" height="26" fill="#171717"/>
+              <text x="130" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">社長</text>
+
+              <rect x="20" y="90" width="70" height="26" fill="#dfe7f6" stroke="#171717" stroke-width="1.2"/>
+              <text x="55" y="107" text-anchor="middle" font-size="10.5" font-weight="700">営業部</text>
+              <rect x="95" y="90" width="70" height="26" fill="#dfe7f6" stroke="#171717" stroke-width="1.2"/>
+              <text x="130" y="107" text-anchor="middle" font-size="10.5" font-weight="700">製造部</text>
+              <rect x="170" y="90" width="70" height="26" fill="#dfe7f6" stroke="#171717" stroke-width="1.2"/>
+              <text x="205" y="107" text-anchor="middle" font-size="10.5" font-weight="700">経理部</text>
+
+              <text x="130" y="150" text-anchor="middle" font-size="9.5" fill="#54617a">機能ごとに1つずつ</text>
+              <text x="130" y="164" text-anchor="middle" font-size="9.5" fill="#54617a">→ 専門性は高いが</text>
+              <text x="130" y="178" text-anchor="middle" font-size="9.5" fill="#54617a">部門間連携が課題</text>
+            </svg>
+            </div>
+          </div>
+          <div class="split-panel">
+            <span class="cap" style="color:#FF3B1F;">事業部制組織</span>
+            <div class="chart-frame">
+            <svg viewBox="0 0 260 200">
+              <g stroke="#171717" stroke-width="1.4">
+                <line x1="130" y1="41" x2="130" y2="60"/>
+                <line x1="65" y1="60" x2="195" y2="60"/>
+                <line x1="65" y1="60" x2="65" y2="75"/>
+                <line x1="195" y1="60" x2="195" y2="75"/>
+                <line x1="65" y1="101" x2="65" y2="115"/>
+                <line x1="31" y1="115" x2="99" y2="115"/>
+                <line x1="31" y1="115" x2="31" y2="140"/>
+                <line x1="65" y1="115" x2="65" y2="140"/>
+                <line x1="99" y1="115" x2="99" y2="140"/>
+                <line x1="195" y1="101" x2="195" y2="115"/>
+                <line x1="161" y1="115" x2="229" y2="115"/>
+                <line x1="161" y1="115" x2="161" y2="140"/>
+                <line x1="195" y1="115" x2="195" y2="140"/>
+                <line x1="229" y1="115" x2="229" y2="140"/>
+              </g>
+              <rect x="100" y="15" width="60" height="26" fill="#171717"/>
+              <text x="130" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">社長</text>
+
+              <rect x="30" y="75" width="70" height="26" fill="#FF3B1F" opacity=".12" stroke="#FF3B1F" stroke-width="1.2"/>
+              <text x="65" y="92" text-anchor="middle" font-size="10.5" font-weight="700">A事業部</text>
+              <rect x="160" y="75" width="70" height="26" fill="#FF3B1F" opacity=".12" stroke="#FF3B1F" stroke-width="1.2"/>
+              <text x="195" y="92" text-anchor="middle" font-size="10.5" font-weight="700">B事業部</text>
+
+              <g font-size="8">
+                <rect x="14" y="140" width="34" height="20" fill="#fff" stroke="#8a8a8a" stroke-width="1"/>
+                <text x="31" y="153" text-anchor="middle">営業</text>
+                <rect x="48" y="140" width="34" height="20" fill="#fff" stroke="#8a8a8a" stroke-width="1"/>
+                <text x="65" y="153" text-anchor="middle">製造</text>
+                <rect x="82" y="140" width="34" height="20" fill="#fff" stroke="#8a8a8a" stroke-width="1"/>
+                <text x="99" y="153" text-anchor="middle">経理</text>
+
+                <rect x="144" y="140" width="34" height="20" fill="#fff" stroke="#8a8a8a" stroke-width="1"/>
+                <text x="161" y="153" text-anchor="middle">営業</text>
+                <rect x="178" y="140" width="34" height="20" fill="#fff" stroke="#8a8a8a" stroke-width="1"/>
+                <text x="195" y="153" text-anchor="middle">製造</text>
+                <rect x="212" y="140" width="34" height="20" fill="#fff" stroke="#8a8a8a" stroke-width="1"/>
+                <text x="229" y="153" text-anchor="middle">経理</text>
+              </g>
+              <text x="130" y="180" text-anchor="middle" font-size="9.5" fill="#b23018">機能が事業部ごとに重複</text>
+            </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>

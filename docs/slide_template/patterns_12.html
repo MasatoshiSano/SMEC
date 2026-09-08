@@ -1,0 +1,498 @@
+<title>Swiss Grid 図解パターン12種</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#171717;
+  --ink-soft:#8a8a8a;
+  --red:#FF3B1F;
+  --line:#e6e6e6;
+  --ghost:#f4f4f4;
+}
+*{box-sizing:border-box;}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
+.intro{max-width:960px;margin:0 auto;padding:56px 24px 30px;text-align:center;}
+.intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 .8em;font-family:"Space Mono",monospace;}
+.intro h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 .5em;}
+.intro p{color:var(--ink-soft);font-size:.9rem;line-height:1.8;margin:0;}
+
+.gallery{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:52px;padding:0 24px;}
+.pat-block{border-top:1px solid var(--line);padding-top:24px;}
+.pat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;flex-wrap:wrap;}
+.pat-num{font-family:"Space Mono",monospace;font-weight:700;font-size:.8rem;color:var(--ink-soft);}
+.pat-name{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.08rem;}
+.pat-usecase{font-size:.72rem;color:var(--red);font-weight:700;margin-bottom:12px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 22px 9px;border-bottom:1.6px solid var(--ink);flex:0 0 auto;gap:14px;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:0.977cqw;color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:1.698cqw;font-weight:900;margin-top:2px;}
+.head .overview{font-size:1.029cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:0.926cqw;color:#fff;background:var(--ink);padding:3px 9px;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:12px 22px 16px;}
+
+/* ---------- 1. 定義・要素カード ---------- */
+.p1-cards{display:flex;height:100%;align-items:flex-end;}
+.p1-card{flex:1;border-left:1px solid var(--line);padding:0 16px;position:relative;}
+.p1-card:first-child{border-left:none;padding-left:0;}
+.p1-card .big{font-size:4.115cqw;font-weight:900;color:var(--ghost);line-height:1;}
+.p1-card .rule{width:22px;height:2px;background:var(--ink);margin:8px 0 8px;}
+.p1-card .nm{font-size:1.235cqw;font-weight:900;}
+.p1-card .df{font-size:0.977cqw;color:var(--ink-soft);margin-top:5px;line-height:1.5;}
+
+/* ---------- 2. 左右比較 ---------- */
+.p2-vs{display:flex;height:100%;position:relative;}
+.p2-side{flex:1;padding:8px 18px;display:flex;flex-direction:column;justify-content:center;gap:8px;}
+.p2-side.left{border-right:1.6px solid var(--ink);}
+.p2-side .lab{font-size:1.337cqw;font-weight:900;}
+.p2-side .ex{font-size:0.977cqw;color:var(--ink-soft);line-height:1.6;}
+.p2-side .tagline{font-family:"Space Mono",monospace;font-size:0.926cqw;color:var(--red);}
+.p2-vsmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-weight:700;font-size:1.132cqw;z-index:2;}
+
+/* ---------- 3. プロセス・手順 ---------- */
+.p3-flow{display:flex;align-items:stretch;gap:8px;height:100%;}
+.p3-step{flex:1;border-top:2.4px solid var(--ink);padding-top:8px;position:relative;}
+.p3-step.hi{border-top-color:var(--red);}
+.p3-step .n{font-size:2.675cqw;font-weight:900;}
+.p3-step.hi .n{color:var(--red);}
+.p3-step .lab{font-size:1.132cqw;font-weight:700;margin-top:4px;}
+.p3-step .d{font-size:0.926cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;}
+.p3-arrow{align-self:flex-start;margin-top:6px;font-size:1.646cqw;color:#c7c7c7;}
+
+/* ---------- 4. 因果関係 ---------- */
+.p4-wrap{display:flex;height:100%;gap:18px;align-items:center;}
+.p4-cause{flex:0 0 32%;border-top:2.4px solid var(--ink);padding-top:10px;}
+.p4-cause .k{font-family:"Space Mono",monospace;font-size:0.874cqw;color:var(--ink-soft);}
+.p4-cause .v{font-size:1.646cqw;font-weight:900;margin-top:4px;}
+.p4-cause .d{font-size:0.926cqw;color:var(--ink-soft);margin-top:6px;line-height:1.5;}
+.p4-arrows{flex:0 0 auto;display:flex;flex-direction:column;font-size:2.058cqw;color:var(--ink);}
+.p4-effects{flex:1;display:flex;flex-direction:column;gap:14px;}
+.p4-eff{border-left:3px solid var(--ink);padding-left:12px;}
+.p4-eff.neg{border-left-color:var(--red);}
+.p4-eff .t{font-size:1.08cqw;font-weight:900;}
+.p4-eff.neg .t{color:var(--red);}
+.p4-eff .d{font-size:0.885cqw;color:var(--ink-soft);margin-top:3px;line-height:1.5;}
+
+/* ---------- 5. 循環モデル ---------- */
+.p5-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:center;gap:10px;min-height:0;}
+.p5-cap{font-size:0.977cqw;color:var(--ink-soft);text-align:center;max-width:36em;line-height:1.6;}
+
+/* ---------- 6. 階層・ピラミッド ---------- */
+.p6-wrap{display:flex;height:100%;gap:16px;align-items:center;min-height:0;}
+.p6-list{flex:1;display:flex;flex-direction:column;gap:8px;}
+.p6-list .row{display:flex;gap:8px;align-items:baseline;font-size:0.977cqw;}
+.p6-list .row b{font-size:1.08cqw;font-weight:900;flex:0 0 5.4em;}
+.p6-list .row span{color:var(--ink-soft);line-height:1.5;}
+
+/* ---------- 7. タイムライン ---------- */
+.p7-wrap{position:relative;height:100%;display:flex;align-items:center;}
+.p7-track{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--ink);}
+.p7-items{position:relative;display:flex;justify-content:space-between;width:100%;}
+.p7-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 6px;}
+.p7-item .box{border:1.6px solid var(--ink);padding:4px 10px;font-size:1.08cqw;font-weight:900;background:#fff;}
+.p7-item.hi .box{border-color:var(--red);color:var(--red);}
+.p7-item .dot{width:8px;height:8px;background:var(--ink);border:2px solid #fff;}
+.p7-item.hi .dot{background:var(--red);}
+.p7-item .d{font-size:0.864cqw;color:var(--ink-soft);text-align:center;line-height:1.5;}
+
+/* ---------- 8. 2x2マトリクス ---------- */
+.p8-wrap{display:flex;height:100%;gap:16px;}
+.p8-grid{flex:0 0 52%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:0;border:1.6px solid var(--ink);}
+.p8-grid .cell{border:1px solid var(--line);padding:8px;position:relative;}
+.p8-grid .cell .q{position:absolute;bottom:2px;right:6px;font-size:2.263cqw;font-weight:900;color:var(--ghost);}
+.p8-grid .cell .lab{font-size:1.029cqw;font-weight:900;position:relative;}
+.p8-grid .cell.hi{background:var(--ink);}
+.p8-grid .cell.hi .lab{color:#fff;}
+.p8-grid .cell.hi .q{color:rgba(255,255,255,.15);}
+.p8-side{flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px;}
+.p8-side .row{font-size:0.926cqw;color:var(--ink-soft);line-height:1.5;}
+.p8-side .row b{color:var(--ink);}
+
+/* ---------- 9. ツリー・分類 ---------- */
+.p9-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:center;min-height:0;}
+.p9-cap{margin-top:8px;font-size:0.926cqw;color:var(--ink-soft);text-align:center;max-width:38em;line-height:1.6;}
+
+/* ---------- 10. ネットワーク・関係図 ---------- */
+.p10-wrap{display:flex;height:100%;gap:16px;align-items:center;min-height:0;}
+.p10-text{flex:0 0 32%;display:flex;flex-direction:column;gap:8px;}
+.p10-text .row{font-size:0.926cqw;color:var(--ink-soft);line-height:1.6;display:flex;gap:6px;}
+.p10-text .row .ln{flex:0 0 16px;height:0;border-top:2px solid var(--ink);align-self:center;}
+.p10-text .row .ln.dash{border-top-style:dashed;}
+.p10-text .row .ln.dot{border-top-style:dotted;border-top-width:2.4px;}
+.p10-diagram{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;}
+
+/* ---------- 11. 数式・投入産出モデル ---------- */
+.p11-wrap{display:flex;flex-direction:column;height:100%;gap:10px;}
+.p11-formula{text-align:center;font-family:"Space Mono",monospace;font-size:1.337cqw;padding:8px 0;border-bottom:1px solid var(--line);}
+.p11-io{flex:1;display:flex;align-items:center;gap:10px;}
+.p11-inputs{flex:0 0 40%;display:flex;flex-direction:column;gap:7px;}
+.p11-inputs .row{font-size:0.885cqw;border-bottom:1px solid var(--line);padding-bottom:5px;}
+.p11-inputs .row b{font-family:"Space Mono",monospace;color:var(--red);margin-right:4px;}
+.p11-arrow{flex:0 0 auto;font-size:2.263cqw;}
+.p11-output{flex:1;border-top:2.4px solid var(--ink);padding-top:14px;text-align:center;}
+.p11-output .v{font-size:2.058cqw;font-weight:900;}
+.p11-output .l{font-size:0.926cqw;color:var(--ink-soft);margin-top:4px;}
+
+/* ---------- 12. グラフ・表・指標比較 ---------- */
+.p12-wrap{display:flex;flex-direction:column;height:100%;gap:8px;}
+.p12-bars{flex:0 0 46%;display:flex;align-items:flex-end;gap:14px;padding:0 4px;border-bottom:1.4px solid var(--ink);}
+.p12-bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.p12-bar .bx{width:60%;background:var(--ink);}
+.p12-bar.hi .bx{background:var(--red);}
+.p12-bar .lab{font-size:0.823cqw;text-align:center;line-height:1.3;}
+table.p12-table{flex:1;width:100%;border-collapse:collapse;font-size:0.823cqw;}
+table.p12-table th,table.p12-table td{border:1px solid var(--line);padding:3px 6px;text-align:left;}
+table.p12-table th{background:var(--ink);color:#fff;font-size:0.782cqw;text-align:center;}
+</style>
+
+<div class="intro">
+  <p class="eyebrow">SWISS GRID ― 12 DIAGRAM PATTERNS</p>
+  <h1>内容に応じた12種類の図解パターン</h1>
+  <p>ご指定いただいた12種類を作成しました。すべてを枠で囲む「カード化」はせず、罫線・余白・番号だけで区切れる箇所はそちらを優先し、マトリクスやツリーなど構造上ボックスが必要な図解にだけ枠を使っています。配置も「図は左・説明は右」「上に図・下に説明」「中央配置＋下にキャプション」など、内容ごとに最も伝わりやすい形を個別に選びました。</p>
+</div>
+
+<div class="gallery">
+
+  <!-- 1. 定義・要素カード -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">01</span><span class="pat-name">定義・要素カード</span></div>
+    <p class="pat-usecase">構図：カードを横一列に並べる（4Pなど「並列する複数要素」向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-31 ／ マーケティング計画と戦略</div><div class="title">4P（マーケティング・ミックス）</div><div class="overview">STPで定めたターゲットに対し、Product・Price・Place・Promotionの4つの手段を組み合わせて売り方を設計する。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p1-cards">
+          <div class="p1-card"><div class="big">P</div><div class="rule"></div><div class="nm">Product<br>製品</div><div class="df">何を売るか</div></div>
+          <div class="p1-card"><div class="big">P</div><div class="rule"></div><div class="nm">Price<br>価格</div><div class="df">いくらで売るか</div></div>
+          <div class="p1-card"><div class="big">P</div><div class="rule"></div><div class="nm">Place<br>流通</div><div class="df">どこで売るか</div></div>
+          <div class="p1-card"><div class="big">P</div><div class="rule" style="background:var(--red);"></div><div class="nm">Promotion<br>販促</div><div class="df">どう知らせるか</div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 2. 左右比較 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">02</span><span class="pat-name">左右比較</span></div>
+    <p class="pat-usecase">構図：中央に区切り線＋VSマーク、左右対称スプリット（2つの選択肢・対立概念向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-7 ／ 競争戦略：競争優位の戦略</div><div class="title">コストリーダーシップ vs 差別化</div><div class="overview">同じ「競争優位」を狙う戦略でも、価格の安さで勝つか、価格以外の価値で勝つかで打ち手はまったく異なる。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body" style="padding:0;">
+        <div class="p2-vs">
+          <div class="p2-vsmark">VS</div>
+          <div class="p2-side left">
+            <div class="tagline">STRATEGY A</div>
+            <div class="lab">コストリーダーシップ戦略</div>
+            <div class="ex">業界で最も低いコストを実現し、価格競争で勝つ戦略。<br>例：格安航空会社</div>
+          </div>
+          <div class="p2-side">
+            <div class="tagline">STRATEGY B</div>
+            <div class="lab">差別化戦略</div>
+            <div class="ex">価格以外の面（品質・ブランド・デザイン・サービス）で独自の価値を提供する戦略。<br>例：高級ホテル</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 3. プロセス・手順 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">03</span><span class="pat-name">プロセス・手順</span></div>
+    <p class="pat-usecase">構図：上に見出し、下に横並びステップ＋矢印（順序のある手順向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-31 ／ マーケティング計画と戦略</div><div class="title">STP：誰に売るかを決める手順</div><div class="overview">市場をいきなり狙わず、絞り込み→選定→立ち位置決めという3つの手順を踏んで「誰に売るか」を定める。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p3-flow">
+          <div class="p3-step"><div class="n">01</div><div class="lab">セグメンテーション</div><div class="d">市場を年齢・地域・ライフスタイル等で細分化</div></div>
+          <div class="p3-arrow">→</div>
+          <div class="p3-step"><div class="n">02</div><div class="lab">ターゲティング</div><div class="d">細分化した市場から狙う市場を選ぶ</div></div>
+          <div class="p3-arrow">→</div>
+          <div class="p3-step hi"><div class="n">03</div><div class="lab">ポジショニング</div><div class="d">競合と比べた自社の独自の位置づけを明確化</div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 4. 因果関係 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">04</span><span class="pat-name">因果関係</span></div>
+    <p class="pat-usecase">構図：左に原因、右に結果を複数枝分かれで並べる（1つの原因が複数の結果を生む場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-17 ／ 組織文化</div><div class="title">強い組織文化がもたらす2つの効果</div><div class="overview">組織文化が強いことは一様に良いわけではなく、効率化という効果と、変革を妨げるという副作用を併せ持つ。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p4-wrap">
+          <div class="p4-cause"><div class="k">CAUSE</div><div class="v">強い組織文化</div><div class="d">メンバーに価値観・行動様式が広く共有されている状態</div></div>
+          <div class="p4-arrows">⟶<br>⟶</div>
+          <div class="p4-effects">
+            <div class="p4-eff"><div class="t">＋ 効率化</div><div class="d">メンバーの行動を統一し、意思疎通・効率を高める</div></div>
+            <div class="p4-eff neg"><div class="t">－ 変革の足かせ</div><div class="d">環境が変化した際「今までのやり方」に固執させ、変革を遅らせることがある</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 5. 循環モデル -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">05</span><span class="pat-name">循環モデル</span></div>
+    <p class="pat-usecase">構図：図を中央に大きく配置、説明キャプションは下に1行（円環そのものが主役）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-24 ／ 組織変革と組織成長</div><div class="title">組織のライフサイクル</div><div class="overview">組織は一方通行では成長せず、段階ごとに異なる経営課題を乗り越えながら循環的に発展・再生していく。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p5-wrap">
+          <svg viewBox="0 0 420 190" style="display:block;width:auto;height:auto;max-width:72%;max-height:100%;" role="img" aria-label="創業期から成長期、成熟期、衰退・再生期へと循環する組織のライフサイクル図">
+            <g stroke="#171717" stroke-width="1.6" fill="none" marker-end="url(#a5)">
+              <line x1="130" y1="45" x2="290" y2="45"/>
+              <line x1="365" y1="70" x2="365" y2="120"/>
+              <line x1="290" y1="145" x2="130" y2="145"/>
+              <line x1="55" y1="120" x2="55" y2="70"/>
+            </g>
+            <defs><marker id="a5" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#171717"/></marker></defs>
+            <g font-family="Zen Kaku Gothic New" font-size="11" font-weight="700">
+              <rect x="20" y="25" width="110" height="40" fill="#fff" stroke="#171717" stroke-width="1.6"/>
+              <text x="75" y="42" text-anchor="middle">創業期</text>
+              <text x="75" y="57" text-anchor="middle" font-size="8" font-weight="400" fill="#8a8a8a">資金調達が課題</text>
+              <rect x="290" y="25" width="110" height="40" fill="#fff" stroke="#171717" stroke-width="1.6"/>
+              <text x="345" y="42" text-anchor="middle">成長期</text>
+              <text x="345" y="57" text-anchor="middle" font-size="8" font-weight="400" fill="#8a8a8a">仕組み化が課題</text>
+              <rect x="290" y="125" width="110" height="40" fill="#fff" stroke="#171717" stroke-width="1.6"/>
+              <text x="345" y="142" text-anchor="middle">成熟期</text>
+              <text x="345" y="157" text-anchor="middle" font-size="8" font-weight="400" fill="#8a8a8a">硬直化への対応</text>
+              <rect x="20" y="125" width="110" height="40" fill="#FF3B1F" stroke="#FF3B1F" stroke-width="1.6"/>
+              <text x="75" y="142" text-anchor="middle" fill="#fff">衰退・再生期</text>
+              <text x="75" y="157" text-anchor="middle" font-size="8" font-weight="400" fill="#ffe">再生か縮小か</text>
+            </g>
+          </svg>
+        </div>
+        <div class="p5-cap">創業期→成長期→成熟期→衰退・再生期という段階を経て、各段階で直面する経営課題が異なる（レヴィンの組織変革論とも関連）。</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 6. 階層・ピラミッド -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">06</span><span class="pat-name">階層・ピラミッド</span></div>
+    <p class="pat-usecase">構図：左に図、右に各階層の説明リスト（上下関係と、各層の意味を同時に示したい場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-19 ／ モチベーション理論</div><div class="title">マズローの欲求段階説</div><div class="overview">人間の欲求は低次から高次へ5段階のピラミッド状に積み上がり、低次の欲求が満たされて初めて次の欲求が現れる。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p6-wrap">
+          <svg viewBox="0 0 240 160" style="display:block;width:auto;height:auto;max-width:38%;max-height:100%;flex:0 0 auto;">
+            <polygon points="120,0 144,32 96,32" fill="#171717"/>
+            <polygon points="96,32 144,32 168,64 72,64" fill="#3a3a3a"/>
+            <polygon points="72,64 168,64 192,96 48,96" fill="#5c5c5c"/>
+            <polygon points="48,96 192,96 216,128 24,128" fill="#8a8a8a"/>
+            <polygon points="24,128 216,128 240,160 0,160" fill="#FF3B1F"/>
+          </svg>
+          <div class="p6-list">
+            <div class="row"><b>自己実現欲求</b><span>能力・可能性を最大限発揮したい</span></div>
+            <div class="row"><b>承認欲求</b><span>他者から認められたい、尊敬されたい</span></div>
+            <div class="row"><b>社会的欲求</b><span>集団に所属したい、愛情を得たい</span></div>
+            <div class="row"><b>安全欲求</b><span>身体的・経済的な安全を確保したい</span></div>
+            <div class="row"><b style="color:#FF3B1F">生理的欲求</b><span>食欲・睡眠など生命維持に必要な欲求</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 7. タイムライン -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">07</span><span class="pat-name">タイムライン</span></div>
+    <p class="pat-usecase">構図：横一直線の時系列、上下交互ではなく全ラベルを揃えて配置（同種の段階が並ぶ場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-36 ／ プロダクト・マネジメント</div><div class="title">プロダクト・ライフサイクル（PLC）</div><div class="overview">製品は導入期から衰退期まで4段階の寿命をたどり、各段階で有効なマーケティング戦略の方向性が異なる。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p7-wrap">
+          <div class="p7-track"></div>
+          <div class="p7-items">
+            <div class="p7-item"><div class="box">導入期</div><div class="dot"></div><div class="d">認知拡大に注力</div></div>
+            <div class="p7-item"><div class="box">成長期</div><div class="dot"></div><div class="d">シェア拡大、販路拡大</div></div>
+            <div class="p7-item"><div class="box">成熟期</div><div class="dot"></div><div class="d">差別化、ブランド強化</div></div>
+            <div class="p7-item hi"><div class="box">衰退期</div><div class="dot"></div><div class="d">撤退判断 or 縮小継続</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 8. 2x2マトリクス -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">08</span><span class="pat-name">2×2マトリクス</span></div>
+    <p class="pat-usecase">構図：左に図、右に軸の意味・凡例の説明（2軸の意味を読み解く必要がある場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-4 ／ 企業戦略：PPM</div><div class="title">PPM：4つの事業ポジション</div><div class="overview">市場成長率と相対市場シェアの2軸で事業を4分類し、どこに資金を集中すべきかを判断する。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p8-wrap">
+          <div class="p8-grid">
+            <div class="cell"><div class="q">01</div><div class="lab">花形</div></div>
+            <div class="cell hi"><div class="q">02</div><div class="lab">問題児</div></div>
+            <div class="cell"><div class="q">03</div><div class="lab">金のなる木</div></div>
+            <div class="cell"><div class="q">04</div><div class="lab">負け犬</div></div>
+          </div>
+          <div class="p8-side">
+            <div class="row"><b>縦軸＝市場成長率</b>／横軸＝相対市場シェア</div>
+            <div class="row"><b>金のなる木</b>で稼いだ資金を<b>問題児</b>に投資し、<b>花形</b>に育てるのが基本セオリー</div>
+            <div class="row"><b>負け犬</b>は撤退候補。事業間のシナジーは考慮できない点に注意</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 9. ツリー・分類 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">09</span><span class="pat-name">ツリー・分類</span></div>
+    <p class="pat-usecase">構図：上から下へ枝分かれ、下に具体例を1行添える（全体→部分の分類関係向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-1 ／ 戦略の考え方・階層別戦略</div><div class="title">経営戦略の3階層</div><div class="overview">経営戦略は、会社全体・個別事業・各機能という粒度の異なる3つの階層に分けて考える。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p9-wrap">
+          <svg viewBox="0 0 420 130" style="display:block;width:auto;height:auto;max-width:86%;max-height:100%;">
+            <rect x="160" y="0" width="100" height="30" fill="#171717"/>
+            <text x="210" y="19" text-anchor="middle" fill="#fff" font-family="Zen Kaku Gothic New" font-size="11" font-weight="700">経営戦略</text>
+            <g stroke="#171717" stroke-width="1.4">
+              <line x1="210" y1="30" x2="210" y2="45"/>
+              <line x1="55" y1="45" x2="365" y2="45"/>
+              <line x1="55" y1="45" x2="55" y2="58"/>
+              <line x1="210" y1="45" x2="210" y2="58"/>
+              <line x1="365" y1="45" x2="365" y2="58"/>
+            </g>
+            <g font-family="Zen Kaku Gothic New" font-size="10" font-weight="700">
+              <rect x="5" y="58" width="100" height="30" fill="#fff" stroke="#171717" stroke-width="1.4"/>
+              <text x="55" y="77" text-anchor="middle">企業戦略</text>
+              <rect x="160" y="58" width="100" height="30" fill="#fff" stroke="#171717" stroke-width="1.4"/>
+              <text x="210" y="77" text-anchor="middle">事業戦略</text>
+              <rect x="315" y="58" width="100" height="30" fill="#FF3B1F" stroke="#FF3B1F" stroke-width="1.4"/>
+              <text x="365" y="77" text-anchor="middle" fill="#fff">機能別戦略</text>
+            </g>
+            <g font-family="Noto Sans JP" font-size="7.6" fill="#8a8a8a">
+              <text x="55" y="102" text-anchor="middle">どの事業を持つか</text>
+              <text x="210" y="102" text-anchor="middle">個別事業でどう戦うか</text>
+              <text x="365" y="102" text-anchor="middle">各機能で何をするか</text>
+            </g>
+          </svg>
+          <div class="p9-cap">例（家電メーカー）：白物家電と金融事業の両方を持つ（企業戦略）／白物家電は高級路線で勝負（事業戦略）／生産部門はコスト削減を最優先（機能別戦略）</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 10. ネットワーク・関係図 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">10</span><span class="pat-name">ネットワーク・関係図</span></div>
+    <p class="pat-usecase">構図：右に図、左に関係の凡例（線種の意味）を並べる（ノード同士が中心以外でも繋がる関係性向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-5 ／ 垂直統合、M&amp;A、戦略的提携</div><div class="title">自社を取り巻く関係図</div><div class="overview">自社は仕入先・顧客・競合・提携先と、取引・競争・提携という性質の異なる関係で結ばれている。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p10-wrap">
+          <div class="p10-text">
+            <div class="row"><span class="ln"></span>実線＝取引関係</div>
+            <div class="row"><span class="ln dash"></span>破線＝戦略的提携</div>
+            <div class="row"><span class="ln dot"></span>点線＝競争関係</div>
+          </div>
+          <div class="p10-diagram">
+            <svg viewBox="0 0 300 200" style="display:block;width:auto;height:auto;max-width:90%;max-height:100%;">
+              <g stroke="#171717" stroke-width="1.6">
+                <line x1="150" y1="100" x2="60" y2="45"/>
+                <line x1="150" y1="100" x2="240" y2="45"/>
+                <line x1="150" y1="100" x2="240" y2="155"/>
+              </g>
+              <line x1="150" y1="100" x2="60" y2="155" stroke="#171717" stroke-width="1.6" stroke-dasharray="4 3"/>
+              <line x1="60" y1="155" x2="240" y2="155" stroke="#171717" stroke-width="1.6" stroke-dasharray="1.5 3"/>
+              <rect x="112" y="80" width="76" height="40" fill="#171717"/>
+              <text x="150" y="105" text-anchor="middle" fill="#fff" font-family="Zen Kaku Gothic New" font-size="11" font-weight="700">自社</text>
+              <g font-family="Zen Kaku Gothic New" font-size="9.5" font-weight="700">
+                <rect x="18" y="26" width="84" height="30" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="60" y="45" text-anchor="middle">仕入先</text>
+                <rect x="198" y="26" width="84" height="30" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="240" y="45" text-anchor="middle">顧客</text>
+                <rect x="198" y="140" width="84" height="30" fill="#fff" stroke="#171717" stroke-width="1.3"/>
+                <text x="240" y="159" text-anchor="middle">提携先</text>
+                <rect x="18" y="140" width="84" height="30" fill="#FF3B1F" stroke="#FF3B1F" stroke-width="1.3"/>
+                <text x="60" y="159" text-anchor="middle" fill="#fff">競合</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11. 数式・投入産出モデル -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">11</span><span class="pat-name">数式・投入産出モデル</span></div>
+    <p class="pat-usecase">構図：上に数式、下に「入力（複数）→処理→出力」の流れ（計算式の構成要素を分解して見せたい場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">B-11 ／ 資本コスト</div><div class="title">WACC（加重平均資本コスト）</div><div class="overview">負債と自己資本、それぞれのコストと構成比を組み合わせて、資金調達全体の平均コストを算出する。</div></div><div class="tag">財務・会計</div></div>
+      <div class="body">
+        <div class="p11-wrap">
+          <div class="p11-formula">WACC = 負債コスト×(1－実効税率)×(負債／総資本) + 自己資本コスト×(自己資本／総資本)</div>
+          <div class="p11-io">
+            <div class="p11-inputs">
+              <div class="row"><b>①</b>負債コスト ×（1－実効税率）</div>
+              <div class="row"><b>②</b>負債 ／ 総資本</div>
+              <div class="row"><b>③</b>自己資本コスト</div>
+              <div class="row"><b>④</b>自己資本 ／ 総資本</div>
+            </div>
+            <div class="p11-arrow">→</div>
+            <div class="p11-output"><div class="v">WACC</div><div class="l">加重平均資本コスト（＝投資判断の割引率）</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12. グラフ・表・指標比較 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">12</span><span class="pat-name">グラフ・表・指標比較</span></div>
+    <p class="pat-usecase">構図：上に簡易グラフで直感的な大小を、下に表で正確な内訳を示す（感覚と正確な数値を両方見せたい場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head"><div><div class="kicker">C-4 ／ 企業戦略：PPM</div><div class="title">PPM 4区分の投資優先度（イメージ）</div><div class="overview">4区分ごとに市場成長率・シェア・とるべき基本方針が異なり、これが投資の優先順位づけの根拠になる。</div></div><div class="tag">企業経営理論</div></div>
+      <div class="body">
+        <div class="p12-wrap">
+          <div class="p12-bars">
+            <div class="p12-bar hi"><div class="bx" style="height:80px;"></div><div class="lab">花形</div></div>
+            <div class="p12-bar"><div class="bx" style="height:60px;"></div><div class="lab">問題児</div></div>
+            <div class="p12-bar"><div class="bx" style="height:34px;"></div><div class="lab">金のなる木</div></div>
+            <div class="p12-bar"><div class="bx" style="height:14px;"></div><div class="lab">負け犬</div></div>
+          </div>
+          <table class="p12-table">
+            <tr><th></th><th>市場成長率</th><th>市場シェア</th><th>基本方針</th></tr>
+            <tr><td><b>花形</b></td><td>高い</td><td>高い</td><td>投資を継続し主力に育てる</td></tr>
+            <tr><td><b>問題児</b></td><td>高い</td><td>低い</td><td>見極めて投資 or 撤退</td></tr>
+            <tr><td><b>金のなる木</b></td><td>低い</td><td>高い</td><td>資金源として活用</td></tr>
+            <tr><td><b>負け犬</b></td><td>低い</td><td>低い</td><td>縮小・撤退を検討</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>

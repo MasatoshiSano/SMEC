@@ -18,6 +18,7 @@ docs/
   08_2nd_stage_solving_framework.md 第2次試験の解答プロセス・事例別フレームワーク
   09_answer_corrections.md     第1次試験の正解訂正情報(令和3〜7年度)
   10_study_schedule.md         次回1次・2次試験に向けた逆算学習スケジュール
+  11_slide_template_spec.md    スライドテンプレート仕様書（Swiss Grid、配色・構成ルール・実装上の注意点）
   official_guides/             第1次・第2次試験案内PDF原本(令和8年度)、corrections/(正解訂正等)、archive/(令和4〜7年度の過去試験案内)
   official_stats/              申込者・合格者統計PDF原本(第1次:平成20〜令和7年度、第2次:平成19〜令和7年度)
 
@@ -39,6 +40,11 @@ problem_sets/
 
 docs/textbook/
   A〜G_*_textbook.md            第1次試験7科目の初心者向け教科書（全論点を基本概念→具体例→ひっかけポイント→過去問参照の構成で解説、7科目完成）
+
+docs/slide_template/
+  patterns_12.html             汎用図解パターン12種のサンプル（単体HTML、ブラウザで直接開ける）
+  economics_6.html / finance_3.html / business_admin_3.html / operations_3.html / information_3.html
+                                科目別専用グラフ（A/B/C/D/F科目、計21パターン）のサンプル
 ```
 
 ## まず読むべきドキュメント
@@ -51,6 +57,10 @@ docs/textbook/
 
 - ゼロから学ぶ場合は `docs/textbook/<科目記号>_*_textbook.md` を最初に読む。各論点を「基本概念→具体例→ひっかけポイント→過去問で確認する」の順で解説しており、これを読めば `problem_sets/1st_stage/exercises/` の演習が解けるレベルに到達することを目標にしている。7科目（A:経済学、B:財務・会計、C:企業経営理論、D:運営管理、E:経営法務、F:経営情報システム、G:中小企業経営・政策）すべて完成済み。
 - 教科書で基礎を固めたら `problem_sets/1st_stage/exercises/` で演習を解き、`docs/10_study_schedule.md` の学習スケジュールに沿って進める。
+
+## スライド化について
+
+教科書は文章中心のため、図解の多いスライド教材への展開を検討中。デザインの方向性（配色・構成ルール）は `docs/11_slide_template_spec.md` に確定済みで、`docs/slide_template/` にサンプル一式（汎用パターン12種＋科目別専用グラフ21種）がある。まだデザイン検証の段階で、実際の教科書コンテンツを流し込んだ本番スライドはこれから。
 
 ## 問題集の作り方
 
@@ -71,3 +81,4 @@ docs/textbook/
 - `problem_sets/1st_stage/` はフェーズ1〜3が7科目で一巡完了（論点見出し・頻出ランク確定・演習各6問）。各科目のAランク論点は数十件あるのに対し演習は6問/科目に留まるため、`docs/10_study_schedule.md` のフェーズBで学習しながら未収録の頻出論点を追加していく想定。
 - `docs/textbook/` の7科目教科書は完成済みだが、演習と同様にAランク論点の演習数がまだ手薄なため、教科書を読んで理解した後に演習不足を感じた論点は過去問（`past_exams/1st_stage/`）で追加演習すること。
 - 第2次試験（事例I〜IV）の教科書・体系的な解説はまだ未着手（論述式のため論点別ランク付けになじまず、別の切り口を検討する必要がある。`docs/08_2nd_stage_solving_framework.md` に解答プロセスのみ整理済み）。
+- スライドテンプレートは経済学・財務・企業経営・運営管理・情報の5科目分の専用パターンまで検証済み（`docs/11_slide_template_spec.md`）。経営法務・中小企業経営政策の専用パターンと、実コンテンツを使った本番スライド作成はまだ着手していない。
