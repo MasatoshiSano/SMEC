@@ -148,8 +148,45 @@ T1/T2の小アイコン（`.icon-mark`）やT3の各行（`.rows .row`）でも�
   min-height:0;overflow:hidden;}
 ```
 
+## 頻出データ帯（標準コンポーネント・全パターン共通）
+
+`docs/slide_template/freq_data_bar.html` 参照。
+
+### 経緯：16:9固定と実際の文章量のミスマッチ
+
+図解主体・文章主体のパターンを一通り試作した後、`docs/textbook/C_business_administration_textbook.md` のC-7・C-8を**要約せず全文そのまま**流し込んで実際の見え方を検証したところ、16:9カードの下半分近くが白紙のまま埋まらないことが分かった。これは「モック文章が短すぎた」からではなく、**教科書1論点あたりの文章量に対して16:9という箱が構造的に大きい**という、パターンの試作だけでは気づけなかった問題だった。
+
+対策として「16:9は維持し、文字を拡大するのではなく、情報量そのものを増やす」方針を採用。ただし内容を水増し（捏造）するのではなく、**リポジトリに既にある実データ**を使う：`problem_sets/1st_stage/<科目記号>_*.md` に全論点の頻出ランク（A/B/C）と出題年度（2016〜2025年度、過去10年）が既に集計済みなので、これをスライド下部の帯として機械的に追加する。
+
+### 構成要素
+
+| 要素 | 内容 |
+|---|---|
+| 頻出ランクチップ | A/B/Cを丸チップで表示（`problem_sets/1st_stage/<科目>.md`の「頻出ランク」列） |
+| 関連論点 | 同じ分野・セットで出題されやすい論点への相互参照（例：C-7とC-8は対になる論点） |
+| 出題年度タイムライン | 2016〜2025年度の10年分を●（出題あり）／○（出題なし）で並べる年表。「'16 '17 '19…」と年度を羅列するだけより、パッと見て出題頻度のムラが分かり、かつ視覚的に必要な面積を稼げる |
+
+```css
+.freq-section{flex:0 0 auto;padding-top:1cqw;margin-top:1cqw;border-top:1px solid var(--ink);
+  display:flex;flex-direction:column;gap:0.75cqw;}
+.freq-top{display:flex;align-items:center;gap:1.5cqw;}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:1.15cqw;
+  color:#fff;background:var(--red);width:1.9cqw;height:1.9cqw;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;}
+.freq-timeline{display:flex;align-items:center;gap:0.2cqw;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.35cqw;}
+.freq-timeline .dot{width:1.5cqw;height:1.5cqw;border-radius:50%;border:1.4px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+```
+
+`.body`を`display:flex;flex-direction:column`にし、図・文章部分（`flex:1`）の下に`.freq-section`（`flex:0 0 auto`）を並べる。図・文章部分側の実装教訓（縮むがあふれない原則）はそのまま維持すること。
+
+### 検証結果と、詰め込みパターン（T4/T5）を不採用にした経緯
+
+同じ白空間問題への対策として、文章主体パターンを左右2列・上下2段に分割して情報量を倍にする「T4：2列密集リスト」「T5：概念＋ひっかけ上下結合」も試作した。しかしコンテナクエリの基準（カード幅 or カード自体）を列・段に対して正しく再設定してもなお、文字を大幅に縮小しないと収まらず、可読性を大きく犠牲にすることが分かった。実データによる頻出データ帯の追加だけで白空間問題は十分に解消できたため、**T4/T5の詰め込み路線は不採用**とした。1論点1枚を無理に2論点分に増量するより、素直に2枚に分けた方が読みやすい。
+
 ## 未着手・今後の拡張候補
 
 - **経営法務（E）・中小企業経営政策（G）の専用パターン**：現時点では作成していない。E科目は法令の存続期間比較や手続きフロー、G科目は中小企業基本法の分類基準表など、法律・政策系ならではの見せ方を検討する余地がある。
-- **実データでの本番スライド作成**：ここまでは全てデザイン検証用のモックアップ（架空の例・イメージ値を含むが、T1〜T3は実際のC科目の内容で試作）。`docs/textbook/` の実コンテンツを流し込んだ本番スライドはまだ作っていない。
+- **実データでの本番スライド作成**：白空間問題の検証でC-7・C-8の2論点は教科書全文＋頻出データ帯で組んで問題ないことを確認したが、これは検証用の個別サンプルであり、全226論点を通しで作る本番作業はまだ行っていない。
 - **PowerPoint(.pptx)版**：`scripts/slidegen/`（python-pptx製）で先行して試作したが、生成物がPowerPointで「修復が必要」というエラーになる不具合が未解決のまま、HTML版に方針転換した経緯がある。pptx版が必要になった場合は、この不具合の原因調査から再開すること。
