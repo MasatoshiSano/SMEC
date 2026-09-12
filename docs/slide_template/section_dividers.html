@@ -1,0 +1,117 @@
+<title>区切りスライド試作（表紙・大分類区切り）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;}
+*{box-sizing:border-box;}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
+.intro{max-width:960px;margin:0 auto;padding:56px 24px 30px;text-align:center;}
+.intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 .8em;font-family:"Space Mono",monospace;}
+.intro h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 .5em;}
+.intro p{color:var(--ink-soft);font-size:.9rem;line-height:1.8;margin:0;}
+
+.gallery{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:52px;padding:36px 24px 0;}
+.pat-block{border-top:1px solid var(--line);padding-top:24px;}
+.pat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;flex-wrap:wrap;}
+.pat-num{font-family:"Space Mono",monospace;font-weight:700;font-size:.8rem;color:var(--ink-soft);}
+.pat-name{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.08rem;}
+.pat-usecase{font-size:.78rem;color:var(--ink-soft);margin-bottom:12px;line-height:1.7;}
+.pat-usecase b{color:var(--red);}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+
+/* 区切りスライド共通：黒背景・白文字の反転（色数は増やさない） */
+.mock.dark{background:var(--ink);color:#fff;}
+
+/* D1：表紙（科目の冒頭） */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:3.2cqw 3.6cqw;}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:1cqw;letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:1cqw;color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:0.8cqw;}
+.cover .main .title{font-size:5.2cqw;font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:1.15cqw;color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:60cqw;}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:1.2cqw;}
+.cover .scope{display:flex;gap:2.4cqw;}
+.cover .scope .item{display:flex;flex-direction:column;gap:0.2cqw;}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:1.6cqw;font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:0.72cqw;color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:0.85cqw;border:1px solid rgba(255,255,255,.4);padding:0.35cqw 1cqw;color:#fff;}
+
+/* D2：大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 4cqw;overflow:hidden;}
+.divider .ghost-no{position:absolute;right:2cqw;top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:22cqw;line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:1.3cqw;max-width:70cqw;}
+.divider .kicker{display:flex;align-items:center;gap:1cqw;}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:1.1cqw;color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:1.1cqw;color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:3.6cqw;font-weight:900;line-height:1.15;}
+.divider .desc{font-size:1.08cqw;color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:1.6cqw;margin-top:0.4cqw;flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:0.78cqw;border:1px solid rgba(255,255,255,.35);padding:0.35cqw 0.9cqw;color:#fff;opacity:.85;white-space:nowrap;}
+</style>
+
+<div class="intro">
+  <p class="eyebrow">SLIDE TYPE ― SECTION DIVIDERS (INVERTED, NO NEW COLOR)</p>
+  <h1>単調さを崩す「反転・大型タイポ」の区切りスライド</h1>
+  <p>全スライドが同じ強さで並ぶと単調になるという指摘を受け、色数を増やさずに（黒背景＋白文字＋赤1色のまま）リズムの強弱だけを作る区切りスライドを2種試作。科目の冒頭（表紙）と、科目内の大分類の切り替わり（例：経営戦略論→組織論）に<span style="white-space:nowrap">挿入する</span>想定。</p>
+</div>
+
+<div class="gallery">
+
+  <!-- D1：表紙 -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">D1</span><span class="pat-name">科目の表紙（黒背景・反転）</span></div>
+    <p class="pat-usecase">構図：科目の最初の1枚。大きな科目名＋収録論点数の<span style="white-space:nowrap">スコープ</span>を示す。<b>各科目の最初の1回だけ</b>使う想定なので、頻度が低く単調さへの影響は小さいが、まず一番強い区切りとして機能する。</p>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 03 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">企業経営理論<span class="accent">。</span></div>
+          <div class="subtitle">経営戦略論・組織論・マーケティング論の3分野。企業がどう戦い、どう組織を動かし、どう売るかを扱う、1次<span style="white-space:nowrap">試験</span>で最も<span style="white-space:nowrap">出題数</span>の多い科目のひとつ。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">42</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">3</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">A</span><span class="lbl">頻出ランクの多くがA</span></div>
+          </div>
+          <span class="tag">docs/textbook/C_business_administration_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- D2：大分類の区切り -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">D2</span><span class="pat-name">大分類の区切り（黒背景・巨大ゴースト番号）</span></div>
+    <p class="pat-usecase">構図：科目内の大分類が切り替わるタイミングに挿入。分類番号を背景に巨大なゴースト数字として置き、タイトル・説明・収録論点の範囲を示す。<b>数論点おきに1回</b>挟むことでリズムを作る。</p>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">02</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 02</span><span class="part-label">企業経営理論 ／ C-16〜C-24</span></div>
+          <div class="title">組織論</div>
+          <div class="desc">会社をどのような構造・文化・人の動機づけで運営するかを考える分野。組織構造の形態比較から、組織のライフサイクル、モチベーション理論まで扱う。</div>
+          <div class="covers">
+            <span class="chip">C-16 組織構造の形態</span>
+            <span class="chip">C-19 モチベーション理論</span>
+            <span class="chip">C-24 組織のライフサイクル</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
