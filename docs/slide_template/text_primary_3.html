@@ -1,0 +1,155 @@
+<title>文章primaryパターン3種</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;}
+*{box-sizing:border-box;}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
+.intro{max-width:960px;margin:0 auto;padding:56px 24px 30px;text-align:center;}
+.intro .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 .8em;font-family:"Space Mono",monospace;}
+.intro h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 .5em;}
+.intro p{color:var(--ink-soft);font-size:.9rem;line-height:1.8;margin:0;}
+.roadmap{max-width:960px;margin:18px auto 0;padding:14px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.78rem;color:var(--ink-soft);line-height:1.9;text-align:left;}
+.roadmap b{color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;}
+
+.gallery{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:52px;padding:36px 24px 0;}
+.pat-block{border-top:1px solid var(--line);padding-top:24px;}
+.pat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;flex-wrap:wrap;}
+.pat-num{font-family:"Space Mono",monospace;font-weight:700;font-size:.8rem;color:var(--ink-soft);}
+.pat-name{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.08rem;}
+.pat-usecase{font-size:.72rem;color:var(--red);font-weight:700;margin-bottom:12px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:1.85cqw 2.26cqw 0.93cqw;border-bottom:0.16cqw solid var(--ink);flex:0 0 auto;gap:1.44cqw;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:0.98cqw;color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:1.7cqw;font-weight:900;margin-top:2px;}
+.head .overview{font-size:1.03cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:0.93cqw;color:#fff;background:var(--ink);padding:0.31cqw 0.93cqw;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:1.5cqw 2.26cqw 1.65cqw;display:flex;}
+
+/* T1・T2共通：左に小さいアイコン、右に文章 */
+.icon-wrap{flex:1;display:flex;gap:2cqw;min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:6.5cqw;height:100%;max-height:6.5cqw;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:0.9cqw;overflow:hidden;}
+.prose p{margin:0;font-size:1.05cqw;line-height:1.75;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:1.15cqw;font-weight:700;line-height:1.55;}
+.prose .term-row{display:flex;gap:1cqw;font-size:1.0cqw;line-height:1.65;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:0.6cqw;border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .note{font-size:0.88cqw;color:var(--red);border-top:1px solid var(--line);padding-top:0.7cqw;margin-top:0.2cqw;}
+.prose .note b{color:var(--red);}
+
+/* T3：純粋な箇条書きリスト（図なし） */
+.rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.rows .row{display:flex;align-items:baseline;gap:1.3cqw;padding:0.85cqw 0;border-top:1px solid var(--line);}
+.rows .row:first-child{border-top:none;}
+.rows .row .no{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:1.3cqw;color:var(--ghost);width:2.4em;}
+.rows .row .name{flex:0 0 15cqw;font-size:1.05cqw;font-weight:900;}
+.rows .row .desc{flex:1;font-size:0.95cqw;color:var(--ink-soft);line-height:1.6;}
+.rows .foot{font-size:0.85cqw;color:var(--red);margin-top:0.8cqw;font-weight:700;}
+</style>
+
+<div class="intro">
+  <p class="eyebrow">SLIDE TYPE ― TEXT-PRIMARY (NOT DIAGRAM-PRIMARY)</p>
+  <h1>文章メイン・図は小さく添えるだけの3パターン</h1>
+  <p>教科書の内容の多くは、そもそも図にしにくい説明文・注意書き・用語の列挙。これまでの「図がメイン」のパターンとは逆に、文章を主役にして、図は小さいアイコン程度に留める（または図自体を使わない）構成を試作した。</p>
+</div>
+
+<div class="gallery">
+
+  <!-- T1. 概念解説（文章primary、小さいアイコン） -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">T1</span><span class="pat-name">概念解説（文章primary＋小さいアイコン）</span></div>
+    <p class="pat-usecase">構図：左に小さいアイコン1つ、右のほとんどのスペースを説明文にあてる（図解できない抽象的な概念向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-2 ／ 企業戦略：ドメイン（企業・事業ドメイン）</div><div class="title">ドメインの2つの定義方法</div><div class="overview">「自社は何屋さんか」の定義の仕方一つで、気づける事業機会の広さが変わる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="26" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="30" r="14" fill="none" stroke="#171717" stroke-width="1.4"/>
+              <circle cx="30" cy="30" r="3.5" fill="#FF3B1F"/>
+              <line x1="30" y1="2" x2="30" y2="10" stroke="#171717" stroke-width="2"/>
+              <line x1="30" y1="50" x2="30" y2="58" stroke="#171717" stroke-width="2"/>
+              <line x1="2" y1="30" x2="10" y2="30" stroke="#171717" stroke-width="2"/>
+              <line x1="50" y1="30" x2="58" y2="30" stroke="#171717" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>ドメイン</b>＝「自社が事業を営む領域」。「うちの会社は何屋さんか」を定義すること。</p>
+            <div class="term-row"><span class="k">物理的定義</span><span class="v">作っている「モノ」で定義する（例：「うちは鉄道車両を作る会社だ」）</span></div>
+            <div class="term-row"><span class="k">機能的定義</span><span class="v">提供している「価値・機能」で定義する（例：「うちは人や物を運ぶサービスを提供する会社だ」）</span></div>
+            <p>機能的定義の方が視野が広がり、新しい事業機会に気づきやすい。「鉄道会社が自分たちを"鉄道業"と狭く定義したために、自動車や航空機の台頭に対応できなかった」というレビットの「マーケティング近視眼」は有名な失敗例。</p>
+            <p class="note"><b>ひっかけ：</b>ドメインの決め方（物理的 vs 機能的）と「多角化」の判断（C-3）を混同しないこと。ドメインは自社の立ち位置の定義、多角化は新しい事業領域への進出という別の概念。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- T2. ひっかけポイント（文章primary） -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">T2</span><span class="pat-name">よくある混同の整理（文章primary＋警告マーク）</span></div>
+    <p class="pat-usecase">構図：左に小さい警告アイコン、右に対比構造の説明文（似た2つの用語を区別させたい場合向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-13 ／ 企業の社会的責任：CSR・CSV・コーポレートガバナンス</div><div class="title">CSRとCSVの違い</div><div class="overview">どちらも「社会性」を扱うが、コストと捉えるか投資と捉えるかで本質的に異なる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <polygon points="30,6 56,52 4,52" fill="none" stroke="#FF3B1F" stroke-width="2.4" stroke-linejoin="round"/>
+              <line x1="30" y1="24" x2="30" y2="38" stroke="#FF3B1F" stroke-width="2.6" stroke-linecap="round"/>
+              <circle cx="30" cy="45" r="1.8" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <div class="term-row"><span class="k">CSR</span><span class="v">企業の社会的責任。利益追求だけでなく、社会に対して果たすべき責任（環境保護、地域貢献など）を果たすこと</span></div>
+            <div class="term-row"><span class="k">CSV</span><span class="v">共有価値の創造（ポーター提唱）。社会的課題の解決そのものを事業機会・利益創出につなげる考え方</span></div>
+            <p>農業支援を通じて質の高い原料を安定調達し、それが自社製品の品質向上と現地農家の所得向上の両方につながる取り組みはCSVの典型例。単なる寄付活動（CSR）とは異なり、事業戦略そのものに組み込まれている点がポイント。</p>
+            <p class="note"><b>見分け方：</b>「コストか投資か」「本業と一体か切り離されているか」という2つの観点で区別する。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- T3. 箇条書きリスト（図なし、タイポグラフィのみ） -->
+  <div class="pat-block">
+    <div class="pat-head"><span class="pat-num">T3</span><span class="pat-name">箇条書きリスト（図なし、罫線と番号だけで構成）</span></div>
+    <p class="pat-usecase">構図：図は一切使わず、罫線区切り＋番号＋名称＋説明の3列だけで並べる（並列する複数の理論・法令などの列挙向き）</p>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-19 ／ 組織における個人：モチベーション理論</div><div class="title">代表的なモチベーション理論、4つ</div><div class="overview">社員のやる気を高める要因を説明する理論は複数あり、提唱者名と核心を対にして覚える。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="rows">
+          <div class="row"><span class="no">01</span><span class="name">マズローの欲求段階説</span><span class="desc">人間の欲求は生理的→安全→社会的→承認→自己実現の5段階。低次が満たされると次が現れる</span></div>
+          <div class="row"><span class="no">02</span><span class="name">ハーズバーグの理論</span><span class="desc">動機づけ要因（達成感・承認・やりがい）と衛生要因（給与・労働条件）は別物。給与を上げても不満は減るが満足度は上がらない</span></div>
+          <div class="row"><span class="no">03</span><span class="name">期待理論（ブルーム）</span><span class="desc">モチベーション＝「期待」×「手段性」×「誘意性」の掛け算で決まる</span></div>
+          <div class="row"><span class="no">04</span><span class="name">目標設定理論（ロック）</span><span class="desc">具体的で少し難易度の高い目標の方が、曖昧・簡単すぎる目標よりモチベーションを高める</span></div>
+          <div class="foot">この論点は10年間ほぼ毎年出題される最頻出論点。理論同士の混同（特にハーズバーグの動機づけ要因・衛生要因）に注意。</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
