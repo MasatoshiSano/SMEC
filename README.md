@@ -19,6 +19,7 @@ docs/
   09_answer_corrections.md     第1次試験の正解訂正情報(令和3〜7年度)
   10_study_schedule.md         次回1次・2次試験に向けた逆算学習スケジュール
   11_slide_template_spec.md    スライドテンプレート仕様書（Swiss Grid、配色・構成ルール・実装上の注意点）
+  12_slide_design_session_log.md スライドデザイン検討セッションの詳細記録（試行錯誤・却下案・バグ究明の経緯）
   official_guides/             第1次・第2次試験案内PDF原本(令和8年度)、corrections/(正解訂正等)、archive/(令和4〜7年度の過去試験案内)
   official_stats/              申込者・合格者統計PDF原本(第1次:平成20〜令和7年度、第2次:平成19〜令和7年度)
 

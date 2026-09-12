@@ -26,6 +26,7 @@
 8. **スライドテンプレートの仕様確定（デザイン検証完了）**：教科書を図解の多いスライドにする方向性を検討し、5デザイン案（Swiss Grid／Soft Pastel／Editorial Serif／Blueprint／Neubrutalist／Ink&Washi）から**Swiss Grid**（モノクロ+赤1色、罫線グリッド）を採用。汎用図解パターン12種＋科目別専用グラフ21種（経済学6・財務3・企業経営3・運営管理3・情報3）を試作し、仕様を `docs/11_slide_template_spec.md` に確定。サンプル実体は `docs/slide_template/*.html`（単体HTMLでブラウザ直接閲覧可）。
    - **重要な実装教訓**：スマホ実機での確認で「グラフがヘッダーに重なる」「文字がはみ出す」不具合が繰り返し発生し、原因を特定して修正済み。①カードの16:9固定は`aspect-ratio`プロパティ単体でなく`padding-top`%トリックで実装する、②カード内の文字サイズは固定pxでなくCSSコンテナクエリ（`cqw`単位、`container-type:inline-size`）でカード幅に追従させる、③SVGグラフの枠は高さを強制せず`object-fit:contain`と同じ考え方で「収まるだけ縮む」実装にする（`max-width:100%;max-height:100%;width:auto;height:auto`）。次回スライド関連の実装をする際は必ず `docs/11_slide_template_spec.md` の「実装上の注意点」を読んでから着手すること。
    - なお `scripts/slidegen/`（python-pptx製）でPowerPoint版も先行試作したが、生成物がPowerPointで「修復が必要」エラーになる不具合が未解決のままHTML版に方針転換した経緯がある。
+   - このデザイン検討の全経緯（却下したデザイン案、モバイル実機バグの3段階にわたる原因究明の過程など）は `docs/12_slide_design_session_log.md` に詳細を記録している。次回スライド関連の作業をする前に一読すること。
 
 ### 未着手・今後の拡充候補
 
