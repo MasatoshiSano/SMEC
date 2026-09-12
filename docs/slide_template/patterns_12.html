@@ -9,6 +9,8 @@
   --red:#FF3B1F;
   --line:#e6e6e6;
   --ghost:#f4f4f4;
+
+  --cw:calc(min(100vw, 1020px) - 48px);
 }
 *{box-sizing:border-box;}
 body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:0 0 90px;}
@@ -26,65 +28,65 @@ body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;marg
 
 .mock-frame{position:relative;width:100%;}
 .mock-frame::before{content:"";display:block;padding-top:56.25%;}
-.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
 .head{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 22px 9px;border-bottom:1.6px solid var(--ink);flex:0 0 auto;gap:14px;}
-.head .kicker{font-family:"Space Mono",monospace;font-size:0.977cqw;color:var(--ink-soft);letter-spacing:.05em;}
-.head .title{font-size:1.698cqw;font-weight:900;margin-top:2px;}
-.head .overview{font-size:1.029cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
-.head .tag{font-family:"Space Mono",monospace;font-size:0.926cqw;color:#fff;background:var(--ink);padding:3px 9px;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.977/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.698/100);font-weight:900;margin-top:2px;}
+.head .overview{font-size:calc(var(--cw)*1.029/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.926/100);color:#fff;background:var(--ink);padding:3px 9px;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
 .body{flex:1;min-height:0;padding:12px 22px 16px;}
 
 /* ---------- 1. 定義・要素カード ---------- */
 .p1-cards{display:flex;height:100%;align-items:flex-end;}
 .p1-card{flex:1;border-left:1px solid var(--line);padding:0 16px;position:relative;}
 .p1-card:first-child{border-left:none;padding-left:0;}
-.p1-card .big{font-size:4.115cqw;font-weight:900;color:var(--ghost);line-height:1;}
+.p1-card .big{font-size:calc(var(--cw)*4.115/100);font-weight:900;color:var(--ghost);line-height:1;}
 .p1-card .rule{width:22px;height:2px;background:var(--ink);margin:8px 0 8px;}
-.p1-card .nm{font-size:1.235cqw;font-weight:900;}
-.p1-card .df{font-size:0.977cqw;color:var(--ink-soft);margin-top:5px;line-height:1.5;}
+.p1-card .nm{font-size:calc(var(--cw)*1.235/100);font-weight:900;}
+.p1-card .df{font-size:calc(var(--cw)*0.977/100);color:var(--ink-soft);margin-top:5px;line-height:1.5;}
 
 /* ---------- 2. 左右比較 ---------- */
 .p2-vs{display:flex;height:100%;position:relative;}
 .p2-side{flex:1;padding:8px 18px;display:flex;flex-direction:column;justify-content:center;gap:8px;}
 .p2-side.left{border-right:1.6px solid var(--ink);}
-.p2-side .lab{font-size:1.337cqw;font-weight:900;}
-.p2-side .ex{font-size:0.977cqw;color:var(--ink-soft);line-height:1.6;}
-.p2-side .tagline{font-family:"Space Mono",monospace;font-size:0.926cqw;color:var(--red);}
-.p2-vsmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-weight:700;font-size:1.132cqw;z-index:2;}
+.p2-side .lab{font-size:calc(var(--cw)*1.337/100);font-weight:900;}
+.p2-side .ex{font-size:calc(var(--cw)*0.977/100);color:var(--ink-soft);line-height:1.6;}
+.p2-side .tagline{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.926/100);color:var(--red);}
+.p2-vsmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.132/100);z-index:2;}
 
 /* ---------- 3. プロセス・手順 ---------- */
 .p3-flow{display:flex;align-items:stretch;gap:8px;height:100%;}
 .p3-step{flex:1;border-top:2.4px solid var(--ink);padding-top:8px;position:relative;}
 .p3-step.hi{border-top-color:var(--red);}
-.p3-step .n{font-size:2.675cqw;font-weight:900;}
+.p3-step .n{font-size:calc(var(--cw)*2.675/100);font-weight:900;}
 .p3-step.hi .n{color:var(--red);}
-.p3-step .lab{font-size:1.132cqw;font-weight:700;margin-top:4px;}
-.p3-step .d{font-size:0.926cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;}
-.p3-arrow{align-self:flex-start;margin-top:6px;font-size:1.646cqw;color:#c7c7c7;}
+.p3-step .lab{font-size:calc(var(--cw)*1.132/100);font-weight:700;margin-top:4px;}
+.p3-step .d{font-size:calc(var(--cw)*0.926/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;}
+.p3-arrow{align-self:flex-start;margin-top:6px;font-size:calc(var(--cw)*1.646/100);color:#c7c7c7;}
 
 /* ---------- 4. 因果関係 ---------- */
 .p4-wrap{display:flex;height:100%;gap:18px;align-items:center;}
 .p4-cause{flex:0 0 32%;border-top:2.4px solid var(--ink);padding-top:10px;}
-.p4-cause .k{font-family:"Space Mono",monospace;font-size:0.874cqw;color:var(--ink-soft);}
-.p4-cause .v{font-size:1.646cqw;font-weight:900;margin-top:4px;}
-.p4-cause .d{font-size:0.926cqw;color:var(--ink-soft);margin-top:6px;line-height:1.5;}
-.p4-arrows{flex:0 0 auto;display:flex;flex-direction:column;font-size:2.058cqw;color:var(--ink);}
+.p4-cause .k{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.874/100);color:var(--ink-soft);}
+.p4-cause .v{font-size:calc(var(--cw)*1.646/100);font-weight:900;margin-top:4px;}
+.p4-cause .d{font-size:calc(var(--cw)*0.926/100);color:var(--ink-soft);margin-top:6px;line-height:1.5;}
+.p4-arrows{flex:0 0 auto;display:flex;flex-direction:column;font-size:calc(var(--cw)*2.058/100);color:var(--ink);}
 .p4-effects{flex:1;display:flex;flex-direction:column;gap:14px;}
 .p4-eff{border-left:3px solid var(--ink);padding-left:12px;}
 .p4-eff.neg{border-left-color:var(--red);}
-.p4-eff .t{font-size:1.08cqw;font-weight:900;}
+.p4-eff .t{font-size:calc(var(--cw)*1.08/100);font-weight:900;}
 .p4-eff.neg .t{color:var(--red);}
-.p4-eff .d{font-size:0.885cqw;color:var(--ink-soft);margin-top:3px;line-height:1.5;}
+.p4-eff .d{font-size:calc(var(--cw)*0.885/100);color:var(--ink-soft);margin-top:3px;line-height:1.5;}
 
 /* ---------- 5. 循環モデル ---------- */
 .p5-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:center;gap:10px;min-height:0;}
-.p5-cap{font-size:0.977cqw;color:var(--ink-soft);text-align:center;max-width:36em;line-height:1.6;}
+.p5-cap{font-size:calc(var(--cw)*0.977/100);color:var(--ink-soft);text-align:center;max-width:36em;line-height:1.6;}
 
 /* ---------- 6. 階層・ピラミッド ---------- */
 .p6-wrap{display:flex;height:100%;gap:16px;align-items:center;min-height:0;}
 .p6-list{flex:1;display:flex;flex-direction:column;gap:8px;}
-.p6-list .row{display:flex;gap:8px;align-items:baseline;font-size:0.977cqw;}
-.p6-list .row b{font-size:1.08cqw;font-weight:900;flex:0 0 5.4em;}
+.p6-list .row{display:flex;gap:8px;align-items:baseline;font-size:calc(var(--cw)*0.977/100);}
+.p6-list .row b{font-size:calc(var(--cw)*1.08/100);font-weight:900;flex:0 0 5.4em;}
 .p6-list .row span{color:var(--ink-soft);line-height:1.5;}
 
 /* ---------- 7. タイムライン ---------- */
@@ -92,33 +94,33 @@ body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;marg
 .p7-track{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--ink);}
 .p7-items{position:relative;display:flex;justify-content:space-between;width:100%;}
 .p7-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 6px;}
-.p7-item .box{border:1.6px solid var(--ink);padding:4px 10px;font-size:1.08cqw;font-weight:900;background:#fff;}
+.p7-item .box{border:1.6px solid var(--ink);padding:4px 10px;font-size:calc(var(--cw)*1.08/100);font-weight:900;background:#fff;}
 .p7-item.hi .box{border-color:var(--red);color:var(--red);}
 .p7-item .dot{width:8px;height:8px;background:var(--ink);border:2px solid #fff;}
 .p7-item.hi .dot{background:var(--red);}
-.p7-item .d{font-size:0.864cqw;color:var(--ink-soft);text-align:center;line-height:1.5;}
+.p7-item .d{font-size:calc(var(--cw)*0.864/100);color:var(--ink-soft);text-align:center;line-height:1.5;}
 
 /* ---------- 8. 2x2マトリクス ---------- */
 .p8-wrap{display:flex;height:100%;gap:16px;}
 .p8-grid{flex:0 0 52%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:0;border:1.6px solid var(--ink);}
 .p8-grid .cell{border:1px solid var(--line);padding:8px;position:relative;}
-.p8-grid .cell .q{position:absolute;bottom:2px;right:6px;font-size:2.263cqw;font-weight:900;color:var(--ghost);}
-.p8-grid .cell .lab{font-size:1.029cqw;font-weight:900;position:relative;}
+.p8-grid .cell .q{position:absolute;bottom:2px;right:6px;font-size:calc(var(--cw)*2.263/100);font-weight:900;color:var(--ghost);}
+.p8-grid .cell .lab{font-size:calc(var(--cw)*1.029/100);font-weight:900;position:relative;}
 .p8-grid .cell.hi{background:var(--ink);}
 .p8-grid .cell.hi .lab{color:#fff;}
 .p8-grid .cell.hi .q{color:rgba(255,255,255,.15);}
 .p8-side{flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px;}
-.p8-side .row{font-size:0.926cqw;color:var(--ink-soft);line-height:1.5;}
+.p8-side .row{font-size:calc(var(--cw)*0.926/100);color:var(--ink-soft);line-height:1.5;}
 .p8-side .row b{color:var(--ink);}
 
 /* ---------- 9. ツリー・分類 ---------- */
 .p9-wrap{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:center;min-height:0;}
-.p9-cap{margin-top:8px;font-size:0.926cqw;color:var(--ink-soft);text-align:center;max-width:38em;line-height:1.6;}
+.p9-cap{margin-top:8px;font-size:calc(var(--cw)*0.926/100);color:var(--ink-soft);text-align:center;max-width:38em;line-height:1.6;}
 
 /* ---------- 10. ネットワーク・関係図 ---------- */
 .p10-wrap{display:flex;height:100%;gap:16px;align-items:center;min-height:0;}
 .p10-text{flex:0 0 32%;display:flex;flex-direction:column;gap:8px;}
-.p10-text .row{font-size:0.926cqw;color:var(--ink-soft);line-height:1.6;display:flex;gap:6px;}
+.p10-text .row{font-size:calc(var(--cw)*0.926/100);color:var(--ink-soft);line-height:1.6;display:flex;gap:6px;}
 .p10-text .row .ln{flex:0 0 16px;height:0;border-top:2px solid var(--ink);align-self:center;}
 .p10-text .row .ln.dash{border-top-style:dashed;}
 .p10-text .row .ln.dot{border-top-style:dotted;border-top-width:2.4px;}
@@ -126,15 +128,15 @@ body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;marg
 
 /* ---------- 11. 数式・投入産出モデル ---------- */
 .p11-wrap{display:flex;flex-direction:column;height:100%;gap:10px;}
-.p11-formula{text-align:center;font-family:"Space Mono",monospace;font-size:1.337cqw;padding:8px 0;border-bottom:1px solid var(--line);}
+.p11-formula{text-align:center;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.337/100);padding:8px 0;border-bottom:1px solid var(--line);}
 .p11-io{flex:1;display:flex;align-items:center;gap:10px;}
 .p11-inputs{flex:0 0 40%;display:flex;flex-direction:column;gap:7px;}
-.p11-inputs .row{font-size:0.885cqw;border-bottom:1px solid var(--line);padding-bottom:5px;}
+.p11-inputs .row{font-size:calc(var(--cw)*0.885/100);border-bottom:1px solid var(--line);padding-bottom:5px;}
 .p11-inputs .row b{font-family:"Space Mono",monospace;color:var(--red);margin-right:4px;}
-.p11-arrow{flex:0 0 auto;font-size:2.263cqw;}
+.p11-arrow{flex:0 0 auto;font-size:calc(var(--cw)*2.263/100);}
 .p11-output{flex:1;border-top:2.4px solid var(--ink);padding-top:14px;text-align:center;}
-.p11-output .v{font-size:2.058cqw;font-weight:900;}
-.p11-output .l{font-size:0.926cqw;color:var(--ink-soft);margin-top:4px;}
+.p11-output .v{font-size:calc(var(--cw)*2.058/100);font-weight:900;}
+.p11-output .l{font-size:calc(var(--cw)*0.926/100);color:var(--ink-soft);margin-top:4px;}
 
 /* ---------- 12. グラフ・表・指標比較 ---------- */
 .p12-wrap{display:flex;flex-direction:column;height:100%;gap:8px;}
@@ -142,10 +144,10 @@ body{background:#fff;color:var(--ink);font-family:"Noto Sans JP",sans-serif;marg
 .p12-bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
 .p12-bar .bx{width:60%;background:var(--ink);}
 .p12-bar.hi .bx{background:var(--red);}
-.p12-bar .lab{font-size:0.823cqw;text-align:center;line-height:1.3;}
-table.p12-table{flex:1;width:100%;border-collapse:collapse;font-size:0.823cqw;}
+.p12-bar .lab{font-size:calc(var(--cw)*0.823/100);text-align:center;line-height:1.3;}
+table.p12-table{flex:1;width:100%;border-collapse:collapse;font-size:calc(var(--cw)*0.823/100);}
 table.p12-table th,table.p12-table td{border:1px solid var(--line);padding:3px 6px;text-align:left;}
-table.p12-table th{background:var(--ink);color:#fff;font-size:0.782cqw;text-align:center;}
+table.p12-table th{background:var(--ink);color:#fff;font-size:calc(var(--cw)*0.782/100);text-align:center;}
 </style>
 
 <div class="intro">

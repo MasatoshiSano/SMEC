@@ -47,7 +47,7 @@
 .mock-frame::before{content:"";display:block;padding-top:56.25%;} /* 9/16 */
 .mock{position:absolute;inset:0;overflow:hidden;background:#fff;
   border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);
-  display:flex;flex-direction:column;container-type:inline-size;}
+  display:flex;flex-direction:column;} /* container-type:inline-size は使わない。理由は次項 */
 ```
 
 HTML側は必ず `.mock` を `.mock-frame` で包む：
@@ -56,14 +56,27 @@ HTML側は必ず `.mock` を `.mock-frame` で包む：
 <div class="mock-frame"><div class="mock"> ... </div></div>
 ```
 
-### 2. カード内の文字サイズは固定pxではなく、コンテナクエリ（`cqw`）で指定する
+### 2. カード内の文字サイズは固定pxではなく、カード幅に追従する相対単位で指定する（**`cqw`は使わない**：2026-09-12改訂）
 
-カードはページ幅に応じて縮む（特にスマホ）。文字が固定px指定だと、カードだけが縮んで文字がはみ出し・重なりの原因になる。`.mock` に `container-type:inline-size` を指定し、内部の `font-size` はすべて **カード幅に対する%（`cqw`）** で書く。デザイン基準幅は約972px（`Ncqw = Npx / 972 * 100`）。
+カードはページ幅に応じて縮む（特にスマホ）。文字が固定px指定だと、カードだけが縮んで文字がはみ出し・重なりの原因になる。
+
+**この仕様は当初コンテナクエリ（`.mock`に`container-type:inline-size`、内部の`font-size`をカード幅に対する%＝`cqw`で指定）を採用していたが、本番投入後に3回連続で「自分の検証環境（Playwright/Chromium）では問題なく収まって見えるのに、ユーザーの実際のブラウザでは文字が重なる・折り返しで内容が消える・大幅にはみ出す」という不具合が起きた**（用語ラベルの重なり→折り返しによる内容消失→過去問チェックのはみ出し、の3段階）。いずれも自分の環境では画面幅を変えても、Webフォントの読み込みを失敗させても再現できなかった。共通点は「`cqw`を使っている箇所すべて」で崩れていたことから、**ユーザーの閲覧環境でコンテナクエリ（`container-type`/`cqw`）自体が効いておらず、指定が丸ごと無視されてブラウザの既定フォントサイズ（実質16px前後）にフォールバックしていた**可能性が高いと判断した。コンテナクエリはモダンブラウザでは広く対応しているが、埋め込みWebView等の古いレンダリングエンジンでは非対応の場合があり、非対応環境では`cqw`という単位そのものが無効な値としてプロパティごと無視される（他のプロパティにフォールバックせず、既定値になる）。
+
+**採用した代替**：`container-type`/`cqw`を一切使わず、CSS変数と`calc()`・`min()`・`vw`（すべて2016年前後から広く対応し、コンテナクエリよりはるかに互換性が高い）だけで同じ「カード幅に対する%」を再現する。
 
 ```css
-.head .title{font-size:1.7cqw;}      /* 元16.5px相当 */
-.head .overview{font-size:1.03cqw;}  /* 元10px相当 */
+:root{
+  /* .gallery/.deck の max-width:1020px、padding:0 24px(左右48px) に合わせる */
+  --cw: calc(min(100vw, 1020px) - 48px);
+}
+.mock{ /* container-type:inline-size は不要（指定しない） */
+  position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column;
+}
+.head .title{font-size:calc(var(--cw)*1.7/100);}      /* 旧: 1.7cqw */
+.head .overview{font-size:calc(var(--cw)*1.03/100);}  /* 旧: 1.03cqw */
 ```
+
+`Ncqw` → `calc(var(--cw)*N/100)` の機械的な置換で移行できる。`--cw`は「カードの実効幅（px）」を表すCSS変数で、`.gallery`/`.deck`の`max-width`とpaddingの合計が変われば式もそれに合わせて調整すること。`docs/slide_template/*.html`・`slides/1st_stage/*.html`はすべてこの方式に統一済み（2026-09-12）。**今後は新規に`cqw`を使わないこと。**
 
 ### 3. グラフ（SVG）の枠は、高さを強制せず「収まるだけ縮む」方式にする
 
@@ -134,16 +147,16 @@ OSI参照モデル（7階層の積み上げ図） ／ ER図（実体・関係・
 
 T1/T2の小アイコン（`.icon-mark`）やT3の各行（`.rows .row`）でも、グラフの`.chart-frame`と全く同じクラスのバグが再発した。修正方針も同じ「縮むが、あふれない」原則で統一する。
 
-- `.icon-mark`の高さを固定`cqw`にすると、カード高さが縮んだときにアイコン自身は縮まずあふれる → `height:100%;max-height:6.5cqw`として親の実高さに追従させ、中のSVGは`width:auto;height:auto;max-width:100%;max-height:100%`で「収まるだけ縮む」。
+- `.icon-mark`の高さを固定`cqw`にすると、カード高さが縮んだときにアイコン自身は縮まずあふれる → `height:100%;max-height:calc(var(--cw)*6.5/100)`として親の実高さに追従させ、中のSVGは`width:auto;height:auto;max-width:100%;max-height:100%`で「収まるだけ縮む」。
 - `.prose`（説明文）や`.rows`（箇条書き）を`justify-content:center`にすると、内容が入りきらないときに上下対称にあふれ、上側がヘッダーに重なる → `justify-content:flex-start`＋`overflow:hidden`＋`min-height:0`にして、万一入りきらない場合も下端で安全に切れるようにする（上＝ヘッダー側には絶対にあふれさせない）。
 
 ```css
-.icon-wrap{flex:1;display:flex;gap:2cqw;min-height:0;min-width:0;overflow:hidden;}
-.icon-mark{flex:0 0 auto;width:6.5cqw;height:100%;max-height:6.5cqw;
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*6.5/100);height:100%;max-height:calc(var(--cw)*6.5/100);
   display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
 .icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
 .prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;
-  justify-content:flex-start;gap:0.9cqw;overflow:hidden;}
+  justify-content:flex-start;gap:calc(var(--cw)*0.9/100);overflow:hidden;}
 .rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;
   min-height:0;overflow:hidden;}
 ```
@@ -159,9 +172,9 @@ T1/T2の小アイコン（`.icon-mark`）やT3の各行（`.rows .row`）でも�
 **採用した方針**：ラベル列 `.k` は幅を一切指定せず（`flex:0 0 auto`のみ）、`white-space:nowrap`で折り返しも禁止する。ラベルの実際の文字数ぴったりの幅に自動的に収まるため、どんなフォント・どんな環境で描画されても、はみ出しも折り返しも原理的に起こり得ない。
 
 ```css
-.prose .term-row{display:flex;gap:0.9cqw;align-items:baseline;}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);align-items:baseline;}
 .prose .term-row .k{flex:0 0 auto;font-weight:700;white-space:nowrap;
-  padding-right:0.55cqw;border-right:2px solid var(--line);} /* widthは指定しない */
+  padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);} /* widthは指定しない */
 ```
 
 トレードオフとして、V/R/I/Oのように長さの異なるラベルが並ぶと、右側の説明文の開始位置が行ごとに微妙にずれる（列としての整列は崩れる）。これは許容し、安全性を優先する。
@@ -187,15 +200,15 @@ T1/T2の小アイコン（`.icon-mark`）やT3の各行（`.rows .row`）でも�
 | 出題年度タイムライン | 2016〜2025年度の10年分を●（出題あり）／○（出題なし）で並べる年表。「'16 '17 '19…」と年度を羅列するだけより、パッと見て出題頻度のムラが分かり、かつ視覚的に必要な面積を稼げる |
 
 ```css
-.freq-section{flex:0 0 auto;padding-top:1cqw;margin-top:1cqw;border-top:1px solid var(--ink);
-  display:flex;flex-direction:column;gap:0.75cqw;}
-.freq-top{display:flex;align-items:center;gap:1.5cqw;}
-.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:1.15cqw;
-  color:#fff;background:var(--red);width:1.9cqw;height:1.9cqw;border-radius:50%;
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*1/100);margin-top:calc(var(--cw)*1/100);border-top:1px solid var(--ink);
+  display:flex;flex-direction:column;gap:calc(var(--cw)*0.75/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.15/100);
+  color:#fff;background:var(--red);width:calc(var(--cw)*1.9/100);height:calc(var(--cw)*1.9/100);border-radius:50%;
   display:flex;align-items:center;justify-content:center;}
-.freq-timeline{display:flex;align-items:center;gap:0.2cqw;}
-.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.35cqw;}
-.freq-timeline .dot{width:1.5cqw;height:1.5cqw;border-radius:50%;border:1.4px solid var(--line);background:#fff;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.35/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.5/100);height:calc(var(--cw)*1.5/100);border-radius:50%;border:1.4px solid var(--line);background:#fff;}
 .freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
 ```
 
@@ -218,7 +231,7 @@ T1/T2の小アイコン（`.icon-mark`）やT3の各行（`.rows .row`）でも�
 | D1 | 科目の表紙（黒背景・反転） | 各科目の最初の1枚。科目名・収録論点数・分野数・頻出ランクの傾向を大きく提示する。使用頻度は低い（科目ごとに1回）が、最も強い区切りとして機能する |
 | D2 | 大分類の区切り（黒背景・巨大ゴースト番号） | 科目内の大分類が切り替わるタイミング（例：経営戦略論→組織論）に、数論点おきに1回挟む。分類番号を巨大なゴースト数字として背景に置き、タイトル・説明・収録論点の範囲を示す |
 
-D1・D2とも、装飾だけで終わらせないよう実データ（収録論点数・頻出ランクの傾向、収録論点の一覧チップなど）を必ず添える。`.mock`に`.dark`クラスを足して背景色とテキスト色を反転させるだけで、他の実装（`mock-frame`の16:9固定、`container-type:inline-size`＋`cqw`）は通常のパターンと共通。
+D1・D2とも、装飾だけで終わらせないよう実データ（収録論点数・頻出ランクの傾向、収録論点の一覧チップなど）を必ず添える。`.mock`に`.dark`クラスを足して背景色とテキスト色を反転させるだけで、他の実装（`mock-frame`の16:9固定、`--cw`ベースの文字サイズ計算）は通常のパターンと共通。
 
 ```css
 .mock.dark{background:var(--ink);color:#fff;}
@@ -260,9 +273,9 @@ D1の試作時、見出し級の大きな文字で「1次試験」が「1次試�
 | 2 | 過去問チェック（解答＆解説） | 選択肢ア〜オを再掲し正解だけ罫線と淡い背景で強調＋解説（正解の理由＋主要な誤答の理由を1段落に凝縮）＋関連知識＋出典（正解PDFのパスも追加） |
 
 ```css
-.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:0.5cqw;}
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
 .examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);
-  padding-left:0.55cqw;margin-left:-0.6cqw;}
+  padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
 .examq .choice.correct .badge{color:var(--red);}
 ```
 
