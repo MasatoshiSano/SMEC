@@ -53,6 +53,27 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:0.64cqw;color:var(--ink-soft);}
 .freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
 
+/* 過去問チェック：実際の過去問をそのまま提示し、直前のスライドで答えられるかを確認する */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:0.55cqw;}
+.examq .stem{font-size:0.9cqw;line-height:1.6;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:0.3cqw;}
+.examq .choice{display:flex;gap:0.7cqw;font-size:0.85cqw;line-height:1.5;padding:0.15cqw 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:0.55cqw;margin-left:-0.6cqw;}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:0.82cqw;line-height:1.55;border-top:1px solid var(--ink);padding-top:0.55cqw;margin-top:0.1cqw;color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .related-note{font-size:0.78cqw;line-height:1.5;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:0.66cqw;color:var(--ink-soft);margin-top:0.3cqw;}
+
+/* アンゾフの成長マトリクス：T3型の4行リスト */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:1.2cqw;padding:0.7cqw 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 12cqw;font-size:0.98cqw;font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 13cqw;font-family:"Space Mono",monospace;font-size:0.78cqw;color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:0.88cqw;color:var(--ink-soft);line-height:1.55;}
+
 /* 表紙 */
 .cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:3.2cqw 3.6cqw;}
 .cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
@@ -159,7 +180,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">O：組織</span><span class="v">その資源を活かせる組織体制になっているか</span></div>
             <p class="warn">この4つがすべて揃って初めて「持続的な競争優位」が実現する。1つでも欠けると優位性は一時的なもので終わる。</p>
             <p><span class="label">具体例</span><br>三代続く和菓子屋の「職人の技」：おいしい和菓子が作れる（価値）、他店にはない技術（希少性）、何十年もかけないと習得できない（模倣困難性）、技を商品化・販売できる体制がある（組織）→ 4つすべて揃っている。</p>
-            <p class="note"><b>ひっかけ：</b>模倣困難性を高めるのは「長い歴史の積み重ね（経路依存性）」「因果関係の曖昧さ」。逆に「価値の源泉が業界に知れ渡っている」「代替資源が外部調達できる」は模倣困難性を<b>弱める</b>要因。</p>
+            <p class="note"><b>ひっかけ：</b>模倣困難性の3大源泉は「経路依存性（長い歴史の積み重ね）」「因果関係の曖昧性」「社会的複雑性（組織文化・人間関係等）」。逆に「価値の源泉が業界に知れ渡っている」「代替資源が外部調達できる」は模倣困難性を<b>弱める</b>要因。「資源の価値が特定市場に限定される」はVの範囲の話で、模倣困難性(I)とは別軸。</p>
           </div>
         </div>
         <div class="freq-section">
@@ -186,9 +207,37 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
     </div>
   </div>
 
-  <!-- 04: C-2 -->
+  <!-- 04: C-1 過去問チェック -->
   <div>
-    <div class="slide-no">04 ／ C-2：企業戦略：ドメイン（企業・事業ドメイン）</div>
+    <div class="slide-no">04 ／ C-1：過去問チェック</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-1 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第1次試験 第3問）</div><div class="overview">前のスライドの内容だけで、実際にこの設問に正しく答えられるかを確認する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">VRIOフレームワークに基づけば、自社の経営資源の模倣困難性は企業の持続的な競争優位性を左右する。競合企業が経営資源を模倣する際のコスト上の不利をもたらし、自社の経営資源の模倣困難性を高める要因として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>競合企業には他に将来性が高く注力するべき経営資源があること。</span></div>
+            <div class="choice correct"><span class="badge">イ</span><span>自社が歴史的な経緯で長い時間をかけて、独自の経営資源を獲得してきたこと。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>自社の経営資源がどのように競争優位性につながっているのかが既に明確になっており、業界に知れ渡っていること。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>自社の経営資源の価値が特定の市場だけに限定されており、他市場では活用できないこと。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>自社の経営資源を代替できる別の経営資源が外部の企業から調達可能であること。</span></div>
+          </div>
+          <p class="explain"><b>正解：イ</b>（経路依存性）。ウ・オはむしろ模倣困難性を<b>弱める</b>要因（業界に知れ渡っている＝因果関係の曖昧性の喪失／代替資源が外部調達可能）。エは資源価値の適用範囲(V)の話で模倣困難性(I)とは別軸。アは自社の模倣困難性と無関係。</p>
+          <p class="related-note">関連知識：模倣困難性の3大源泉は「経路依存性」「因果関係の曖昧性」「社会的複雑性」。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第3問／正解：past_exams/1st_stage_answers/r07/2025c.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: C-2 -->
+  <div>
+    <div class="slide-no">05 ／ C-2：企業戦略：ドメイン（企業・事業ドメイン）</div>
     <div class="mock-frame">
     <div class="mock">
       <div class="head">
@@ -241,9 +290,77 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
     </div>
   </div>
 
-  <!-- 05: C-3 -->
+  <!-- 06: アンゾフの成長マトリクス（C-2の過去問に必要な前提知識を補う） -->
   <div>
-    <div class="slide-no">05 ／ C-3：企業戦略：多角化（シナジー、関連型・非関連型）</div>
+    <div class="slide-no">06 ／ C-2：過去問の前提知識（アンゾフの成長マトリクス）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-2 ／ 企業戦略：アンゾフの成長マトリクス</div><div class="title">誰に・何を売るかで成長戦略を4つに分ける</div><div class="overview">製品と市場がそれぞれ「既存」か「新規」かの組み合わせで、成長戦略は4パターンに整理できる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">市場浸透戦略</span><span class="combo">既存製品×既存市場</span><span class="desc">既存顧客のリピート購入促進やシェア拡大など、今ある製品・市場のままで成長を図る</span></div>
+          <div class="row"><span class="name">新製品開発戦略</span><span class="combo">新製品×既存市場</span><span class="desc">既存顧客層向けに新しい製品を投入する（例：既存客向けの新フレーバー・新機能）</span></div>
+          <div class="row"><span class="name">新市場開拓戦略</span><span class="combo">既存製品×新市場</span><span class="desc">今の製品のまま、新しい顧客層・地域・海外市場に展開する</span></div>
+          <div class="row"><span class="name">多角化戦略</span><span class="combo">新製品×新市場</span><span class="desc">新しい製品で、新しい市場に進出する。既存の強みが活かせるかで関連型・非関連型に分かれる（C-3参照）</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>解き方のコツ：</b>選択肢の具体的施策が実際にはどの象限（製品×市場の新旧）に当たるかを先に判定し、選択肢が主張する戦略名と一致するかを照合する。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 07: C-2 過去問チェック -->
+  <div>
+    <div class="slide-no">07 ／ C-2：過去問チェック</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-2 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第1次試験 第2問）</div><div class="overview">前のスライドの内容だけで、実際にこの設問に正しく答えられるかを確認する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">食品メーカーA社は、日本国内の一般消費者向けのシリアルの開発・製造・販売を行う専業企業である。同社は、現在、今後の成長戦略のための施策を検討している。アンゾフの成長マトリクスの考え方に基づく記述として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>自社ECサイトを立ち上げ、既存の一般消費者向けシリアル市場でのシェア拡大を狙うことで、「多角化戦略」を行う。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>飲食事業者向けのSNSマーケティング支援事業を新しく開始し、次の収益の柱とすることで、「市場浸透戦略」を行う。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>一部の既存販売地域向けに、地域名産品を用いた限定フレーバーを新しく開発することで、「多角化戦略」を行う。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>既存顧客のリピート購入を促進するキャンペーンを実施し、既存市場でのシェア拡大を狙うことで、「新市場開拓戦略」を行う。</span></div>
+            <div class="choice correct"><span class="badge">オ</span><span>コア・ユーザーである中高年層向けに、新しく低糖質シリアルを開発することで、「新製品開発戦略」を行う。</span></div>
+          </div>
+          <p class="explain"><b>正解：オ</b>。既存顧客層（既存市場）向けに新しい低糖質シリアル（新製品）＝新製品開発戦略で、施策の実態と戦略名が一致。ア〜エはすべて、施策の実態（製品×市場の組み合わせ）と選択肢が主張する戦略名が食い違っている。</p>
+          <p class="related-note">関連知識：まず各選択肢の施策が実際にはどの象限かを判定し、その上で主張されている戦略名と一致するか照合するのが速い解き方。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第2問／正解：past_exams/1st_stage_answers/r07/2025c.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 08: C-3 -->
+  <div>
+    <div class="slide-no">08 ／ C-3：企業戦略：多角化（シナジー、関連型・非関連型）</div>
     <div class="mock-frame">
     <div class="mock">
       <div class="head">
