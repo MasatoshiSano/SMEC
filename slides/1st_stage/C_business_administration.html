@@ -1,0 +1,294 @@
+<title>企業経営理論 - スライド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;}
+*{box-sizing:border-box;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;container-type:inline-size;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:1.85cqw 2.26cqw 0.93cqw;border-bottom:0.16cqw solid var(--ink);flex:0 0 auto;gap:1.44cqw;}
+.head .kicker{font-family:"Space Mono",monospace;font-size:0.98cqw;color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:1.55cqw;font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:1.0cqw;color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:0.93cqw;color:#fff;background:var(--ink);padding:0.31cqw 0.93cqw;align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:1.4cqw 2.26cqw 1.5cqw;display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:1.8cqw;min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:5.2cqw;height:100%;max-height:5.2cqw;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:0.5cqw;overflow:hidden;}
+.prose p{margin:0;font-size:0.92cqw;line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:0.92cqw;font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:0.9cqw;font-size:0.88cqw;line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);padding-right:0.55cqw;border-right:2px solid var(--line);width:9.5cqw;}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:0.88cqw;line-height:1.55;background:var(--ghost);padding:0.5cqw 0.8cqw;border-left:2px solid var(--ink);}
+.prose .note{font-size:0.82cqw;color:var(--red);border-top:1px solid var(--line);padding-top:0.55cqw;margin-top:0.05cqw;line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:0.7cqw;font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:0.9cqw;margin-top:0.85cqw;border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:0.65cqw;}
+.freq-top{display:flex;align-items:center;gap:1.5cqw;}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:0.55cqw;}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:1.05cqw;color:#fff;background:var(--red);width:1.75cqw;height:1.75cqw;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-label{font-size:0.76cqw;font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:0.78cqw;color:var(--ink-soft);border-left:1px solid var(--line);padding-left:1.1cqw;line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:0.2cqw;}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:0.68cqw;color:var(--ink-soft);margin-right:0.9cqw;white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3cqw;}
+.freq-timeline .dot{width:1.35cqw;height:1.35cqw;border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:0.64cqw;color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:3.2cqw 3.6cqw;}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:1cqw;letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:1cqw;color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:0.8cqw;}
+.cover .main .title{font-size:5.2cqw;font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:1.15cqw;color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:62cqw;}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:1.2cqw;}
+.cover .scope{display:flex;gap:2.4cqw;}
+.cover .scope .item{display:flex;flex-direction:column;gap:0.2cqw;}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:1.6cqw;font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:0.72cqw;color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:0.85cqw;border:1px solid rgba(255,255,255,.4);padding:0.35cqw 1cqw;color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 4cqw;overflow:hidden;}
+.divider .ghost-no{position:absolute;right:2cqw;top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:22cqw;line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:1.3cqw;max-width:70cqw;}
+.divider .kicker{display:flex;align-items:center;gap:1cqw;}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:1.1cqw;color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:1.1cqw;color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:3.6cqw;font-weight:900;line-height:1.15;}
+.divider .desc{font-size:1.08cqw;color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:1.6cqw;margin-top:0.4cqw;flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:0.78cqw;border:1px solid rgba(255,255,255,.35);padding:0.35cqw 0.9cqw;color:#fff;opacity:.85;white-space:nowrap;}
+</style>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 03 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">企業経営理論<span class="accent">。</span></div>
+          <div class="subtitle">経営戦略論・組織論・マーケティング論の3<span style="white-space:nowrap">分野</span>、42<span style="white-space:nowrap">論点</span>。うち40論点が頻出ランクA（直近10年で3回以上出題）という、1次<span style="white-space:nowrap">試験</span>随一の頻出科目。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">42</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">3</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">40/42</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/C_business_administration_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 02: 経営戦略論 区切り -->
+  <div>
+    <div class="slide-no">02</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">企業経営理論 ／ C-1〜C-14</span></div>
+          <div class="title">経営戦略論</div>
+          <div class="desc">企業がどの事業を持ち、どのように経営資源を配分して競争に勝つかを考える分野。VRIO分析やPPM、5フォース分析など、教科書レベルでも重要フレームワークが集中する。</div>
+          <div class="covers">
+            <span class="chip">C-1 VRIO分析</span>
+            <span class="chip">C-4 PPM</span>
+            <span class="chip">C-6 5フォース分析</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 03: C-1 -->
+  <div>
+    <div class="slide-no">03 ／ C-1：戦略の考え方・階層別戦略・VRIO</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-1 ／ 戦略の考え方・階層別戦略・VRIO</div><div class="title">VRIO分析で競争優位の源泉を見抜く</div><div class="overview">自社の経営資源が本当に競争力の源泉になっているかを、4つの視点でチェックする。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="26" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="30" r="16" fill="none" stroke="#171717" stroke-width="1.4"/>
+              <circle cx="30" cy="30" r="6" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">経営戦略には企業戦略・事業戦略・機能別戦略の3階層があり、まず自社を取り巻く状況を分析する。代表的な枠組みがVRIO分析：経営資源が競争力の源泉かを4つの視点でチェックする。</p>
+            <div class="term-row"><span class="k">V：価値</span><span class="v">外部の機会をつかむ・脅威を防ぐのに役立つか</span></div>
+            <div class="term-row"><span class="k">R：希少性</span><span class="v">他社があまり持っていない珍しい資源か</span></div>
+            <div class="term-row"><span class="k">I：模倣困難性</span><span class="v">他社が真似しようとしてもすぐには真似できないか</span></div>
+            <div class="term-row"><span class="k">O：組織</span><span class="v">その資源を活かせる組織体制になっているか</span></div>
+            <p class="warn">この4つがすべて揃って初めて「持続的な競争優位」が実現する。1つでも欠けると優位性は一時的なもので終わる。</p>
+            <p><span class="label">具体例</span><br>三代続く和菓子屋の「職人の技」：おいしい和菓子が作れる（価値）、他店にはない技術（希少性）、何十年もかけないと習得できない（模倣困難性）、技を商品化・販売できる体制がある（組織）→ 4つすべて揃っている。</p>
+            <p class="note"><b>ひっかけ：</b>模倣困難性を高めるのは「長い歴史の積み重ね（経路依存性）」「因果関係の曖昧さ」。逆に「価値の源泉が業界に知れ渡っている」「代替資源が外部調達できる」は模倣困難性を<b>弱める</b>要因。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-6 業界の構造分析、C-9〜C-11 技術経営など、外部・内部環境分析の土台になる論点全般と結びつく。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 04: C-2 -->
+  <div>
+    <div class="slide-no">04 ／ C-2：企業戦略：ドメイン（企業・事業ドメイン）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-2 ／ 企業戦略：ドメイン（企業・事業ドメイン）</div><div class="title">ドメインの2つの定義方法</div><div class="overview">「自社は何屋さんか」の定義の仕方一つで、気づける事業機会の広さが変わる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="26" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="30" r="14" fill="none" stroke="#171717" stroke-width="1.4"/>
+              <circle cx="30" cy="30" r="3.5" fill="#FF3B1F"/>
+              <line x1="30" y1="2" x2="30" y2="10" stroke="#171717" stroke-width="2"/>
+              <line x1="30" y1="50" x2="30" y2="58" stroke="#171717" stroke-width="2"/>
+              <line x1="2" y1="30" x2="10" y2="30" stroke="#171717" stroke-width="2"/>
+              <line x1="50" y1="30" x2="58" y2="30" stroke="#171717" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>ドメイン</b>＝「自社が事業を営む領域」。「うちの会社は何屋さんか」を定義すること。</p>
+            <div class="term-row"><span class="k">物理的定義</span><span class="v">作っている「モノ」で定義する（例：「うちは鉄道車両を作る会社だ」）</span></div>
+            <div class="term-row"><span class="k">機能的定義</span><span class="v">提供している「価値・機能」で定義する（例：「うちは人や物を運ぶサービスを提供する会社だ」）</span></div>
+            <p>機能的定義の方が視野が広がり新しい事業機会に気づきやすい。「鉄道会社が自分たちを『鉄道業』と狭く定義したために自動車・航空機の台頭に対応できなかった」というレビットの「マーケティング近視眼」は有名な失敗例。</p>
+            <p><span class="label">具体例</span><br>コンビニチェーンが自社を「小売業」ではなく「生活インフラ業」と定義し直すと、公共料金の収納代行、ATM、宅配便の受付など、単なる「モノを売る」以上のサービス展開に踏み出しやすくなる。</p>
+            <p class="note"><b>ひっかけ：</b>ドメインの決め方（物理的 vs 機能的）と、C-3の「多角化」の判断を混同しないこと。ドメインは「自社の立ち位置の定義」、多角化は「新しい事業領域への進出」という別の概念。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-3 多角化（アンゾフの成長マトリクスの発想の土台になる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: C-3 -->
+  <div>
+    <div class="slide-no">05 ／ C-3：企業戦略：多角化（シナジー、関連型・非関連型）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-3 ／ 企業戦略：多角化（シナジー、関連型・非関連型）</div><div class="title">多角化とシナジーの関係</div><div class="overview">既存事業との関連性が高いほど、多角化はシナジーを生みやすい。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="22" cy="30" r="14" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="38" cy="30" r="14" fill="none" stroke="#FF3B1F" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>多角化</b>＝既存事業とは別の新しい事業に進出すること。2種類ある。</p>
+            <div class="term-row"><span class="k">関連型多角化</span><span class="v">既存事業と技術・顧客・販売チャネル等で関連がある分野に進出（例：カメラメーカーが医療用内視鏡事業に進出。レンズ技術という共通の強みを活かせる）</span></div>
+            <div class="term-row"><span class="k">非関連型多角化</span><span class="v">既存事業とほとんど関連がない分野に進出（例：繊維会社が化粧品事業に進出）</span></div>
+            <p class="warn"><b>シナジー（相乗効果）：</b>「1+1が2ではなく3以上になる効果」。技術・ブランド・販売網を複数事業で共有すると単独でやるより効率が良くなる。関連型多角化の方がシナジーを生みやすい。</p>
+            <p><span class="label">具体例</span><br>富士フイルムは写真フィルム事業で培った化学・材料技術（酸化を防ぐ技術等）を応用して化粧品事業（アンチエイジング）に進出した。一見畑違いだが技術的関連性が高い「関連型多角化」の代表例。</p>
+            <p class="note"><b>ひっかけ：</b>「新市場に新技術で進出する」ことが必ずしも「多角化」とは限らない。アンゾフの成長マトリクスの「新製品×新市場」が多角化に該当。既存製品のままの海外展開（新市場開拓）や既存市場向けの新商品（新製品開発）と混同しないこと。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-2 ドメイン（自社の立ち位置の定義が多角化判断の前提になる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>

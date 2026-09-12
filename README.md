@@ -49,6 +49,10 @@ docs/slide_template/
   text_primary_3.html          文章主体パターン3種（T1〜T3、図解に向かない論点向け。C科目の実内容で試作）
   freq_data_bar.html           頻出データ帯（全パターン共通の標準要素。頻出ランク・10年分の出題年表を実データで表示）
   section_dividers.html        区切りスライド2種（D1:科目の表紙／D2:大分類の区切り。黒背景反転で単調さを崩す）
+
+slides/1st_stage/
+  C_business_administration.html  企業経営理論の本番スライド（作成中。表紙〜C-3まで、実データのみで構成）
+  C_business_administration_pilot.pptx  旧PowerPoint版パイロット（開けない不具合が未解決、参考記録として保持）
 ```
 
 ## まず読むべきドキュメント
