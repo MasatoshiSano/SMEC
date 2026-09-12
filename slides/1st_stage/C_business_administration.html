@@ -72,8 +72,8 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
 .matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
 .matrix-rows .row:first-child{border-top:none;}
-.matrix-rows .row .name{flex:0 0 calc(var(--cw)*12/100);font-size:calc(var(--cw)*0.98/100);font-weight:900;}
-.matrix-rows .row .combo{flex:0 0 calc(var(--cw)*13/100);font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
 .matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
 
 /* 表紙 */
