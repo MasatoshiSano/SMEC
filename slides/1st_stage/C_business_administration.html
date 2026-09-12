@@ -28,17 +28,17 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
 .icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
 .icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
-.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*1.05/100);overflow:hidden;}
-.prose p{margin:0;font-size:calc(var(--cw)*0.86/100);line-height:1.65;color:var(--ink);}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
 .prose p b{font-weight:700;}
-.prose .lede{font-size:calc(var(--cw)*0.86/100);font-weight:400;line-height:1.65;color:var(--ink-soft);}
-.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.83/100);line-height:1.55;align-items:baseline;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
 .prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
 .prose .term-row .v{color:var(--ink-soft);}
-.prose .warn{font-size:calc(var(--cw)*0.83/100);line-height:1.6;background:var(--ghost);padding:calc(var(--cw)*0.55/100) calc(var(--cw)*0.85/100);border-left:2px solid var(--ink);}
-.prose .note{font-size:calc(var(--cw)*0.77/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.6/100);margin-top:calc(var(--cw)*0.1/100);line-height:1.55;}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
 .prose .note b{color:var(--red);}
-.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.66/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
 
 /* 頻出データ帯 */
 .freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
@@ -57,25 +57,25 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
 
 /* 過去問チェック：実際の過去問をそのまま提示し、直前のスライドで答えられるかを確認する */
-.examq{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;gap:calc(var(--cw)*1.3/100);}
-.examq .stem{font-size:calc(var(--cw)*0.98/100);line-height:1.65;color:var(--ink);}
-.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.75/100);}
-.examq .choice{display:flex;gap:calc(var(--cw)*0.75/100);font-size:calc(var(--cw)*0.92/100);line-height:1.6;padding:calc(var(--cw)*0.2/100) 0;}
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
 .examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
 .examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
 .examq .choice.correct .badge{color:var(--red);}
-.examq .explain{font-size:calc(var(--cw)*0.86/100);line-height:1.6;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.65/100);margin-top:calc(var(--cw)*0.15/100);color:var(--ink);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
 .examq .explain b{color:var(--red);}
-.examq .related-note{font-size:calc(var(--cw)*0.78/100);line-height:1.55;color:var(--ink-soft);}
-.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.3/100);}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
 
 /* アンゾフの成長マトリクス：T3型の4行リスト */
 .matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
-.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*1.1/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
 .matrix-rows .row:first-child{border-top:none;}
-.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.96/100);font-weight:900;}
-.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.77/100);color:var(--red);white-space:nowrap;}
-.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.87/100);color:var(--ink-soft);line-height:1.6;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
 
 /* 表紙 */
 .cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
