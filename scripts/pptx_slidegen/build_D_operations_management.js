@@ -1231,5 +1231,316 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 43: 商品補充・物流／流通情報システム 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "04",
+  partNo: "PART 04",
+  partLabel: "運営管理 ／ D-29〜D-35",
+  title: "価格・販促／物流・流通情報",
+  desc: "価格設定・販売促進で店舗の売り方を締めくくり、在庫・輸配送・物流センターという商品の流れ、そしてPOS・電子タグという情報システムまで。",
+  chips: ["D-29 交差比率", "D-33 DC・TC", "D-34 アソシエーション分析"],
+  notes: "価格・販促／商品補充・物流／流通情報システムパートの区切りスライド。",
+});
+
+// ---------- Slide 44: D-29 価格設定 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-29 ／ 価格設定（価格政策、特売・値下げ）",
+    title: "交差比率＝粗利益率×商品回転率",
+    overview: "粗利益率が低くても回転率が高ければ在庫効率は優れていると評価できる。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "EDLP", v: "特売せず常に低価格を維持（集客効果は生まれにくい）" },
+    { k: "ハイ・ロー・プライシング", v: "普段は通常価格、定期的に特売でメリハリをつける" },
+    { k: "交差比率", v: "粗利益率 × 商品回転率" },
+  ], { fontSize: 11, labelW: 2.6, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "粗利益率20％・回転率10回→交差比率2.0。粗利益率40％・回転率3回→交差比率1.2。前者の方が在庫効率で優れる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「粗利益率が高いほど必ず優良」は誤り。在庫効率まで含めるなら交差比率で判断する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-31 商品在庫管理（商品回転率の詳細）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'20", "'21", "'24"])),
+  });
+}
+
+// ---------- Slide 45: D-30 販売促進計画 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-30 ／ 販売促進計画",
+    title: "来店促進と購買促進は別の段階",
+    overview: "プロモーションは実施場所によって店外・店内の2つに大別される。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "店外プロモーション", v: "チラシ・屋外広告・SNS広告など来店を促す活動" },
+    { k: "店内プロモーション", v: "POP広告・実演・試食など来店後の追加購買を促す活動" },
+    { k: "リベート・共同販促", v: "メーカーの販売奨励金、小売店とメーカーの共同キャンペーン" },
+  ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "店外プロモーション（来店促進）と店内プロモーション（購買促進）は狙う効果の段階が異なる点を区別する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-28 売場構成・陳列（店内プロモーションの一部はVMDと重なる）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'20", "'24"])),
+  });
+}
+
+// ---------- Slide 46: D-31 商品在庫管理・需要予測（店舗販売系） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-31 ／ 商品在庫管理・需要予測（店舗販売系）",
+    title: "回転率は高ければ高いほど良いとは限らない",
+    overview: "欠品が直接その場の販売機会損失につながる店舗特有の視点。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "商品回転率", v: "売上高（または売上原価） ÷ 平均在庫高" },
+  ], { fontSize: 11, labelW: 1.7, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "年間売上高1,200万円・平均在庫高200万円→商品回転率＝年6回。業界平均より低ければ過剰在庫・品揃え見直しの材料になる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "回転率を上げすぎると発注頻度増による事務コスト増、欠品リスク増につながる。D-29の交差比率のように収益性とのバランスで評価する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-20 在庫管理（ABC分析・EOQと同じ考え方の店舗版）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 47: D-32 輸配送管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-32 ／ 輸配送管理（輸送手段、共同輸配送）",
+    title: "モーダルシフトは環境と労働力不足の両方に効く",
+    overview: "トラック輸送の一部を鉄道・船舶に切り替え、CO2削減とドライバー不足対応を両立。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "モーダルシフト", v: "トラック輸送の一部を鉄道・船舶に切り替える取り組み" },
+    { k: "共同輸配送", v: "複数荷主が1台のトラックに積み合わせ、積載効率を高める" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食品メーカーA社・B社が別々に走らせていたトラックを1台に積み合わせ、台数・走行距離を減らしながら両社の商品を届ける。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "モーダルシフトは「コスト削減だけ」の施策ではなく、環境負荷低減と労働力不足対応の複数の目的を持つ。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-33 物流センター管理（輸配送の結節点となる物流拠点）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 48: D-33 物流センター管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-33 ／ 物流センター管理（機能・設計・運営）",
+    title: "在庫を持つかどうかがDCとTCの決定的な違い",
+    overview: "DC（在庫型）とTCクロスドッキング（通過型）の2タイプ。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "DC", tag: "在庫型", desc: "商品を一定期間在庫として保管し注文に応じ出荷。欠品対応力高いが保管コスト大" },
+    { name: "TC", tag: "通過型", desc: "在庫を持たず届いた荷物をすぐ仕分け出荷（クロスドッキング）。生鮮・日配品向き" },
+  ], { nameW: 1.3, tagW: 1.5, rowH: 1.4 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「TCは在庫スペースを大きく確保」は誤り。DC・TCは「在庫を持つか」を軸に区別する。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 49: D-34 流通情報システム（POS） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-34 ／ 流通情報システム（POS、顧客管理システム）",
+    title: "リフト値は信頼度を支持度で正規化した指標",
+    overview: "POSデータのアソシエーション分析で使う3指標：支持度・信頼度・リフト値。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "支持度", v: "該当組み合わせのレシート数 ÷ 全レシート数" },
+    { k: "信頼度", v: "A・B両方を含むレシート数 ÷ Aを含むレシート数" },
+    { k: "リフト値", v: "信頼度(A→B) ÷ Bの単独出現率。1超なら正の相関" },
+  ], { fontSize: 11, labelW: 1.6, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "全6,000枚中A含む3,000枚・B含む3,000枚・AB両方1,800枚→信頼度＝1,800/3,000＝0.6、リフト値＝0.6÷0.5＝1.2（正の相関）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "リフト値を信頼度のまま使う誤りに注意。相手側商品単独の出現率でさらに割って初めて求まる。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-35 流通情報システム（JANコード等、POSデータの入口となる識別技術）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 50: D-34 過去問チェック（設問、2設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-34 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第40問）",
+    overview: "計算問題（2設問）。前のスライドの公式で自分の手で計算してみる。",
+    tag: "運営管理",
+  });
+  let cy = 1.9;
+  s.addText(
+    "あるスーパーで対象商品A・B・Cのレシート枚数を集計：Aのみ400／Bのみ200／Cのみ600／A・Bのみ1,200／A・Cのみ800／B・Cのみ1,000／A・B・Cすべて600／いずれも無し1,200／合計6,000枚。",
+    { x: 0.55, y: cy, w: 12.25, h: 0.85, fontFace: F_BODY, fontSize: 12, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.95;
+  s.addText([
+    { text: "設問1　", options: { bold: true, color: INK_SOFT } },
+    { text: "商品Aからみた商品Bの信頼度（コンフィデンス）として、最も適切なものはどれか。　ア 1/9　イ 1/6　ウ 7/15　エ 8/15　オ 3/5", options: { color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.6, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.7;
+  s.addText([
+    { text: "設問2　", options: { bold: true, color: INK_SOFT } },
+    { text: "商品Aと商品Bを併買した購買パターンのリフト値として、最も適切なものはどれか。　ア 3/5　イ 5/6　ウ 1　エ 16/15　オ 6/5", options: { color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.6, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第40問", {
+    x: 0.55, y: 6.9, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 51: D-34 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-34 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第40問）",
+    overview: "設問1＝オ（3/5）、設問2＝オ（6/5）。",
+    tag: "運営管理",
+  });
+  let cy = 1.9;
+  s.addShape("rect", { x: 0.55, y: cy, w: 12.25, h: 0.5, fill: { color: GHOST }, line: { type: "none" } });
+  s.addShape("line", { x: 0.55, y: cy, w: 0, h: 0.5, line: { color: RED, width: 3 } });
+  s.addText([
+    { text: "設問1：オ　", options: { bold: true, color: RED } },
+    { text: "信頼度(A→B)＝(AとB両方含むレシート数1,800)÷(Aを含むレシート数3,000)＝3/5", options: { color: INK } },
+  ], { x: 0.75, y: cy, w: 11.9, h: 0.5, valign: "middle", fontFace: F_BODY, fontSize: 11, isTextBox: true, margin: 0 });
+  cy += 0.6;
+  s.addShape("rect", { x: 0.55, y: cy, w: 12.25, h: 0.5, fill: { color: GHOST }, line: { type: "none" } });
+  s.addShape("line", { x: 0.55, y: cy, w: 0, h: 0.5, line: { color: RED, width: 3 } });
+  s.addText([
+    { text: "設問2：オ　", options: { bold: true, color: RED } },
+    { text: "リフト値＝信頼度(3/5)÷Bの単独出現率(3,000/6,000＝1/2)＝(3/5)×2＝6/5", options: { color: INK } },
+  ], { x: 0.75, y: cy, w: 11.9, h: 0.5, valign: "middle", fontFace: F_BODY, fontSize: 11, isTextBox: true, margin: 0 });
+  cy += 0.65;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "準備：", options: { bold: true, color: RED } },
+    { text: "Aを含むレシート数＝400+1,200+800+600＝3,000枚。Bを含むレシート数＝200+1,200+1,000+600＝3,000枚。AとBを両方含むレシート数＝1,200+600＝1,800枚。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.6, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "リフト値6/5＞1のため、AとBは正の相関があり一緒に買われやすい＝クロスセルの対象として有望と判断できる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：支持度・信頼度・リフト値はそれぞれ分母・分子が異なるため、1つずつ正確に区別すること。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第40問／正解：past_exams/1st_stage_answers/r07/d_v2_20250902.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 52: D-35 流通情報システム（商品コード） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-35 ／ 流通情報システム（商品コード、電子タグ、トレーサビリティ）",
+    title: "電子タグは複数を離れた場所から一括で読める",
+    overview: "JANコード（13桁／8桁）と、無線通信で一括読取できる電子タグ（RFID）。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "JANコード（GTIN）", v: "標準13桁／短縮8桁。GS1事業者コード＋商品コード＋チェックデジット" },
+    { k: "電子タグ（RFID）", v: "ICチップ＋アンテナ。複数タグを離れた場所から一括読取できる" },
+    { k: "EPC", v: "GS1識別コード＋個体別シリアル番号。同じ商品でも1点ずつ識別可能" },
+    { k: "トレーサビリティ", v: "生産〜加工〜流通〜販売までの経路を追跡できる仕組み" },
+  ], { fontSize: 10.5, labelW: 2.3, gap: 0.38 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「電子タグも1つずつ近づけて読み取る必要がある」は誤り。バーコードと違い複数タグを離れた場所から一括読取できる点が最大の利点。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-34 流通情報システム（POSデータの入口となる識別技術）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
 pres.writeFile({ fileName: path.join(__dirname, "../../slides/1st_stage/D_operations_management.pptx") })
   .then(() => console.log("wrote", "slides/1st_stage/D_operations_management.pptx"));
