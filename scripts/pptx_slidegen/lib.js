@@ -308,6 +308,65 @@ function drawScopeBars(slide, x, y, w, h, { narrowLabel, wideLabel, resultLabel,
   }
 }
 
+// generic 2x2 matrix (PPM, Porter's generic strategies, etc.) — four labeled quadrants
+// plus a one-line caption underneath explaining what the axes mean (kept as plain text
+// rather than rotated axis labels, which pptxgenjs handles less predictably).
+function drawQuadrant(slide, x, y, w, h, { cells, axisCaption }) {
+  const gap = 0.06;
+  const gridH = h - 0.4;
+  const cw = (w - gap) / 2, ch = (gridH - gap) / 2;
+  const pos = {
+    tl: [x, y], tr: [x + cw + gap, y],
+    bl: [x, y + ch + gap], br: [x + cw + gap, y + ch + gap],
+  };
+  cells.forEach((cell) => {
+    const [cx, cy] = pos[cell.pos];
+    slide.addShape("rect", { x: cx, y: cy, w: cw, h: ch, fill: { color: GHOST }, line: { color: INK, width: 1 } });
+    slide.addText([
+      { text: cell.label + "\n", options: { bold: true, fontSize: 12, color: INK, breakLine: true } },
+      { text: cell.sublabel || "", options: { fontSize: 8.5, color: INK_SOFT } },
+    ], {
+      x: cx + 0.08, y: cy, w: cw - 0.16, h: ch, align: "center", valign: "middle",
+      fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15,
+    });
+  });
+  if (axisCaption) {
+    slide.addText(axisCaption, {
+      x, y: y + gridH + 0.1, w, h: 0.3, align: "center",
+      fontFace: F_BODY, fontSize: 8, color: INK_SOFT, isTextBox: true, margin: 0,
+    });
+  }
+}
+
+// Porter's five forces — a center box (the industry) with four surrounding forces
+// connected by thin spokes. Use for any "one central thing pressured from N directions"
+// content, not just 5 forces specifically.
+function draw5Forces(slide, x, y, w, h, { center, top, bottom, left, right }) {
+  const boxW = w * 0.52, boxH = h * 0.24;
+  const cx = x + w / 2, cy = y + h / 2;
+  const mkBox = (label, bx, by, fill, textColor) => {
+    slide.addShape("rect", { x: bx, y: by, w: boxW, h: boxH, fill: { color: fill }, line: { color: INK, width: 1 } });
+    slide.addText(label, {
+      x: bx, y: by, w: boxW, h: boxH, align: "center", valign: "middle",
+      fontFace: F_BODY, fontSize: 9, bold: fill !== GHOST, color: textColor, isTextBox: true, margin: 0, lineSpacingMultiple: 1.05,
+    });
+  };
+  const centerX = cx - boxW / 2, centerY = cy - boxH / 2;
+  const topY = y, bottomY = y + h - boxH;
+  const leftX = x, rightX = x + w - boxW;
+  const midY = cy - boxH / 2;
+  // spokes (drawn first so boxes sit on top)
+  slide.addShape("line", { x: cx, y: topY + boxH, w: 0, h: centerY - (topY + boxH), line: { color: LINE, width: 1 } });
+  slide.addShape("line", { x: cx, y: centerY + boxH, w: 0, h: bottomY - (centerY + boxH), line: { color: LINE, width: 1 } });
+  slide.addShape("line", { x: leftX + boxW, y: cy, w: centerX - (leftX + boxW), h: 0, line: { color: LINE, width: 1 } });
+  slide.addShape("line", { x: centerX + boxW, y: cy, w: (rightX) - (centerX + boxW), h: 0, line: { color: LINE, width: 1 } });
+  mkBox(top, cx - boxW / 2, topY, WHITE, INK);
+  mkBox(bottom, cx - boxW / 2, bottomY, WHITE, INK);
+  mkBox(left, leftX, midY, WHITE, INK);
+  mkBox(right, rightX, midY, WHITE, INK);
+  mkBox(center, centerX, centerY, RED, WHITE);
+}
+
 // two overlapping circles — relatedness → the overlap is the payoff (synergy, shared risk, etc.)
 function drawVennOverlap(slide, x, y, w, h, { leftLabel, rightLabel, overlapLabel }) {
   const r = Math.min(w, h) * 0.34;
@@ -347,4 +406,6 @@ module.exports = {
   addExamQuestion,
   drawScopeBars,
   drawVennOverlap,
+  drawQuadrant,
+  draw5Forces,
 };

@@ -77,6 +77,23 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
 .matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
 
+/* 2x2マトリクス（PPM・競争優位の基本戦略など） */
+.quadrant-wrap{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.quadrant-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:calc(var(--cw)*0.5/100);min-height:0;}
+.quadrant-grid .cell{background:var(--ghost);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--cw)*0.4/100);min-height:0;overflow:hidden;}
+.quadrant-grid .cell .label{font-weight:900;font-size:calc(var(--cw)*1.15/100);color:var(--ink);}
+.quadrant-grid .cell .sub{font-size:calc(var(--cw)*0.76/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.25/100);line-height:1.4;}
+.diagram-caption{flex:0 0 auto;font-size:calc(var(--cw)*0.74/100);color:var(--ink-soft);text-align:center;line-height:1.4;}
+
+/* 放射状の力学図（5フォース分析など：中心＋周囲4方向の圧力） */
+.forces-wrap{flex:1;display:grid;grid-template-columns:1fr 1.3fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:calc(var(--cw)*0.35/100);min-height:0;overflow:hidden;}
+.forces-wrap .box{display:flex;align-items:center;justify-content:center;text-align:center;font-size:calc(var(--cw)*0.76/100);line-height:1.35;padding:calc(var(--cw)*0.3/100);border:1px solid var(--line);background:#fff;min-height:0;overflow:hidden;}
+.forces-wrap .box.center{background:var(--red);color:#fff;font-weight:700;font-size:calc(var(--cw)*0.85/100);border:none;grid-column:2;grid-row:2;}
+.forces-wrap .box.top{grid-column:2;grid-row:1;}
+.forces-wrap .box.bottom{grid-column:2;grid-row:3;}
+.forces-wrap .box.left{grid-column:1;grid-row:2;}
+.forces-wrap .box.right{grid-column:3;grid-row:2;}
+
 /* 表紙 */
 .cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
 .cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
@@ -454,6 +471,690 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11: C-4 PPM -->
+  <div>
+    <div class="slide-no">11 ／ C-4：企業戦略：PPM（プロダクト・ポートフォリオ・マネジメント）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-4 ／ 企業戦略：PPM（プロダクト・ポートフォリオ・マネジメント）</div><div class="title">PPMで事業ポートフォリオの資金配分を判断する</div><div class="overview">市場成長率×市場シェアの2軸で事業を4分類し、どこに投資しどこから資金を引き上げるかを判断する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="quadrant-wrap">
+          <div class="quadrant-grid">
+            <div class="cell"><span class="label">花形（スター）</span><span class="sub">稼ぐが投資も必要。将来の主力候補</span></div>
+            <div class="cell"><span class="label">問題児</span><span class="sub">将来性はあるが今は稼げない。育てるか撤退か判断が必要</span></div>
+            <div class="cell"><span class="label">金のなる木</span><span class="sub">投資が要らず安定して稼ぐ。他事業の資金源</span></div>
+            <div class="cell"><span class="label">負け犬</span><span class="sub">稼げず将来性も薄い。撤退候補</span></div>
+          </div>
+          <div class="diagram-caption">縦軸：市場成長率（上＝高い）／横軸：市場シェア（左＝高い）。「金のなる木」の資金を「問題児」に投資して「花形」に育てるのが基本セオリー。</div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>PPMは「市場の魅力度」と「自社の競争力」の2軸だけの単純化モデルで、事業間のシナジーや社会的意義のある事業（あえて赤字でも続ける等）は考慮できないという限界がある。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12: C-5 垂直統合・M&A・戦略的提携 -->
+  <div>
+    <div class="slide-no">12 ／ C-5：企業戦略：垂直統合、M&amp;A、戦略的提携</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-5 ／ 企業戦略：垂直統合、M&amp;A、戦略的提携</div><div class="title">事業を拡大・強化する3つの方法</div><div class="overview">資本を統合するか（M&amp;A）、契約ベースで組むか（提携）、自社に取り込むか（垂直統合）で選択肢が変わる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="18" cy="30" r="10" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="42" cy="30" r="10" fill="none" stroke="#FF3B1F" stroke-width="2"/>
+              <line x1="28" y1="30" x2="32" y2="30" stroke="#171717" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">会社が事業を拡大・強化する主な方法は3つ。資本を統合する度合いが異なる。</p>
+            <div class="term-row"><span class="k">垂直統合</span><span class="v">自社のバリューチェーンの川上（原材料側）・川下（消費者側）を自社に取り込む</span></div>
+            <div class="term-row"><span class="k">M&amp;A</span><span class="v">他社を買収・合併し、技術・顧客・ブランドを一気に手に入れる（TOB・MBOはその手法）</span></div>
+            <div class="term-row"><span class="k">戦略的提携</span><span class="v">資本を統合せず契約ベースで協力する（ジョイントベンチャーもこの一種）</span></div>
+            <p><span class="label">具体例</span><br>自動車部品メーカーが鋼材メーカーを買収すれば「川上への垂直統合」、完成車メーカーを買収すれば「川下への垂直統合」。2社が共同出資でJVを設立するのは「戦略的提携」。</p>
+            <p class="note"><b>ひっかけ：</b>ジョイントベンチャーは独立性を保つため、経営統合するM&amp;Aより共有できる情報の範囲は一般に<b>狭い</b>（広いは誤り）。MBOは上場企業の非公開化だけでなく、非上場企業の事業承継の手段としても行われる。CVC（事業会社がベンチャー企業へ出資しシナジーを狙う手法）も周辺用語として頻出。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-11 新規事業開発（CVCによるベンチャー投資）、C-14 事業承継（MBOによる従業員承継）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 13: C-5 過去問チェック（設問のみ） -->
+  <div>
+    <div class="slide-no">13 ／ C-5：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-5 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第6問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">企業間の連携戦略に関する記述として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>TOBとは、買収者が対象企業の株式を公開市場で株主から買い付ける手法のことを指す。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>経営陣が中核となって既存株主から株式を買い取ることをMBOと呼ぶが、MBOは上場企業では起こるが、非上場企業では起こらない。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>仕入先の事業を買収し、事業のバリューチェーンの変革を目指す買収を水平的M&amp;Aと呼ぶ。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ジョイントベンチャーは、M&amp;Aよりも当事者同士で共有できる情報の範囲が広く範囲の経済を享受できるので、より大きな相乗効果が期待される。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ベンチャー企業が開発した革新的な技術やビジネスモデルを取り込み、自社の既存事業との間でシナジーを発現させることなどを目的に、事業会社がベンチャー企業に投資をすることをCVC（コーポレート・ベンチャー・キャピタル）と呼ぶ。</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第6問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 14: C-5 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">14 ／ C-5：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-5 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第6問）</div><div class="overview">正解はオ。TOB・MBO・垂直/水平M&amp;A・JVの定義のズレを見抜く。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>TOBとは、買収者が対象企業の株式を公開市場で株主から買い付ける手法のことを指す。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>経営陣が中核となって既存株主から株式を買い取ることをMBOと呼ぶが、MBOは上場企業では起こるが、非上場企業では起こらない。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>仕入先の事業を買収し、事業のバリューチェーンの変革を目指す買収を水平的M&amp;Aと呼ぶ。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ジョイントベンチャーは、M&amp;Aよりも当事者同士で共有できる情報の範囲が広く範囲の経済を享受できるので、より大きな相乗効果が期待される。</span></div>
+            <div class="choice correct"><span class="badge">オ</span><span>ベンチャー企業が開発した革新的な技術やビジネスモデルを取り込み、自社の既存事業との間でシナジーを発現させることなどを目的に、事業会社がベンチャー企業に投資をすることをCVC（コーポレート・ベンチャー・キャピタル）と呼ぶ。</span></div>
+          </div>
+          <p class="explain"><b>正解：オ</b>。CVCの定義そのもの。ア：TOBは通常「取引所を介さず」株主から直接買い集める手法で「公開市場で買い付け」は不正確。イ：MBOは非上場企業の事業承継手段としても行われる。ウ：仕入先（川上）の買収は<b>垂直的</b>M&amp;A（水平的は誤り）。エ：JVは独立性を保つため共有情報の範囲はM&amp;Aより<b>狭い</b>（広いは誤り）。</p>
+          <p class="related-note">関連知識：M&amp;Aの類型（水平・垂直・多角化型）とTOB・MBO・CVC等の周辺用語はセットで頻出。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第6問／正解：past_exams/1st_stage_answers/r07/2025c.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 15: C-6 5フォース・価値連鎖 -->
+  <div>
+    <div class="slide-no">15 ／ C-6：競争戦略：業界の構造分析（5フォース、価値連鎖）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-6 ／ 競争戦略：業界の構造分析（5フォース、価値連鎖）</div><div class="title">5つの力で「儲かりやすい業界か」を判断する</div><div class="overview">業界の競争構造を5つの力（ポーター）に分解し、力が弱いほど儲けやすい業界と判断する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="forces-wrap">
+          <div class="box top">新規参入の脅威<br>（参入障壁が低いほど大）</div>
+          <div class="box left">売り手の<br>交渉力</div>
+          <div class="box center">業界内の<br>既存競合</div>
+          <div class="box right">買い手の<br>交渉力</div>
+          <div class="box bottom">代替品の脅威（例：新聞紙にとってのニュースアプリ）</div>
+        </div>
+        <div class="diagram-caption">もう1つの分析軸が<b>バリューチェーン（価値連鎖）分析</b>：活動を「主活動」（購買物流→製造→出荷物流→販売→サービス）と「支援活動」（全般管理・人事・技術開発・調達）に分け、付加価値の源泉を探る。</div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「参入障壁が高く撤退障壁が低い」のように複数条件を組み合わせた業界特性は、「障壁が高い＝儲かる」という単純発想では判断できない。設問の前提条件を個別に確認すること。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 16: C-7 競争優位の3つの基本戦略 -->
+  <div>
+    <div class="slide-no">16 ／ C-7：競争戦略：競争優位の戦略（コスト・差別化・集中）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-7 ／ 競争戦略：競争優位の戦略（コスト・差別化・集中）</div><div class="title">競争に勝つための3つの基本戦略</div><div class="overview">「競争優位の種類」×「狙う市場の広さ」の組み合わせで、とるべき戦略が変わる（ポーター）。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="quadrant-wrap">
+          <div class="quadrant-grid">
+            <div class="cell"><span class="label">コストリーダーシップ</span><span class="sub">業界最低コストで価格競争に勝つ（例：格安航空会社）</span></div>
+            <div class="cell"><span class="label">差別化</span><span class="sub">品質・ブランド・デザインで独自の価値を出す（例：高級ホテル）</span></div>
+            <div class="cell"><span class="label">コスト集中</span><span class="sub">特定の狭い顧客層に絞ってコストで勝つ</span></div>
+            <div class="cell"><span class="label">差別化集中</span><span class="sub">特定の狭い顧客層に絞って差別化で勝つ</span></div>
+          </div>
+          <div class="diagram-caption">縦軸：狙う市場の広さ（上＝広い市場全体、下＝特定の狭い層＝集中戦略）／横軸：競争優位の源泉（左＝コスト、右＝差別化）。コストと差別化を中途半端に両方狙うと収益性が落ちる（<b>スタック・イン・ザ・ミドル</b>）。</div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>集中戦略は「誰に売るか」という軸の話で、コストリーダーシップ・差別化そのものとは別軸。ユニクロのようなSPAによる効率化は、単純な安売りでなく差別化的コストリーダーシップと解釈される。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 17: C-8 競争地位別戦略 -->
+  <div>
+    <div class="slide-no">17 ／ C-8：競争戦略：競争地位別戦略（リーダー・チャレンジャー・ニッチャー・フォロワー）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-8 ／ 競争戦略：競争地位別戦略</div><div class="title">業界内シェアの順位で戦い方を変える（コトラー）</div><div class="overview">市場シェアの順位に応じて、企業が取るべき戦略は4パターンに分かれる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">リーダー</span><span class="combo">業界1位</span><span class="desc">市場全体を拡大させ、他社の攻撃を防ぐ「全方位戦略」</span></div>
+          <div class="row"><span class="name">チャレンジャー</span><span class="combo">2位以下・体力あり</span><span class="desc">リーダーとの「差別化」戦略。同じ土俵で戦うと体力負けするため</span></div>
+          <div class="row"><span class="name">ニッチャー</span><span class="combo">特定分野に特化</span><span class="desc">特定のセグメントに経営資源を集中する「集中」戦略</span></div>
+          <div class="row"><span class="name">フォロワー</span><span class="combo">シェア・体力とも劣る</span><span class="desc">リーダーの成功パターンを模倣し、低コストで生き残る</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>チャレンジャーが取るべきは「同質化（真似）」ではなく「差別化」。同質化はむしろフォロワーの戦略に近い考え方であり、混同しないこと。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 18: C-9 MOT・コア技術戦略 -->
+  <div>
+    <div class="slide-no">18 ／ C-9：技術経営（MOT）：技術戦略、知財戦略</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-9 ／ 技術経営（MOT）：技術戦略、知財戦略</div><div class="title">コア技術を軸に複数事業へ展開する</div><div class="overview">技術力を経済的価値に変えるマネジメント。コア技術戦略と知財戦略が中心。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="6" fill="#FF3B1F"/>
+              <circle cx="14" cy="14" r="5" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="46" cy="14" r="5" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="14" cy="46" r="5" fill="none" stroke="#171717" stroke-width="2"/>
+              <line x1="27" y1="27" x2="17" y2="17" stroke="#171717" stroke-width="1.4"/>
+              <line x1="33" y1="27" x2="43" y2="17" stroke="#171717" stroke-width="1.4"/>
+              <line x1="27" y1="33" x2="17" y2="43" stroke="#171717" stroke-width="1.4"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>MOT（技術経営）</b>は技術力を利益に変えるマネジメント。代表例が<b>コア技術戦略</b>：特定の技術分野に集中し、複数の製品・事業に展開する戦略。</p>
+            <div class="term-row"><span class="k">コア技術戦略</span><span class="v">1つの技術を土台に複数製品を展開し、得た知見を技術自体の強化に還元する好循環</span></div>
+            <div class="term-row"><span class="k">知財戦略</span><span class="v">特許として公開・独占するか、ノウハウとして秘匿するかの選択も含む</span></div>
+            <p><span class="label">具体例</span><br>「精密加工技術」をコア技術に持つ工作機械メーカーが、医療機器・航空宇宙部品にも展開し、各分野で得たノウハウを工作機械の技術力向上にも還元する。</p>
+            <p class="note"><b>ひっかけ：</b>コア技術戦略は「既存技術に固執し続けること」ではない。陳腐化・模倣時は技術自体を進化させるのが前提。「既存市場でのシェア拡大が最優先」も誤りで、本質は<b>複数事業への横展開</b>。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-10 イノベーションマネジメント、C-11 新規事業開発と同じ技術経営（MOT）分野。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 19: C-9 過去問チェック（設問のみ） -->
+  <div>
+    <div class="slide-no">19 ／ C-9：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-9 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第9問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">特定の技術分野に集中し、その技術をベースとした製品を次々と開発・導入する戦略として「コア技術戦略」がある。コア技術戦略の特徴に関する記述として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>コア技術戦略では、コア技術が陳腐化したり、競合企業に模倣されたりしても、コア技術の入れ替えは考えず、既存のコア技術にこだわった技術開発や製品開発を追求する。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>コア技術戦略では、コア技術の活用に注力し、既存市場でのシェア拡大を最優先の目標とする。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>コア技術戦略では、コア技術を活用して顧客ニーズに合致した製品を開発することが望ましいが、開発の初期段階ではコア技術よりも既存顧客の要求を優先する。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>コア技術戦略では、コア技術を基盤に、多様な製品を開発し、その学習成果をコア技術の強化や発展につなげる。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>コア技術戦略では、特定の技術に経営資源を集中させるため、事業の多角化が難しく、コア技術に依存するリスクを分散しにくい。</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第9問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 20: C-9 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">20 ／ C-9：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-9 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第9問）</div><div class="overview">正解はエ。「複数製品への横展開」がコア技術戦略の本質。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>コア技術戦略では、コア技術が陳腐化したり、競合企業に模倣されたりしても、コア技術の入れ替えは考えず、既存のコア技術にこだわった技術開発や製品開発を追求する。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>コア技術戦略では、コア技術の活用に注力し、既存市場でのシェア拡大を最優先の目標とする。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>コア技術戦略では、コア技術を活用して顧客ニーズに合致した製品を開発することが望ましいが、開発の初期段階ではコア技術よりも既存顧客の要求を優先する。</span></div>
+            <div class="choice correct"><span class="badge">エ</span><span>コア技術戦略では、コア技術を基盤に、多様な製品を開発し、その学習成果をコア技術の強化や発展につなげる。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>コア技術戦略では、特定の技術に経営資源を集中させるため、事業の多角化が難しく、コア技術に依存するリスクを分散しにくい。</span></div>
+          </div>
+          <p class="explain"><b>正解：エ</b>。単一のコア技術を軸に複数製品・事業へ展開し、得た学習成果を技術自体の強化に還元する好循環がコア技術戦略の核心。ア：陳腐化・模倣時も固執するのは「コンピタンス・トラップ」に近く誤り。イ：既存市場シェア拡大最優先は市場浸透戦略の説明で誤り。ウ：開発初期にコア技術を後回しにするのは本旨と矛盾。オ：コア技術を軸にした展開はむしろ<b>多角化しやすい</b>。</p>
+          <p class="related-note">関連知識：1つの技術基盤を複数事業に展開する考え方は「技術のプラットフォーム化」「技術シナジー」とも関連する。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第9問／正解：past_exams/1st_stage_answers/r07/2025c.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 21: C-10 イノベーションマネジメント -->
+  <div>
+    <div class="slide-no">21 ／ C-10：技術経営（MOT）：イノベーションマネジメント</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-10 ／ 技術経営（MOT）：イノベーションマネジメント</div><div class="title">3つのイノベーション理論を区別する</div><div class="overview">「誰が」「どこから」イノベーションを起こすかで異なる3つの代表理論がある。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <path d="M30 6 L36 24 L54 24 L39 35 L45 53 L30 42 L15 53 L21 35 L6 24 L24 24 Z" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <circle cx="30" cy="30" r="4" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">イノベーションに関する3つの代表理論。「誰が」「どこから」起こすかがそれぞれ異なる。</p>
+            <div class="term-row"><span class="k">イノベーションのジレンマ</span><span class="v">既存顧客への対応に注力するあまり、新興企業の破壊的イノベーションに対応できず地位を奪われる（クリステンセン）</span></div>
+            <div class="term-row"><span class="k">オープンイノベーション</span><span class="v">社外（大学・他社・スタートアップ）のアイデア・技術を積極的に取り込む考え方</span></div>
+            <div class="term-row"><span class="k">ユーザー・イノベーション</span><span class="v">企業でなくユーザー自身が改良・開発を行う。先端的ニーズを持つリード・ユーザーが主な担い手（フォン・ヒッペル）</span></div>
+            <p class="note"><b>ひっかけ：</b>ユーザー・イノベーションは「企業が顧客ニーズをアンケート調査すること」ではなく、<b>ユーザー自身</b>が開発主体。個人単独より<b>コミュニティを通じた方が普及しやすい</b>。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>フィルムカメラの高性能化に注力する大手を尻目に、性能は劣るが手軽なデジタルカメラで新興メーカーが台頭した例が「イノベーションのジレンマ」の典型。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 22: C-10 過去問チェック（設問のみ） -->
+  <div>
+    <div class="slide-no">22 ／ C-10：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-10 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第10問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">ユーザー・イノベーションに関する記述として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>個人によるユーザー・イノベーションは、コミュニティを通じたユーザー・イノベーションよりも普及しやすい傾向にある。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ユーザー・イノベーションとは、企業の開発者が主体となり、アンケートやインタビューを活用して、顧客のニーズを調査し、その結果を製品開発に反映するプロセスである。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ユーザー・イノベーションは、イノベーションのジレンマを引き起こし、既存企業が破壊的イノベーションに対応できなくなる原因となる。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ユーザー・イノベーションは、ユーザーが持つニーズ情報の粘着性が高く、技術情報の粘着性が低い場合に起こりやすい。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ユーザー・イノベーションは、リード・ユーザーと呼ばれる、特定の企業への忠誠度が高いユーザーによって引き起こされる傾向が強い。</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第10問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 23: C-10 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">23 ／ C-10：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-10 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第10問）</div><div class="overview">正解はオ。主体の取り違え・普及しやすさの逆転に注意する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>個人によるユーザー・イノベーションは、コミュニティを通じたユーザー・イノベーションよりも普及しやすい傾向にある。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ユーザー・イノベーションとは、企業の開発者が主体となり、アンケートやインタビューを活用して、顧客のニーズを調査し、その結果を製品開発に反映するプロセスである。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ユーザー・イノベーションは、イノベーションのジレンマを引き起こし、既存企業が破壊的イノベーションに対応できなくなる原因となる。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ユーザー・イノベーションは、ユーザーが持つニーズ情報の粘着性が高く、技術情報の粘着性が低い場合に起こりやすい。</span></div>
+            <div class="choice correct"><span class="badge">オ</span><span>ユーザー・イノベーションは、リード・ユーザーと呼ばれる、特定の企業への忠誠度が高いユーザーによって引き起こされる傾向が強い。</span></div>
+          </div>
+          <p class="explain"><b>正解：オ</b>。フォン・ヒッペルの提唱した「リード・ユーザー」（市場ニーズを先取りする強いニーズを持つユーザー）が主な担い手。ア：個人単独よりコミュニティを通じた方が普及しやすく記述は逆。イ：主体は企業でなく<b>ユーザー自身</b>で誤り。ウ：ジレンマの原因はユーザー・イノベーションではなく持続的イノベーションへの偏重。エ：概ね妥当だが模範解答はオ。</p>
+          <p class="related-note">関連知識：リード・ユーザー法は新製品開発のマーケティングリサーチ手法として2次試験（事例II）でも問われることがある。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第10問／正解：past_exams/1st_stage_answers/r07/2025c.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 24: C-11 新規事業開発・リーンスタートアップ -->
+  <div>
+    <div class="slide-no">24 ／ C-11：技術経営（MOT）：新規事業開発</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-11 ／ 技術経営（MOT）：新規事業開発</div><div class="title">リーン・スタートアップで新規事業の不確実性に対処する</div><div class="overview">完成品をいきなり作らず、最小限の製品で顧客の反応を見ながら素早く軌道修正する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <path d="M30 10 A20 20 0 1 1 10 30" fill="none" stroke="#171717" stroke-width="2"/>
+              <path d="M10 30 L4 24 M10 30 L16 24" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="30" r="4" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>リーン・スタートアップ</b>（エリック・リース）：新規性が高く顧客の存在も未知な事業で、完成品を作る前に検証を繰り返す方法論。</p>
+            <div class="term-row"><span class="k">MVP</span><span class="v">実用最小限の製品。コストをかけず最低限の機能だけを持つ試作版</span></div>
+            <div class="term-row"><span class="k">構築－計測－学習</span><span class="v">MVPを顧客に使ってもらい反応を見て学習する、というサイクルを素早く回す</span></div>
+            <div class="term-row"><span class="k">ピボット</span><span class="v">学習結果を踏まえ、必要なら事業の方向転換をすること</span></div>
+            <p class="note"><b>ひっかけ：</b>リーン・スタートアップは「トヨタ生産方式」（ムダを省き素早く改善サイクルを回す）の考え方から影響を受けている。流行に敏感で自ら情報収集する「アーリー・アダプター」を巻き込むことも推奨される。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>新アプリで、いきなり全機能を実装せず最低限の試作版をリリースし、実際の反応を見て本格開発の方向性を決めるのがMVPの考え方。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 25: C-12 国際経営戦略：海外進出形態 -->
+  <div>
+    <div class="slide-no">25 ／ C-12：国際経営戦略：海外進出形態</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-12 ／ 国際経営戦略：海外進出形態</div><div class="title">投資リスクの違いで3つの海外進出形態を選ぶ</div><div class="overview">輸出・ライセンス供与・海外直接投資の順にリスクとコントロールの強さが増す。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="24" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <path d="M6 30 H54 M30 6 C 42 18, 42 42, 30 54 C 18 42, 18 18, 30 6 Z" fill="none" stroke="#171717" stroke-width="1.2"/>
+              <circle cx="42" cy="20" r="3" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">企業が海外に進出する形態には段階があり、リスクとコントロールの強さがトレードオフになる。</p>
+            <div class="term-row"><span class="k">輸出</span><span class="v">自国で作った製品を海外に売る。最も投資リスクが低い</span></div>
+            <div class="term-row"><span class="k">ライセンス供与</span><span class="v">技術・ブランドの使用権を海外企業に許諾しロイヤリティを得る</span></div>
+            <div class="term-row"><span class="k">海外直接投資（FDI）</span><span class="v">海外に子会社・工場を設立。投資額・リスクは大きいが現地のコントロールが強い</span></div>
+            <p><span class="label">具体例</span><br><b>ダニングの折衷理論（OLIパラダイム）</b>：①所有優位性（O：自社の技術・ブランド等の強み）、②立地優位性（L：進出先市場の魅力）、③内部化優位性（I：自社管理が有利か）の3条件が揃うときFDIが選ばれる。</p>
+            <p class="note"><b>ひっかけ：</b>3条件のうち一部しか揃わない場合の進出形態を問う問題が頻出。例えば「所有優位性はあるが内部化優位性がない」場合は<b>ライセンス供与</b>が適切、というように組み合わせごとに最適形態が変わる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-5 M&amp;A・戦略的提携（海外企業とのJVもOLIの内部化優位性の判断と関わる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 26: C-13 CSR・CSV・ガバナンス -->
+  <div>
+    <div class="slide-no">26 ／ C-13：企業の社会的責任：CSR・CSV・コーポレートガバナンス</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-13 ／ 企業の社会的責任：CSR・CSV・コーポレートガバナンス</div><div class="title">「コストか投資か」でCSRとCSVを区別する</div><div class="overview">社会的責任・共有価値の創造・企業統治という3つの関連概念を整理する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="22" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <path d="M30 14 L30 30 L42 38" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="30" r="3" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">企業が利益追求だけでなく社会と向き合うための3つの関連概念。</p>
+            <div class="term-row"><span class="k">CSR</span><span class="v">企業の社会的責任。環境保護・地域貢献など、利益とは別に果たすべき責任（コスト）</span></div>
+            <div class="term-row"><span class="k">CSV</span><span class="v">共有価値の創造（ポーター）。社会課題の解決そのものを事業機会・利益創出につなげる発想（投資）</span></div>
+            <div class="term-row"><span class="k">コーポレートガバナンス</span><span class="v">株主・社会の利益を守るため経営者の暴走を防ぐ統治の仕組み（社外取締役・監査役制度等）</span></div>
+            <p><span class="label">具体例</span><br>農業支援で質の高い原料を安定調達し、自社製品の品質向上と現地農家の所得向上の両方につながる取り組みはCSVの典型例。単なる寄付活動（CSR）とは異なり、事業戦略そのものに組み込まれている。</p>
+            <p class="note"><b>ひっかけ：</b>CSRとCSVは似ているが、「コストか投資か」「本業と一体か切り離されているか」という観点で区別される。混同しないこと。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>経営法務科目の会社法（社外取締役・監査役会等の機関設計）とも関連する。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 27: C-14 ファミリービジネス・事業承継 -->
+  <div>
+    <div class="slide-no">27 ／ C-14：ファミリービジネスの戦略：創業・事業承継</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-14 ／ ファミリービジネスの戦略：創業・事業承継</div><div class="title">事業承継の3つのパターン</div><div class="overview">日本の中小企業の多くは家族経営。経営権・所有権の引き継ぎ方は大きく3つに分かれる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="20" cy="18" r="7" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="40" cy="42" r="7" fill="none" stroke="#FF3B1F" stroke-width="2"/>
+              <line x1="26" y1="23" x2="34" y2="37" stroke="#171717" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">日本の中小企業の多くは家族経営（ファミリービジネス）。経営権・所有権を後継者にどう引き継ぐかが特有の課題（<b>事業承継</b>）。</p>
+            <div class="term-row"><span class="k">親族内承継</span><span class="v">子どもなど親族に引き継ぐ</span></div>
+            <div class="term-row"><span class="k">親族外承継</span><span class="v">役員・従業員に引き継ぐ（従業員承継。MBOもこの一種になりうる）</span></div>
+            <div class="term-row"><span class="k">M&amp;A（第三者承継）</span><span class="v">外部の企業や個人に売却する</span></div>
+            <p><span class="label">具体例</span><br>後継者不在の町工場が長年勤めた工場長に経営を引き継がせる（従業員承継）ケースや、同業の大手企業に事業を売却する（M&amp;A）ケースが近年増加している。</p>
+            <p class="note"><b>ひっかけ：</b>ファミリービジネスの強み（長期的視点・迅速な意思決定）と弱み（後継者育成の難しさ・身内経営によるガバナンスの脆弱化）を対比で理解しておく。事業承継の法制度（経営承継円滑化法）は経営法務科目とも関連。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-5 M&amp;A（第三者承継としてのM&amp;A、MBOによる従業員承継）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
           </div>
         </div>
       </div>
