@@ -105,6 +105,16 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .process-steps .step .desc{font-size:calc(var(--cw)*0.76/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.35/100);line-height:1.4;}
 .process-steps .arrow{flex:0 0 auto;display:flex;align-items:center;font-size:calc(var(--cw)*1.4/100);color:var(--ink-soft);}
 
+/* 左2/3テキスト＋右1/3図解：狭い右カラムは calc(var(--cw)*N/100) がそのまま
+   使えない（カード全体幅基準のため、狭いカラムでは字が大きすぎて溢れる）。
+   右カラムの図解は viewBox 付きSVGで描き、アイコン(.icon-mark svg)と同じ
+   max-width/max-height:100%で「収まるだけ縮む」方式にして、この問題を回避する。 */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
 /* 表紙 */
 .cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
 .cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
@@ -302,25 +312,23 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="icon-wrap">
-          <div class="icon-mark">
-            <svg viewBox="0 0 60 60">
-              <circle cx="30" cy="30" r="26" fill="none" stroke="#171717" stroke-width="2"/>
-              <circle cx="30" cy="30" r="14" fill="none" stroke="#171717" stroke-width="1.4"/>
-              <circle cx="30" cy="30" r="3.5" fill="#FF3B1F"/>
-              <line x1="30" y1="2" x2="30" y2="10" stroke="#171717" stroke-width="2"/>
-              <line x1="30" y1="50" x2="30" y2="58" stroke="#171717" stroke-width="2"/>
-              <line x1="2" y1="30" x2="10" y2="30" stroke="#171717" stroke-width="2"/>
-              <line x1="50" y1="30" x2="58" y2="30" stroke="#171717" stroke-width="2"/>
-            </svg>
-          </div>
+        <div class="split-wrap">
           <div class="prose">
             <p class="lede"><b>ドメイン</b>＝「自社が事業を営む領域」。「うちの会社は何屋さんか」を定義すること。</p>
             <div class="term-row"><span class="k">物理的定義</span><span class="v">作っている「モノ」で定義する（例：「うちは鉄道車両を作る会社だ」）</span></div>
             <div class="term-row"><span class="k">機能的定義</span><span class="v">提供している「価値・機能」で定義する（例：「うちは人や物を運ぶサービスを提供する会社だ」）</span></div>
-            <p>機能的定義の方が視野が広がり新しい事業機会に気づきやすい。「鉄道会社が自分たちを『鉄道業』と狭く定義したために自動車・航空機の台頭に対応できなかった」というレビットの「マーケティング近視眼」は有名な失敗例。</p>
-            <p><span class="label">具体例</span><br>コンビニチェーンが自社を「小売業」ではなく「生活インフラ業」と定義し直すと、公共料金の収納代行、ATM、宅配便の受付など、単なる「モノを売る」以上のサービス展開に踏み出しやすくなる。</p>
-            <p class="note"><b>ひっかけ：</b>ドメインの決め方（物理的 vs 機能的）と、C-3の「多角化」の判断を混同しないこと。ドメインは「自社の立ち位置の定義」、多角化は「新しい事業領域への進出」という別の概念。</p>
+            <p><span class="label">具体例</span><br>コンビニが自社を「小売業」ではなく「生活インフラ業」と定義し直すと、公共料金の収納代行・ATM・宅配受付など、単なる「モノを売る」以上の展開がしやすくなる。</p>
+            <p class="note"><b>ひっかけ：</b>ドメイン（自社の立ち位置の定義）とC-3「多角化」（新領域への進出）を混同しないこと。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 200 140">
+              <text x="0" y="13" font-family="Zen Kaku Gothic New" font-weight="700" font-size="13" fill="#171717">物理的定義</text>
+              <rect x="0" y="21" width="84" height="26" fill="#f4f4f4" stroke="#171717" stroke-width="1.5"/>
+              <text x="0" y="71" font-family="Zen Kaku Gothic New" font-weight="700" font-size="13" fill="#171717">機能的定義</text>
+              <rect x="0" y="79" width="200" height="26" fill="#f4f4f4" stroke="#FF3B1F" stroke-width="2"/>
+              <text x="0" y="129" font-family="Zen Kaku Gothic New" font-weight="700" font-size="13" fill="#FF3B1F">→ 事業機会が広がる</text>
+            </svg>
+            <div class="diagram-caption-mini">レビットの「マーケティング近視眼」：鉄道会社が自らを「鉄道業」と狭く定義したため自動車・航空機の台頭に対応できなかった、という有名な失敗例。</div>
           </div>
         </div>
         <div class="freq-section">
@@ -451,20 +459,23 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="icon-wrap">
-          <div class="icon-mark">
-            <svg viewBox="0 0 60 60">
-              <circle cx="22" cy="30" r="14" fill="none" stroke="#171717" stroke-width="2"/>
-              <circle cx="38" cy="30" r="14" fill="none" stroke="#FF3B1F" stroke-width="2"/>
-            </svg>
-          </div>
+        <div class="split-wrap">
           <div class="prose">
             <p class="lede"><b>多角化</b>＝既存事業とは別の新しい事業に進出すること。2種類ある。</p>
-            <div class="term-row"><span class="k">関連型多角化</span><span class="v">既存事業と技術・顧客・販売チャネル等で関連がある分野に進出（例：カメラメーカーが医療用内視鏡事業に進出。レンズ技術という共通の強みを活かせる）</span></div>
+            <div class="term-row"><span class="k">関連型多角化</span><span class="v">既存事業と技術・顧客・販売チャネル等で関連がある分野に進出（例：カメラメーカーが医療用内視鏡事業に進出）</span></div>
             <div class="term-row"><span class="k">非関連型多角化</span><span class="v">既存事業とほとんど関連がない分野に進出（例：繊維会社が化粧品事業に進出）</span></div>
-            <p class="warn"><b>シナジー（相乗効果）：</b>「1+1が2ではなく3以上になる効果」。技術・ブランド・販売網を複数事業で共有すると単独でやるより効率が良くなる。関連型多角化の方がシナジーを生みやすい。</p>
-            <p><span class="label">具体例</span><br>富士フイルムは写真フィルム事業で培った化学・材料技術（酸化を防ぐ技術等）を応用して化粧品事業（アンチエイジング）に進出した。一見畑違いだが技術的関連性が高い「関連型多角化」の代表例。</p>
-            <p class="note"><b>ひっかけ：</b>「新市場に新技術で進出する」ことが必ずしも「多角化」とは限らない。アンゾフの成長マトリクスの「新製品×新市場」が多角化に該当。既存製品のままの海外展開（新市場開拓）や既存市場向けの新商品（新製品開発）と混同しないこと。</p>
+            <p><span class="label">具体例</span><br>富士フイルムは写真フィルム事業で培った化学・材料技術を応用して化粧品事業（アンチエイジング）に進出した。技術的関連性が高い「関連型多角化」の代表例。</p>
+            <p class="note"><b>ひっかけ：</b>「新市場に新技術で進出する」＝多角化とは限らない。アンゾフの成長マトリクスの「新製品×新市場」が該当。新市場開拓・新製品開発と混同しないこと。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 220 165">
+              <circle cx="80" cy="85" r="55" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="140" cy="85" r="55" fill="none" stroke="#FF3B1F" stroke-width="2"/>
+              <text x="50" y="16" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="14" fill="#171717">既存事業</text>
+              <text x="170" y="16" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="14" fill="#FF3B1F">新規事業</text>
+              <text x="110" y="157" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="14" fill="#171717">シナジー</text>
+            </svg>
+            <div class="diagram-caption-mini">「1+1が2でなく3以上になる効果」。技術・ブランド・販売網を複数事業で共有すると効率が良くなる。関連型多角化ほどシナジーを生みやすい。</div>
           </div>
         </div>
         <div class="freq-section">
@@ -501,19 +512,33 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="quadrant-wrap">
-          <div class="quadrant-grid">
-            <div class="cell"><span class="label">花形（スター）</span><span class="sub">稼ぐが投資も必要。将来の主力候補</span></div>
-            <div class="cell"><span class="label">問題児</span><span class="sub">将来性はあるが今は稼げない。育てるか撤退か判断が必要</span></div>
-            <div class="cell"><span class="label">金のなる木</span><span class="sub">投資が要らず安定して稼ぐ。他事業の資金源</span></div>
-            <div class="cell"><span class="label">負け犬</span><span class="sub">稼げず将来性も薄い。撤退候補</span></div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">市場成長率×市場シェアの2軸で事業を4分類し、資金配分を判断するフレームワーク。</p>
+            <div class="term-row"><span class="k">花形</span><span class="v">稼ぐが投資も必要。将来の主力候補</span></div>
+            <div class="term-row"><span class="k">問題児</span><span class="v">将来性はあるが今は稼げない。育てるか撤退か判断が必要</span></div>
+            <div class="term-row"><span class="k">金のなる木</span><span class="v">投資が要らず安定して稼ぐ。他事業の資金源</span></div>
+            <div class="term-row"><span class="k">負け犬</span><span class="v">稼げず将来性も薄い。撤退候補</span></div>
+            <p class="note"><b>ひっかけ：</b>PPMは「市場の魅力度」と「自社の競争力」の2軸だけの単純化モデルで、事業間のシナジーや社会的意義のある事業は考慮できない限界がある。</p>
           </div>
-          <div class="diagram-caption">縦軸：市場成長率（上＝高い）／横軸：市場シェア（左＝高い）。「金のなる木」の資金を「問題児」に投資して「花形」に育てるのが基本セオリー。</div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 230 220">
+              <rect x="5" y="5" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="57" y="60" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">花形</text>
+              <rect x="120" y="5" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="172" y="60" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">問題児</text>
+              <rect x="5" y="115" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="57" y="170" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="15" fill="#171717">金のなる木</text>
+              <rect x="120" y="115" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="172" y="170" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">負け犬</text>
+            </svg>
+            <div class="diagram-caption-mini">縦軸：市場成長率（上＝高い）／横軸：市場シェア（左＝高い）。「金のなる木」の資金を「問題児」に投資して「花形」に育てるのが基本セオリー。</div>
+          </div>
         </div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
-            <div class="related"><b>ひっかけ：</b>PPMは「市場の魅力度」と「自社の競争力」の2軸だけの単純化モデルで、事業間のシナジーや社会的意義のある事業（あえて赤字でも続ける等）は考慮できないという限界がある。</div>
+            <div class="related"><b>関連：</b>C-7 競争優位の戦略（各象限で有効な戦略の方向性が異なる）。</div>
           </div>
           <div class="freq-timeline">
             <span class="yr-title">出題年度（過去10年）</span>
@@ -649,14 +674,31 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="forces-wrap">
-          <div class="box top">新規参入の脅威<br>（参入障壁が低いほど大）</div>
-          <div class="box left">売り手の<br>交渉力</div>
-          <div class="box center">業界内の<br>既存競合</div>
-          <div class="box right">買い手の<br>交渉力</div>
-          <div class="box bottom">代替品の脅威（例：新聞紙にとってのニュースアプリ）</div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">業界の競争構造を5つの力（ポーター）に分解し、力が弱いほど儲けやすい業界と判断する。</p>
+            <div class="term-row"><span class="k">新規参入の脅威</span><span class="v">参入障壁が低いほど大きい</span></div>
+            <div class="term-row"><span class="k">売り手の交渉力</span><span class="v">仕入先が強いと買い叩かれる</span></div>
+            <div class="term-row"><span class="k">買い手の交渉力</span><span class="v">顧客が強いと値下げ圧力を受ける</span></div>
+            <div class="term-row"><span class="k">代替品の脅威</span><span class="v">例：新聞紙にとってのニュースアプリ</span></div>
+            <p><span class="label">具体例</span><br>もう1つの分析軸が<b>バリューチェーン（価値連鎖）分析</b>：活動を「主活動」（購買物流→製造→出荷物流→販売→サービス）と「支援活動」に分け、付加価値の源泉を探る。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 240 220">
+              <rect x="65" y="0" width="100" height="68" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="115" y="39" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="15" fill="#171717">新規参入</text>
+              <rect x="0" y="76" width="55" height="68" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="27" y="114" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="13" fill="#171717">売り手</text>
+              <rect x="65" y="76" width="100" height="68" fill="#FF3B1F"/>
+              <text x="115" y="115" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="15" fill="#fff">既存競合</text>
+              <rect x="183" y="76" width="55" height="68" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="210" y="114" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="13" fill="#171717">買い手</text>
+              <rect x="65" y="152" width="100" height="68" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="115" y="191" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="15" fill="#171717">代替品</text>
+            </svg>
+            <div class="diagram-caption-mini">5フォース分析（ポーター）。中心の「既存競合」が4方向から受ける圧力を分析する。</div>
+          </div>
         </div>
-        <div class="diagram-caption">もう1つの分析軸が<b>バリューチェーン（価値連鎖）分析</b>：活動を「主活動」（購買物流→製造→出荷物流→販売→サービス）と「支援活動」（全般管理・人事・技術開発・調達）に分け、付加価値の源泉を探る。</div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -691,19 +733,36 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="quadrant-wrap">
-          <div class="quadrant-grid">
-            <div class="cell"><span class="label">コストリーダーシップ</span><span class="sub">業界最低コストで価格競争に勝つ（例：格安航空会社）</span></div>
-            <div class="cell"><span class="label">差別化</span><span class="sub">品質・ブランド・デザインで独自の価値を出す（例：高級ホテル）</span></div>
-            <div class="cell"><span class="label">コスト集中</span><span class="sub">特定の狭い顧客層に絞ってコストで勝つ</span></div>
-            <div class="cell"><span class="label">差別化集中</span><span class="sub">特定の狭い顧客層に絞って差別化で勝つ</span></div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">「競争優位の種類」×「狙う市場の広さ」の組み合わせで、とるべき戦略が変わる（ポーター）。</p>
+            <div class="term-row"><span class="k">コストリーダーシップ</span><span class="v">業界最低コストで価格競争に勝つ（例：格安航空会社）</span></div>
+            <div class="term-row"><span class="k">差別化</span><span class="v">品質・ブランド・デザインで独自の価値を出す（例：高級ホテル）</span></div>
+            <div class="term-row"><span class="k">集中戦略</span><span class="v">特定の狭い顧客層に絞ってコスト or 差別化で勝つ</span></div>
+            <p class="note"><b>ひっかけ：</b>集中戦略は「誰に売るか」という別軸の話。両方を中途半端に狙うと収益性が落ちる（<b>スタック・イン・ザ・ミドル</b>）。</p>
           </div>
-          <div class="diagram-caption">縦軸：狙う市場の広さ（上＝広い市場全体、下＝特定の狭い層＝集中戦略）／横軸：競争優位の源泉（左＝コスト、右＝差別化）。コストと差別化を中途半端に両方狙うと収益性が落ちる（<b>スタック・イン・ザ・ミドル</b>）。</div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 230 220">
+              <rect x="5" y="5" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="57" y="47" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="14" fill="#171717">コスト</text>
+              <text x="57" y="66" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="14" fill="#171717">リーダー</text>
+              <text x="57" y="85" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="14" fill="#171717">シップ</text>
+              <rect x="120" y="5" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="172" y="60" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">差別化</text>
+              <rect x="5" y="115" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="57" y="160" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="15" fill="#171717">コスト</text>
+              <text x="57" y="180" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="15" fill="#171717">集中</text>
+              <rect x="120" y="115" width="105" height="100" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="172" y="160" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="15" fill="#171717">差別化</text>
+              <text x="172" y="180" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="15" fill="#171717">集中</text>
+            </svg>
+            <div class="diagram-caption-mini">縦軸：狙う市場の広さ（上＝広い、下＝狭い＝集中）／横軸：競争優位の源泉（左＝コスト、右＝差別化）。</div>
+          </div>
         </div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
-            <div class="related"><b>ひっかけ：</b>集中戦略は「誰に売るか」という軸の話で、コストリーダーシップ・差別化そのものとは別軸。ユニクロのようなSPAによる効率化は、単純な安売りでなく差別化的コストリーダーシップと解釈される。</div>
+            <div class="related"><b>関連：</b>C-4 PPM（各象限で有効な戦略の方向性が異なる）。ユニクロのSPAは単純な安売りでなく差別化的コストリーダーシップと解釈される。</div>
           </div>
           <div class="freq-timeline">
             <span class="yr-title">出題年度（過去10年）</span>
@@ -1656,20 +1715,34 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="process-wrap">
-          <div class="process-steps">
-            <div class="step"><span class="num">STEP 1</span><span class="label">解凍</span><span class="desc">現状維持の意識を崩し、変化の必要性を認識させる</span></div>
-            <div class="arrow">→</div>
-            <div class="step"><span class="num">STEP 2</span><span class="label">変化</span><span class="desc">新しいやり方を実際に導入する</span></div>
-            <div class="arrow">→</div>
-            <div class="step"><span class="num">STEP 3</span><span class="label">再凍結</span><span class="desc">新しいやり方を定着させ、元に戻らないようにする</span></div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">組織変革はレヴィンの3段階モデルで進める。組織はライフサイクル（創業期→成長期→成熟期→再生・衰退期）もたどる。</p>
+            <div class="term-row"><span class="k">解凍</span><span class="v">現状維持の意識を崩し、変化の必要性を認識させる</span></div>
+            <div class="term-row"><span class="k">変化</span><span class="v">新しいやり方を実際に導入する</span></div>
+            <div class="term-row"><span class="k">再凍結</span><span class="v">新しいやり方を定着させ、元に戻らないようにする</span></div>
+            <p><span class="label">具体例</span><br>新システム導入時、いきなり入れ替えず「今のままではまずい」と危機感を共有し（解凍）、試験導入し（変化）、新業務フローとして定着させる（再凍結）と成功しやすい。</p>
           </div>
-          <div class="diagram-caption">レヴィンの3段階モデル。組織のライフサイクル（創業期→成長期→成熟期→再生・衰退期）では、各段階で直面する経営課題（資金調達→仕組み化→硬直化対応）が異なる。</div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 200 300">
+              <rect x="10" y="0" width="180" height="80" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="32" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="12" fill="#FF3B1F">STEP 1</text>
+              <text x="100" y="60" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="20" fill="#171717">解凍</text>
+              <text x="100" y="95" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="20" fill="#8a8a8a">↓</text>
+              <rect x="10" y="110" width="180" height="80" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="142" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="12" fill="#FF3B1F">STEP 2</text>
+              <text x="100" y="170" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="20" fill="#171717">変化</text>
+              <text x="100" y="205" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="20" fill="#8a8a8a">↓</text>
+              <rect x="10" y="220" width="180" height="80" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="252" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="12" fill="#FF3B1F">STEP 3</text>
+              <text x="100" y="278" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="20" fill="#171717">再凍結</text>
+            </svg>
+          </div>
         </div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
-            <div class="related"><b>具体例：</b>新システム導入時、いきなり入れ替えず「今のままではまずい」と危機感を共有し（解凍）、試験導入し（変化）、新業務フローとして定着させる（再凍結）と成功しやすい。</div>
+            <div class="related"><b>関連：</b>組織のライフサイクルでは各段階の経営課題（資金調達→仕組み化→硬直化対応）が異なる。</div>
           </div>
           <div class="freq-timeline">
             <span class="yr-title">出題年度（過去10年）</span>
@@ -2235,17 +2308,34 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">企業経営理論</div>
       </div>
       <div class="body">
-        <div class="process-wrap">
-          <div class="process-steps">
-          <div class="step"><span class="num">導入期</span><span class="label">認知拡大</span><span class="desc">販売量少、認知度が低い。製品の認知拡大に注力</span></div>
-          <div class="arrow">→</div>
-          <div class="step"><span class="num">成長期</span><span class="label">シェア拡大</span><span class="desc">販売量が急拡大、競合が参入。シェア・販売網の拡大</span></div>
-          <div class="arrow">→</div>
-          <div class="step"><span class="num">成熟期</span><span class="label">差別化</span><span class="desc">販売量ピーク・競争激化。差別化、ブランド強化、コスト効率化</span></div>
-          <div class="arrow">→</div>
-          <div class="step"><span class="num">衰退期</span><span class="label">撤退判断</span><span class="desc">販売量が減少。撤退判断、または縮小継続</span></div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">製品は導入期→成長期→成熟期→衰退期の4段階をたどり、各段階で有効な戦略が異なる。</p>
+            <div class="term-row"><span class="k">導入期</span><span class="v">販売量少、認知度が低い。製品の認知拡大に注力</span></div>
+            <div class="term-row"><span class="k">成長期</span><span class="v">販売量が急拡大、競合が参入。シェア・販売網の拡大</span></div>
+            <div class="term-row"><span class="k">成熟期</span><span class="v">販売量ピーク・競争激化。差別化、ブランド強化、コスト効率化</span></div>
+            <div class="term-row"><span class="k">衰退期</span><span class="v">販売量が減少。撤退判断、または縮小継続</span></div>
+            <p><span class="label">具体例</span><br>新しいガジェットが発売直後（導入期）はアーリー・アダプター層に的を絞り、市場拡大につれ（成長期）大量生産・販路拡大を進め、競合増加で差別化が難しい時期（成熟期）にはブランドの独自性を強調する。</p>
           </div>
-          <div class="diagram-caption">新しいガジェットが発売直後（導入期）はアーリー・アダプター層に的を絞り、市場拡大につれ（成長期）大量生産・販路拡大を進め、競合増加で差別化が難しい時期（成熟期）にはブランドの独自性を強調する、という戦略の切り替えがPLCの考え方。</div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 200 300">
+              <rect x="10" y="0" width="180" height="60" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="27" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">導入期</text>
+              <text x="100" y="47" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="11" fill="#FF3B1F">認知拡大</text>
+              <text x="100" y="70" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="18" fill="#8a8a8a">↓</text>
+              <rect x="10" y="80" width="180" height="60" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="107" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">成長期</text>
+              <text x="100" y="127" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="11" fill="#FF3B1F">シェア拡大</text>
+              <text x="100" y="150" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="18" fill="#8a8a8a">↓</text>
+              <rect x="10" y="160" width="180" height="60" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="187" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">成熟期</text>
+              <text x="100" y="207" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="11" fill="#FF3B1F">差別化</text>
+              <text x="100" y="230" text-anchor="middle" font-family="Zen Kaku Gothic New" font-size="18" fill="#8a8a8a">↓</text>
+              <rect x="10" y="240" width="180" height="60" fill="#f4f4f4" stroke="#e6e6e6" stroke-width="1.5"/>
+              <text x="100" y="267" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="900" font-size="16" fill="#171717">衰退期</text>
+              <text x="100" y="287" text-anchor="middle" font-family="Zen Kaku Gothic New" font-weight="700" font-size="11" fill="#FF3B1F">撤退判断</text>
+            </svg>
+          </div>
         </div>
         <div class="freq-section">
           <div class="freq-top">
