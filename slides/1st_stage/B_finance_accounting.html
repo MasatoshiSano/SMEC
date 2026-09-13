@@ -1,0 +1,742 @@
+<title>財務・会計 - スライド</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;
+  --cw:calc(min(100vw, 1020px) - 48px);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:calc(var(--cw)*1.85/100) calc(var(--cw)*2.26/100) calc(var(--cw)*0.93/100);border-bottom:calc(var(--cw)*0.16/100) solid var(--ink);flex:0 0 auto;gap:calc(var(--cw)*1.44/100);}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.98/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.55/100);font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:calc(var(--cw)*1.0/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.93/100);color:#fff;background:var(--ink);padding:calc(var(--cw)*0.31/100) calc(var(--cw)*0.93/100);align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:calc(var(--cw)*1.4/100) calc(var(--cw)*2.26/100) calc(var(--cw)*1.5/100);display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--cw)*0.55/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.05/100);color:#fff;background:var(--red);width:calc(var(--cw)*1.75/100);height:calc(var(--cw)*1.75/100);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-chip.none{background:var(--ink-soft);}
+.freq-top .rank-label{font-size:calc(var(--cw)*0.76/100);font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:calc(var(--cw)*0.78/100);color:var(--ink-soft);border-left:1px solid var(--line);padding-left:calc(var(--cw)*1.1/100);line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:calc(var(--cw)*0.68/100);color:var(--ink-soft);margin-right:calc(var(--cw)*0.9/100);white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.3/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.35/100);height:calc(var(--cw)*1.35/100);border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 過去問チェック */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .example{font-size:calc(var(--cw)*0.78/100);line-height:1.5;color:var(--ink);}
+.examq .example .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.62/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
+
+/* 番号なしの罫線区切りリスト（手順・分類等） */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
+
+/* 2x2マトリクス */
+.quadrant-wrap{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.quadrant-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:calc(var(--cw)*0.5/100);min-height:0;}
+.quadrant-grid .cell{background:var(--ghost);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--cw)*0.4/100);min-height:0;overflow:hidden;}
+.quadrant-grid .cell .label{font-weight:900;font-size:calc(var(--cw)*1.15/100);color:var(--ink);}
+.quadrant-grid .cell .sub{font-size:calc(var(--cw)*0.76/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.25/100);line-height:1.4;}
+.diagram-caption{flex:0 0 auto;font-size:calc(var(--cw)*0.74/100);color:var(--ink-soft);text-align:center;line-height:1.4;}
+
+/* 左2/3テキスト＋右1/3図解 */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:calc(var(--cw)*0.8/100);}
+.cover .main .title{font-size:calc(var(--cw)*5.2/100);font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:calc(var(--cw)*1.15/100);color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:calc(var(--cw)*62/100);}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:calc(var(--cw)*1.2/100);}
+.cover .scope{display:flex;gap:calc(var(--cw)*2.4/100);}
+.cover .scope .item{display:flex;flex-direction:column;gap:calc(var(--cw)*0.2/100);}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.6/100);font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:calc(var(--cw)*0.72/100);color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.85/100);border:1px solid rgba(255,255,255,.4);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*1/100);color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 calc(var(--cw)*4/100);overflow:hidden;}
+.divider .ghost-no{position:absolute;right:calc(var(--cw)*2/100);top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*22/100);line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:calc(var(--cw)*1.3/100);max-width:calc(var(--cw)*70/100);}
+.divider .kicker{display:flex;align-items:center;gap:calc(var(--cw)*1/100);}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:calc(var(--cw)*3.6/100);font-weight:900;line-height:1.15;}
+.divider .desc{font-size:calc(var(--cw)*1.08/100);color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:calc(var(--cw)*1.6/100);margin-top:calc(var(--cw)*0.4/100);flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);border:1px solid rgba(255,255,255,.35);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*0.9/100);color:#fff;opacity:.85;white-space:nowrap;}
+</style>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 02 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">財務・会計<span class="accent">。</span></div>
+          <div class="subtitle">簿記・会計の基礎から原価計算、経営分析、投資評価、企業価値まで<span style="white-space:nowrap">34論点</span>。計算問題を自分の手で解けるようになることが最重要な、2次<span style="white-space:nowrap">試験</span>事例IVにも直結する科目。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">34</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">6</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">27/34</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/B_finance_accounting_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 02: 簿記・会計の基礎 区切り -->
+  <div>
+    <div class="slide-no">02</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">財務・会計 ／ B-1〜B-11</span></div>
+          <div class="title">簿記・会計の基礎／原価計算</div>
+          <div class="desc">会社のお金の動きを記録し、財務諸表にまとめる技術（簿記）と、財務諸表そのもの（B/S・P/L・C/F）、そして社内向けのコスト情報を作る原価計算。以降すべての土台になる分野。</div>
+          <div class="covers">
+            <span class="chip">B-1 仕訳の基本</span>
+            <span class="chip">B-5 貸借対照表</span>
+            <span class="chip">B-9 税効果会計</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 03: B-1 簿記原理・会計帳簿 -->
+  <div>
+    <div class="slide-no">03 ／ B-1：簿記の基礎：簿記原理・会計帳簿</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-1 ／ 簿記の基礎：簿記原理・会計帳簿</div><div class="title">取引を「借方」「貸方」に分けて記録する</div><div class="overview">複式簿記では、1つの取引を必ず「原因」と「結果」の2側面から記録する。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <line x1="30" y1="6" x2="30" y2="54" stroke="#171717" stroke-width="2"/>
+              <text x="15" y="14" font-size="8" text-anchor="middle" fill="#171717" font-weight="700">借方</text>
+              <text x="45" y="14" font-size="8" text-anchor="middle" fill="#FF3B1F" font-weight="700">貸方</text>
+              <rect x="6" y="20" width="18" height="8" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <rect x="36" y="34" width="18" height="8" fill="none" stroke="#FF3B1F" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>簿記</b>は会社の取引を一定ルールで帳簿に記録する技術。中小企業診断士試験で扱う「複式簿記」は、1つの取引を必ず借方（左）・貸方（右）の2面で記録する。</p>
+            <div class="term-row"><span class="k">資産・費用</span><span class="v">増えたら借方（左）に記録</span></div>
+            <div class="term-row"><span class="k">負債・純資産・収益</span><span class="v">増えたら貸方（右）に記録</span></div>
+            <p><span class="label">具体例</span><br>現金100万円で開業＝（借）現金100万／（貸）資本金100万。商品120万円を掛け売り＝（借）売掛金120万／（貸）売上120万。借方合計＝貸方合計は、どんな取引でも必ず一致する（貸借平均の原理）。</p>
+            <p class="note"><b>ひっかけ：</b>借方・貸方が逆になっている誤答肢が定番。「資産・費用の増加＝借方」「負債・純資産・収益の増加＝貸方」の対応を体に覚え込ませる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>B-2 決算処理一巡（仕訳の集大成）、B-3〜B-5 財務諸表の作成。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 04: B-2 決算処理一巡 -->
+  <div>
+    <div class="slide-no">04 ／ B-2：簿記の基礎：決算処理一巡（試算表・精算表・決算仕訳）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-2 ／ 簿記の基礎：決算処理一巡</div><div class="title">試算表→決算整理→財務諸表の一連の流れ</div><div class="overview">1年に1回、それまでの取引記録をまとめて財務諸表を作る一連のプロセス。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">①試算表</span><span class="desc">各勘定科目の残高を一覧化し、借方合計＝貸方合計になっているか検算する</span></div>
+          <div class="row"><span class="name">②決算整理</span><span class="desc">減価償却など、期中の記録だけでは反映されない項目を修正する仕訳を行う</span></div>
+          <div class="row"><span class="name">③精算表</span><span class="desc">試算表→決算整理→P/L・B/Sへの流れを1枚にまとめる（試験で頻出）</span></div>
+          <div class="row"><span class="name">④財務諸表</span><span class="desc">損益計算書・貸借対照表を作成する</span></div>
+          <div class="row"><span class="name">⑤帳簿の締切</span><span class="desc">収益・費用の勘定をゼロに戻し、儲けを純資産に振り替える</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>建物1,000万円（耐用20年、定額法）→減価償却費＝1,000万÷20年＝50万円／年。（借）減価償却費50万／（貸）減価償却累計額50万（間接法）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: B-3 貸借対照表・損益計算書の作成 -->
+  <div>
+    <div class="slide-no">05 ／ B-3：簿記の基礎：貸借対照表・損益計算書の作成</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-3 ／ 簿記の基礎：貸借対照表・損益計算書の作成</div><div class="title">仕訳の集大成としてのB/S・P/L</div><div class="overview">決算整理後の残高試算表を、資産・負債・純資産＝B/S、収益・費用＝P/Lに振り分ける。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="8" y="10" width="20" height="40" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <text x="18" y="8" font-size="7" text-anchor="middle" fill="#171717">B/S</text>
+              <rect x="34" y="20" width="20" height="20" fill="none" stroke="#FF3B1F" stroke-width="1.5"/>
+              <text x="44" y="18" font-size="7" text-anchor="middle" fill="#FF3B1F">P/L</text>
+              <path d="M28 40 Q31 40 34 38" stroke="#171717" stroke-width="1.2" fill="none" marker-end="url(#arrow)"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">B-1・B-2で記録した仕訳の集大成が貸借対照表（B/S）と損益計算書（P/L）。決算整理後の残高試算表の勘定科目を、次のルールで2つの表に振り分ける。</p>
+            <div class="term-row"><span class="k">資産・負債・純資産</span><span class="v">→ 貸借対照表（B/S）へ</span></div>
+            <div class="term-row"><span class="k">収益・費用</span><span class="v">→ 損益計算書（P/L）へ（収益－費用＝当期純利益）</span></div>
+            <p><span class="label">具体例</span><br>P/Lで計算した「当期純利益」は、最終的にB/Sの純資産（利益剰余金）に加算される。2つの表は別々のものではなく、1つの決算処理から生まれる表裏一体の関係。</p>
+            <p class="note"><b>ひっかけ：</b>「当期純利益はB/Sのどこに反映されるか」（→純資産の利益剰余金に加算）というP/L・B/Sのつながりを問う問題が頻出。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip none">－</span><span class="rank-label">集計データなし</span></div>
+            <div class="related"><b>関連：</b>B-4 損益計算書、B-5 貸借対照表（それぞれの表の中身を詳しく見る）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 06: B-4 損益計算書 -->
+  <div>
+    <div class="slide-no">06 ／ B-4：企業会計の基礎：損益計算書（収益・費用の会計）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-4 ／ 企業会計の基礎：損益計算書</div><div class="title">5段階で儲けを積み上げる</div><div class="overview">1年間の経営成績を、儲けの種類ごとに5段階の利益で表す。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">①売上総利益</span><span class="combo">売上高－売上原価</span><span class="desc">いわゆる「粗利」</span></div>
+          <div class="row"><span class="name">②営業利益</span><span class="combo">①－販管費</span><span class="desc">本業でどれだけ儲けたか</span></div>
+          <div class="row"><span class="name">③経常利益</span><span class="combo">②＋営業外収益－営業外費用</span><span class="desc">本業＋財務活動を含めた通常の儲け</span></div>
+          <div class="row"><span class="name">④税引前当期純利益</span><span class="combo">③＋特別利益－特別損失</span><span class="desc">臨時的な損益も含めた最終的な儲け</span></div>
+          <div class="row"><span class="name">⑤当期純利益</span><span class="combo">④－法人税等</span><span class="desc">株主に帰属する最終利益</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「借入金の支払利息増で経常利益は落ちたが営業利益は好調」→本業は問題なく財務体質に課題、と読み解けるかがポイント。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 07: B-5 貸借対照表 -->
+  <div>
+    <div class="slide-no">07 ／ B-5：企業会計の基礎：貸借対照表（資産・負債・純資産の会計）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-5 ／ 企業会計の基礎：貸借対照表</div><div class="title">資産 ＝ 負債 ＋ 純資産</div><div class="overview">決算日時点での財政状態（何を持ち、何を返す必要があるか）を表す。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">左側（借方）に資産、右側（貸方）に負債・純資産を並べ、左右の合計は必ず一致する。資産・負債はさらに「流動」（1年以内）と「固定」（1年超）に分ける（ワン・イヤー・ルール）。</p>
+            <div class="term-row"><span class="k">流動資産</span><span class="v">現金、売掛金、棚卸資産</span></div>
+            <div class="term-row"><span class="k">固定資産</span><span class="v">建物、機械、土地</span></div>
+            <div class="term-row"><span class="k">流動負債</span><span class="v">買掛金、短期借入金</span></div>
+            <div class="term-row"><span class="k">固定負債</span><span class="v">長期借入金、社債</span></div>
+            <p class="note"><b>ひっかけ：</b>「利益剰余金が多い＝現金が多い」は誤り。現金は資産の部に別途「現金預金」として計上される。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 90">
+              <rect x="10" y="10" width="35" height="70" fill="none" stroke="#171717" stroke-width="2"/>
+              <text x="27" y="6" font-size="7" text-anchor="middle" fill="#171717" font-weight="700">資産</text>
+              <rect x="55" y="10" width="35" height="35" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <text x="72" y="30" font-size="6" text-anchor="middle" fill="#171717">負債</text>
+              <rect x="55" y="45" width="35" height="35" fill="none" stroke="#FF3B1F" stroke-width="1.5"/>
+              <text x="72" y="65" font-size="6" text-anchor="middle" fill="#FF3B1F">純資産</text>
+              <text x="50" y="47" font-size="9" text-anchor="middle" fill="#171717">＝</text>
+            </svg>
+            <div class="diagram-caption-mini">資産合計＝負債合計＋純資産合計</div>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>B-13 安全性分析（流動比率・自己資本比率等はこのB/Sから計算する）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 08: B-6 キャッシュ・フロー計算書 -->
+  <div>
+    <div class="slide-no">08 ／ B-6：企業会計の基礎：キャッシュ・フロー計算書</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-6 ／ 企業会計の基礎：キャッシュ・フロー計算書</div><div class="title">利益と現金の動きは一致しない</div><div class="overview">「現金の動き」だけを営業・投資・財務の3区分で表す書類。間接法の調整が頻出。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="22" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <text x="30" y="14" font-size="6" text-anchor="middle" fill="#171717">営業CF</text>
+              <text x="12" y="42" font-size="6" text-anchor="middle" fill="#171717">投資CF</text>
+              <text x="48" y="42" font-size="6" text-anchor="middle" fill="#FF3B1F">財務CF</text>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">間接法：当期純利益からスタートし、現金の動きを伴わない項目を調整して営業CFを逆算する（試験で頻出）。</p>
+            <div class="term-row"><span class="k">減価償却費</span><span class="v">現金支出を伴わない（非資金費用）→ 加算</span></div>
+            <div class="term-row"><span class="k">売上債権の増加</span><span class="v">まだ現金回収していない → 減算</span></div>
+            <div class="term-row"><span class="k">棚卸資産の増加</span><span class="v">現金を払って在庫を増やした → 減算</span></div>
+            <div class="term-row"><span class="k">仕入債務の増加</span><span class="v">支払いを先延ばしできている → 加算</span></div>
+            <p class="note"><b>ひっかけ：</b>「資産の増加＝お金が寝ている＝マイナス」「負債の増加＝支払いを待ってもらえる＝プラス」とイメージで覚える。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>B-19 キャッシュ・フロー管理（FCFはこの営業CFの計算がベース）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 09: B-7 企業結合 -->
+  <div>
+    <div class="slide-no">09 ／ B-7：企業会計の基礎：企業結合（合併・分割・連結決算）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-7 ／ 企業会計の基礎：企業結合</div><div class="title">買収額と時価純資産の差額が「のれん」</div><div class="overview">合併・会社分割・連結決算の会計処理。パーチェス法とのれんの扱いが頻出。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="20" cy="30" r="14" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <circle cx="38" cy="30" r="14" fill="none" stroke="#FF3B1F" stroke-width="1.5"/>
+              <text x="29" y="33" font-size="7" text-anchor="middle" fill="#171717" font-weight="700">のれん</text>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">会社を買収する場合、原則<b>パーチェス法</b>で処理する。買収先の資産・負債を時価評価し、取得原価が時価純資産を上回った差額を「のれん」として資産計上、20年以内で規則的に償却する。</p>
+            <div class="term-row"><span class="k">合併</span><span class="v">複数社が1社になる（吸収合併／新設合併）</span></div>
+            <div class="term-row"><span class="k">会社分割</span><span class="v">事業の一部を切り離し承継させる（吸収分割／新設分割）</span></div>
+            <div class="term-row"><span class="k">連結決算</span><span class="v">親会社が子会社を含めグループ全体を1社として財務諸表を作成</span></div>
+            <p><span class="label">具体例</span><br>買収額1,200万円、時価純資産1,000万円→のれん＝200万円。20年均等償却なら毎期10万円を費用計上。</p>
+            <p class="note"><b>ひっかけ：</b>「負ののれん」（取得原価＜時価純資産）は資産計上せず、発生した期の利益（特別利益）に一括計上する。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>B-32 M&amp;Aにおける企業評価（買収額そのものの算定方法）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 10: B-8 会計ディスクロージャー -->
+  <div>
+    <div class="slide-no">10 ／ B-8：企業会計の基礎：会計ディスクロージャー</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-8 ／ 企業会計の基礎：会計ディスクロージャー</div><div class="title">速報性と詳細さのトレードオフ</div><div class="overview">株主・投資家・債権者への財務状況の開示。根拠法令とタイミングの対応が頻出。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">決算短信</span><span class="combo">取引所規則</span><span class="desc">決算発表時に投資家へ最速で開示する速報資料</span></div>
+          <div class="row"><span class="name">有価証券報告書</span><span class="combo">金融商品取引法</span><span class="desc">事業年度ごとの最も詳細で公的な開示書類（決算短信より遅い）</span></div>
+          <div class="row"><span class="name">半期報告書</span><span class="combo">金融商品取引法</span><span class="desc">2024年4月以後、四半期報告書は廃止され第2四半期はこれに統合</span></div>
+          <div class="row"><span class="name">計算書類</span><span class="combo">会社法</span><span class="desc">株主総会に提出するB/S・P/L等（会社法上の開示義務）</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「根拠法令」と「開示タイミング」の対応関係が問われやすい。2024年度の四半期報告書廃止という制度変更も要注意。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11: B-9 税務会計の基礎 -->
+  <div>
+    <div class="slide-no">11 ／ B-9：税務会計の基礎：益金と損金・課税所得と税額の計算・税効果会計</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-9 ／ 税務会計の基礎</div><div class="title">会計上の利益と税務上の課税所得はズレる</div><div class="overview">益金・損金の申告調整と、そのズレのうち一時差異を調整する税効果会計。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="8" y="14" width="20" height="32" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <text x="18" y="10" font-size="6" text-anchor="middle" fill="#171717">会計利益</text>
+              <path d="M30 30 L36 30" stroke="#171717" stroke-width="1.5" marker-end="url(#a)"/>
+              <rect x="38" y="14" width="20" height="32" fill="none" stroke="#FF3B1F" stroke-width="1.5"/>
+              <text x="48" y="10" font-size="6" text-anchor="middle" fill="#FF3B1F">課税所得</text>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">課税所得＝益金－損金。会計上の当期純利益を出発点に、会計と税法のズレを加減算する（申告調整）。将来解消するズレ（一時差異）は<b>税効果会計</b>で調整する。</p>
+            <div class="term-row"><span class="k">将来減算一時差異</span><span class="v">将来、税金が減る効果 → 繰延税金資産を計上</span></div>
+            <div class="term-row"><span class="k">将来加算一時差異</span><span class="v">将来、税金が増える効果 → 繰延税金負債を計上</span></div>
+            <p><span class="label">具体例</span><br>実効税率30％。賞与引当金3,000千円（前期末）→繰延税金資産900千円。当期末3,300千円に増額→繰延税金資産990千円（増加額90千円）。</p>
+            <p class="note"><b>ひっかけ：</b>「将来、税金の支払いが減る権利」だから資産、「将来、税金の支払いが増える義務」だから負債、とイメージで結びつける。交際費の損金不算入超過等の「永久差異」は税効果会計の対象外。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>B-2 決算処理一巡（税効果会計も決算整理仕訳の一種）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12: B-9 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">12 ／ B-9：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-9 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第9問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">税効果会計に関する記述として、最も適切なものはどれか。なお、法人税等の実効税率を30％として計算していることを前提とする。また、繰延税金資産の回収可能性は考慮しなくてよい。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>期首に備品を購入し、減価償却方法を定額法とすると、取得原価10,000千円、残存価額1,000千円、会計上の耐用年数が5年、税務上の耐用年数が4年の場合、1年目の終わりには135千円の繰延税金負債が計上される。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>期首に備品を購入し、減価償却方法を定額法とすると、取得原価10,000千円、残存価額1,000千円、会計上の耐用年数が5年、税務上の耐用年数が6年の場合、1年目の終わりには90千円の繰延税金負債が計上される。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>前期に計上した賞与引当金3,000千円が全額損金不算入となり、繰延税金資産が900千円計上されていたとする。当期末に賞与引当金3,300千円を設定し、同額が損金不算入になった場合、繰延税金資産は90千円だけ増加することになる。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>当期に積立金方式による圧縮記帳を行ったことにより将来減算一時差異が10,000千円生じた場合、当期末には3,000千円の繰延税金資産が計上される。</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第9問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 13: B-9 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">13 ／ B-9：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-9 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第9問）</div><div class="overview">正解はウ。前期末900千円→当期末990千円で増加額90千円。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>期首に備品を購入し、減価償却方法を定額法とすると、取得原価10,000千円、残存価額1,000千円、会計上の耐用年数が5年、税務上の耐用年数が4年の場合、1年目の終わりには135千円の繰延税金負債が計上される。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>期首に備品を購入し、減価償却方法を定額法とすると、取得原価10,000千円、残存価額1,000千円、会計上の耐用年数が5年、税務上の耐用年数が6年の場合、1年目の終わりには90千円の繰延税金負債が計上される。</span></div>
+            <div class="choice correct"><span class="badge">ウ</span><span>前期に計上した賞与引当金3,000千円が全額損金不算入となり、繰延税金資産が900千円計上されていたとする。当期末に賞与引当金3,300千円を設定し、同額が損金不算入になった場合、繰延税金資産は90千円だけ増加することになる。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>当期に積立金方式による圧縮記帳を行ったことにより将来減算一時差異が10,000千円生じた場合、当期末には3,000千円の繰延税金資産が計上される。</span></div>
+          </div>
+          <p class="explain"><b>正解：ウ</b>。前期末の繰延税金資産＝3,000千円×30％＝900千円。当期末＝3,300千円×30％＝990千円。増加額＝990－900＝<b>90千円</b>で記述と一致。エ：積立金方式の圧縮記帳は会計上の帳簿価額が税務上より高くなるため<b>将来加算一時差異</b>が生じ、計上されるのは繰延税金<b>負債</b>（3,000千円）。「繰延税金資産」としている点が誤り。イ：会計上の減価償却費1,800千円、税務上1,500千円。会計上の方が多く償却するため<b>将来減算一時差異</b>（繰延税金<b>資産</b>）が生じ、「繰延税金負債」としている点が誤り。</p>
+          <p class="example"><span class="label">具体例</span><br>税効果会計は「会計上の資産・負債」と「税務上の資産・負債」の差異（一時差異）に着目する。将来減算一時差異→繰延税金資産、将来加算一時差異→繰延税金負債、という対応をまず固定してから各選択肢の数値を検算する。</p>
+          <p class="related-note">関連知識：ア自体は数値としては会計上の計算と整合するが、他の選択肢との比較で最も明確に正しいのはウ。数値の正確な検算より先に「向き」（資産か負債か）で消去できる選択肢を先に削るのが速い。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第9問／正解：past_exams/1st_stage_answers/r07/2025b.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 14: B-10 原価計算の種類 -->
+  <div>
+    <div class="slide-no">14 ／ B-10：原価計算：原価概念・原価計算の種類と方法</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-10 ／ 原価計算：原価概念・原価計算の種類と方法</div><div class="title">原価の3要素と3つの分類軸</div><div class="overview">材料費・労務費・経費の3要素。生産形態・算定タイミング・固定費の扱いで方法が分かれる。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">個別 vs 総合</span><span class="desc">受注生産（造船・建設）は個別原価計算、大量見込生産（食品等）は総合原価計算</span></div>
+          <div class="row"><span class="name">実際 vs 標準</span><span class="desc">実際にかかったコストを事後集計するのが実際原価計算、あらかじめ標準原価を決め差異分析するのが標準原価計算</span></div>
+          <div class="row"><span class="name">全部 vs 直接</span><span class="desc">固定費を製品原価に含めるのが全部原価計算（制度会計）、含めないのが直接原価計算（社内判断・CVP分析用）</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>全部原価計算＝固定費を含める、直接原価計算＝含めない、の一点に集約される違い。財務諸表作成には全部原価計算のみが認められる。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 15: B-11 原価情報の利用 -->
+  <div>
+    <div class="slide-no">15 ／ B-11：原価計算：原価情報の利用</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">B-11 ／ 原価計算：原価情報の利用</div><div class="title">意思決定に使うべきコストだけに注目する</div><div class="overview">差額原価収益分析：選択肢によって変化するコスト・収益だけに注目する考え方。</div></div>
+        <div class="tag">財務・会計</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="22" fill="none" stroke="#171717" stroke-width="1.5"/>
+              <path d="M20 30 L40 30 M30 20 L30 40" stroke="#FF3B1F" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>差額原価収益分析</b>：複数の選択肢を比較する際、選択肢によって変わる（差が出る）コスト・収益だけに注目して判断する。</p>
+            <div class="term-row"><span class="k">埋没原価</span><span class="v">既に支払い回収不可能な過去の支出。意思決定に影響させてはいけない</span></div>
+            <div class="term-row"><span class="k">機会原価</span><span class="v">ある選択肢を選んだことで失った、他の選択肢を選んでいたら得られた利益</span></div>
+            <p><span class="label">具体例</span><br>特別注文（1,000個、1個300円）を、追加変動費250円・遊休設備利用で受注できるなら、固定費（埋没原価に近い）は判断に関係なく、1個50円の追加の儲け（限界利益）が生まれ受注すべきと判断できる。</p>
+            <p class="note"><b>ひっかけ：</b>既に支払った過去のコストを「もったいないから」と将来の判断に引きずる「サンクコストの誤謬」が典型的なひっかけ。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>B-16 利益計画（プロダクト・ミックス）でも同じ「差額で考える」発想を使う。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
