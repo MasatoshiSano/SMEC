@@ -6,7 +6,7 @@
 const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
-  addTermRows, addRowList, addExamQuestion, drawLineChart, drawQuadrant,
+  addTermRows, addRowList, addExamQuestion, drawLineChart, drawQuadrant, drawLineSeg,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -1397,6 +1397,247 @@ addDividerSlide(pres, {
     y: 6.55, rank: "B", rankLabel: "直近10年で2回出題",
     related: "関連：B-26 投資評価基準（期待CFを使ってNPVを計算する応用形）。",
     years: mkYears(new Set(["'17", "'22"])),
+  });
+}
+
+// ---------- Slide 44: 証券投資／企業価値／デリバティブ 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "04",
+  partNo: "PART 04",
+  partLabel: "財務・会計 ／ B-28〜B-34",
+  title: "証券投資／企業価値",
+  desc: "投資家側から見た証券投資の考え方（分散投資、CAPM）、会社全体・株式の価値をどう算定するか（企業価値評価）、そしてリスクをヘッジする金融派生商品（デリバティブ）まで。",
+  chips: ["B-28 ポートフォリオ理論", "B-29 CAPM", "B-33 オプション取引"],
+  notes: "証券投資／企業価値／デリバティブパートの区切りスライド。",
+});
+
+// ---------- Slide 45: B-28 ポートフォリオ理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-28 ／ 証券投資：ポートフォリオ理論",
+    title: "分散投資で消せるリスク、消せないリスク",
+    overview: "複数証券への分散投資でリスクを減らせるが、市場リスクだけは消せない。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "分散投資効果", v: "組み合わせる証券の相関係数（－1〜＋1）が低いほど大きい" },
+    { k: "個別リスク", v: "分散投資で消せる、個別銘柄固有のリスク" },
+    { k: "市場リスク", v: "分散投資でも消せない、市場全体が動くリスク（システマティック・リスク）" },
+  ], { fontSize: 11, labelW: 1.8, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "傘メーカーと日焼け止めメーカーは天候で業績が逆に動く（相関係数がマイナスに近い）。両方に投資すると天候リスクを打ち消し合い、ポートフォリオ全体のリスクを減らせる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.78, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.86;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「分散投資をすればリスクはゼロにできる」は誤り。消せるのは個別リスクだけで、市場リスクはどれだけ銘柄数を増やしても残り続ける。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-29 資本市場理論（市場リスクへの感応度を測る指標がβ）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 46: B-29 資本市場理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-29 ／ 証券投資：資本市場理論",
+    title: "市場リスクへの感応度がβ",
+    overview: "効率的市場仮説の3段階と、市場リスクプレミアムをモデル化したCAPM。",
+    tag: "財務・会計",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "ウィーク型", desc: "過去の株価・出来高情報。テクニカル分析でも超過収益は得られない" },
+    { name: "セミストロング型", desc: "公表されている全情報。ファンダメンタルズ分析でも超過収益は得られない" },
+    { name: "ストロング型", desc: "未公表の内部情報も含む全情報。インサイダー情報でも超過収益は得られない" },
+  ], { nameW: 2.4, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "CAPM：自己資本コスト＝リスクフリー・レート＋β×市場リスクプレミアム。具体例：2％＋1.5×(8％－2％)＝11％。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'20", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 47: B-30 株主価値の算定 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-30 ／ 企業価値：株主価値の算定",
+    title: "株価＝将来配当の現在価値",
+    overview: "配当割引モデル（DDM）と、実務で使われる簡便な株価指標PER・PBR。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "配当割引モデル", v: "株価＝来期予想配当 ÷ (株主資本コスト－配当成長率)" },
+    { k: "PER", v: "株価 ÷ 1株当たり利益（EPS）。低いほど割安とされることが多い" },
+    { k: "PBR", v: "株価 ÷ 1株当たり純資産（BPS）。1倍未満は解散価値割れ" },
+  ], { fontSize: 11, labelW: 2.0, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "来期予想配当30円、株主資本コスト8％、成長率3％→株価＝30÷5％＝600円。EPS50円→PER12倍、BPS400円→PBR1.5倍。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "配当成長率が株主資本コストを上回る（分母マイナス）ケースは理論上想定されない。PER・PBRは業種で適正水準が異なる。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-21 資本コスト（株主資本コストの計算はここでも使う）。",
+    years: mkYears(new Set(["'16", "'17", "'21", "'24"])),
+  });
+}
+
+// ---------- Slide 48: B-31 企業価値評価モデル ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-31 ／ 企業価値：企業価値評価モデル",
+    title: "企業価値と株主価値を混同しない",
+    overview: "DCF法（企業価値版）と残余利益モデル。企業価値－有利子負債＝株主価値。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "DCF法", v: "将来FCFをWACCで割引いた事業価値＋非事業用資産＝企業価値" },
+    { k: "残余利益モデル", v: "現在の純資産＋将来の残余利益（利益－資本コスト相当額）の現在価値" },
+    { k: "株主価値", v: "企業価値 － 有利子負債" },
+  ], { fontSize: 11, labelW: 1.9, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "事業価値20億・非事業用資産3億→企業価値23億。有利子負債8億→株主価値15億。発行済株式1,000万株→理論株価150円。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "企業価値（株主＋債権者の取り分の合計）と株主価値（そこから有利子負債を引いた株主だけの取り分）を混同しない。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-32 M&Aにおける企業評価（インカムアプローチとしてDCF法が使われる）。",
+    years: mkYears(new Set(["'21", "'22", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 49: B-32 M&Aにおける企業評価 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-32 ／ 企業価値：M&Aにおける企業評価",
+    title: "3つのアプローチで評価額は変わりうる",
+    overview: "コスト・マーケット・インカムの3アプローチ。「唯一の正しい企業価値」はない。",
+    tag: "財務・会計",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "コストアプローチ", tag: "純資産方式", desc: "貸借対照表上の（時価）純資産を基準。客観的だが将来の収益力を反映しにくい" },
+    { name: "マーケットアプローチ", tag: "乗数法", desc: "類似上場企業のPER・PBR等の倍率を対象会社の利益・純資産に掛ける" },
+    { name: "インカムアプローチ", tag: "収益還元法・DCF法", desc: "将来の利益・CFを基準に評価。収益還元法＝利益÷資本還元率" },
+  ], { nameW: 2.5, tagW: 1.9, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：税引後利益2,000万・資本還元率10％→収益還元法の企業価値＝2億円。時価純資産1億5,000万との差はのれん相当額。",
+    years: mkYears(new Set(["'16", "'22", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 50: B-33 オプション取引 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-33 ／ デリバティブとリスク管理：オプション取引",
+    title: "買い手の損失はプレミアムに限定される",
+    overview: "あらかじめ決めた価格で売買する「権利」の取引。買い手と売り手でリスクが非対称。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 7.6;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "コール", v: "あらかじめ決めた価格で「買う権利」" },
+    { k: "プット", v: "あらかじめ決めた価格で「売る権利」" },
+    { k: "プレミアム", v: "本質的価値＋時間的価値（満期に近づくほど減る）" },
+  ], { fontSize: 10.5, labelW: 1.4, gap: 0.45 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "買い手の損失はプレミアムに限定されるが、売り手は理論上無限大の損失を被りうる。中小企業のヘッジ利用は基本的に「買い」が中心。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  // right column: call option payoff "hockey stick" diagram
+  const rx = 8.55, rw = 4.05;
+  const ax = rx, ay = 5.5, bx = rx + rw, by = 2.0;
+  s.addShape("line", { x: ax, y: ay, w: bx - ax, h: 0, line: { color: INK, width: 1.4 } });
+  s.addShape("line", { x: ax, y: by, w: 0, h: ay - by, line: { color: INK, width: 1.4 } });
+  const kinkX = ax + rw * 0.46, flatY = ay - (ay - by) * 0.15, topY = by + (ay - by) * 0.2;
+  drawLineSeg(s, ax, flatY, kinkX, flatY, { color: RED, width: 2.5 });
+  drawLineSeg(s, kinkX, flatY, bx, topY, { color: RED, width: 2.5 });
+  s.addShape("line", { x: kinkX, y: flatY - 0.03, w: 0, h: ay - flatY + 0.03, line: { color: INK_SOFT, width: 0.75, dashType: "dash" } });
+  s.addText("権利行使価格", { x: kinkX - 1.0, y: ay + 0.08, w: 2.0, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 9.5, color: INK, isTextBox: true, margin: 0 });
+  s.addText("利益", { x: bx - 0.7, y: by - 0.1, w: 0.7, h: 0.3, fontFace: F_BODY, fontSize: 11, bold: true, color: RED, isTextBox: true, margin: 0 });
+  s.addText("コール買いの損益：損失はプレミアムに限定、利益は青天井", { x: rx - 0.3, y: 5.85, w: rw + 0.6, h: 0.4, align: "center", fontFace: F_BODY, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：権利行使価格1,000円・プレミアム50円のコール。満期株価1,200円→利益150円。満期株価900円→権利放棄、損失はプレミアム50円のみ。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'21", "'24"])),
+  });
+}
+
+// ---------- Slide 51: B-34 先物取引・スワップ ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-34 ／ デリバティブとリスク管理：先物取引・スワップ",
+    title: "「権利」ではなく「義務」",
+    overview: "先物・為替予約は必ず実行しなければならない取引。オプションとの根本的な違い。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "先物取引", v: "将来の期日に、あらかじめ決めた価格・数量で売買を約束する（義務）" },
+    { k: "為替予約", v: "将来の外貨受払いレートを固定し為替変動リスクをヘッジ" },
+    { k: "スワップ取引", v: "2つのキャッシュフローを交換（金利スワップ、通貨スワップ）" },
+  ], { fontSize: 11, labelW: 1.9, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "3か月後の輸出代金1万ドルを1ドル148円で為替予約→実際のレートによらず148万円を確定できる。変動金利の借入を金利スワップで実質固定金利に変換することも可能。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "先物・為替予約は「義務」であり、有利な方向に相場が動いても予約レートでの取引が確定する（オプションのような「権利放棄」はできない）。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-33 オプション取引（「権利」と「義務」の対比で押さえる）。",
+    years: mkYears(new Set(["'17", "'18", "'22", "'23", "'25"])),
   });
 }
 

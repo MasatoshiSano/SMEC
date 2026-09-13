@@ -513,4 +513,5 @@ module.exports = {
   drawProcessSteps,
   drawProcessStepsVertical,
   drawLineChart,
+  drawLineSeg,
 };
