@@ -45,12 +45,14 @@ addDividerSlide(pres, {
     overview: "飲食店業は「小売業」に分類される、業種区分の落とし穴が頻出。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
-    { name: "製造業・建設業等", tag: "資本金3億円以下", desc: "または従業員300人以下" },
-    { name: "卸売業", tag: "資本金1億円以下", desc: "または従業員100人以下" },
-    { name: "サービス業", tag: "資本金5,000万円以下", desc: "または従業員100人以下" },
-    { name: "小売業（飲食店業含む）", tag: "資本金5,000万円以下", desc: "または従業員50人以下" },
-  ], { nameW: 2.7, tagW: 2.1, rowH: 0.9 });
+  addRowList(s, 0.55, 1.9, 12.25, [
+    { name: "製造業・建設業・運輸業等", tag: "資本金3億円以下", desc: "または常時使用する従業員300人以下のいずれかを満たせば中小企業者に該当" },
+    { name: "卸売業", tag: "資本金1億円以下", desc: "または従業員100人以下。メーカーと小売の中間流通を担う業種区分" },
+    { name: "サービス業", tag: "資本金5,000万円以下", desc: "または従業員100人以下。旅館業等は施行令で従業員基準が200人以下に緩和される特例あり" },
+    { name: "小売業（飲食店業含む）", tag: "資本金5,000万円以下", desc: "または従業員50人以下。飲食店業もこの区分に含まれる" },
+    { name: "小規模企業者", tag: "製造業等20人以下", desc: "商業・サービス業は従業員5人以下。中小企業の中でもさらに小さい区分" },
+    { name: "特例業種の例", tag: "ソフトウェア業等", desc: "資本金3億円以下・従業員300人以下と、通常のサービス業基準より緩和" },
+  ], { nameW: 2.7, tagW: 2.1, rowH: 0.75 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：基準はAND（両方満たす）ではなくOR（どちらか一方）。旅館業等は従業員基準の特例あり（例：旅館業は200人以下）。",
@@ -135,16 +137,17 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "経済センサス", v: "国内すべての事業所・企業を対象にした国の基幹統計" },
-    { k: "中小企業実態基本調査", v: "中小企業庁が実施。付加価値額等の財務データを把握" },
+    { k: "経済センサス", v: "国内すべての事業所・企業を対象にした国の基幹統計。企業数・従業者数・売上高を網羅的に把握" },
+    { k: "中小企業実態基本調査", v: "中小企業庁が実施。法人・個人事業者を対象に付加価値額等の財務データを把握" },
     { k: "法人企業統計調査", v: "財務省が実施。資本金階級別の財務諸表データを集計" },
-  ], { fontSize: 11.5, labelW: 2.6, gap: 0.45 });
+    { k: "出題パターン", v: "具体的な数値そのものを問うタイプと、増加/減少・大企業比の高低という方向性を問うタイプがある" },
+  ], { fontSize: 10.5, labelW: 2.4, gap: 0.42 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
-    { text: "中小企業は企業数ベースで大部分を占めるが、付加価値額シェアは企業数割合ほど高くない（数は多いが稼ぐ力は小さい）。", options: { color: RED } },
+    { text: "中小企業は企業数ベースで大部分を占めるが、付加価値額シェアは企業数割合ほど高くない（数は多いが稼ぐ力は小さい）。数値を覚えきれなくても白書のメインメッセージから方向性を掴んでおくこと。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
 
   addFreqBar(s, {
@@ -166,15 +169,16 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "中小企業性業種", v: "大企業の参入が少なく中小企業が主な担い手（印刷業、繊維工業、伝統工芸品等）" },
+    { k: "中小企業性業種", v: "大企業の参入が少なく中小企業が主な担い手（印刷業、木材・木製品製造業、繊維工業、家具製造業、伝統的工芸品産業等）" },
+    { k: "生き残る理由", v: "多品種少量生産に向く、または地域の資源・技術に根ざし、大企業の規模の経済が働きにくい" },
     { k: "装置産業", v: "巨額の設備投資が必要で大企業中心（鉄鋼、石油化学、電力等）" },
-  ], { fontSize: 11.5, labelW: 2.4, gap: 0.5 });
-  cy += 0.1;
+  ], { fontSize: 10.5, labelW: 2.2, gap: 0.42 });
+  cy += 0.08;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
-    { text: "「中小企業性業種＝衰退産業」は誤り。ブランド・地域性等で高収益を実現する企業も存在する。", options: { color: RED } },
+    { text: "「中小企業性業種＝衰退産業」は誤り。酒蔵・陶磁器産地のようにブランド・地域性・匠の技術で高収益を実現する企業も存在する。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
 
   addFreqBar(s, {
@@ -194,9 +198,10 @@ addDividerSlide(pres, {
     tag: "中小企業経営・政策",
   });
   addRowList(s, 0.55, 1.95, 12.25, [
-    { name: "産地", desc: "同業種の中小企業が特定地域に集積し、調達〜製造〜販売の分業体制を構築" },
-    { name: "企業城下町", desc: "特定の大企業（親工場）を中心に下請企業群が地域に集積" },
-  ], { nameW: 2.2, tagW: 0, rowH: 1.3 });
+    { name: "産地", desc: "同業種の中小企業が特定地域に集積し、調達〜製造〜販売の分業体制を構築（例：眼鏡フレーム、刃物の産地）" },
+    { name: "企業城下町", desc: "特定の大企業（親工場）を中心に下請企業群が地域に集積する型の産業集積" },
+    { name: "地域資源活用・農商工連携", desc: "地域外の企業・大学・金融機関と連携し、農産品・観光資源・伝統技術を活かした新事業を創出する近年の取り組み" },
+  ], { nameW: 3.4, tagW: 0, rowH: 0.9 });
   addFreqBar(s, {
     y: 6.55, rank: "B", rankLabel: "頻出論点",
     related: "ひっかけ：「産地」と「企業城下町」の構造の違い（同業種集積か、親工場中心の下請構造か）を混同しない。",
@@ -216,9 +221,11 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "財務6指標", v: "売上高増加率・営業利益率・労働生産性・EBITDA有利子負債倍率・営業運転資本回転期間・自己資本比率" },
-    { k: "非財務4視点", v: "経営者・事業・関係者・内部管理体制への着目" },
-  ], { fontSize: 11, labelW: 2.1, gap: 0.55 });
+    { k: "財務6指標", v: "①売上高増加率②営業利益率③労働生産性④EBITDA有利子負債倍率⑤営業運転資本回転期間⑥自己資本比率" },
+    { k: "非財務4視点", v: "①経営者への着目②事業への着目③関係者への着目④内部管理体制への着目、の4観点で分析" },
+    { k: "商流・業務フロー", v: "自社の業務の流れを把握し、工夫や差別化ポイントを理解すること。非財務分析の一部" },
+    { k: "ツールの目的", v: "決算書の数字だけでなく将来性や潜在的リスクを含め総合的に企業を評価すること" },
+  ], { fontSize: 10, labelW: 1.9, gap: 0.4 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -313,10 +320,12 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "資金調達力の弱さ", v: "信用力が低く間接金融に依存。直接金融は限定的" },
-    { k: "人材確保の難しさ", v: "知名度・待遇面で大企業に見劣りし採用競争で不利" },
-    { k: "経営者への依存度", v: "オーナー経営者の能力・健康状態が経営全体を左右" },
-  ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
+    { k: "資金調達力の弱さ", v: "信用力が大企業より低く間接金融（借入）に依存しがち。直接金融は限定的" },
+    { k: "人材確保の難しさ", v: "知名度・待遇面で大企業に見劣りし、採用競争で不利になりやすい" },
+    { k: "情報収集力の限界", v: "市場動向・法改正・技術動向を収集・分析する専任部署を持てないことが多い" },
+    { k: "経営者への依存度の高さ", v: "オーナー経営者の能力・健康状態が経営全体を大きく左右する" },
+    { k: "経営の多様性", v: "業種・規模・経営者の考え方によって経営のあり方が極めて多様な点も特徴" },
+  ], { fontSize: 9.5, labelW: 2.4, gap: 0.36 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -366,9 +375,10 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "サプライチェーンの強靱化", v: "調達先の分散、国内回帰（リショアリング）、在庫適正化" },
-    { k: "価格転嫁の推進", v: "原材料費・エネルギー・人件費上昇分を取引価格に反映" },
-  ], { fontSize: 11.5, labelW: 2.8, gap: 0.5 });
+    { k: "グローバル化の進展と反動", v: "貿易・投資拡大が進む一方、地政学リスクや感染症拡大で供給網の海外依存リスクが再認識" },
+    { k: "サプライチェーンの強靱化", v: "調達先の分散、国内回帰（リショアリング）、在庫の適正化" },
+    { k: "価格転嫁の推進", v: "原材料費・エネルギー価格・人件費上昇分を取引価格に適切に反映させること" },
+  ], { fontSize: 10.5, labelW: 2.8, gap: 0.42 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -396,10 +406,11 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "間接金融依存", v: "中小企業は信用力が乏しく銀行借入への依存度が高い" },
-    { k: "中小企業基本法の基準", v: "業種ごとに資本金または従業員数のいずれかで判定" },
-    { k: "租税特別措置法の基準", v: "業種問わず資本金1億円以下で一律判定（中小法人）" },
-  ], { fontSize: 10.5, labelW: 2.7, gap: 0.4 });
+    { k: "間接金融依存", v: "中小企業は担保力・情報開示力が乏しく、直接金融より銀行借入への依存度が高い" },
+    { k: "信用保証制度", v: "信用保証協会が公的な保証人になり、金融機関が融資をしやすくする仕組み（G-24）" },
+    { k: "中小企業基本法の基準", v: "業種ごとに資本金または従業員数のいずれかで判定（G-1）" },
+    { k: "租税特別措置法の基準", v: "業種問わず資本金1億円以下で一律判定（中小法人）。軽減税率や交際費特例等に適用" },
+  ], { fontSize: 10, labelW: 2.5, gap: 0.38 });
   cy += 0.08;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -494,10 +505,11 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "多様な人材の活用", v: "女性・高齢者・外国人材・副業兼業人材の労働参加を促す" },
-    { k: "省力化・生産性向上", v: "DX・設備投資で少ない人手でも成果を上げる" },
-    { k: "賃上げのジレンマ", v: "定着には賃上げが必要だが価格転嫁力の弱さが原資確保を阻む" },
-  ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
+    { k: "労働供給制約社会", v: "働き手そのものが減っていく社会の到来で、今後さらに人手不足が深刻化する懸念" },
+    { k: "多様な人材の活用", v: "女性・高齢者・外国人材・副業兼業人材など活用されてこなかった層の労働参加を促す" },
+    { k: "省力化・生産性向上", v: "人手を増やすのではなくDX・設備投資で少ない人手でも成果を上げる" },
+    { k: "賃上げのジレンマ", v: "定着には賃上げが不可欠だが価格転嫁力の弱さが原資（利益）確保を阻む" },
+  ], { fontSize: 10, labelW: 2.4, gap: 0.4 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -556,9 +568,11 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "付加価値額の増加", v: "価格転嫁、成長投資、新事業展開、事業承継・M&Aによる再編" },
+    { k: "稼ぐ力", v: "中小企業白書が一貫して掲げる重要テーマ（付加価値を生み出す力）の向上" },
+    { k: "付加価値額の増加", v: "価格転嫁、成長投資、新事業展開、事業承継・M&Aによる事業再編" },
     { k: "労働投入量の最適化", v: "省力化投資、DX推進による生産性向上" },
-  ], { fontSize: 11.5, labelW: 2.6, gap: 0.5 });
+    { k: "現状維持は最大のリスク", v: "短期損益にとらわれず長期視点で事業・組織構造を見直す「戦略を持った経営」への転換" },
+  ], { fontSize: 10, labelW: 2.5, gap: 0.4 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -587,8 +601,10 @@ addDividerSlide(pres, {
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "DX", v: "デジタル技術で業務プロセス・ビジネスモデルを変革し競争優位を確立" },
-    { k: "DX認定制度", v: "企業のDXへの取り組み方針を国が認定する制度" },
-  ], { fontSize: 11.5, labelW: 2.3, gap: 0.5 });
+    { k: "段階の違い", v: "デジタイゼーション（単純デジタル化）→デジタライゼーション（業務効率化）→DX（事業変革）の順に広がる" },
+    { k: "DX認定制度", v: "企業のDXへの取り組み方針を経済産業省が認定する制度" },
+    { k: "中小企業のDXの遅れ", v: "大企業に比べ人材・予算の制約から取り組みが遅れがちと白書で繰り返し指摘される" },
+  ], { fontSize: 9.5, labelW: 2.4, gap: 0.4 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -637,9 +653,10 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "海外展開の段階", v: "輸出→ライセンス供与→海外直接投資（現地法人・工場設立）" },
-    { k: "JETRO", v: "日本貿易振興機構。中小企業の海外展開を支援する公的機関" },
-  ], { fontSize: 11.5, labelW: 2.3, gap: 0.5 });
+    { k: "海外展開の段階", v: "輸出→ライセンス供与→海外直接投資（現地法人・工場設立）の順に段階を踏む" },
+    { k: "中小企業特有の制約", v: "大企業に比べノウハウ・人材・資金が限られるため公的機関の支援を活用しながら進める" },
+    { k: "JETRO", v: "日本貿易振興機構。海外市場調査・商談会や見本市への出展支援等を行う中核機関" },
+  ], { fontSize: 10.5, labelW: 2.5, gap: 0.42 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -714,6 +731,508 @@ addDividerSlide(pres, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-21 経営サポート（知的財産支援策）。",
     years: mkYears(new Set(["'20", "'21", "'23"])),
+  });
+}
+
+// ---------- Slide 26: G-18〜G-28 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "02",
+  partNo: "PART 02",
+  partLabel: "中小企業経営・政策 ／ G-18〜G-28",
+  title: "中小企業政策",
+  desc: "国や自治体が中小企業をどう支援しているか。支援策の名前は年度で変わるが、「どんな課題に、どんな支援の枠組みがあるか」という制度の骨格を押さえる。",
+  chips: ["G-20 経営革新計画", "G-24 信用保証制度", "G-25 事業承継税制"],
+  notes: "中小企業政策パートの区切りスライド。",
+});
+
+// ---------- Slide 27: G-18 中小企業関連法規 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-18 ／ 中小企業関連法規（中小企業基本法、中小企業支援法等）",
+    title: "「憲法」「支援体制」「計画認定」で役割が異なる",
+    overview: "名称が似た3つの法律の役割を区別する。",
+    tag: "中小企業経営・政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "中小企業基本法", desc: "中小企業政策の理念・基本方針を定める「憲法」。中小企業者の定義もここに規定" },
+    { name: "中小企業支援法", desc: "都道府県等中小企業支援センター等、支援体制の整備を定める" },
+    { name: "中小企業等経営強化法", desc: "経営革新計画・経営力向上計画等、個々の企業の取り組みを認定・支援する枠組み" },
+  ], { nameW: 2.6, tagW: 0, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：3つの法律名は似ているが役割が異なる別の法律。「理念・定義」「支援体制」「個別計画認定」で区別する。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'20", "'22", "'24"])),
+  });
+}
+
+// ---------- Slide 28: G-19 創業・ベンチャー支援 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-19 ／ 経営サポート：創業・ベンチャー支援",
+    title: "年齢要件の数値を微妙にずらすひっかけが定番",
+    overview: "日本公庫の創業融資は女性・若年者・高齢者に特別利率を適用。",
+    tag: "中小企業経営・政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "新規開業・スタートアップ支援資金", v: "日本政策金融公庫国民生活事業の創業融資制度。貸付利率などに特例を設けて創業を支援" },
+    { k: "対象者", v: "新規開業しようとする者、または新規開業して概ね7年以内の者" },
+    { k: "特別利率の対象", v: "女性、または若年者・高齢者。運転資金・設備資金（土地取得資金を除く）に適用" },
+    { k: "創業支援等事業計画", v: "市区町村が民間の創業支援機関と連携して策定。認定計画に基づく創業者には登録免許税の軽減等の優遇" },
+  ], { fontSize: 9.5, labelW: 3.3, gap: 0.4 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "若年者・高齢者の年齢基準は選択肢で数値をずらして出題される定番パターン。制度は改定されうる前提も忘れずに。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：G-16 創業・アントレプレナーシップ（経営面の一般的な考え方）。",
+    years: mkYears(new Set(["'18", "'19", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 29: G-19 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-19 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第20問設問1）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "中小企業経営・政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "日本政策金融公庫国民生活事業が実施している新規開業・スタートアップ支援資金は、女性、若年者または高齢者の場合には、運転資金と設備資金（土地取得資金を除く）に特別利率が適用される。「若年者または高齢者」の要件の定めとして、最も適切なものはどれか。",
+    stemH: 0.85,
+    choices: [
+      { badge: "ア", text: "若年者は30歳未満、高齢者は55歳以上。", h: 0.42 },
+      { badge: "イ", text: "若年者は30歳未満、高齢者は65歳以上。", h: 0.42 },
+      { badge: "ウ", text: "若年者は35歳未満、高齢者は55歳以上。", h: 0.42 },
+      { badge: "エ", text: "若年者は35歳未満、高齢者は60歳以上。", h: 0.42 },
+      { badge: "オ", text: "若年者は35歳未満、高齢者は65歳以上。", h: 0.42 },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第20問設問1", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 30: G-19 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-19 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第20問設問1）",
+    overview: "正解はウ。若年者35歳未満、高齢者55歳以上（令和7年度時点）。",
+    tag: "中小企業経営・政策",
+  });
+  const choices = [
+    { badge: "ア", text: "若年者は30歳未満、高齢者は55歳以上。", h: 0.42 },
+    { badge: "イ", text: "若年者は30歳未満、高齢者は65歳以上。", h: 0.42 },
+    { badge: "ウ", text: "若年者は35歳未満、高齢者は55歳以上。", h: 0.42 },
+    { badge: "エ", text: "若年者は35歳未満、高齢者は60歳以上。", h: 0.42 },
+    { badge: "オ", text: "若年者は35歳未満、高齢者は65歳以上。", h: 0.42 },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.06;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "。令和7年度時点、日本政策金融公庫国民生活事業の新規開業・スタートアップ支援資金では、若年者は", options: {} },
+    { text: "35歳未満", options: { bold: true } },
+    { text: "、高齢者は", options: {} },
+    { text: "55歳以上", options: { bold: true } },
+    { text: "が特別利率適用の年齢要件。ア・イ・エ・オはいずれかの年齢基準が実際の制度と異なる。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, fontFace: F_BODY, fontSize: 9, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.12 });
+  cy += 0.76;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "「女性、若者/シニア起業家」向けに優遇金利を設ける枠組みは日本公庫の他の融資制度でもたびたび登場する。年齢基準は制度改定で変わりうるため最新情報を確認すること。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.45, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.5;
+  s.addText("関連知識：年齢要件の数値を微妙にずらす出題は定番パターン。正確な数値を覚えつつ「制度は改定されうる」前提も忘れないこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.35;
+  s.addText("出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第20問設問1／正解：past_exams/1st_stage_answers/r07/2025g.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 31: G-20 経営革新支援、新事業展開支援 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-20 ／ 経営サポート：経営革新支援、新事業展開支援",
+    title: "新規性は「全国初」ではなく自社基準でよい",
+    overview: "新事業活動は5類型のいずれかに該当すれば対象になる。",
+    tag: "中小企業経営・政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "経営革新計画", v: "新事業活動に取り組む計画。都道府県知事等の承認で特別貸付・保証特例" },
+    { k: "新事業活動5類型", v: "新商品開発／新役務開発／新生産販売方式／新提供方式／新経営管理方法" },
+    { k: "経営力向上計画", v: "生産性向上に着目。国の認定で経営強化税制等の税制優遇と結びつく" },
+  ], { fontSize: 10.5, labelW: 2.4, gap: 0.4 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「新規性＝全国初でなければならない」は誤り。既に他社が採用済みでも自社にとって新しければ対象。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：G-12 経営革新・事業創造（「稼ぐ力」向上との連続性）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 32: G-20 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-20 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第29問設問1）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "中小企業経営・政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "経営革新計画の「該当する事業内容」に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。ａ：商品の新たな販売方式の導入は対象となる。ｂ：自社にとって新しいものであれば、他社で採用されているものも対象となる。",
+    stemH: 0.75,
+    choices: [
+      { badge: "ア", text: "ａ：正　ｂ：正", h: 0.42 },
+      { badge: "イ", text: "ａ：正　ｂ：誤", h: 0.42 },
+      { badge: "ウ", text: "ａ：誤　ｂ：正", h: 0.42 },
+      { badge: "エ", text: "ａ：誤　ｂ：誤", h: 0.42 },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第29問設問1", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 33: G-20 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-20 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第29問設問1）",
+    overview: "正解はア。ａ・ｂともに正しい記述。",
+    tag: "中小企業経営・政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａ：正　ｂ：正", h: 0.42 },
+    { badge: "イ", text: "ａ：正　ｂ：誤", h: 0.42 },
+    { badge: "ウ", text: "ａ：誤　ｂ：正", h: 0.42 },
+    { badge: "エ", text: "ａ：誤　ｂ：誤", h: 0.42 },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.06;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。ａ（正）：「商品の新たな販売方式の導入」は新事業活動5類型の③にそのまま該当する。ｂ（正）：新事業活動の新規性は業界全体・全国で見て新しいことまでは要求されず、", options: {} },
+    { text: "その中小企業者にとって新しい", options: { bold: true } },
+    { text: "取り組みであれば足りる（既に他社が採用済みでも対象になりうる）。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.72, fontFace: F_BODY, fontSize: 9.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.78;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある町工場が他の工場で既に広く使われている加工方式でも、自社にとって新しい取り組みであれば経営革新計画の「新事業活動」に該当しうる。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText("関連知識：経営革新計画の経営目標は「付加価値額（または一人当たり付加価値額）」と「給与支給総額」の両方について事業期間に応じた伸び率を満たす必要がある。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.35;
+  s.addText("出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第29問設問1／正解：past_exams/1st_stage_answers/r07/2025g.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 34: G-21 知的財産支援、再生支援 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-21 ／ 経営サポート：知的財産支援、再生支援",
+    title: "再生支援は中小企業活性化協議会が中心的役割",
+    overview: "M&A支援は事業承継・引継ぎ支援センターと役割の重心が異なる。",
+    tag: "中小企業経営・政策",
+  });
+  addRowList(s, 0.55, 1.9, 12.25, [
+    { name: "知的財産支援", desc: "中小企業が特許出願する際の審査請求料・特許料の減免制度等、コスト面での支援" },
+    { name: "中小企業活性化協議会", desc: "各都道府県に設置。資金繰りに窮した企業の相談を受け、専門家とともに再生計画策定・金融機関との調整を支援（旧：中小企業再生支援協議会）" },
+    { name: "事業承継・引継ぎ支援センター", desc: "各都道府県に設置。事業承継の第三者承継（M&A）を支援する専門機関" },
+  ], { nameW: 3.2, tagW: 0, rowH: 1.5 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「再生支援＝活性化協議会」「M&Aマッチング＝引継ぎ支援センター」を対応させて覚える。連携はするが役割の重心が違う。",
+    years: mkYears(new Set(["'16", "'18", "'19"])),
+  });
+}
+
+// ---------- Slide 35: G-22 雇用人材支援、海外展開支援 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-22 ／ 経営サポート：雇用人材支援、海外展開支援",
+    title: "JETROは海外展開支援の中核機関",
+    overview: "当年度の施策名・数値目標は白書・施策総覧で都度確認する。",
+    tag: "中小企業経営・政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "雇用人材支援", v: "雇用調整助成金、人材確保等支援助成金等、人材の確保・育成を後押しする各種助成金" },
+    { k: "人材育成機関の活用", v: "生産性向上に資する人材育成を行う機関の活用支援" },
+    { k: "JETRO", v: "日本貿易振興機構。海外市場調査、商談会・見本市出展支援、現地情報提供を行う中核機関" },
+    { k: "当年度の代表施策", v: "「新規輸出1万者支援プログラム」等、輸出初挑戦企業の裾野拡大施策（施策名は年度で変わる）" },
+  ], { fontSize: 9.5, labelW: 2.4, gap: 0.4 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "海外展開の一般的な考え方（G-15）と、当年度の具体的な支援施策名（G-22）は分けて整理する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：G-15 海外展開（企業レベルの海外展開の進め方）。",
+    years: mkYears(new Set(["'16", "'17", "'19", "'22"])),
+  });
+}
+
+// ---------- Slide 36: G-23 取引・官公需支援、小規模企業支援 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-23 ／ 経営サポート：取引・官公需支援、小規模企業支援",
+    title: "下請法は民間取引、官公需法は国・自治体の調達",
+    overview: "相手方が民間か国・自治体かで対象法律が異なる。",
+    tag: "中小企業経営・政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "下請代金支払遅延等防止法", desc: "親事業者の支払遅延・不当減額・買いたたき等を規制（民間の取引）" },
+    { name: "官公需法", desc: "国・地方公共団体の調達で中小企業者の受注機会確保に努力義務" },
+    { name: "小規模企業振興基本法", desc: "2014年制定。小規模企業の持続的発展を支える政策の柱" },
+  ], { nameW: 3.0, tagW: 0, rowH: 0.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：価格交渉促進月間・パートナーシップ構築宣言も取引適正化の一環。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 37: G-24 金融サポート ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-24 ／ 金融サポート（信用保証制度、政府系金融機関）",
+    title: "普通保証2億円、無担保保証8,000万円は別枠",
+    overview: "一般保証とセーフティネット保証・小口零細企業保証は別の仕組み。",
+    tag: "中小企業経営・政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "普通保証", v: "限度額2億円以内" },
+    { k: "無担保保証", v: "限度額8,000万円以内。担保不要" },
+    { k: "日本政策金融公庫", v: "国民生活事業（個人・小規模）と中小企業事業の2部門" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "普通保証・無担保保証・無担保無保証人保証（小口零細企業保証）の限度額と名称を正確に区別する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：G-9 金融・信用保証、税制（信用保証制度の基礎）。",
+    years: mkYears(new Set(["'16", "'18", "'20", "'21", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 38: G-24 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-24 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第26問設問1）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "中小企業経営・政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "信用保証制度において、一般保証の限度額は、普通保証が【Ａ】、【Ｂ】が8,000万円以内となっている。空欄ＡとＢに入る語句の組み合わせとして、最も適切なものはどれか。",
+    stemH: 0.65,
+    choices: [
+      { badge: "ア", text: "Ａ：１億円以内　Ｂ：無担保保証", h: 0.42 },
+      { badge: "イ", text: "Ａ：１億円以内　Ｂ：無担保無保証人保証", h: 0.42 },
+      { badge: "ウ", text: "Ａ：２億円以内　Ｂ：無担保保証", h: 0.42 },
+      { badge: "エ", text: "Ａ：２億円以内　Ｂ：無担保無保証人保証", h: 0.42 },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第26問設問1", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 39: G-24 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-24 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第26問設問1）",
+    overview: "正解はウ。普通保証2億円以内、無担保保証の名称も正しい。",
+    tag: "中小企業経営・政策",
+  });
+  const choices = [
+    { badge: "ア", text: "Ａ：１億円以内　Ｂ：無担保保証", h: 0.42 },
+    { badge: "イ", text: "Ａ：１億円以内　Ｂ：無担保無保証人保証", h: 0.42 },
+    { badge: "ウ", text: "Ａ：２億円以内　Ｂ：無担保保証", h: 0.42 },
+    { badge: "エ", text: "Ａ：２億円以内　Ｂ：無担保無保証人保証", h: 0.42 },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.06;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "。信用保証協会の一般保証は「普通保証」（限度額", options: {} },
+    { text: "2億円以内", options: { bold: true } },
+    { text: "）と「無担保保証」（限度額8,000万円以内、担保不要）の2種類で、両者は別枠でカウントされる。ア・イ：Ａの限度額「1億円以内」が誤り（正しくは2億円以内）。イ・エ：Ｂの「無担保無保証人保証」は、より小規模向けの別の保証類型（小口零細企業保証制度）を指し、本問で対比すべき「無担保保証」とは異なる。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.9, fontFace: F_BODY, fontSize: 9, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.12 });
+  cy += 0.95;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "取引先の倒産や自然災害等で経営が悪化した場合は、一般保証とは別枠のセーフティネット保証を利用できる。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.4, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.45;
+  s.addText("関連知識：普通保証（2億円）・無担保保証（8,000万円）・無担保無保証人保証（小口零細企業保証、より小規模向け）の3類型を限度額とセットで区別すること。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.35;
+  s.addText("出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第26問設問1／正解：past_exams/1st_stage_answers/r07/2025g.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 40: G-25 財務サポート ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-25 ／ 財務サポート（税制、事業承継税制）",
+    title: "特例措置は対象株式数の上限なし、猶予割合100％",
+    overview: "一般措置との違い（上限有無・猶予割合）が頻出の比較ポイント。",
+    tag: "中小企業経営・政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "事業承継税制", v: "非上場株式の贈与・相続税を都道府県知事の認定で猶予・最終免除" },
+    { k: "一般措置", v: "対象株式は総株式数の3分の2まで。猶予割合80％" },
+    { k: "特例措置", v: "対象株式の上限撤廃（全株式）。猶予割合100％。特例承継計画の事前提出が条件" },
+  ], { fontSize: 10, labelW: 1.8, gap: 0.4 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "特例措置は「特例承継計画」の事前提出という手続き要件がある点を見落としやすい。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：G-14 事業承継・M&A（承継の3方式との関連）。",
+    years: mkYears(new Set(["'17", "'18", "'20", "'21", "'22", "'23", "'25"])),
+  });
+}
+
+// ---------- Slide 41: G-26 商業・地域サポート ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-26 ／ 商業・地域サポート",
+    title: "まちづくり三法は目的の異なる3つの法律",
+    overview: "郊外大型店の出店増加で衰退した中心市街地の再生を図る。",
+    tag: "中小企業経営・政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "大規模小売店舗立地法", desc: "大型店の立地環境（周辺の生活環境）を整備" },
+    { name: "中心市街地活性化法", desc: "郊外化で衰退した中心市街地の再生を図る" },
+    { name: "改正都市計画法", desc: "広域的な土地利用規制" },
+  ], { nameW: 2.8, tagW: 0, rowH: 0.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：3法の目的（立地環境整備／中心市街地再生／広域土地利用規制）を取り違えない。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'20", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 42: G-27 中小企業支援事業の実施体制 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-27 ／ 中小企業支援事業の実施体制（中小機構、支援センター等）",
+    title: "商工会と商工会議所は根拠法・所管が異なる別組織",
+    overview: "よろず支援拠点と中小企業支援センターも設置根拠が異なる。",
+    tag: "中小企業経営・政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "中小企業基盤整備機構", v: "中小企業政策実施の中核的独立行政法人。ファンド出資・共済制度運営等" },
+    { k: "よろず支援拠点", v: "中小機構が委託。あらゆる経営相談に無料対応するワンストップ窓口" },
+    { k: "商工会／商工会議所", v: "商工会＝町村部・中小企業庁所管／商工会議所＝市部が中心" },
+  ], { fontSize: 10, labelW: 2.4, gap: 0.4 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「商工会」と「商工会議所」は名前が似ているが根拠法・管轄・所管が異なる別組織。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：G-18 中小企業関連法規（中小企業支援法との関係）。",
+    years: mkYears(new Set(["'21", "'22", "'23", "'25"])),
+  });
+}
+
+// ---------- Slide 43: G-28 中小企業政策の役割と変遷 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "G-28 ／ 中小企業政策の役割と変遷（沿革）",
+    title: "「格差是正型」から「自立支援型」へ転換した",
+    overview: "1999年の抜本改正で中小企業の位置づけが大きく変わった。",
+    tag: "中小企業経営・政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "1963年 制定", tag: "格差是正型", desc: "大企業と中小企業の「二重構造」是正が目的。弱者保護の発想" },
+    { name: "1999年 抜本改正", tag: "自立支援型", desc: "「多様な事業活動を行い経済の基盤を形成する存在」へ位置づけ直し" },
+  ], { nameW: 2.2, tagW: 1.8, rowH: 1.4 });
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    related: "ひっかけ：年号そのものより「制定時＝弱者保護、改正後＝自立支援」という理念転換の方向性を理解することが重要。",
+    years: mkYears(new Set(["'21"])),
   });
 }
 
