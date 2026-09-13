@@ -78,12 +78,17 @@
     - **E-8（意匠権・実用新案権の存続期間比較）で初めて棒グラフをHTML側でも直接SVG実装**：これまで`drawBarChart`（PPTX側、D科目で新設）に対応するHTML側の棒グラフは`.bar-chart`というCSS実装で用意されていたが未使用だったため、E-8では代わりに`.split-diagram`内に手書きSVG（`<rect>`＋`<text>`）で特許20年／実用新案10年／意匠25年（赤ハイライト）／商標10年+更新の4本棒グラフを実装した。初回、商標の「10年+更新」ラベルがviewBox右端をはみ出す不具合をPlaywrightで検出し、2行（"10年"＋"+更新"）に分割して解消。PPTX側は既存の`drawBarChart`をそのまま流用でき、右カラム図解の座標（`diagX=8.25, diagW=4.05`）に配置した際、図解キャプションの位置がバーの下ラベルと重なるD-6と同型のバグが再発し、同じ修正（キャプションのy座標を下げる）で対応した。**教訓：新しい棒グラフを手書きSVGで作る際は、ラベルの左右幅がviewBoxやカラム幅を超えないか、特に長い文字列（単位付き数値等）は要確認。**
     - **区切りタイトルの2行折り返し対策を継続**：PART2「知的財産権（契約）／取引関係法務／民法・会社法」（23文字）→「取引法務・民法・会社法」、PART3「独禁法・消費者保護・資本市場」（14文字）→「独禁法と消費者保護」と、他科目より長くなりがちな法律科目の区切りタイトルもPPTX側のみ意味を保ったまま短縮（10〜13文字目安）して対処した。
 
+26. **経営情報システム（F科目）24論点、HTML・PowerPoint両方が完成**：A〜Eに続く6科目目として、F-1〜F-11（情報通信技術に関する基礎的知識）・F-12〜F-24（経営情報管理）の2パートを順次追加し、`slides/1st_stage/F_information_systems.html`（39枚）と`slides/1st_stage/F_information_systems.pptx`（39枚、`scripts/pptx_slidegen/build_F_information_systems.js`）が両方とも完成。`problem_sets/1st_stage/exercises/F_information_systems_exercises.md`に元々収録されていた6論点分の実データ（F-9正規化、F-10プロトコル、F-11信頼性設計、F-17アジャイル開発、F-18 WBS、F-20ランサムウェア対策）をすべて過去問チェックとして活用した（新規の過去問収集は不要だった）。
+    - **IT科目特有の「正誤の組み合わせ」形式が過去問チェックの主流**：F科目は択一式（ア〜オから1つ選ぶ）より「ａ〜ｄの正誤の組み合わせ」形式（例：F-9正規化、F-17システム開発手法、F-18 WBS）が多く、既存の`addExamQuestion`の選択肢に「ａ：正 ｂ：誤 ｃ：正」のような組み合わせ文字列をそのまま`text`として渡すだけで問題なく対応できた（C科目・D科目の「組み合わせ」パターンと同じ扱い）。
+    - **F-19（情報セキュリティの概念）を「－／直近10年単独出題なし」の対象と確認**：`problem_sets/1st_stage/F_information_systems.md`でF-19のみ頻出ランク・出題年度が空欄だったため、他科目で確立した運用をそのまま適用。CIA（機密性・完全性・可用性）という基礎概念は他のF-20等の設問の前提知識として出題されている可能性が高いが、単独出題の実績がないため捏造せず「－」と表示。
+    - **専用グラフなしで完結**：F科目はハードウェア・データベース・ネットワーク・開発手法など図解より「用語の定義の正確な区別」が問われる論点がほとんどで、新規の専用図解パターンは追加しなかった（既存の`icon-wrap`/`matrix-rows`/`addRowList`の文章主体コンポーネントのみで全24論点をカバー）。「内容に応じて図解の要否を判断する」という既存方針どおり、無理に図解を追加しない判断を貫いた。
+
 ### 未着手・今後の拡充候補
 
 - **演習の拡充**：`problem_sets/1st_stage/exercises/` の各科目6問を、`problem_sets/1st_stage/<科目>.md` の未収録Aランク論点に向けて追加していく。教科書側は全論点をカバー済みだが、対応する演習が手薄な論点が多いため優先順位が高い。
 - **第2次試験の問題集化・教科書化**：`problem_sets/` および `docs/textbook/` は現状1次試験のみ。事例I〜IVは論述式のため論点別ランク付けになじまず、別の切り口（頻出テーマ・フレームワーク別の演習集など）を検討する必要がある。
 - **令和8年度第2次試験**（2026年10月25日実施予定）の過去問・出題の趣旨・統計は実施後に追加すること。
-- **スライドの他科目への展開（次のステップ）**：経済学経済政策（A科目、36論点）・財務会計（B科目、34論点）・企業経営理論（C科目、42論点）・運営管理（D科目、35論点）・経営法務（E科目、27論点）はHTML・PowerPointとも完成済み。`docs/11_slide_template_spec.md`・`docs/13_pptx_slide_template_spec.md`の仕様と、5科目で確立したワークフロー（`slides/1st_stage/{A_economics,B_finance_accounting,C_business_administration,D_operations_management,E_business_law}.html`と対応する`build_*.js`が実例）に沿って、残り2科目（F経営情報システム・G中小企業経営政策）へ展開する。各科目ごとに`slides/1st_stage/<科目名>.html`＋`scripts/pptx_slidegen/build_<科目名>.js`を新規作成する方針（`lib.js`のコンポーネントはそのまま流用可能。`drawBarChart`はD科目で新設、E-8で右カラム図解への流用実績あり）。
+- **スライドの残り1科目への展開（次のステップ）**：経済学経済政策（A科目、36論点）・財務会計（B科目、34論点）・企業経営理論（C科目、42論点）・運営管理（D科目、35論点）・経営法務（E科目、27論点）・経営情報システム（F科目、24論点）はHTML・PowerPointとも完成済み。`docs/11_slide_template_spec.md`・`docs/13_pptx_slide_template_spec.md`の仕様と、6科目で確立したワークフロー（`slides/1st_stage/{A_economics,B_finance_accounting,C_business_administration,D_operations_management,E_business_law,F_information_systems}.html`と対応する`build_*.js`が実例）に沿って、残り1科目（G中小企業経営政策）へ展開する。`slides/1st_stage/G_sme_management_policy.html`＋`scripts/pptx_slidegen/build_G_sme_management_policy.js`を新規作成する方針（`lib.js`のコンポーネントはそのまま流用可能）。
 - **中小企業経営政策(G)の専用グラフ**：他6科目分は作成済みだが、G科目分の専用パターンは未着手（中小企業基本法の分類基準表など、政策系ならではの見せ方の検討が必要）。経営法務(E)はE-8の存続期間比較棒グラフで対応済み。
 
 ## よくある作業パターン
