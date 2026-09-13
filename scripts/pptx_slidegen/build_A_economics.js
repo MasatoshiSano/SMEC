@@ -804,6 +804,274 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 29: PART3 主要経済理論・市場メカニズム 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "03",
+  partNo: "PART 03",
+  partLabel: "経済学・経済政策 ／ A-18〜A-24",
+  title: "主要経済理論とミクロ経済学",
+  desc: "ケインズ派・古典派・マネタリズムという学派の違いを整理したのち、ミクロ経済学に入り、価格がどう決まり、市場がどれだけの豊かさ（余剰）を生むかを学ぶ。",
+  chips: ["A-21 市場均衡", "A-23 経済余剰", "A-24 市場の失敗"],
+  notes: "PART3区切りスライド。",
+});
+
+// ---------- Slide 30: A-18 ケインズ理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-18 ／ ケインズ理論",
+    title: "有効需要の原理と政府の積極的介入",
+    overview: "1930年代の世界恐慌を背景にケインズが打ち立てた理論。現代マクロ経済学（A-7〜A-13）の土台になっている。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "ケインズ経済学の中心的な考え方は2点。",
+    { x: proseX, y: cy, w: proseW, h: 0.35, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.43;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "有効需要の原理", v: "GDPの水準は供給側でなく需要（有効需要）の大きさで決まる", gap: 0.4 },
+    { k: "市場調整の限界", v: "賃金・価格は下方硬直的で、非自発的失業が発生しうる。政府の財政・金融政策による介入が必要", gap: 0.55 },
+  ], { fontSize: 11.5, labelW: 2.0 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "世界恐慌下でアメリカが実施したニューディール政策（公共事業による雇用創出）は「政府による有効需要の創出」を体現した代表例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「市場に任せれば賃金・価格の調整で自動的に完全雇用が実現する」（A-19の古典派の立場）とは対照的。「非自発的失業は存在しない」はケインズ理論と正反対の主張。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "－", rankLabel: "集計データなし",
+    related: "関連：A-7 生産物市場とGDP決定理論（有効需要の原理を45度線分析で具体化）。基礎理論として他の計算問題に組み込まれる形で出題されることが多い。",
+    years: mkYears(new Set([])),
+  });
+}
+
+// ---------- Slide 31: A-19 古典派・新古典派の理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-19 ／ 古典派・新古典派の理論",
+    title: "ケインズと対照的な、市場メカニズムを信頼する立場",
+    overview: "古典派経済学（ケインズ以前の主流派）は価格の伸縮性を信頼し、需要不足による不況は本来生じないと考える。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "セイの法則", tag: "供給が需要を創造", desc: "生産物は生産者の所得となりそのまま支出に回るため、需要不足の不況は本来生じない" },
+    { name: "価格の伸縮性", tag: "自動調整", desc: "失業が発生しても賃金が下がり労働需要が回復、市場メカニズムで自動的に完全雇用が実現する" },
+    { name: "古典派の二分法", tag: "貨幣の中立性", desc: "実物部門と貨幣部門は独立。貨幣供給量の変化は物価水準のみに影響し実物変数には影響しない" },
+  ], { rowH: 1.0, nameW: 2.6, tagW: 2.3 });
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    related: "ひっかけ：「貨幣供給量の変化は実物変数にも影響する」は誤り。古典派の二分法（貨幣の中立性）では物価水準のみに影響する。",
+    years: mkYears(new Set(["'22"])),
+  });
+}
+
+// ---------- Slide 32: A-20 マネタリズム ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-20 ／ マネタリズム",
+    title: "「裁量」より「k%ルール」を重視するフリードマンの立場",
+    overview: "マネタリズムは貨幣供給量（マネーストック）のコントロールを最重要視し、裁量的な政策運営に否定的な立場をとる。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "貨幣数量説（MV＝PT。M：貨幣供給量、V：流通速度、P：物価水準、T：取引量）が理論的土台。VとTが安定的なら、Mの増加はほぼそのままPの上昇（インフレ）につながる。",
+    { x: proseX, y: cy, w: proseW, h: 0.65, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.73;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "k%ルール", v: "裁量的な政策運営でなく、貨幣供給量を一定率で機械的に増加させるべきという主張", gap: 0.4 },
+    { k: "裁量的政策への批判", v: "政策効果が現れるまでのタイムラグの不確実性が、かえって景気を不安定化させるとする", gap: 0.4 },
+  ], { fontSize: 11.5, labelW: 2.3 });
+  cy += 0.1;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "マネタリズムは「政府による裁量的な財政・金融政策を積極活用すべき」というケインズ的立場とは正反対。「貨幣供給量より財政政策を重視する」という記述は誤り。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "－", rankLabel: "集計データなし",
+    related: "関連：A-12 フィリップス曲線（自然失業率仮説はマネタリズムの立場からケインズ的総需要管理政策を批判する論拠）。",
+    years: mkYears(new Set([])),
+  });
+}
+
+// ---------- Slide 33: A-21 市場均衡・不均衡 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-21 ／ 市場均衡・不均衡",
+    title: "需要曲線と供給曲線の交点で価格・数量が決まる",
+    overview: "価格が自動調整されて需要と供給を一致させる働きが価格メカニズム。政府が上限・下限規制を課すと不均衡が解消されなくなる。",
+    tag: "経済学・経済政策",
+  });
+  drawLineChart(s, 0.55, 1.9, 7.4, 4.2, {
+    xLabel: "数量 Q", yLabel: "価格 P",
+    series: [
+      { x1: 0.05, y1: 0.85, x2: 0.95, y2: 0.1, color: INK, width: 2.2, label: "D", labelDy: -0.4 },
+      { x1: 0.05, y1: 0.1, x2: 0.95, y2: 0.85, color: RED, width: 2.2, label: "S" },
+    ],
+    point: { nx: 0.5, ny: 0.475, label: "E" },
+  });
+  s.addText([
+    { text: "超過需要", options: { bold: true } }, { text: "：価格が均衡より低く需要量＞供給量（品不足）。通常は価格上昇で解消\n\n", options: {} },
+    { text: "超過供給", options: { bold: true } }, { text: "：価格が均衡より高く供給量＞需要量（売れ残り）。通常は価格下落で解消\n\n", options: {} },
+    { text: "上限規制", options: { bold: true, color: RED } }, { text: "（家賃統制等）→超過需要が解消されない\n\n", options: {} },
+    { text: "下限規制", options: { bold: true, color: RED } }, { text: "（最低賃金等）→超過供給（失業）が解消されない", options: {} },
+  ], { x: 8.25, y: 2.0, w: 4.05, h: 4.0, fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「超過需要が発生すると価格は下落する」は逆。超過需要は価格の上昇によって解消される。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'21", "'22", "'25"])),
+  });
+}
+
+// ---------- Slide 34: A-22 弾力性の概念（価格弾力性等） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-22 ／ 弾力性の概念（価格弾力性等）",
+    title: "弾力性の大きさで売上の増減が決まる",
+    overview: "需要の価格弾力性＝｜需要量の変化率÷価格の変化率｜。1を境に、値下げが売上を増やすか減らすかが変わる。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "弾力性＞1", tag: "弾力的", desc: "価格を下げると支出総額（売上）は増加する" },
+    { name: "弾力性＝1", tag: "単位弾力的", desc: "価格を変えても支出総額は変化しない" },
+    { name: "弾力性＜1", tag: "非弾力的", desc: "価格を下げると支出総額は減少する" },
+    { name: "弾力性＝0／∞", tag: "完全非弾力的／完全弾力的", desc: "需要曲線が垂直＝0、水平＝∞に対応" },
+  ], { rowH: 0.85, nameW: 2.0, tagW: 3.0 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「弾力性ゼロなら価格上昇でも支出総額は変化しない」は誤り。「長期の弾力性は短期より低い」も誤り（長期の方が高くなりやすい）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 35: A-22 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-22 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第13問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経済学・経済政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "需要の価格弾力性（絶対値）に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。\n\nａ　需要の価格弾力性がゼロであれば、価格の上昇によっても消費者の支出総額は変化しない。\nｂ　需要の価格弾力性が1より大きければ、価格の下落によって消費者の支出総額は増加する。\nｃ　同一の財について長期間で計った需要の価格弾力性は、短期間で計った場合よりも低くなりやすい。\nｄ　需要曲線が横軸に水平な直線である場合、需要の価格弾力性は無限大である。",
+    choices: [
+      { badge: "ア", text: "ａ：正　ｂ：正　ｃ：正　ｄ：誤" },
+      { badge: "イ", text: "ａ：正　ｂ：誤　ｃ：正　ｄ：誤" },
+      { badge: "ウ", text: "ａ：誤　ｂ：正　ｃ：誤　ｄ：正" },
+      { badge: "エ", text: "ａ：誤　ｂ：誤　ｃ：正　ｄ：正" },
+      { badge: "オ", text: "ａ：誤　ｂ：誤　ｃ：誤　ｄ：誤" },
+    ],
+    stemH: 1.15,
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第13問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 36: A-22 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-22 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第13問）",
+    overview: "正解はウ。ａ・ｃの「変化しない／低くなりやすい」という向きの誤りに注意。",
+    tag: "経済学・経済政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａ：正　ｂ：正　ｃ：正　ｄ：誤" },
+    { badge: "イ", text: "ａ：正　ｂ：誤　ｃ：正　ｄ：誤" },
+    { badge: "ウ", text: "ａ：誤　ｂ：正　ｃ：誤　ｄ：正" },
+    { badge: "エ", text: "ａ：誤　ｂ：誤　ｃ：正　ｄ：正" },
+    { badge: "オ", text: "ａ：誤　ｂ：誤　ｃ：誤　ｄ：誤" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "（a誤・b正・c誤・d正）。ａ：弾力性ゼロ＝数量が一切変化しない。数量一定のまま価格が上昇すれば支出総額は増加する（「変化しない」が誤り）。ｂ：弾力性が1超なら価格下落で需要量がそれ以上の割合で増え支出総額は増加＝正。ｃ：長期の方が代替財を探す余裕があり弾力性は高くなりやすい（「低くなりやすい」が誤り）。ｄ：需要曲線が水平＝価格のわずかな変化に需要量が無限に反応＝弾力性は無限大＝正。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "生活必需品（米・電気）は代替が利きにくく非弾力的なため値上げで売上が増えやすいが、嗜好品・ブランド品は弾力的なため値上げするとかえって売上が減ることがある。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText("関連知識：「弾力性＞1：弾力的（値下げで総収入増）／弾力性＜1：非弾力的（値下げで総収入減）」に加え、需要曲線の形状と弾力性の対応、長期は短期より弾力的という対応は繰り返し出題される定番論点。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.4, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.47;
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第13問／正解：past_exams/1st_stage_answers/r07/2025a.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 37: A-23 経済余剰（消費者余剰・生産者余剰） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-23 ／ 経済余剰（消費者余剰・生産者余剰）",
+    title: "総余剰は均衡取引量で最大化される",
+    overview: "消費者余剰＋生産者余剰＝総余剰。数量規制などで取引量が均衡水準より減ると、総余剰の一部が死荷重として失われる。",
+    tag: "経済学・経済政策",
+  });
+  drawLineChart(s, 0.55, 1.9, 7.4, 4.2, {
+    xLabel: "数量 Q", yLabel: "価格 P",
+    series: [
+      { x1: 0.05, y1: 0.85, x2: 0.95, y2: 0.1, color: INK, width: 2.2, label: "D", labelDy: -0.4 },
+      { x1: 0.05, y1: 0.1, x2: 0.95, y2: 0.85, color: RED, width: 2.2, label: "S" },
+    ],
+    point: { nx: 0.5, ny: 0.475, label: "E" },
+  });
+  s.addText([
+    { text: "■ 消費者余剰", options: { bold: true, color: "2E5495" } }, { text: "：買い手が得する部分（払ってもよい額－実際の支払額）\n\n", options: {} },
+    { text: "■ 生産者余剰", options: { bold: true, color: "6B6B6B" } }, { text: "：売り手が得する部分（受取額－最低売りたい額）\n\n", options: {} },
+    { text: "■ 死荷重", options: { bold: true, color: RED } }, { text: "：数量規制等で取引量が減ったとき失われる余剰", options: {} },
+  ], { x: 8.25, y: 2.3, w: 4.05, h: 3.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.4 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：死荷重は「消費者余剰・生産者余剰の減少分の合計」ではなく、その減少分から税収等で社会に残った部分を差し引いた「純粋に失われた部分」。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'22", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 38: A-24 競争的市場の資源配分機能・市場の失敗 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-24 ／ 競争的市場の資源配分機能・市場の失敗",
+    title: "完全競争の理想が崩れる4つの「市場の失敗」",
+    overview: "完全競争市場では総余剰が最大化される（パレート効率性）が、現実にはこの理想が実現しない市場の失敗がある。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "外部性", tag: "外部不経済／外部経済", desc: "対価のやり取りなしに第三者に影響。悪影響（公害）は生産過大、良い影響（受粉）は過少になりがち" },
+    { name: "公共財", tag: "非競合性・非排除性", desc: "フリーライダー問題により民間市場だけでは十分な量が供給されにくい" },
+    { name: "独占・寡占", tag: "A-31参照", desc: "少数の供給者が価格支配力を持つと生産量過少・価格過大になる" },
+    { name: "情報の非対称性", tag: "A-29参照", desc: "取引当事者間の情報格差" },
+  ], { rowH: 0.85, nameW: 2.3, tagW: 2.7 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：公共財の「非競合性」（消費の奪い合いにならない）と「非排除性」（対価を払わない人を締め出せない）は別の性質。ピグー税・コースの定理も頻出。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'23", "'24", "'25"])),
+  });
+}
+
 const outPath = path.join(__dirname, "..", "..", "slides", "1st_stage", "A_economics.pptx");
 pres.writeFile({ fileName: outPath }).then(() => {
   console.log("wrote", outPath);
