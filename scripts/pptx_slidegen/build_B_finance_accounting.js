@@ -6,7 +6,7 @@
 const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
-  addTermRows, addRowList, addExamQuestion, drawLineChart,
+  addTermRows, addRowList, addExamQuestion, drawLineChart, drawQuadrant,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -906,6 +906,497 @@ addDividerSlide(pres, {
   cy += 0.38;
   s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第21問／正解：past_exams/1st_stage_answers/r07/2025b.pdf", {
     x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 29: 資金調達と配当政策／実物投資 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "03",
+  partNo: "PART 03",
+  partLabel: "財務・会計 ／ B-20〜B-27",
+  title: "資金調達と実物投資",
+  desc: "どこからお金を集め、そのコスト（WACC）をどう計算し、儲けをどう配分するか。そして、集めたお金を工場・設備にどう投じ、その投資が見合うかを判定する分野。2次試験事例IVに直結する。",
+  chips: ["B-21 WACC", "B-23 MM理論", "B-26 NPV法"],
+  notes: "資金調達と配当政策／実物投資パートの区切りスライド。",
+});
+
+// ---------- Slide 30: B-20 資金調達の形態 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-20 ／ 資金調達と配当政策：資金調達の形態",
+    title: "2つの軸は独立している",
+    overview: "「調達元（内部／外部）」と「資金の流れ（直接／間接）」は別々の分類軸。",
+    tag: "財務・会計",
+  });
+  drawQuadrant(s, 0.55, 1.95, 12.25, 4.3, {
+    cells: [
+      { pos: "tl", label: "内部金融", sublabel: "内部留保、減価償却費" },
+      { pos: "tr", label: "直接金融", sublabel: "株式・社債発行（投資家から直接）" },
+      { pos: "bl", label: "間接金融", sublabel: "銀行借入（金融機関を介する）" },
+      { pos: "br", label: "外部金融", sublabel: "増資、借入、社債発行" },
+    ],
+    axisCaption: "具体例：内部留保の取り崩し＝内部金融、銀行融資＝外部・間接金融、新株発行＝外部・直接金融",
+  });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「外部金融＝間接金融」ではない。銀行借入は外部＋間接、社債発行は外部＋直接。",
+    years: mkYears(new Set(["'16", "'17", "'19", "'21", "'24"])),
+  });
+}
+
+// ---------- Slide 31: B-21 資本コスト ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-21 ／ 資金調達と配当政策：資本コスト",
+    title: "負債コストは必ず税引後にする",
+    overview: "負債コストと自己資本コストを調達額の割合で加重平均したものがWACC。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "負債コスト", v: "税引前負債コスト×(1－実効税率)（税引後で考える）" },
+    { k: "自己資本コスト", v: "配当割引モデル：1株当たり予想配当÷株価（成長率ゼロの場合）" },
+    { k: "WACC", v: "負債コスト×(負債／総資本)＋自己資本コスト×(自己資本／総資本)" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "負債5,000万・株主資本5,000万、配当5円・株価50円→自己資本コスト10％。税引前負債4％・実効税率30％→税引後負債コスト2.8％。WACC＝2.8％×0.5＋10％×0.5＝6.4％。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "負債コストを税引前のまま加重平均する計算ミスが最頻出。株主資本コストも「リスクフリー・レート＋事業リスクプレミアム＋財務リスクプレミアム」の構成。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-24〜B-26 投資評価（WACCはNPV法の割引率として登場）。",
+    years: mkYears(new Set(["'16", "'17", "'19", "'21", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 32: B-21 過去問チェック（設問1：リスクプレミアム） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-21 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第15問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "財務・会計",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "資本コストのリスクプレミアムに関する記述として、最も適切なものはどれか。",
+    stemH: 0.5,
+    choices: [
+      { badge: "ア", text: "不確実な投資プロジェクトの評価に確実性等価法を適用する場合、キャッシュフローの不確実性を、割引率として用いる資本コストのリスクプレミアムで調整する。", h: 0.62 },
+      { badge: "イ", text: "負債が増大するにつれて、債務不履行リスクが大きくなる場合、負債の資本コストのリスクプレミアムには、債務不履行リスクが反映される。", h: 0.62 },
+      { badge: "ウ", text: "負債による資金調達を行っている企業の株主資本コストは、リスクフリー・レートと財務リスクプレミアムで構成されている。", h: 0.62 },
+      { badge: "エ", text: "ポートフォリオ理論によれば、株主資本コストのリスクプレミアムには、市場リスクが反映されていない。", h: 0.5 },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第15問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 33: B-21 過去問チェック（解答1：リスクプレミアム） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-21 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第15問）",
+    overview: "正解はイ。負債増加による債務不履行リスクは、負債コストに反映される。",
+    tag: "財務・会計",
+  });
+  const choices = [
+    { badge: "ア", text: "不確実な投資プロジェクトの評価に確実性等価法を適用する場合、キャッシュフローの不確実性を、割引率として用いる資本コストのリスクプレミアムで調整する。", h: 0.62 },
+    { badge: "イ", text: "負債が増大するにつれて、債務不履行リスクが大きくなる場合、負債の資本コストのリスクプレミアムには、債務不履行リスクが反映される。", h: 0.62 },
+    { badge: "ウ", text: "負債による資金調達を行っている企業の株主資本コストは、リスクフリー・レートと財務リスクプレミアムで構成されている。", h: 0.62 },
+    { badge: "エ", text: "ポートフォリオ理論によれば、株主資本コストのリスクプレミアムには、市場リスクが反映されていない。", h: 0.5 },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ", options: { bold: true, color: RED } },
+    { text: "。負債が増えるほど倒産（債務不履行）の可能性が高まり、それに応じて負債コストにリスクプレミアムが上乗せされる。ア：確実性等価法はキャッシュフロー自体を変換する手法で、割引率側で調整するのは「リスク調整割引率法」。手法の説明が逆。ウ：負債を利用する企業の株主資本コストは、リスクフリー・レートに加え事業リスクプレミアムと財務リスクプレミアムの", options: {} },
+    { text: "両方", options: { bold: true } },
+    { text: "で構成される。エ：CAPMによれば市場リスクは明確に", options: {} },
+    { text: "反映される", options: { bold: true } },
+    { text: "。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "負債比率が高い会社ほど、貸し手は返済されないリスクを警戒し、より高い金利（リスクプレミアム）を要求する。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：株主資本コストの構成はB-23の財務レバレッジ・MM理論とも関連する。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第15問／正解：past_exams/1st_stage_answers/r07/2025b.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 34: B-21 過去問チェック（設問2：WACC計算） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-21 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第16問）",
+    overview: "計算問題。前のスライドの公式で自分の手で計算してみる。",
+    tag: "財務・会計",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "以下のデータに基づき、毎期一定額の配当を行っている当社の加重平均資本コストを計算したとき、最も適切なものを下記の解答群から選べ。ただし、株主資本コストは配当割引モデルによって求めるものとする。\n【当社のデータ】負債（時価）5,000万円／株主資本（時価）5,000万円／発行済株式数100万株／毎期の1株当たり配当金5円／税引前の負債コスト4％／法人税等の実効税率30％",
+    stemH: 1.15,
+    choices: [
+      { badge: "ア", text: "5.6％" },
+      { badge: "イ", text: "6.4％" },
+      { badge: "ウ", text: "6.5％" },
+      { badge: "エ", text: "7％" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第16問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 35: B-21 過去問チェック（解答2：WACC計算） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-21 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第16問）",
+    overview: "正解はイ（6.4％）。株価50円→自己資本コスト10％、税引後負債コスト2.8％。",
+    tag: "財務・会計",
+  });
+  const choices = [
+    { badge: "ア", text: "5.6％" },
+    { badge: "イ", text: "6.4％" },
+    { badge: "ウ", text: "6.5％" },
+    { badge: "エ", text: "7％" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ（6.4％）", options: { bold: true, color: RED } },
+    { text: "。①株価＝5,000万円÷100万株＝50円。②自己資本コスト（配当割引モデル）＝5円÷50円＝10％。③税引後負債コスト＝4％×(1－30％)＝2.8％。④WACC＝2.8％×0.5＋10％×0.5＝1.4％＋5％＝", options: {} },
+    { text: "6.4％", options: { bold: true } },
+    { text: "。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.8, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.88;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "税引後負債コストへの変換を忘れて「4％×0.5＋10％×0.5＝7％」（選択肢エ）と誤答するのが典型的なひっかけパターン。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：WACC計算は毎年頻出。負債コストは必ず税引後に直してから加重平均する点を忘れないこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第16問／正解：past_exams/1st_stage_answers/r07/2025b.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 36: B-22 ペイアウト政策 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-22 ／ 資金調達と配当政策：ペイアウト政策",
+    title: "配当と自社株買い、還元の仕方が違う",
+    overview: "現金で直接還元する配当と、株価上昇で還元する自社株買い。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "配当", v: "利益の一部を現金で株主に分配する" },
+    { k: "自社株買い", v: "発行済株式数が減りEPS・BPSが向上する（株価上昇で還元）" },
+    { k: "配当性向", v: "配当金総額 ÷ 当期純利益 × 100" },
+  ], { fontSize: 11, labelW: 1.8, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "当期純利益10億円・配当3億円→配当性向30％。3億円で自社株買いし発行済株式数を1,000万株→900万株に減らすと、EPS＝100円→約111円に上昇。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "MM理論（完全資本市場）では配当政策は企業価値に無関連（配当無関連命題）とされるが、現実には税制の違いやシグナリング効果があり実務上は重要な意思決定。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-23 最適資本構成（MM理論の考え方は資本構成論と配当政策論の両方に登場）。",
+    years: mkYears(new Set(["'21", "'22", "'24"])),
+  });
+}
+
+// ---------- Slide 37: B-23 最適資本構成 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-23 ／ 資金調達と配当政策：最適資本構成",
+    title: "負債はROEを押し上げるが倒産リスクも上げる",
+    overview: "MM理論・修正MM理論・トレードオフ理論。財務レバレッジの効果は条件付き。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "MM理論（無税）", v: "資本構成を変えても企業価値は変化しない（無関連命題）" },
+    { k: "修正MM理論", v: "負債の節税効果の分だけ企業価値は増加する" },
+    { k: "トレードオフ理論", v: "節税効果と倒産コストが釣り合う点に最適資本構成がある" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "総資産10億円・利回り8％。全額自己資本ならROE8％。半分を借入（利率4％）にすると、支払利息2,000万円を引いてもROE12％に上昇（事業利回り＞借入利率のため）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「負債を増やすほど無条件にROE・企業価値が上がる」は誤り。財務レバレッジは「事業の利回り＞負債の利率」のときのみROEを押し上げる条件付きの効果。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-12 収益性分析（デュポン分解の財務レバレッジと同じ概念）。",
+    years: mkYears(new Set(["'17", "'19", "'20", "'21", "'23"])),
+  });
+}
+
+// ---------- Slide 38: B-24 貨幣の時間価値とDCF ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-24 ／ 実物投資：貨幣の時間価値とDCF",
+    title: "「今日の100万円」と「1年後の100万円」は違う",
+    overview: "将来のキャッシュフローを現在価値に割り引くのがDCF法。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 7.6;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "現在価値", v: "CFn ÷ (1＋r)^n（rは割引率、nは年数）" },
+  ], { fontSize: 10.5, labelW: 1.6, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "割引率6％、2年後の220万円→現在価値＝220万円×0.88（複利現価係数）＝193.6万円。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「何年後のCFに何年の係数を掛けるか」の取り違えが多発。CFの発生タイミングを必ずタイムラインで整理してから計算する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  const rx = 8.55, rw = 4.05;
+  s.addShape("line", { x: rx, y: 4.0, w: rw, h: 0, line: { color: INK, width: 1.25 } });
+  s.addShape("ellipse", { x: rx - 0.05, y: 3.95, w: 0.1, h: 0.1, fill: { color: INK }, line: { type: "none" } });
+  s.addText("現在", { x: rx - 0.4, y: 4.1, w: 0.9, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0 });
+  s.addShape("ellipse", { x: rx + rw - 0.15, y: 3.95, w: 0.1, h: 0.1, fill: { color: RED }, line: { type: "none" } });
+  s.addText("2年後（220万円）", { x: rx + rw - 1.3, y: 3.2, w: 1.75, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 10, color: RED, isTextBox: true, margin: 0 });
+  s.addText("×0.88で割引 → 193.6万円", { x: rx, y: 4.4, w: rw, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 10.5, bold: true, color: INK, isTextBox: true, margin: 0 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-26 投資評価基準（このDCFの考え方がNPV法・IRR法の土台）。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'21", "'22", "'25"])),
+  });
+}
+
+// ---------- Slide 39: B-25 投資評価基準（回収期間法・ARR） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-25 ／ 実物投資：投資評価基準（回収期間法、ARR）",
+    title: "貨幣の時間価値を考慮しない簡便法",
+    overview: "計算は簡単だが、回収後のキャッシュフローを無視するという共通の弱点がある。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "回収期間法", v: "投資額 ÷ 年間キャッシュフロー（短いほど良いと判断）" },
+    { k: "会計的投資利益率法（ARR）", v: "平均年間利益 ÷ 平均（初期）投資額 × 100" },
+  ], { fontSize: 11, labelW: 2.9, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "投資案A：初期投資1,000万・年200万→回収期間5年。投資案B：初期投資600万・年150万→回収期間4年。単純比較ではBが優先される。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "両者とも貨幣の時間価値を考慮しないため、「5年目以降にどれだけ稼ぐか」を無視し、長期的に有利な案を過小評価する可能性がある。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  s.addShape("line", { x: 0.55, y: 6.55, w: 12.25, h: 0, line: { color: INK, width: 0.75 } });
+  s.addShape("ellipse", { x: 0.55, y: 6.63, w: 0.36, h: 0.36, fill: { color: INK_SOFT }, line: { type: "none" } });
+  s.addText("－", { x: 0.55, y: 6.63, w: 0.36, h: 0.36, align: "center", valign: "middle", fontFace: F_MONO, fontSize: 13, bold: true, color: "FFFFFF", isTextBox: true, margin: 0 });
+  s.addText("集計データなし　／　関連：B-26 投資評価基準（NPV法、IRR法、収益性指数法）。", {
+    x: 1.0, y: 6.63, w: 11.5, h: 0.36, valign: "middle", fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 40: B-26 投資評価基準（IRR・NPV・PI） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-26 ／ 実物投資：投資評価基準（IRR法、NPV法、PI法）",
+    title: "NPV＞0、IRR＞資本コスト、PI＞1なら実行",
+    overview: "貨幣の時間価値を考慮した、より精緻な投資評価方法。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "NPV法", v: "将来CFの現在価値の合計－初期投資額。NPV＞0なら実行" },
+    { k: "IRR法", v: "NPV＝0になる割引率。IRR＞資本コストなら実行" },
+    { k: "収益性指数法（PI）", v: "将来CFの現在価値 ÷ 初期投資額。PI＞1なら実行" },
+  ], { fontSize: 11, labelW: 2.4, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "初期投資2,200万、1年後1,100万（係数0.94）、2年後2,200万（係数0.88）、資本コスト6％→NPV＝－2,200＋1,034＋1,936＝770万円（＞0なので実行）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "投資規模が大きく異なる複数案の比較ではNPVとIRRで優劣が逆転することがある。一般にNPV法の方が優れた判断基準とされる。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-21 資本コスト（WACCがこの割引率として使われる）。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 41: B-26 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-26 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第17問）",
+    overview: "計算問題。前のスライドの公式で自分の手で計算してみる。",
+    tag: "財務・会計",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "Y社は、ある投資案の採否について正味現在価値法に基づいて判断している。なお、税金は存在しないものとする。この投資案の初期投資は第1期首に行われ、初期投資額は2,200万円、第1期末のキャッシュフローは1,100万円、第2期末のキャッシュフローは2,200万円と予測されている。投資の経済命数は2年であり、資本コストは6％である。この投資案の正味現在価値として、最も適切なものを下記の解答群から選べ。なお、計算には以下の複利現価係数表を使用すること。複利現価係数表：1年＝0.94（6％）、2年＝0.88（6％）",
+    stemH: 1.4,
+    choices: [
+      { badge: "ア", text: "737万円" },
+      { badge: "イ", text: "770万円" },
+      { badge: "ウ", text: "825万円" },
+      { badge: "エ", text: "902万円" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第17問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 42: B-26 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-26 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第17問）",
+    overview: "正解はイ（770万円）。初期投資額はそのまま、将来CFだけ割り引く。",
+    tag: "財務・会計",
+  });
+  const choices = [
+    { badge: "ア", text: "737万円" },
+    { badge: "イ", text: "770万円" },
+    { badge: "ウ", text: "825万円" },
+    { badge: "エ", text: "902万円" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ（770万円）", options: { bold: true, color: RED } },
+    { text: "。NPV＝－初期投資額＋第1期末CF×1年現価係数＋第2期末CF×2年現価係数＝－2,200＋1,100×0.94＋2,200×0.88＝－2,200＋1,034＋1,936＝", options: {} },
+    { text: "770万円", options: { bold: true } },
+    { text: "。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.78;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "初期投資額（第1期首＝現時点）はそのままの金額を使い、将来のCF（第1期末・第2期末）だけを現価係数で割り引く点がポイント。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：NPVがプラスなので、この投資案は実行すべきと判断する。docs/07_key_formulas_and_frameworks.md参照。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第17問／正解：past_exams/1st_stage_answers/r07/2025b.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 43: B-27 不確実性下の投資決定 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-27 ／ 実物投資：不確実性下の投資決定",
+    title: "将来の不確実性を投資判断に織り込む",
+    overview: "期待値法・感応度分析・デシジョンツリー分析の3つの考え方。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "期待値法", v: "複数シナリオの発生確率×CFの加重平均でNPV等を計算" },
+    { k: "感応度分析", v: "前提条件を変化させNPV等の変化を分析、リスク要因を特定" },
+    { k: "デシジョンツリー分析", v: "意思決定と不確実な事象を樹形図に整理し期待値で最適経路を探る" },
+  ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "好況60％・CF3,000万、不況40％・CF500万→期待CF＝3,000×60％＋500×40％＝2,000万円。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.58, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.66;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "期待値だけで判断すると「最悪シナリオでの損失の大きさ」が見えなくなる。期待値が同じでもばらつきが大きい案と小さい案では慎重な意思決定者は後者を選好する場合がある。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "直近10年で2回出題",
+    related: "関連：B-26 投資評価基準（期待CFを使ってNPVを計算する応用形）。",
+    years: mkYears(new Set(["'17", "'22"])),
   });
 }
 
