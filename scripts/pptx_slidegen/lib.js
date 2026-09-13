@@ -440,6 +440,34 @@ function drawProcessStepsVertical(slide, x, y, w, h, steps) {
   });
 }
 
+// simple vertical bar chart — N labeled bars, one or more highlighted red (e.g. a
+// bottleneck process in a line-balancing diagram). bars: [{label, value, on}].
+function drawBarChart(slide, x, y, w, h, { bars, maxValue }) {
+  const max = maxValue || Math.max(...bars.map((b) => b.value));
+  const gap = w * 0.06;
+  const barW = (w - gap * (bars.length - 1)) / bars.length;
+  const baseY = y + h;
+  slide.addShape("line", { x, y: baseY, w, h: 0, line: { color: INK, width: 1.5 } });
+  bars.forEach((b, i) => {
+    const bx = x + i * (barW + gap);
+    const barH = (b.value / max) * (h - 0.4);
+    const by = baseY - barH;
+    slide.addShape("rect", {
+      x: bx, y: by, w: barW, h: barH,
+      fill: { color: b.on ? RED : GHOST }, line: { color: b.on ? RED : INK, width: 1 },
+    });
+    slide.addText(String(b.value), {
+      x: bx - 0.03, y: by - 0.32, w: barW + 0.06, h: 0.28, align: "center",
+      fontFace: F_MONO, fontSize: b.on ? 13 : 10.5, bold: b.on, color: b.on ? RED : INK,
+      isTextBox: true, margin: 0,
+    });
+    slide.addText(b.label, {
+      x: bx - 0.03, y: baseY + 0.06, w: barW + 0.06, h: 0.3, align: "center",
+      fontFace: F_BODY, fontSize: 9, color: INK, isTextBox: true, margin: 0,
+    });
+  });
+}
+
 // ---------- 経済学専用グラフ（座標軸＋直線で表す需要供給曲線・IS-LM分析・
 // 45度線分析など）。pptxgenjsに滑らかな曲線を描く手段がないため、教科書の
 // 慣例どおりどれも直線（右下がり/右上がりの直線）で描く。座標は0〜1に正規化
@@ -514,4 +542,5 @@ module.exports = {
   drawProcessStepsVertical,
   drawLineChart,
   drawLineSeg,
+  drawBarChart,
 };

@@ -1,0 +1,678 @@
+<title>運営管理 - スライド</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;
+  --cw:calc(min(100vw, 1020px) - 48px);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:calc(var(--cw)*1.85/100) calc(var(--cw)*2.26/100) calc(var(--cw)*0.93/100);border-bottom:calc(var(--cw)*0.16/100) solid var(--ink);flex:0 0 auto;gap:calc(var(--cw)*1.44/100);}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.98/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.55/100);font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:calc(var(--cw)*1.0/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.93/100);color:#fff;background:var(--ink);padding:calc(var(--cw)*0.31/100) calc(var(--cw)*0.93/100);align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:calc(var(--cw)*1.4/100) calc(var(--cw)*2.26/100) calc(var(--cw)*1.5/100);display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--cw)*0.55/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.05/100);color:#fff;background:var(--red);width:calc(var(--cw)*1.75/100);height:calc(var(--cw)*1.75/100);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-chip.none{background:var(--ink-soft);}
+.freq-top .rank-label{font-size:calc(var(--cw)*0.76/100);font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:calc(var(--cw)*0.78/100);color:var(--ink-soft);border-left:1px solid var(--line);padding-left:calc(var(--cw)*1.1/100);line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:calc(var(--cw)*0.68/100);color:var(--ink-soft);margin-right:calc(var(--cw)*0.9/100);white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.3/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.35/100);height:calc(var(--cw)*1.35/100);border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 過去問チェック */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .example{font-size:calc(var(--cw)*0.78/100);line-height:1.5;color:var(--ink);}
+.examq .example .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.62/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
+
+/* 番号なしの罫線区切りリスト */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
+
+/* 左2/3テキスト＋右1/3図解 */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:calc(var(--cw)*0.8/100);}
+.cover .main .title{font-size:calc(var(--cw)*5.2/100);font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:calc(var(--cw)*1.15/100);color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:calc(var(--cw)*62/100);}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:calc(var(--cw)*1.2/100);}
+.cover .scope{display:flex;gap:calc(var(--cw)*2.4/100);}
+.cover .scope .item{display:flex;flex-direction:column;gap:calc(var(--cw)*0.2/100);}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.6/100);font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:calc(var(--cw)*0.72/100);color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.85/100);border:1px solid rgba(255,255,255,.4);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*1/100);color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 calc(var(--cw)*4/100);overflow:hidden;}
+.divider .ghost-no{position:absolute;right:calc(var(--cw)*2/100);top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*22/100);line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:calc(var(--cw)*1.3/100);max-width:calc(var(--cw)*70/100);}
+.divider .kicker{display:flex;align-items:center;gap:calc(var(--cw)*1/100);}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:calc(var(--cw)*3.6/100);font-weight:900;line-height:1.15;}
+.divider .desc{font-size:calc(var(--cw)*1.08/100);color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:calc(var(--cw)*1.6/100);margin-top:calc(var(--cw)*0.4/100);flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);border:1px solid rgba(255,255,255,.35);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*0.9/100);color:#fff;opacity:.85;white-space:nowrap;}
+
+/* 棒グラフ（ラインバランシング等） */
+.bar-chart{flex:1;display:flex;align-items:flex-end;gap:calc(var(--cw)*1.2/100);min-height:0;padding-bottom:calc(var(--cw)*0.3/100);border-bottom:1.5px solid var(--ink);}
+.bar-chart .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:calc(var(--cw)*0.3/100);}
+.bar-chart .bar-val{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.72/100);color:var(--ink-soft);}
+.bar-chart .bar-val.on{color:var(--red);font-weight:700;}
+.bar-chart .bar{width:60%;background:var(--ghost);border:1px solid var(--ink);}
+.bar-chart .bar.on{background:var(--red);border-color:var(--red);}
+.bar-chart .bar-label{font-size:calc(var(--cw)*0.74/100);color:var(--ink);margin-top:calc(var(--cw)*0.2/100);}
+</style>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 04 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">運営管理<span class="accent">。</span></div>
+          <div class="subtitle">生産管理（工場でどう作るか）と店舗・販売管理（店でどう売るか）の2<span style="white-space:nowrap">分野</span>、35<span style="white-space:nowrap">論点</span>。暗記事項と計算問題（タクトタイム、EOQ、ライリーの法則等）の両方が出題される。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">35</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">2</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">32/35</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/D_operations_management_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 02: 生産管理概論／生産の管理 区切り -->
+  <div>
+    <div class="slide-no">02</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">運営管理 ／ D-1〜D-9</span></div>
+          <div class="title">生産管理概論／生産計画</div>
+          <div class="desc">工場管理の目標（PQCDSME）から、生産方式・ライン編成・需要予測・需給計画・スケジューリングまで。町工場をイメージしながら読み進める。</div>
+          <div class="covers">
+            <span class="chip">D-2 JIT・かんばん</span>
+            <span class="chip">D-6 ラインバランシング</span>
+            <span class="chip">D-9 ジョンソンの規則</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 03: D-1 生産管理概論（PQCDSME） -->
+  <div>
+    <div class="slide-no">03 ／ D-1：生産管理概論（PQCDSME）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-1 ／ 生産管理概論（PQCDSME）</div><div class="title">7つの目標はトレードオフの関係</div><div class="overview">工場管理者が同時に追う7つの目標。一方を追求すると他方が犠牲になりやすい。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">P：生産性</span><span class="v">少ない人・設備・時間でどれだけ多く作れるか</span></div>
+            <div class="term-row"><span class="k">Q：品質</span><span class="v">不良品を出さず要求品質を満たすか</span></div>
+            <div class="term-row"><span class="k">C：コスト</span><span class="v">材料費・労務費・経費をどれだけ抑えられるか</span></div>
+            <div class="term-row"><span class="k">D：納期</span><span class="v">決められた期日までに決められた量を届けられるか</span></div>
+            <div class="term-row"><span class="k">S・M・E</span><span class="v">Safety（安全）・Morale（士気）・Environment（環境）</span></div>
+            <p><span class="label">具体例</span><br>「今月中に納品したい」という要求（D優先）に応え検査を簡略化した結果、不良品が増え（Q低下）手直しコストがかさむ（C悪化）のはトレードオフの典型例。</p>
+            <p class="note"><b>ひっかけ：</b>SはSales（販売）ではなくSafety（安全）、EはEfficiency（効率）ではなくEnvironment（環境）。並び順より「互いにトレードオフになりうる」という理解が問われる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>D-10 生産統制（PQCDSMEを実際に管理する活動）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 04: D-2 生産システム -->
+  <div>
+    <div class="slide-no">04 ／ D-2：生産システム（JIT、かんばん方式、ERP、SCM）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-2 ／ 生産システム（JIT、かんばん方式、ERP、SCM）</div><div class="title">かんばんはJITを実現する道具</div><div class="overview">必要な物を必要な時に必要な量だけ作るJIT。後工程引取りの仕組みがかんばん。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">JIT</span><span class="v">必要な物を必要な時に必要な量だけ作る・運ぶ（トヨタ生産方式）</span></div>
+            <div class="term-row"><span class="k">かんばん方式</span><span class="v">後工程が使った分だけ前工程に指示する情報伝達の道具（プル型）</span></div>
+            <div class="term-row"><span class="k">ERP</span><span class="v">会計・人事・生産・販売を1システムで統合管理</span></div>
+            <div class="term-row"><span class="k">SCM</span><span class="v">複数の会社をまたぐ調達〜販売の供給連鎖全体を最適化</span></div>
+            <p class="note"><b>ひっかけ：</b>かんばん方式はJITを実現する道具であり、JITそのものではない。JIT（プル型）とMRP（D-8、プッシュ型）は対照的な考え方で混同しない。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>D-8 需給計画（MRP、プッシュ型との対比）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: D-3 環境配慮型生産 -->
+  <div>
+    <div class="slide-no">05 ／ D-3：環境配慮型生産（3R、LCA）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-3 ／ 環境配慮型生産（3R、LCA）</div><div class="title">優先順位はリデュース＞リユース＞リサイクル</div><div class="overview">3Rの優先順位と、製品の一生涯を評価するLCA。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">①リデュース</span><span class="desc">そもそも廃棄物・使用資源の発生量を減らす（最優先）</span></div>
+          <div class="row"><span class="name">②リユース</span><span class="desc">使えるものはそのまま繰り返し使う</span></div>
+          <div class="row"><span class="name">③リサイクル</span><span class="desc">使い終わったものを資源として再生利用する（優先順位は最後）</span></div>
+          <div class="row"><span class="name">LCA</span><span class="desc">原材料採取→製造→輸送→使用→廃棄まで一生涯の環境負荷を定量評価</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「リサイクルを最優先すべき」は誤り。LCAは製造工程だけでなく調達〜廃棄までの全体を対象とする。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 06: D-4 製品開発・製品設計 -->
+  <div>
+    <div class="slide-no">06 ／ D-4：生産計画：製品開発・製品設計（VA/VE、コンカレントエンジニアリング）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-4 ／ 生産計画：製品開発・製品設計</div><div class="title">価値＝機能÷コスト</div><div class="overview">VA/VEは機能を維持・向上しながら価値を高める活動。コスト削減だけが目的ではない。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">VA/VE</span><span class="v">価値（V）＝機能（F）÷コスト（C）を高める体系的活動</span></div>
+            <div class="term-row"><span class="k">コンカレントエンジニアリング</span><span class="v">設計・生産技術・調達・販売が同時並行で検討し開発期間を短縮</span></div>
+            <p><span class="label">具体例</span><br>家電メーカーが企画段階から設計者・生産技術者・調達担当者が一緒に検討し、「金型が高額」「量産時に調達しにくい」等の懸念を早期に反映するのがコンカレントエンジニアリング。</p>
+            <p class="note"><b>ひっかけ：</b>「機能を下げてコストを下げれば必ず価値が上がる」は誤り。機能の低下率よりコストの低下率が大きくなければ価値は上がらない。コンカレントエンジニアリングは「各部門が独立して同時に別設計」ではなく「情報共有しながら同時並行検討」。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>D-16 工場計画（SLP、設計後のレイアウト検討にもつながる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 07: D-5 生産方式 -->
+  <div>
+    <div class="slide-no">07 ／ D-5：生産計画：生産方式（見込生産・受注生産、個別・ロット・連続生産、セル生産）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-5 ／ 生産計画：生産方式</div><div class="title">3つの分類軸で生産方式を整理する</div><div class="overview">「いつ作るか」「どれだけまとめて作るか」「どう配置するか」の3軸。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">見込／受注生産</span><span class="desc">需要予測で先に作る（欠品・過剰在庫リスク）／注文後に作る（リードタイム長い）</span></div>
+          <div class="row"><span class="name">個別／ロット／連続生産</span><span class="desc">1個ずつ専用計画／まとまった数量で段取替え／同一製品を継続生産（コスト低下、柔軟性低下）</span></div>
+          <div class="row"><span class="name">ライン／セル生産</span><span class="desc">大量生産向き・柔軟性低い／多能工が一連工程を担当し多品種少量に強い</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>セル生産は多能工化（D-11）が前提。「少人化」（需要増減に応じ人数調整）と「省人化」（固定的な人員削減）は別概念。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 08: D-6 ライン編成（ラインバランシング） -->
+  <div>
+    <div class="slide-no">08 ／ D-6：生産計画：ライン編成（ラインバランシング）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-6 ／ 生産計画：ライン編成（ラインバランシング）</div><div class="title">ネック工程がサイクルタイムを決める</div><div class="overview">タクトタイムは目標値、サイクルタイムは実績値（最も遅い工程の時間）。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="split-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">タクトタイム</span><span class="v">実稼働時間 ÷ 必要生産数（目標値）</span></div>
+            <div class="term-row"><span class="k">ラインバランシング効率</span><span class="v">各工程作業時間合計 ÷ (工程数×サイクルタイム) × 100</span></div>
+            <p class="note"><b>ひっかけ：</b>分母のサイクルタイムには「平均」ではなく「最大（ネック工程）」の時間を使う。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 90">
+              <line x1="6" y1="80" x2="94" y2="80" stroke="#171717" stroke-width="1.2"/>
+              <rect x="12" y="46" width="14" height="34" fill="#f4f4f4" stroke="#171717"/>
+              <rect x="34" y="10" width="14" height="70" fill="#FF3B1F"/>
+              <rect x="56" y="54" width="14" height="26" fill="#f4f4f4" stroke="#171717"/>
+              <rect x="78" y="38" width="14" height="42" fill="#f4f4f4" stroke="#171717"/>
+              <text x="19" y="42" font-size="6" text-anchor="middle" fill="#171717">200</text>
+              <text x="41" y="7" font-size="6" text-anchor="middle" fill="#FF3B1F" font-weight="700">252</text>
+              <text x="63" y="50" font-size="6" text-anchor="middle" fill="#171717">180</text>
+              <text x="85" y="34" font-size="6" text-anchor="middle" fill="#171717">220</text>
+            </svg>
+            <div class="diagram-caption-mini">第2工程（赤）がネック＝サイクルタイム252秒</div>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>852秒÷(4×252秒)×100＝約84.5％、バランスロス率約15.5％。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 09: D-6 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">09 ／ D-6：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-6 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第21問）</div><div class="overview">計算問題。前のスライドの公式で自分の手で計算してみる。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">ある工場では、1種類の製品をライン生産方式で生産することを計画している。1カ月の製品の必要生産数は2,000個、稼働日は20日である。1日の実稼働時間は7時間である。この生産ラインのタクトタイムが含まれる範囲として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>100秒未満</span></div>
+            <div class="choice"><span class="badge">イ</span><span>100秒以上、200秒未満</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>200秒以上、300秒未満</span></div>
+            <div class="choice"><span class="badge">エ</span><span>300秒以上、400秒未満</span></div>
+            <div class="choice"><span class="badge">オ</span><span>400秒以上</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第21問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 10: D-6 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">10 ／ D-6：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-6 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第21問）</div><div class="overview">正解はウ。タクトタイム＝25,200秒÷100個＝252秒/個。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>100秒未満</span></div>
+            <div class="choice"><span class="badge">イ</span><span>100秒以上、200秒未満</span></div>
+            <div class="choice correct"><span class="badge">ウ</span><span>200秒以上、300秒未満</span></div>
+            <div class="choice"><span class="badge">エ</span><span>300秒以上、400秒未満</span></div>
+            <div class="choice"><span class="badge">オ</span><span>400秒以上</span></div>
+          </div>
+          <p class="explain"><b>正解：ウ</b>。①1日あたりの必要生産数＝2,000個÷20日＝100個/日。②1日の実稼働時間＝7時間＝25,200秒。③タクトタイム＝25,200秒÷100個＝<b>252秒/個</b>。252秒は「200秒以上、300秒未満」に含まれる。</p>
+          <p class="example"><span class="label">具体例</span><br>タクトタイムは「必要な生産量を稼働時間内に満たすには1個あたり何秒で生産すればよいか」を表す目標値で、ラインバランシングの前提となる基準時間（サイクルタイム）として使われる。</p>
+          <p class="related-note">関連知識：`docs/07_key_formulas_and_frameworks.md`のラインバランシング効率の分母にこのタクトタイム（サイクルタイム）を使う。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第21問／正解：past_exams/1st_stage_answers/r07/d_v2_20250902.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11: D-7 需要予測 -->
+  <div>
+    <div class="slide-no">11 ／ D-7：生産計画：需要予測（指数平滑法、移動平均法）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-7 ／ 生産計画：需要予測</div><div class="title">αが大きいほど直近実績を重視</div><div class="overview">移動平均法は均等ウェイト、指数平滑法は直近ほど大きなウェイト。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">移動平均法</span><span class="v">直近n期間の実績値の単純平均。各期に均等なウェイト</span></div>
+            <div class="term-row"><span class="k">指数平滑法</span><span class="v">次期予測値＝α×当期実績値＋(1－α)×当期予測値</span></div>
+            <p><span class="label">具体例</span><br>先月実績100個・予測90個。α＝0.3→次期予測93個。α＝0.6→次期予測96個。αが大きいほど直近実績（100個）に近づく。</p>
+            <p class="note"><b>ひっかけ：</b>「αが大きいほど予測が安定する」は誤り。αが大きいほど直近実績への反応が敏感になり予測は振れやすくなる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>D-31 商品在庫管理・需要予測（店舗版でも同じ考え方を使う）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12: D-8 需給計画（MRP） -->
+  <div>
+    <div class="slide-no">12 ／ D-8：生産計画：需給計画（MRP、MPS、BOM）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-8 ／ 生産計画：需給計画（MRP、MPS、BOM）</div><div class="title">総所要量から在庫・入庫予定を引く</div><div class="overview">MPS（生産計画）とBOM（部品表）から必要部品を展開し、正味所要量を計算する。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">MPS</span><span class="v">最終製品を「いつ・いくつ作るか」定めた基準生産計画</span></div>
+            <div class="term-row"><span class="k">BOM</span><span class="v">製品1個に必要な部品・員数を示す部品表</span></div>
+            <div class="term-row"><span class="k">正味所要量</span><span class="v">総所要量－（現在庫＋入庫予定）</span></div>
+            <p><span class="label">具体例</span><br>自転車1台＝車輪2個。来月50台生産→総所要量100個。在庫15個・入荷予定10個→正味所要量＝100－25＝<b>75個</b>をリードタイム分前倒しで発注。</p>
+            <p class="note"><b>ひっかけ：</b>員数（自転車1台＝車輪2個）の掛け忘れに注意。MRPは計画に基づき部品を押し出す<b>プッシュ型</b>で、かんばん（プル型、D-2）とは対照的。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>D-2 生産システム（JIT・かんばん＝プル型との対比）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 13: D-9 スケジューリング -->
+  <div>
+    <div class="slide-no">13 ／ D-9：生産計画：スケジューリング（大中小日程計画、PERT、ジョンソンの規則）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-9 ／ 生産計画：スケジューリング</div><div class="title">短い工程に着目して投入順序を決める</div><div class="overview">PERTのクリティカルパスと、2機械フローショップのジョンソンの規則。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">クリティカルパス</span><span class="v">PERT図で最も時間のかかる経路。余裕時間ゼロで遅れが全体に直結</span></div>
+            <div class="term-row"><span class="k">ジョンソンの規則</span><span class="v">第1工程が短いジョブは前方へ昇順、第2工程が短いジョブは後方へ降順</span></div>
+            <p><span class="label">具体例</span><br>4ジョブa,b,c,dの投入順序＝a→c→d→b（前方は第1工程時間昇順、後方は第2工程時間降順）。</p>
+            <p class="note"><b>ひっかけ：</b>「第1工程が長いジョブを先に」ではなく「短い工程に着目」。ジョンソンの規則は2台機械・同一工程順序のフローショップ限定。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>D-10 生産統制（進捗管理でスケジュール通りかを日々チェック）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 14: D-9 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">14 ／ D-9：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-9 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第6問）</div><div class="overview">計算問題。前のスライドの公式で自分の手で計算してみる。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">2台の機械を用いて、第1工程、第2工程の順で作業するフローショップにおいて、各ジョブの作業時間が下表に与えられている（ジョブa：第1工程3・第2工程4／ジョブb：第1工程4・第2工程1／ジョブc：第1工程5・第2工程7／ジョブd：第1工程6・第2工程2）。メイクスパンが最小になるように各ジョブがフローショップに投入された場合、メイクスパンにおける2台の機械の非稼働時間の合計として、最も適切なものを下記の解答群から選べ。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>3</span></div>
+            <div class="choice"><span class="badge">イ</span><span>4</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>5</span></div>
+            <div class="choice"><span class="badge">エ</span><span>6</span></div>
+            <div class="choice"><span class="badge">オ</span><span>7</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第6問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 15: D-9 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">15 ／ D-9：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">D-9 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第6問）</div><div class="overview">正解はエ（6）。投入順序a→c→d→bでメイクスパン19、非稼働時間合計6。</div></div>
+        <div class="tag">運営管理</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>3</span></div>
+            <div class="choice"><span class="badge">イ</span><span>4</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>5</span></div>
+            <div class="choice correct"><span class="badge">エ</span><span>6</span></div>
+            <div class="choice"><span class="badge">オ</span><span>7</span></div>
+          </div>
+          <p class="explain"><b>正解：エ（6）</b>。ジョンソンの規則より投入順序＝a→c→d→b。第1工程：0-3-8-14-18（合計18稼働、非稼働1）。第2工程：a(3-7)→c(8-15)→d(15-17)→b(18-19)。メイクスパン＝19。第2工程の非稼働＝開始前3＋a後の待ち1＋d後の待ち1＝5。2台合計＝1＋5＝<b>6</b>。</p>
+          <p class="example"><span class="label">具体例</span><br>a：min(3,4)=3→前方、b：min(4,1)=1→後方、c：min(5,7)=5→前方、d：min(6,2)=2→後方。前方は第1工程時間昇順（a→c）、後方は第2工程時間降順（d→b）。</p>
+          <p class="related-note">関連知識：ジョンソンの規則は2機械n個ジョブのフローショップでメイクスパンを最小化する代表的手法。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第6問／正解：past_exams/1st_stage_answers/r07/d_v2_20250902.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
