@@ -144,6 +144,11 @@ addDividerSlide(pres, {
     { text: "要因（業界に知れ渡っている＝因果関係の曖昧性の喪失／代替資源が外部調達可能）。エは資源価値の適用範囲(V)の話で模倣困難性(I)とは別軸。アは自社の模倣困難性と無関係。", options: {} },
   ], { x: 0.55, y: cy, w: 12.25, h: 0.75, fontFace: F_BODY, fontSize: 11, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
   cy += 0.85;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "三代続く和菓子屋が長年かけて築いた「職人の技」は、他社が一朝一夕に習得できない（経路依存性＝イ）。逆にその技が広く知られていたり（ウ）、代替の資源を外部調達できたり（オ）すれば、模倣は容易になり優位性は弱まる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
   s.addText("関連知識：模倣困難性の3大源泉は「経路依存性」「因果関係の曖昧性」「社会的複雑性」（この設問はV・Iのみが対象でR・Oは問われていない）。", {
     x: 0.55, y: cy, w: 12.25, h: 0.4, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
   });
@@ -280,6 +285,11 @@ addDividerSlide(pres, {
     { text: "。既存顧客層（既存市場）向けに新しい低糖質シリアル（新製品）＝新製品開発戦略で、施策の実態と戦略名が一致。ア〜エはすべて、施策の実態（製品×市場の組み合わせ）と選択肢が主張する戦略名が食い違っている。", options: {} },
   ], { x: 0.55, y: cy, w: 12.25, h: 0.6, fontFace: F_BODY, fontSize: 11, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
   cy += 0.7;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "例えばアの「自社ECサイトを立ち上げ、既存シリアル市場でのシェア拡大を狙う」は、製品・市場とも既存のままの施策＝実態は「市場浸透戦略」なのに、選択肢は「多角化戦略」と誤って名付けている。まず施策の実態を製品×市場で判定してから戦略名が一致するか照合するのがコツ。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
   s.addText("関連知識：まず各選択肢の施策が実際にはどの象限かを判定し、その上で主張されている戦略名と一致するか照合するのが速い解き方。", {
     x: 0.55, y: cy, w: 12.25, h: 0.4, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
   });
@@ -465,6 +475,11 @@ addDividerSlide(pres, {
     { text: "（広いは誤り）。", options: {} },
   ], { x: 0.55, y: cy, w: 12.25, h: 0.85, fontFace: F_BODY, fontSize: 11, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
   cy += 0.93;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "大手飲料メーカーが自社にない発酵技術を持つスタートアップに出資し、将来の自社事業とのシナジーを狙うのがCVCの典型例。買収して経営統合するM&Aとは異なり、出資先の独立性を保ったまま関係を築く点がポイント。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
   s.addText("関連知識：M&Aの類型（水平・垂直・多角化型）とTOB・MBO・CVC等の周辺用語はセットで頻出。", {
     x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
   });
@@ -645,6 +660,11 @@ addDividerSlide(pres, {
     { text: "。", options: {} },
   ], { x: 0.55, y: cy, w: 12.25, h: 0.85, fontFace: F_BODY, fontSize: 11, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
   cy += 0.93;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "「精密加工技術」をコア技術に持つ工作機械メーカーが、医療機器・航空宇宙部品にも技術を横展開し、各分野で得た知見を工作機械自体の技術力向上にも還元するのがエの記述そのものの実践例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
   s.addText("関連知識：1つの技術基盤を複数事業に展開する考え方は「技術のプラットフォーム化」「技術シナジー」とも関連する。", {
     x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
   });
@@ -741,6 +761,11 @@ addDividerSlide(pres, {
     { text: "ユーザー自身", options: { bold: true } },
     { text: "で誤り。ウ：ジレンマの原因はユーザー・イノベーションではなく持続的イノベーションへの偏重。", options: {} },
   ], { x: 0.55, y: cy, w: 12.25, h: 0.85, fontFace: F_BODY, fontSize: 11, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  cy += 0.93;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "マウンテンバイクは、既存の自転車に飽き足らない愛好家（リード・ユーザー）自身が山道走行用に独自改造・開発したことから発展した、ユーザー・イノベーションの代表的な歴史的事例としてよく引用される。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   cy += 0.93;
   s.addText("関連知識：リード・ユーザー法は新製品開発のマーケティングリサーチ手法として2次試験（事例II）でも問われることがある。", {
     x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
