@@ -342,29 +342,28 @@ function drawQuadrant(slide, x, y, w, h, { cells, axisCaption }) {
 // connected by thin spokes. Use for any "one central thing pressured from N directions"
 // content, not just 5 forces specifically.
 function draw5Forces(slide, x, y, w, h, { center, top, bottom, left, right }) {
-  const boxW = w * 0.52, boxH = h * 0.24;
-  const cx = x + w / 2, cy = y + h / 2;
-  const mkBox = (label, bx, by, fill, textColor) => {
-    slide.addShape("rect", { x: bx, y: by, w: boxW, h: boxH, fill: { color: fill }, line: { color: INK, width: 1 } });
+  // 3x3 grid (like the HTML .forces-wrap CSS grid): side columns narrower than the
+  // center column, three equal rows. This mirrors the fixed-size-columns approach
+  // rather than centering boxes by half-widths, which previously produced overlapping
+  // boxes when the "center" box was wider than the side gaps allowed.
+  const gapX = 0.15, gapY = 0.12;
+  const colSideW = w * 0.24;
+  const colCenterW = w - 2 * colSideW - 2 * gapX;
+  const rowH = (h - 2 * gapY) / 3;
+  const col1X = x, col2X = x + colSideW + gapX, col3X = col2X + colCenterW + gapX;
+  const row1Y = y, row2Y = y + rowH + gapY, row3Y = y + 2 * (rowH + gapY);
+  const mkBox = (label, bx, by, bw, fill, textColor) => {
+    slide.addShape("rect", { x: bx, y: by, w: bw, h: rowH, fill: { color: fill }, line: { color: INK, width: 1 } });
     slide.addText(label, {
-      x: bx, y: by, w: boxW, h: boxH, align: "center", valign: "middle",
-      fontFace: F_BODY, fontSize: 9, bold: fill !== GHOST, color: textColor, isTextBox: true, margin: 0, lineSpacingMultiple: 1.05,
+      x: bx, y: by, w: bw, h: rowH, align: "center", valign: "middle",
+      fontFace: F_BODY, fontSize: 9, bold: fill !== WHITE, color: textColor, isTextBox: true, margin: 0, lineSpacingMultiple: 1.05,
     });
   };
-  const centerX = cx - boxW / 2, centerY = cy - boxH / 2;
-  const topY = y, bottomY = y + h - boxH;
-  const leftX = x, rightX = x + w - boxW;
-  const midY = cy - boxH / 2;
-  // spokes (drawn first so boxes sit on top)
-  slide.addShape("line", { x: cx, y: topY + boxH, w: 0, h: centerY - (topY + boxH), line: { color: LINE, width: 1 } });
-  slide.addShape("line", { x: cx, y: centerY + boxH, w: 0, h: bottomY - (centerY + boxH), line: { color: LINE, width: 1 } });
-  slide.addShape("line", { x: leftX + boxW, y: cy, w: centerX - (leftX + boxW), h: 0, line: { color: LINE, width: 1 } });
-  slide.addShape("line", { x: centerX + boxW, y: cy, w: (rightX) - (centerX + boxW), h: 0, line: { color: LINE, width: 1 } });
-  mkBox(top, cx - boxW / 2, topY, WHITE, INK);
-  mkBox(bottom, cx - boxW / 2, bottomY, WHITE, INK);
-  mkBox(left, leftX, midY, WHITE, INK);
-  mkBox(right, rightX, midY, WHITE, INK);
-  mkBox(center, centerX, centerY, RED, WHITE);
+  mkBox(top, col2X, row1Y, colCenterW, WHITE, INK);
+  mkBox(left, col1X, row2Y, colSideW, WHITE, INK);
+  mkBox(center, col2X, row2Y, colCenterW, RED, WHITE);
+  mkBox(right, col3X, row2Y, colSideW, WHITE, INK);
+  mkBox(bottom, col2X, row3Y, colCenterW, WHITE, INK);
 }
 
 // two overlapping circles — relatedness → the overlap is the payoff (synergy, shared risk, etc.)
