@@ -931,5 +931,314 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 33: E-20〜E-27 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "03",
+  partNo: "PART 03",
+  partLabel: "経営法務 ／ E-20〜E-27",
+  title: "独禁法と消費者保護",
+  desc: "公正な競争を守るルール、製品事故や不当表示から消費者を守る法律、事業承継の民法特例、そして資本市場へのアクセス手続まで、経営法務の最終パート。",
+  chips: ["E-21 不正競争防止法", "E-23 遺留分の民法特例", "E-27 上場審査基準"],
+  notes: "独禁法・消費者保護／事業承継／資本市場パートの区切りスライド。",
+});
+
+// ---------- Slide 34: E-20 金融商品取引法 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-20 ／ 金融商品取引法",
+    title: "発行開示と継続開示の両方を投資家保護のため義務付け",
+    overview: "開示書類の詳細はE-26に、規制の全体像はここで押さえる。",
+    tag: "経営法務",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "発行開示", v: "新たに証券を発行する際の有価証券届出書等" },
+    { k: "継続開示", v: "上場会社等が事業年度ごとに提出する有価証券報告書等" },
+    { k: "インサイダー取引規制", v: "未公表の重要事実を知る会社関係者による株式売買を禁止" },
+  ], { fontSize: 11.5, labelW: 2.4, gap: 0.4 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "注意：", options: { bold: true, color: RED } },
+    { text: "直近10年間この論点単独の出題はなく、関連する開示書類名はE-26に集約されて出題される。E-26と合わせて学習すること。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
+    related: "関連：E-26 有価証券報告書とディスクロージャー（開示書類の詳細）。",
+    years: mkYears(new Set([])),
+  });
+}
+
+// ---------- Slide 35: E-21 独占禁止法・不正競争防止法 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-21 ／ 独占禁止法・不正競争防止法",
+    title: "著名表示冒用行為は「混同」を要件としない",
+    overview: "不正競争防止法は号ごとに要件（周知性・著名性・混同の要否）が異なる。",
+    tag: "経営法務",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "周知表示混同惹起", tag: "2条1項1号", desc: "周知の商品等表示と同一・類似を使用し混同を生じさせる行為（混同要件あり）" },
+    { name: "著名表示冒用", tag: "2条1項2号", desc: "著名な商品等表示と同一・類似を使用する行為（混同は要件ではない）" },
+    { name: "不正ドメイン取得", tag: "2条1項19号", desc: "不正の利益目的等でのドメイン名取得・使用（周知・著名性は不要）" },
+    { name: "課徴金減免制度", tag: "独禁法", desc: "自ら公取委に申告した事業者は課徴金が減免される（リニエンシー）" },
+  ], { nameW: 2.2, tagW: 1.6, rowH: 0.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「商品等表示の\"商標\"に役務商標は含まれない」は誤り。役務商標（サービスマーク）も含まれる。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 36: E-21 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-21 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第11問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経営法務",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "不正競争防止法に関する記述として、最も適切なものはどれか。なお、選択肢における「特定商品等表示」とは、人の業務に係る氏名、商号、商標、標章その他の商品又は役務を表示するものをいう。",
+    stemH: 0.85,
+    choices: [
+      { badge: "ア", text: "営業秘密を保有する事業者からその営業秘密を示された場合において、不正の利益を得る目的で、その営業秘密を使用する行為は不正競争に該当する旨が、不正競争防止法に規定されている。", h: 0.6 },
+      { badge: "イ", text: "他人の著名な商品等表示と同一又は類似のものを使用する行為が、著名表示冒用行為と認定されるには、他人の商品又は営業と混同を生じさせることが要件となる。", h: 0.6 },
+      { badge: "ウ", text: "「商品等表示」には商標法上の「商標」が含まれるが、ここでいう「商標」には役務商標は含まれない。", h: 0.5 },
+      { badge: "エ", text: "不正の利益を得る目的で、他人の特定商品等表示と同一又は類似のドメイン名を使用する権利を取得する行為は、当該表示が周知である場合に限り不正競争を構成する。", h: 0.6 },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第11問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 37: E-21 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-21 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第11問）",
+    overview: "正解はア。営業秘密の不正使用は不正競争防止法に明文で規定される。",
+    tag: "経営法務",
+  });
+  const choices = [
+    { badge: "ア", text: "営業秘密を保有する事業者からその営業秘密を示された場合において、不正の利益を得る目的で、その営業秘密を使用する行為は不正競争に該当する旨が、不正競争防止法に規定されている。", h: 0.6 },
+    { badge: "イ", text: "他人の著名な商品等表示と同一又は類似のものを使用する行為が、著名表示冒用行為と認定されるには、他人の商品又は営業と混同を生じさせることが要件となる。", h: 0.6 },
+    { badge: "ウ", text: "「商品等表示」には商標法上の「商標」が含まれるが、ここでいう「商標」には役務商標は含まれない。", h: 0.5 },
+    { badge: "エ", text: "不正の利益を得る目的で、他人の特定商品等表示と同一又は類似のドメイン名を使用する権利を取得する行為は、当該表示が周知である場合に限り不正競争を構成する。", h: 0.6 },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.06;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。2条1項7号は、営業秘密保有者から示された営業秘密を、不正の利益を得る目的等で使用・開示する行為を不正競争として規定しており、記述どおり正しい。イ：著名表示冒用行為（2条1項2号）は著名性のみで足り", options: {} },
+    { text: "混同は要件ではない", options: { bold: true } },
+    { text: "（保護の必要性が高く希釈化・汚染から保護する趣旨）。ウ：「商標」には", options: {} },
+    { text: "役務商標も含まれる", options: { bold: true } },
+    { text: "。エ：ドメイン名の不正取得規制（19号）は", options: {} },
+    { text: "周知・著名性を要件としない", options: { bold: true } },
+    { text: "。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.68, fontFace: F_BODY, fontSize: 9, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.12 });
+  cy += 0.74;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "無名の町工場が有名ブランドと似たロゴを使い始めた場合、実際に消費者が混同していなくても著名表示冒用行為（2号）に該当しうる。これが「混同要件あり」の1号との大きな違い。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.55;
+  s.addText("関連知識：1号（周知表示混同惹起）＝周知性＋混同要件あり、2号（著名表示冒用）＝著名性のみで混同要件なし、19号（不正ドメイン取得）＝周知・著名性を問わず目的要件のみ、という整理を押さえること。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.35, fontFace: F_BODY, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15,
+  });
+  cy += 0.4;
+  s.addText("出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第11問／正解：past_exams/1st_stage_answers/r07/2025e.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 38: E-22 製造物責任法・消費者保護法 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-22 ／ 製造物責任法・消費者保護法",
+    title: "PL法は過失を証明しなくても請求できる",
+    overview: "「欠陥」の存在を証明すれば足りる点で被害者保護を図る。",
+    tag: "経営法務",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "PL法の対象", v: "製造・加工された動産。未加工農林畜水産物や不動産、ソフトウェア単体は対象外" },
+    { k: "請求権の期間", v: "知った時から3年（生命・身体侵害は5年）、引渡しから10年" },
+    { k: "消費者契約法", v: "不実告知・断定的判断の提供・不退去等があれば契約を取り消せる" },
+    { k: "景品表示法", v: "優良誤認表示・有利誤認表示を禁止" },
+  ], { fontSize: 10.5, labelW: 2.0, gap: 0.36 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "期間制限は「一律3年」ではなく、生命・身体の侵害は5年に延長。加えて引渡しから10年の長期制限も別途存在する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：E-17 民法（PL法は過失不要な点で通常の不法行為責任と異なる）。",
+    years: mkYears(new Set(["'17", "'18", "'21", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 39: E-23 事業承継に関する法 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-23 ／ 事業承継に関する法（経営承継円滑化法）",
+    title: "「除外」は計算から外す、「固定」は評価額を止める",
+    overview: "後継者の自社株式承継が遺留分侵害額請求を受けるリスクを防ぐ特例。",
+    tag: "経営法務",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "除外合意", desc: "贈与株式・事業用資産の価額を遺留分算定の財産から除外する合意" },
+    { name: "固定合意", desc: "遺留分算定時の自社株式評価額を合意時の時価に固定（株式のみ）" },
+    { name: "効力発生要件", desc: "推定相続人全員の合意＋経済産業大臣の確認＋家庭裁判所の許可" },
+  ], { nameW: 2.0, tagW: 0, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「除外＝計算から外す」「固定＝評価額を止める」を混同しない。固定合意は自社株式のみに使える。",
+    years: mkYears(new Set(["'16", "'17", "'21", "'23"])),
+  });
+}
+
+// ---------- Slide 40: E-24 企業活動に関する国際条約 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-24 ／ 企業活動に関する国際条約",
+    title: "準拠法を定めなければウィーン売買条約が適用されうる",
+    overview: "知財の国際条約はE-12、それ以外の代表格がウィーン売買条約（CISG）。",
+    tag: "経営法務",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "ウィーン売買条約（CISG）", v: "国際的な物品売買契約に適用されるルールを統一する条約" },
+    { k: "準拠法条項との関係", v: "契約書で準拠法を定めていないと、両国が加盟国なら適用されうる" },
+  ], { fontSize: 11.5, labelW: 3.2, gap: 0.45 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "注意：", options: { bold: true, color: RED } },
+    { text: "直近10年間この論点単独の出題はなく、知財関連の国際条約の出題はE-12に集約される。E-12・E-15と合わせて学習すること。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
+    related: "関連：E-12（知財国際条約）・E-15（英文契約の準拠法条項）。",
+    years: mkYears(new Set([])),
+  });
+}
+
+// ---------- Slide 41: E-25 資本市場に関する基礎知識 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-25 ／ 資本市場に関する基礎知識",
+    title: "直接金融は株式・社債で投資家から直接資金を集める",
+    overview: "間接金融（借入）と対比しつつ、E-26・E-27の前提知識として押さえる。",
+    tag: "経営法務",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "間接金融", v: "金融機関からの借入" },
+    { k: "直接金融", v: "株式・社債を発行して投資家から直接資金を集める" },
+    { k: "上場のメリット・コスト", v: "知名度・信用力向上の一方、継続開示義務と株主関与の受け入れが必要" },
+  ], { fontSize: 11.5, labelW: 2.3, gap: 0.4 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "注意：", options: { bold: true, color: RED } },
+    { text: "直近10年間この論点単独の出題はない。「直接金融と間接金融の違い」という基礎知識としてE-26・E-27とあわせて学習する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
+    related: "関連：E-27 社債発行・株式公開手続（上場によって生じる開示義務等）。",
+    years: mkYears(new Set([])),
+  });
+}
+
+// ---------- Slide 42: E-26 有価証券報告書とディスクロージャー ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-26 ／ 有価証券報告書とディスクロージャー",
+    title: "「届出書」は発行時、「報告書」は継続開示",
+    overview: "有価証券報告書は事業年度終了後原則3か月以内に提出する。",
+    tag: "経営法務",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "有価証券届出書", v: "発行開示。一定額以上の募集・売出しの際に提出" },
+    { k: "有価証券報告書", v: "継続開示。事業年度終了後原則3か月以内に提出" },
+    { k: "提出義務の範囲", v: "上場会社だけでなく、過去の届出書提出会社や株主数一定以上の非上場会社にも及ぶ" },
+  ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「届出書＝発行時」「報告書＝継続」の役割の違いを混同しない。提出義務は上場会社に限られない。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    related: "関連：E-20 金融商品取引法（開示規制の全体像）。",
+    years: mkYears(new Set(["'18", "'19"])),
+  });
+}
+
+// ---------- Slide 43: E-27 社債発行・株式公開手続 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "E-27 ／ 社債発行・株式公開手続",
+    title: "社債権者は「株主」ではなく「債権者」",
+    overview: "上場審査には形式基準と実質基準の両方があり、数値基準だけでは足りない。",
+    tag: "経営法務",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "社債", v: "議決権はなく、利息支払と元本償還を受ける権利を持つ" },
+    { k: "社債管理者", v: "社債権者保護のため一定の場合に設置が必要（銀行・信託会社等）" },
+    { k: "上場審査基準", v: "形式基準（株主数・時価総額・事業継続年数等）＋実質基準（健全性・ガバナンス等）" },
+  ], { fontSize: 11, labelW: 1.9, gap: 0.42 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "社債権者は株主ではなく債権者。上場は形式基準（数値）を満たすだけでは不十分で実質基準も審査される。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：E-25 資本市場に関する基礎知識（直接金融の位置づけ）。",
+    years: mkYears(new Set(["'16", "'17", "'19", "'21", "'24"])),
+  });
+}
+
 pres.writeFile({ fileName: path.join(__dirname, "../../slides/1st_stage/E_business_law.pptx") })
   .then(() => console.log("wrote", "slides/1st_stage/E_business_law.pptx"));
