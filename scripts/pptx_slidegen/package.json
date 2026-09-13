@@ -1,0 +1,8 @@
+{
+  "name": "pptx_slidegen",
+  "private": true,
+  "description": "Swiss Grid PowerPoint slide generator (pptxgenjs) for the SMEC problem-set decks. See docs/13_pptx_slide_template_spec.md.",
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}
