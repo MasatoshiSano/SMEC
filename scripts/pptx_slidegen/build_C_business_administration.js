@@ -1446,6 +1446,392 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 44: マーケティング論 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "03",
+  partNo: "PART 03",
+  partLabel: "企業経営理論 ／ C-30〜C-42",
+  title: "マーケティング論",
+  desc: "「誰に」「何を」「どう」届けるかを設計する分野。STP・4Pという基本フレームワークに、CRM・デジタル・ブランディングなど現代的なテーマが加わる、最頻出（A）論点が並ぶ分野。",
+  chips: ["C-31 STP・4P", "C-37 ブランディング", "C-38 消費者行動"],
+  notes: "マーケティング論パートの区切りスライド。",
+});
+
+// ---------- Slide 45: C-30 マーケティングの基礎概念 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-30 ／ マーケティングの基礎概念",
+    title: "マーケティングとは「顧客視点」で考えること",
+    overview: "「作ったものを売る」販売志向から「求められるものを作る」顧客志向への転換が出発点。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "マーケティングとは、単に「モノを売る」ことではなく、顧客が本当に求めている価値を理解し、それを届ける仕組みを作ること。時代とともに考え方が転換してきた。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "販売志向", v: "「作ったものをいかに売るか」が起点。工場をフル稼働させ、広告と営業力で売りさばく発想" },
+    { k: "顧客志向", v: "「顧客が何を求めているか」が起点。ニーズを調査し、そのニーズに合った商品を企画・開発する" },
+  ], { fontSize: 11.5, labelW: 1.7, gap: 0.5 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "「工場をフル稼働させて作った商品を、広告と営業力で売りさばく」のが販売志向、「まず顧客のニーズを調査し、そのニーズに合った商品を企画・開発する」のが顧客志向（マーケティング・コンセプト）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：現在の主流は顧客志向だが、販売志向が「常に誤り」というわけではない。両者の違いは「発想の起点がどちらか」という点で理解する。",
+    years: mkYears(new Set(["'16", "'17", "'20", "'23", "'25"])),
+  });
+}
+
+// ---------- Slide 46: C-31 マーケティング計画と戦略（STP、4P） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-31 ／ マーケティング計画と戦略（STP、4P）",
+    title: "「誰に」を決めるSTP、「どう売るか」を決める4P",
+    overview: "STPで狙う市場と立ち位置を決め、4Pで具体的な打ち手を組み立てる、マーケティング戦略の2大フレームワーク。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "セグメンテーション", tag: "STP①", desc: "市場を年齢・地域・ライフスタイルなどの基準で細分化する" },
+    { name: "ターゲティング", tag: "STP②", desc: "細分化した市場（セグメント）の中から、自社が狙う市場を選ぶ" },
+    { name: "ポジショニング", tag: "STP③", desc: "選んだ市場の中で、競合と比べた自社商品の独自の位置づけを明確にする" },
+    { name: "Product", tag: "4P①", desc: "何を売るか（製品そのものの設計）" },
+    { name: "Price", tag: "4P②", desc: "いくらで売るか（価格設定）" },
+    { name: "Place", tag: "4P③", desc: "どこで売るか（流通・チャネル）" },
+    { name: "Promotion", tag: "4P④", desc: "どう知らせ、購買を促すか（広告・販促）" },
+  ], { rowH: 0.6, nameW: 2.6, tagW: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-2 アンゾフの成長マトリクス（「誰に」「何を」の整理の仕方が共通する）。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'24"])),
+  });
+}
+
+// ---------- Slide 47: C-32 マーケティング・リサーチ ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-32 ／ マーケティング・リサーチ",
+    title: "施策の前に「調べる」：定性調査と定量調査",
+    overview: "市場や顧客を調査する活動がマーケティング・リサーチ。目的に応じて調査手法を使い分ける。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "マーケティング施策を考える前に、市場や顧客を調査する活動がマーケティング・リサーチ。調査方法は大きく2つに分かれる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "定性調査", v: "インタビューやアンケートの自由記述で「なぜ」「どう思うか」を深掘りする。少人数向け・初期段階向き" },
+    { k: "定量調査", v: "多数のデータを集めて数値で傾向を把握する。大規模なアンケート等で需要規模の検証に向く" },
+  ], { fontSize: 11.5, labelW: 1.7, gap: 0.5 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "新商品のコンセプトを固める初期段階では少人数へのインタビュー（定性調査）でアイデアを練り、コンセプトが固まった段階で大規模なアンケート（定量調査）を行い需要規模を検証する、という使い分けが一般的。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-30 マーケティングの基礎概念（顧客志向を実現するための情報収集手段）。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'21", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 48: C-33 リレーションシップ・CRM ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-33 ／ リレーションシップ・CRM",
+    title: "新規獲得より既存顧客との関係強化（CRM）",
+    overview: "新規顧客の獲得コストは既存顧客の維持コストより一般に高く、既存顧客との関係強化が収益性に直結する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "新規顧客の獲得だけでなく、既存顧客との長期的な関係を維持・強化する考え方が", options: { color: INK } },
+    { text: "リレーションシップ・マーケティング", options: { bold: true, color: INK } },
+    { text: "。これを支えるシステムが", options: { color: INK } },
+    { text: "CRM（顧客関係管理）", options: { bold: true, color: INK } },
+    { text: "。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.68;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "リレーションシップ", v: "新規獲得だけでなく既存顧客との長期的な関係を維持・強化する考え方" },
+    { k: "CRM", v: "顧客の購買履歴や属性データを一元管理し、個別対応や継続的な関係構築に活用するシステム" },
+  ], { fontSize: 11.5, labelW: 2.1, gap: 0.4 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある会員制ネットショップが、購買履歴に基づいて一人ひとりに合ったクーポンやレコメンドを送るのはCRMの活用例。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：新規顧客の獲得コストは既存顧客の維持コストより高いのが一般的。CRMは既存顧客との関係強化を通じて収益性を高める手段と位置づける。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'21", "'22"])),
+  });
+}
+
+// ---------- Slide 49: C-34 サービス・マーケティング ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-34 ／ サービス・マーケティング",
+    title: "モノと違う、サービスならではの4つの特性",
+    overview: "無形性・同時性・非均質性・消滅性という4特性が、サービス・マーケティング特有の課題を生む。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "無形性", tag: "形がない", desc: "事前に確認・試すことができない" },
+    { name: "同時性", tag: "生産＝消費", desc: "提供と消費が同時に起こる（例：美容院の施術）" },
+    { name: "非均質性", tag: "ばらつく", desc: "提供者や状況によって品質にばらつきが出る" },
+    { name: "消滅性", tag: "在庫できない", desc: "売れ残った提供機会は後から売ることができない（例：空席のまま出発した飛行機の座席）" },
+  ], { nameW: 2.0, tagW: 2.1 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：近年は「製造業のサービス化」（機械を売るだけでなく稼働監視サービスまで提供する等）も重要テーマ。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'22", "'25"])),
+  });
+}
+
+// ---------- Slide 50: C-35 デジタル・マーケティング ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-35 ／ デジタル・マーケティング",
+    title: "ネット時代の購買行動モデル：AIDMAからAISASへ",
+    overview: "インターネット普及で、消費者は購入前に「検索」し、購入後に「共有」するようになった。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "従来のマス広告時代の消費者行動モデルが", options: { color: INK } },
+    { text: "AIDMA", options: { bold: true, color: INK } },
+    { text: "、インターネット時代のモデルとして提唱されたのが", options: { color: INK } },
+    { text: "AISAS", options: { bold: true, color: INK } },
+    { text: "。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "AIDMA", v: "Attention注意→Interest関心→Desire欲求→Memory記憶→Action購買（マス広告時代）" },
+    { k: "AISAS", v: "Attention注意→Interest関心→Search検索→Action購買→Share共有（インターネット時代）" },
+  ], { fontSize: 11, labelW: 1.3, gap: 0.5 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "テレビCMを見て興味を持った商品について、購入前にスマートフォンでレビューを検索し（Search）、購入後にSNSに写真を投稿する（Share）という一連の行動は、AISASモデルそのもの。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：AIDMAの「Desire・Memory」がAISASでは「Search」に、「Action」の後に「Share」が加わる点が変化のポイント。",
+    years: mkYears(new Set(["'19", "'20", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 51: C-36 プロダクト・マネジメント：PLC、新製品開発 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-36 ／ プロダクト・マネジメント：PLC、新製品開発",
+    title: "プロダクト・ライフサイクル（PLC）で戦略を切り替える",
+    overview: "製品は導入期→成長期→成熟期→衰退期の4段階をたどり、各段階で有効な戦略が異なる。",
+    tag: "企業経営理論",
+  });
+  drawProcessSteps(s, 0.55, 2.0, 12.25, 2.4, [
+    { num: "導入期", label: "認知拡大", desc: "販売量少、認知度が低い。製品の認知拡大に注力" },
+    { num: "成長期", label: "シェア拡大", desc: "販売量が急拡大、競合が参入。シェア・販売網の拡大" },
+    { num: "成熟期", label: "差別化", desc: "販売量ピーク・競争激化。差別化、ブランド強化、コスト効率化" },
+    { num: "衰退期", label: "撤退判断", desc: "販売量が減少。撤退判断、または縮小継続" },
+  ]);
+  s.addText([
+    { text: "新しいガジェットが発売直後（導入期）はアーリー・アダプター層に的を絞り、市場拡大につれ（成長期）大量生産・販路拡大を進め、競合増加で差別化が難しい時期（成熟期）にはブランドの独自性を強調する、という戦略の切り替えがPLCの考え方。", options: {} },
+  ], { x: 0.55, y: 4.6, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-37 ブランディング（成熟期の差別化戦略の柱となる）。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'22", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 52: C-37 ブランディング ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-37 ／ ブランディング",
+    title: "ブランド・エクイティという「見えない資産」",
+    overview: "ブランド力があれば、同じ機能の商品でも高価格で選ばれ、リピート購入される（アーカーのブランド・エクイティ論）。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "ブランド・エクイティ", options: { bold: true, color: INK } },
+    { text: "とは、ブランドが持つ資産的な価値のこと。同じ機能の商品でも、ブランド力があれば高い価格でも選ばれたり、リピート購入されたりする。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.68;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "ブランド認知", v: "そのブランドが知られているか" },
+    { k: "知覚品質", v: "品質が高いと思われているか（消費者の主観的な評価）" },
+    { k: "ブランド・ロイヤルティ", v: "そのブランドへの愛着・継続購買意向" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.4 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "同じような機能のスニーカーでも、有名スポーツブランドのロゴが付いているだけで高い価格で売れるのは、そのブランドが持つブランド・エクイティ（ブランド価値）によるもの。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：ブランド・エクイティは「知覚品質」であり、客観的な品質の高さそのものではない。消費者にどう「思われているか」が本質。",
+    years: mkYears(new Set(["'16", "'18", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 53: C-38 消費者行動 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-38 ／ 消費者行動",
+    title: "「高関与」か「低関与」かで購買行動が変わる",
+    overview: "10年間ほぼ毎年出題される最頻出論点。関与度による購買行動の違いを理解する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "消費者が商品を購入するまでの心理プロセスを理解することもマーケティングの重要な要素。購買への関与度によって行動パターンが異なる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "高関与型", v: "じっくり検討する購買（住宅、自動車など）。多くの情報を集めて比較検討する" },
+    { k: "低関与型", v: "あまり深く考えない購買（日用品など）。習慣的に選ばれることが多い" },
+  ], { fontSize: 11.5, labelW: 1.5, gap: 0.5 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "住宅の購入では、多くの情報を集めて比較検討する「高関与型」の意思決定が行われるが、コンビニでのお菓子の購入は、ほとんど検討せず習慣的に選ばれる「低関与型」の意思決定であることが多い。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-39 プライシング（高関与型では価格以外の情報も比較検討材料になる）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 54: C-39 プライシング ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-39 ／ プライシング",
+    title: "価格はどう決まるか：3つのアプローチと心理的価格設定",
+    overview: "コストベース・需要ベース・競争ベースという3つの価格決定アプローチに加え、心理的な価格設定の工夫も出題される。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "コストベース", tag: "原価起点", desc: "原価に一定の利益を上乗せして価格を決める" },
+    { name: "需要ベース", tag: "顧客起点", desc: "顧客が「これくらいなら払ってもよい」と思う金額を基準に価格を決める" },
+    { name: "競争ベース", tag: "競合起点", desc: "競合の価格を基準に価格を決める" },
+    { name: "端数価格", tag: "心理効果", desc: "「1,000円」でなく「980円」と表示し、実際以上に安く感じさせる" },
+  ], { nameW: 2.0, tagW: 1.6 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：高級ブランド品は原価でなく「顧客がブランド価値にどれだけ払う意思があるか」（需要ベース）であえて高価格を維持しブランドイメージを守る。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'21", "'22", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 55: C-40 コミュニケーション ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-40 ／ コミュニケーション",
+    title: "マスメディアとSPメディアを組み合わせる",
+    overview: "企業が消費者に情報を伝える手段には、マスメディア広告とSP（セールス・プロモーション）メディアがある。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "企業が消費者に情報を伝える「コミュニケーション」手段には、テレビCMなどの", options: { color: INK } },
+    { text: "マスメディア", options: { bold: true, color: INK } },
+    { text: "を使った広告と、チラシ・ノベルティなどの", options: { color: INK } },
+    { text: "SPメディア", options: { bold: true, color: INK } },
+    { text: "がある。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.68;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "マスメディア広告", v: "テレビ・新聞・雑誌等、不特定多数に一斉に届ける広告" },
+    { k: "SPメディア", v: "チラシ・ノベルティ・店頭POP等、購買行動に近い場面で使う販促媒体" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.4 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "新商品のテレビCM（マスメディア広告）で認知を広げつつ、店頭でのポップやサンプリング（SPメディア）で最後の後押しをする、という組み合わせが一般的。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-41 プロモーション（コミュニケーション手段の使い分けとセットで問われる）。",
+    years: mkYears(new Set(["'17", "'20", "'21", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 56: C-41 プロモーション ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-41 ／ プロモーション",
+    title: "3つのプロモーション手法と、プル／プッシュの使い分け",
+    overview: "人的販売・販売促進・PRという3手法、そして消費者に直接働きかけるか流通業者に働きかけるかの戦略選択が問われる。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "人的販売", tag: "対面", desc: "営業担当者が直接顧客に働きかける（高額商品・法人営業で重要）" },
+    { name: "販売促進", tag: "短期", desc: "値引き、クーポン、サンプリングなど、短期的に購買を促す施策" },
+    { name: "PR", tag: "間接", desc: "報道機関への情報提供等で評判を高める。掲載可否や内容は自社でコントロールできない" },
+    { name: "プル戦略", tag: "対消費者", desc: "広告等で消費者の需要を喚起し、小売店に「置いてほしい」と言わせる" },
+    { name: "プッシュ戦略", tag: "対流通", desc: "卸・小売店に営業をかけて棚を確保する" },
+  ], { rowH: 0.75, nameW: 2.0, tagW: 1.6 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：テレビCMで消費者の関心を高め店頭で探させるのがプル戦略、営業担当が小売店を回り陳列棚を確保するのがプッシュ戦略。",
+    years: mkYears(new Set(["'18", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 57: C-42 流通チャネル ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-42 ／ 流通チャネル",
+    title: "チャネルの開放度と、オムニチャネル時代の3つの考え方",
+    overview: "開放的・選択的・専属的という開放度の違いに加え、実店舗とネットの垣根をなくすオムニチャネル系の概念も頻出。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "開放的チャネル", tag: "広く", desc: "多くの店舗に幅広く置いてもらう（例：コンビニで売る日用品）" },
+    { name: "選択的チャネル", tag: "絞る", desc: "一定の基準を満たす店舗にのみ置く（例：百貨店・ブランド専門店限定の高級化粧品）" },
+    { name: "専属的チャネル", tag: "独占", desc: "特定の1社にのみ独占的に販売権を与える" },
+    { name: "オムニチャネル", tag: "融合", desc: "実店舗とネット通販の垣根をなくし、どちらでもスムーズに買い物できるようにする" },
+    { name: "O2O", tag: "Online→Offline", desc: "オンラインでの行動をオフライン（実店舗）の購買に結びつける" },
+    { name: "OMO", tag: "意識させない", desc: "オンラインとオフラインの垣根をそもそも意識させない" },
+  ], { rowH: 0.6, nameW: 2.3, tagW: 1.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：ネットで注文して店舗で受け取れるサービスはO2O・オムニチャネルの代表例。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'21", "'22", "'23"])),
+  });
+}
+
 const outPath = path.join(__dirname, "..", "..", "slides", "1st_stage", "C_business_administration.pptx");
 pres.writeFile({ fileName: outPath }).then(() => {
   console.log("wrote", outPath);
