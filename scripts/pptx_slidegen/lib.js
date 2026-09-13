@@ -248,14 +248,14 @@ function addRowList(slide, x, y, w, rows, { rowH = 0.92, nameW = 2.6, tagW = 2.5
 // the question-only slide, then again with `correctIndex` + explain/relatedNote for the
 // answer slide. Never fabricate a question — only use real past_exams content, skip the
 // topic's exam-check pair entirely if no matching exercise exists yet.
-function addExamQuestion(slide, { stem, choices, correctIndex = -1 }) {
+function addExamQuestion(slide, { stem, choices, correctIndex = -1, stemH = 1.0 }) {
   let cy = 1.9;
   if (stem) {
     slide.addText(stem, {
-      x: 0.55, y: cy, w: 12.25, h: 1.0,
+      x: 0.55, y: cy, w: 12.25, h: stemH,
       fontFace: F_BODY, fontSize: 12.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3,
     });
-    cy += 1.05;
+    cy += stemH + 0.05;
   }
   choices.forEach((c, i) => {
     const isCorrect = i === correctIndex;

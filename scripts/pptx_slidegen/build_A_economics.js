@@ -208,6 +208,602 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 09: PART2 マクロ経済理論・国際経済 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "02",
+  partNo: "PART 02",
+  partLabel: "経済学・経済政策 ／ A-7〜A-17",
+  title: "マクロ経済理論・国際経済",
+  desc: "一国全体の経済がどう動くかを理論的に説明するマクロ経済学の中核。45度線分析・IS-LM分析という2大フレームワークに加え、開放経済（貿易・為替）まで扱う、A科目で最も出題数が多い山場。",
+  chips: ["A-9 IS-LM分析", "A-14 比較生産費説", "A-17 マンデル=フレミング"],
+  notes: "PART2区切りスライド。",
+});
+
+// ---------- Slide 10: A-7 生産物市場とGDP決定理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-7 ／ 生産物市場とGDP決定理論",
+    title: "45度線分析：総支出線と45度線の交点で均衡GDPが決まる",
+    overview: "有効需要の原理：GDPの水準は需要（Y=C+I+G）の大きさで決まる。政府支出の増加はそれ以上にGDPを押し上げる（乗数効果）。",
+    tag: "経済学・経済政策",
+  });
+  drawLineChart(s, 0.55, 1.9, 7.4, 4.2, {
+    xLabel: "国民所得 Y", yLabel: "総支出 E",
+    series: [
+      { x1: 0, y1: 0, x2: 0.8, y2: 0.8, color: INK_SOFT, width: 1.3, dashType: "dash", label: "45°", labelDx: -0.55, labelDy: 0.05 },
+      { x1: 0.05, y1: 0.15, x2: 0.95, y2: 0.72, color: RED, width: 2.2, label: "C+I+G" },
+    ],
+    point: { nx: 0.435, ny: 0.435, label: "均衡" },
+  });
+  s.addText([
+    { text: "総支出線（C+I+G）", options: { bold: true, color: INK } },
+    { text: "の傾き＝限界消費性向（1より小さい）のため45度線より緩やか。", options: {} },
+  ], { x: 8.25, y: 2.1, w: 4.05, h: 1.0, fontFace: F_BODY, fontSize: 11, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.35 });
+  s.addText([
+    { text: "政府支出Gを1増やすとGDPは1/(1-c)倍（乗数）増加する。均衡予算（同額増税とセット）でもGDPは支出増加分だけ増える（均衡予算乗数＝1）。", options: {} },
+  ], { x: 8.25, y: 3.3, w: 4.05, h: 1.6, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.4 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-9 IS-LM分析（財市場の均衡を利子率も含めて拡張したもの）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 11: A-8 貨幣市場と利子率 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-8 ／ 貨幣市場と利子率",
+    title: "貨幣需要の3つの動機（流動性選好理論）",
+    overview: "ケインズは貨幣を持ちたがる動機を3つに整理した。投機的動機だけが利子率に依存する点がポイント。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "貨幣需要は「所得が増えるほど増加し、利子率が上がるほど減少する」性質を持つ。3つの動機に整理される。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "取引動機", v: "日々の決済のための需要。所得に依存する", gap: 0.4 },
+    { k: "予備的動機", v: "不測の事態に備える需要。これも所得に依存する", gap: 0.4 },
+    { k: "投機的動機", v: "投資タイミングを計る需要。利子率が低いほど大きくなる", gap: 0.4 },
+  ], { fontSize: 11.5, labelW: 1.7 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "好況で所得が増えると取引に必要なお金が増え利子率に上昇圧力。金融緩和で貨幣供給を増やすと利子率は低下圧力を受ける。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "投機的動機は「利子率」に依存し「所得」には依存しない。取引・予備的動機は逆に「所得」に依存し「利子率」にはあまり依存しない。流動性の罠（利子率が下限に達し金融政策が効かなくなる状態）もあわせて押さえる。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    related: "関連：A-9 IS-LM分析（貨幣市場の均衡がLM曲線として組み込まれる）。",
+    years: mkYears(new Set(["'24", "'25"])),
+  });
+}
+
+// ---------- Slide 12: A-9 IS-LM曲線・分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-9 ／ IS-LM曲線・分析",
+    title: "財市場と貨幣市場を同時に満たすIS-LM分析",
+    overview: "IS曲線（財市場の均衡）は右下がり、LM曲線（貨幣市場の均衡）は右上がり。交点で均衡GDPと均衡利子率が決まる。",
+    tag: "経済学・経済政策",
+  });
+  drawLineChart(s, 0.55, 1.9, 7.4, 4.2, {
+    xLabel: "Y", yLabel: "r",
+    series: [
+      { x1: 0.05, y1: 0.85, x2: 0.95, y2: 0.1, color: INK, width: 2.2, label: "IS", labelDy: -0.4 },
+      { x1: 0.05, y1: 0.1, x2: 0.95, y2: 0.85, color: RED, width: 2.2, label: "LM" },
+    ],
+    point: { nx: 0.5, ny: 0.475, label: "E" },
+  });
+  s.addText([
+    { text: "IS曲線", options: { bold: true } }, { text: "：財市場の均衡。右下がり（利子率↓→投資↑→GDP↑）\n\n", options: {} },
+    { text: "LM曲線", options: { bold: true } }, { text: "：貨幣市場の均衡。右上がり（GDP↑→取引需要↑→利子率↑）\n\n", options: {} },
+    { text: "財政政策", options: { bold: true, color: INK } }, { text: "→ISが右へシフト（クラウディングアウト発生）\n\n", options: {} },
+    { text: "金融政策", options: { bold: true, color: RED } }, { text: "→LMが右へシフト", options: {} },
+  ], { x: 8.25, y: 2.0, w: 4.05, h: 4.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：IS・LM曲線が緩やかなほど「もう一方」の政策が効きやすい（IS緩やか→金融政策が効く、LM緩やか→財政政策が効く）という対応関係が頻出。",
+    years: mkYears(new Set(["'16", "'17", "'20", "'21", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 13: A-9 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-9 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第10問設問2）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経済学・経済政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "IS曲線とLM曲線に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。\n\nａ　限界消費性向が大きいほどIS曲線の傾きはより緩やかになり、貨幣供給の増加によるGDPの拡大効果は大きくなる。\nｂ　投資の利子感応度が小さいほど、IS曲線の傾きはより急になり、貨幣供給の増加によるGDPの拡大効果は小さくなる。\nｃ　貨幣需要の所得感応度が大きいほど、LM曲線の傾きはより緩やかになり、政府支出の増加によるGDPの拡大効果は小さくなる。\nｄ　貨幣需要の利子感応度が大きいほど、LM曲線の傾きはより緩やかになり、政府支出の増加によるGDPの拡大効果は大きくなる。",
+    choices: [
+      { badge: "ア", text: "ａ：正　ｂ：正　ｃ：誤　ｄ：正" },
+      { badge: "イ", text: "ａ：正　ｂ：誤　ｃ：正　ｄ：誤" },
+      { badge: "ウ", text: "ａ：正　ｂ：誤　ｃ：誤　ｄ：正" },
+      { badge: "エ", text: "ａ：誤　ｂ：正　ｃ：正　ｄ：誤" },
+      { badge: "オ", text: "ａ：誤　ｂ：正　ｃ：誤　ｄ：正" },
+    ],
+    stemH: 1.15,
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第10問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 14: A-9 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-9 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第10問設問2）",
+    overview: "正解はア。cの前半（LM曲線の傾きの説明）が誤りである点に注意。",
+    tag: "経済学・経済政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａ：正　ｂ：正　ｃ：誤　ｄ：正" },
+    { badge: "イ", text: "ａ：正　ｂ：誤　ｃ：正　ｄ：誤" },
+    { badge: "ウ", text: "ａ：正　ｂ：誤　ｃ：誤　ｄ：正" },
+    { badge: "エ", text: "ａ：誤　ｂ：正　ｃ：正　ｄ：誤" },
+    { badge: "オ", text: "ａ：誤　ｂ：正　ｃ：誤　ｄ：正" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "（a正・b正・c誤・d正）。ａ：限界消費性向cが大きいほど乗数1/(1-c)が大きくIS曲線は緩やかになり、金融政策の効果は大きくなる＝正。ｂ：投資の利子感応度が小さいとIS曲線は急になり、金融政策の効果は小さくなる＝正。ｃ：貨幣需要の所得感応度が大きいとLM曲線は急になる（「緩やかになる」が誤り）。ｄ：貨幣需要の利子感応度が大きいとLM曲線は緩やかになり、財政政策の効果は大きくなる＝正。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.1, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  cy += 1.18;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "投資が利子率にほとんど反応しない経済（IS曲線が急）では、金融緩和で利子率を下げても設備投資は増えにくく金融政策の効果は限定的。逆にこの経済では財政政策の方がGDP押し上げ効果が大きい。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.78;
+  s.addText("関連知識：IS・LM曲線の傾きの4決定要因と政策効果の対応は「その曲線自体が緩やかであるほど、もう一方の政策が効きやすい」という覚え方が有効。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.35, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.42;
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第10問／正解：past_exams/1st_stage_answers/r07/2025a.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 15: A-10 政府支出・租税と財政政策 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-10 ／ 政府支出・租税と財政政策",
+    title: "裁量的財政政策とビルトイン・スタビライザー",
+    overview: "財政政策は歳出・歳入を通じて景気を調整する。政府が発動する裁量的政策と、制度に組み込まれた自動調整機能がある。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "財政政策は歳出（政府支出）・歳入（租税）を通じて景気を調整する。不況期は拡張的、好況期は緊縮的に運用する。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "裁量的財政政策", v: "政府が意図的・都度判断で発動する政策", gap: 0.4 },
+    { k: "ビルトイン・スタビライザー", v: "累進課税・失業保険給付など、制度に組み込まれた自動安定化機能", gap: 0.4 },
+  ], { fontSize: 11.5, labelW: 2.6 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "不況期に所得税を減税しても、消費者が「将来の増税」を予想して減税分を貯蓄に回すと、期待ほど消費が増えない（リカードの中立命題）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "ビルトイン・スタビライザーは「政府が都度判断して発動する政策」ではなく、税制・社会保障制度に組み込まれた自動的な機能。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-9 IS-LM分析（クラウディングアウトは財政政策の効果を弱める代表的な要因）。",
+    years: mkYears(new Set(["'16", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 16: A-11 貨幣理論と金融政策 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-11 ／ 貨幣理論と金融政策",
+    title: "中央銀行が持つ6つの金融政策手段",
+    overview: "日本銀行が金利・通貨量を調整して物価安定・景気調整を図る手段。買いオペ＝資金供給（緩和）の方向を正確に覚える。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "公開市場操作", tag: "オペレーション", desc: "国債等の売買で資金量を調整。買いオペ＝資金供給（緩和）、売りオペ＝資金吸収（引締）" },
+    { name: "政策金利操作", tag: "無担保コールレート", desc: "中央銀行が誘導目標とする短期金利を操作" },
+    { name: "預金準備率操作", tag: "準備率", desc: "金融機関が中央銀行に預け入れる比率を上下させ貸出余力を調整" },
+    { name: "量的緩和政策", tag: "QE", desc: "政策金利がほぼゼロになった後、資金供給「量」そのものを拡大" },
+    { name: "マイナス金利政策", tag: "", desc: "日銀当座預金の一部にマイナス金利を適用し貸出・投資を促す" },
+    { name: "イールドカーブ・コントロール", tag: "YCC", desc: "長期金利（長期国債利回り）にも誘導目標を設定" },
+  ], { rowH: 0.62, nameW: 3.3, tagW: 1.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「買いオペは資金を吸収する」は誤り。買いオペは資金を「供給する」緩和的な政策。売りオペとの方向を逆に覚えないこと。",
+    years: mkYears(new Set(["'19", "'20", "'21"])),
+  });
+}
+
+// ---------- Slide 17: A-12 雇用と物価水準（フィリップス曲線等） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-12 ／ 雇用と物価水準（フィリップス曲線等）",
+    title: "短期は右下がり、長期は垂直（自然失業率仮説）",
+    overview: "フィリップス曲線はインフレ率と失業率のトレードオフを示す。ただし長期的にはこのトレードオフは成立しない。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "フィリップス曲線：縦軸インフレ率、横軸失業率の右下がりの関係。「失業率を下げようとするとインフレ率が高まる」という経験則。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "短期フィリップス曲線", v: "右下がり。インフレ率と失業率のトレードオフが観察される", gap: 0.4 },
+    { k: "自然失業率仮説", v: "予想インフレ率が織り込まれると曲線が上方シフト。長期は自然失業率の水準で垂直になる", gap: 0.5 },
+  ], { fontSize: 11.5, labelW: 2.1 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "1970年代の石油危機後、原油高でインフレが進む一方、不況で失業率も高止まりする「スタグフレーション」が発生し、単純なフィリップス曲線の想定が崩れた。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「トレードオフは長期でも常に成立」は誤り。長期の曲線は自然失業率の水準で垂直になる。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'20", "'22", "'24"])),
+  });
+}
+
+// ---------- Slide 18: A-13 景気変動と景気循環 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-13 ／ 景気変動と景気循環",
+    title: "4つの景気循環：周期の短い順に原因とペアで覚える",
+    overview: "キチン（在庫）＜ジュグラー（設備）＜クズネッツ（建築）＜コンドラチェフ（技術革新）の順に周期が長くなる。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "キチン・サイクル", tag: "約40か月", desc: "企業の在庫投資（在庫の積み増し・取り崩し）の変動による短期循環" },
+    { name: "ジュグラー・サイクル", tag: "約7〜10年", desc: "企業の設備投資（生産設備の更新投資）の波による中期循環" },
+    { name: "クズネッツの波", tag: "約15〜25年", desc: "住宅・商工業建築物の建て替え需要の変動（建築循環）" },
+    { name: "コンドラチェフ・サイクル", tag: "約50年", desc: "鉄道・電力・情報通信技術のような大規模な技術革新の普及" },
+  ], { rowH: 0.85, nameW: 2.9, tagW: 1.7 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-4 景気動向指数（DI・CI）とあわせて景気の波を把握する視点。周期と原因のペアを入れ替えた誤答が頻出。",
+    years: mkYears(new Set(["'17", "'22", "'25"])),
+  });
+}
+
+// ---------- Slide 19: A-13 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-13 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第6問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経済学・経済政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "景気循環の周期性に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。\n\nａ　コンドラチェフ・サイクルは、約50年の周期をもつ景気循環で、大規模な技術革新などに起因して生じると考えられている。\nｂ　キチン・サイクルは、約20年の周期をもつ景気循環で、住宅や商工業建築の建て替えなどに起因して生じると考えられている。\nｃ　ジュグラー・サイクルは、約7〜10年の周期をもつ景気循環で、生産設備の更新投資などに起因して生じると考えられている。",
+    choices: [
+      { badge: "ア", text: "ａ：正　ｂ：正　ｃ：正" },
+      { badge: "イ", text: "ａ：正　ｂ：正　ｃ：誤" },
+      { badge: "ウ", text: "ａ：正　ｂ：誤　ｃ：正" },
+      { badge: "エ", text: "ａ：誤　ｂ：正　ｃ：正" },
+      { badge: "オ", text: "ａ：誤　ｂ：正　ｃ：誤" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第6問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 20: A-13 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-13 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第6問）",
+    overview: "正解はウ。ｂはキチン・サイクルとクズネッツの波の説明が入れ替わっている。",
+    tag: "経済学・経済政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａ：正　ｂ：正　ｃ：正" },
+    { badge: "イ", text: "ａ：正　ｂ：正　ｃ：誤" },
+    { badge: "ウ", text: "ａ：正　ｂ：誤　ｃ：正" },
+    { badge: "エ", text: "ａ：誤　ｂ：正　ｃ：正" },
+    { badge: "オ", text: "ａ：誤　ｂ：正　ｃ：誤" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "（a正・b誤・c正）。ａ：コンドラチェフ・サイクルは約50年周期・技術革新が原動力＝正。ｂ：キチン・サイクルは本来「約40か月（3〜4年）」の在庫投資による短期循環。「約20年・住宅や商工業建築の建て替え」はクズネッツの波の説明であり、名称と内容が入れ替わっている＝誤。ｃ：ジュグラー・サイクルは約7〜10年・設備投資が原因＝正。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "企業が在庫を積みすぎ、その後在庫調整で生産を絞る数年単位のサイクルはキチン・サイクルの典型例。鉄道・電力の普及のような技術革新が経済を長期に押し上げる動きはコンドラチェフ・サイクルとして説明される。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.78;
+  s.addText("関連知識：4大景気循環（キチン・ジュグラー・クズネッツ・コンドラチェフ）は「周期の長さ×原因（在庫・設備・建築・技術革新）」のペアで暗記する。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.35, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.42;
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第6問／正解：past_exams/1st_stage_answers/r07/2025a.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 21: A-14 比較生産費説と貿易理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-14 ／ 比較生産費説と貿易理論",
+    title: "「相対的な得意」で特化すると両国とも得をする",
+    overview: "リカードの比較生産費説：絶対優位でなく比較優位（機会費用の小ささ）に基づいて特化・貿易すれば両国の生産量が増える。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "機会費用（ある財1単位の生産に必要な労働量 ÷ もう一方の財1単位に必要な労働量）が相手国より低い財に特化すると、貿易の利益が生まれる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "絶対優位", v: "ある国が2財のどちらも他国より効率よく作れること（貿易の必要条件ではない）", gap: 0.4 },
+    { k: "比較優位", v: "相対的に機会費用が低い財を持つこと。これに基づき特化すれば両国とも得をする", gap: 0.4 },
+  ], { fontSize: 11.5, labelW: 1.5 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "カカオ1単位の労働量：A国5、B国4。大豆1単位：A国10、B国2。A国のカカオの機会費用＝5÷10＝0.5、B国＝4÷2＝2。A国はカカオに、B国は大豆に比較優位を持ち、それぞれ完全特化すると特化前より多く生産・消費できる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "機会費用の式（自国の労働量÷もう一方の財の労働量）をどちらの財について聞かれているか取り違えないこと。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-23 経済余剰（貿易の利益を余剰の増加として捉える視点）。",
+    years: mkYears(new Set(["'16", "'17", "'22", "'24"])),
+  });
+}
+
+// ---------- Slide 22: A-14 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-14 ／ 過去問で確認する",
+    title: "こう出題される（令和6年度 第22問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経済学・経済政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "下表に従って、比較生産費説に基づく国際分業を考える。カカオ1単位を生産するのに必要な労働量は、Ａ国では5、Ｂ国では4である。同様に、大豆1単位を生産するのに必要な労働量は、Ａ国では10、Ｂ国では2である。労働は両国で同質で、当初はどちらの国もカカオと大豆をそれぞれ40単位ずつ生産していたものとする。このような状況に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。\n\nａ　Ａ国におけるカカオ1単位の機会費用は、大豆2単位である。\nｂ　Ｂ国における大豆のカカオに対する相対価格は、Ａ国のそれよりも高い。\nｃ　Ｂ国で2つの財の生産に必要となる労働量の合計は240である。\nｄ　当初の労働量を維持しながら、Ａ国がカカオの生産に、Ｂ国が大豆の生産にそれぞれ完全特化したとき、各国におけるカカオと大豆の生産量はどちらも120となる。",
+    choices: [
+      { badge: "ア", text: "ａ：正　ｂ：正　ｃ：誤　ｄ：誤" },
+      { badge: "イ", text: "ａ：正　ｂ：誤　ｃ：正　ｄ：誤" },
+      { badge: "ウ", text: "ａ：誤　ｂ：正　ｃ：正　ｄ：誤" },
+      { badge: "エ", text: "ａ：誤　ｂ：誤　ｃ：正　ｄ：正" },
+      { badge: "オ", text: "ａ：誤　ｂ：誤　ｃ：誤　ｄ：正" },
+    ],
+    stemH: 1.85,
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2024/A1JI2024.pdf（令和6年度第1次試験）第22問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 23: A-14 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-14 ／ 過去問で確認する",
+    title: "解答＆解説（令和6年度 第22問）",
+    overview: "正解はエ。機会費用の式（自国の労働量÷もう一方の財の労働量）を正確に適用できるかがカギ。",
+    tag: "経済学・経済政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａ：正　ｂ：正　ｃ：誤　ｄ：誤" },
+    { badge: "イ", text: "ａ：正　ｂ：誤　ｃ：正　ｄ：誤" },
+    { badge: "ウ", text: "ａ：誤　ｂ：正　ｃ：正　ｄ：誤" },
+    { badge: "エ", text: "ａ：誤　ｂ：誤　ｃ：正　ｄ：正" },
+    { badge: "オ", text: "ａ：誤　ｂ：誤　ｃ：誤　ｄ：正" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 3 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：エ", options: { bold: true, color: RED } },
+    { text: "（a誤・b誤・c正・d正）。ａ：Ａ国のカカオ1単位の機会費用＝5÷10＝大豆0.5単位（「2単位」はＢ国の機会費用）＝誤。ｂ：大豆の相対価格（大豆の労働量÷カカオの労働量）はＡ国＝10÷5＝2、Ｂ国＝2÷4＝0.5。Ｂ国の方が低いため「Ｂ国の方が高い」は誤。ｃ：Ｂ国の総労働量＝4×40＋2×40＝240＝正。ｄ：Ａ国はカカオに600÷5＝120単位、Ｂ国は大豆に240÷2＝120単位、完全特化。両国とも120＝正。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "特化前は両国合計でカカオ80単位・大豆80単位だったのに対し、特化後は各国120単位ずつを生産でき、貿易を通じてより多くの量を消費できる可能性が生まれる（貿易の利益）。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText("関連知識：「各国の総労働量（一定）÷特化財の労働係数＝特化後の生産量」という計算パターンは頻出。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.35, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.42;
+  s.addText("出典：past_exams/1st_stage/1ji2024/A1JI2024.pdf（令和6年度第1次試験）第22問／正解：past_exams/1st_stage_answers/r06/2024a.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 24: A-15 貿易政策（関税・非関税障壁） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-15 ／ 貿易政策（関税・非関税障壁）",
+    title: "保護貿易は社会全体の総余剰を減らす",
+    overview: "関税・非関税障壁いずれも国内生産者を保護する一方、自由貿易と比べ社会全体の総余剰は小さくなる（死荷重の発生）。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "自由貿易は理論上、両国全体の余剰を最大化するが、各国政府は国内産業保護のため保護貿易政策をとることがある。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "関税", v: "輸入品への課税。国内価格↑で消費者余剰↓・生産者余剰↑・政府に関税収入。総余剰は死荷重の分だけ減少", gap: 0.6 },
+    { k: "非関税障壁", v: "輸入数量割当（クオータ）、輸出自主規制、国内基準を使った実質的な輸入制限など", gap: 0.5 },
+  ], { fontSize: 11.5, labelW: 1.6 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "輸入農産物に高関税をかけると、消費者は割高な価格を負担（消費者余剰↓）するが、国内農家は保護され（生産者余剰↑）、政府に関税収入が入る。社会全体の総余剰は自由貿易時より小さくなる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-23 経済余剰（死荷重の考え方の土台）。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'21", "'23", "'25"])),
+  });
+}
+
+// ---------- Slide 25: A-16 国際収支と為替レート決定理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-16 ／ 国際収支と為替レート決定理論",
+    title: "為替レートの決定理論とマーシャル＝ラーナー条件",
+    overview: "為替レートの変動要因を説明する2理論と、円安が貿易収支を改善させる条件（弾力性の和）を押さえる。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "購買力平価説", tag: "PPP", desc: "二国間の物価上昇率の差で為替レートが決まる。自国の物価上昇率が高いほど自国通貨は減価" },
+    { name: "金利平価説", tag: "", desc: "内外の金利差が為替レートの予想変化率と等しくなるよう調整される" },
+    { name: "マーシャル＝ラーナー条件", tag: "弾力性の和＞1", desc: "輸出入の価格弾力性の和が1超なら円安は貿易収支を改善、＝1なら不変、＜1なら悪化" },
+    { name: "Jカーブ効果", tag: "", desc: "円安直後は数量が反応せず貿易収支が一時悪化し、時間経過とともに改善する現象" },
+  ], { rowH: 0.85, nameW: 2.9, tagW: 2.1 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：弾力性の和＝1のケースを「悪化する」とする誤りが典型。正しくは「変化しない（中立）」。",
+    years: mkYears(new Set(["'19", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 26: A-16 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-16 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第11問設問2）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経済学・経済政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "円建ての貿易収支NXが、NX＝PX(e)－eP＊M(e)と表されるとする（X(e)は輸出量、M(e)は輸入量、eは円建て為替レート、Pは円建て輸出財価格（一定）、P＊はドル建て輸入財価格（一定））。為替レートの変化が貿易収支に及ぼす影響に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。\n\nａ　為替レートが変化しても輸出量と輸入量は変化しないとき、為替レートの円安・ドル高への変化は、貿易収支を悪化させる。\nｂ　輸入の価格弾力性と輸出の価格弾力性がいずれも1より大きいとき、為替レートの円安・ドル高への変化は、貿易収支を改善させる。\nｃ　輸入の価格弾力性と輸出の価格弾力性の合計が1に等しいとき、為替レートの円安・ドル高への変化は、貿易収支を悪化させる。",
+    choices: [
+      { badge: "ア", text: "ａ：正　ｂ：正　ｃ：正" },
+      { badge: "イ", text: "ａ：正　ｂ：正　ｃ：誤" },
+      { badge: "ウ", text: "ａ：正　ｂ：誤　ｃ：正" },
+      { badge: "エ", text: "ａ：誤　ｂ：正　ｃ：正" },
+      { badge: "オ", text: "ａ：誤　ｂ：正　ｃ：誤" },
+    ],
+    stemH: 1.4,
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第11問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 27: A-16 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-16 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第11問設問2）",
+    overview: "正解はイ。ｃは「悪化」でなく「変化しない（中立）」が正しい。",
+    tag: "経済学・経済政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａ：正　ｂ：正　ｃ：正" },
+    { badge: "イ", text: "ａ：正　ｂ：正　ｃ：誤" },
+    { badge: "ウ", text: "ａ：正　ｂ：誤　ｃ：正" },
+    { badge: "エ", text: "ａ：誤　ｂ：正　ｃ：正" },
+    { badge: "オ", text: "ａ：誤　ｂ：正　ｃ：誤" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ", options: { bold: true, color: RED } },
+    { text: "（a正・b正・c誤）。ａ：輸出入数量が一定なら円安は輸入代金の円換算額だけを機械的に押し上げ貿易収支は悪化＝正（Jカーブ効果の谷の局面と同じ理屈）。ｂ：弾力性の和が1超なら数量効果が価格効果を上回り貿易収支は改善＝正。ｃ：弾力性の和がちょうど1のときは数量効果と価格効果が相殺し貿易収支は変化しない（「悪化する」は誤り）。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.95, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  cy += 1.03;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "急激な円安直後は輸入企業が契約済み数量のまま購入を続け輸入代金（円換算）が膨らみ貿易収支が一時悪化する（Jカーブの谷）。時間をかけて数量調整が進むと貿易収支は改善に向かう。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.78;
+  s.addText("関連知識：マーシャル＝ラーナー条件は、短期は弾力性の和が小さいため悪化し、時間とともに改善するJカーブ効果とセットで理解する。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.35, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.42;
+  s.addText("出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第11問／正解：past_exams/1st_stage_answers/r07/2025a.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 28: A-17 国際マクロ経済の理論と政策 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-17 ／ 国際マクロ経済の理論と政策",
+    title: "為替相場制度で財政・金融政策の効き方が正反対になる",
+    overview: "マンデル＝フレミング・モデル：資本移動自由な小国では、変動相場制と固定相場制で政策効果が逆転する。",
+    tag: "経済学・経済政策",
+  });
+  drawQuadrant(s, 0.55, 1.9, 12.25, 3.9, {
+    cells: [
+      { pos: "tl", label: "変動相場制×財政政策", sublabel: "効果はほぼ無効。利子率↑→自国通貨高→純輸出減で相殺" },
+      { pos: "tr", label: "変動相場制×金融政策", sublabel: "効果は有効。利子率↓→自国通貨安→輸出増でGDP拡大" },
+      { pos: "bl", label: "固定相場制×財政政策", sublabel: "効果は増幅。為替介入が金融緩和と同様の効果を持つ" },
+      { pos: "br", label: "固定相場制×金融政策", sublabel: "効果は無効。為替介入で緩和効果が打ち消される" },
+    ],
+    axisCaption: "資本移動が自由な小国が前提。「変動相場制→財政無効・金融有効」「固定相場制→財政有効・金融無効」という対応関係が最重要。",
+  });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-9 IS-LM分析（開放経済への拡張モデル）。",
+    years: mkYears(new Set(["'18", "'19", "'20", "'21", "'22", "'23", "'24"])),
+  });
+}
+
 const outPath = path.join(__dirname, "..", "..", "slides", "1st_stage", "A_economics.pptx");
 pres.writeFile({ fileName: outPath }).then(() => {
   console.log("wrote", outPath);
