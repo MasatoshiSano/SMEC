@@ -1,0 +1,696 @@
+<title>経営法務 - スライド</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;
+  --cw:calc(min(100vw, 1020px) - 48px);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:calc(var(--cw)*1.85/100) calc(var(--cw)*2.26/100) calc(var(--cw)*0.93/100);border-bottom:calc(var(--cw)*0.16/100) solid var(--ink);flex:0 0 auto;gap:calc(var(--cw)*1.44/100);}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.98/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.55/100);font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:calc(var(--cw)*1.0/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.93/100);color:#fff;background:var(--ink);padding:calc(var(--cw)*0.31/100) calc(var(--cw)*0.93/100);align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:calc(var(--cw)*1.4/100) calc(var(--cw)*2.26/100) calc(var(--cw)*1.5/100);display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--cw)*0.55/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.05/100);color:#fff;background:var(--red);width:calc(var(--cw)*1.75/100);height:calc(var(--cw)*1.75/100);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-chip.none{background:var(--ink-soft);}
+.freq-top .rank-label{font-size:calc(var(--cw)*0.76/100);font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:calc(var(--cw)*0.78/100);color:var(--ink-soft);border-left:1px solid var(--line);padding-left:calc(var(--cw)*1.1/100);line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:calc(var(--cw)*0.68/100);color:var(--ink-soft);margin-right:calc(var(--cw)*0.9/100);white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.3/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.35/100);height:calc(var(--cw)*1.35/100);border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 過去問チェック */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .example{font-size:calc(var(--cw)*0.78/100);line-height:1.5;color:var(--ink);}
+.examq .example .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.62/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
+
+/* 番号なしの罫線区切りリスト */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
+
+/* 左2/3テキスト＋右1/3図解 */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:calc(var(--cw)*0.8/100);}
+.cover .main .title{font-size:calc(var(--cw)*5.2/100);font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:calc(var(--cw)*1.15/100);color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:calc(var(--cw)*62/100);}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:calc(var(--cw)*1.2/100);}
+.cover .scope{display:flex;gap:calc(var(--cw)*2.4/100);}
+.cover .scope .item{display:flex;flex-direction:column;gap:calc(var(--cw)*0.2/100);}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.6/100);font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:calc(var(--cw)*0.72/100);color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.85/100);border:1px solid rgba(255,255,255,.4);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*1/100);color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 calc(var(--cw)*4/100);overflow:hidden;}
+.divider .ghost-no{position:absolute;right:calc(var(--cw)*2/100);top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*22/100);line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:calc(var(--cw)*1.3/100);max-width:calc(var(--cw)*70/100);}
+.divider .kicker{display:flex;align-items:center;gap:calc(var(--cw)*1/100);}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:calc(var(--cw)*3.6/100);font-weight:900;line-height:1.15;}
+.divider .desc{font-size:calc(var(--cw)*1.08/100);color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:calc(var(--cw)*1.6/100);margin-top:calc(var(--cw)*0.4/100);flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);border:1px solid rgba(255,255,255,.35);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*0.9/100);color:#fff;opacity:.85;white-space:nowrap;}
+
+/* 棒グラフ（存続期間比較等） */
+.bar-chart{flex:1;display:flex;align-items:flex-end;gap:calc(var(--cw)*1.2/100);min-height:0;padding-bottom:calc(var(--cw)*0.3/100);border-bottom:1.5px solid var(--ink);}
+.bar-chart .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:calc(var(--cw)*0.3/100);}
+.bar-chart .bar-val{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.72/100);color:var(--ink-soft);}
+.bar-chart .bar-val.on{color:var(--red);font-weight:700;}
+.bar-chart .bar{width:60%;background:var(--ghost);border:1px solid var(--ink);}
+.bar-chart .bar.on{background:var(--red);border-color:var(--red);}
+.bar-chart .bar-label{font-size:calc(var(--cw)*0.74/100);color:var(--ink);margin-top:calc(var(--cw)*0.2/100);}
+</style>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 05 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">経営法務<span class="accent">。</span></div>
+          <div class="subtitle">会社の設立・倒産、知的財産権、取引・民法・会社法、独禁法、資本市場まで27<span style="white-space:nowrap">論点</span>。丸暗記ではなく「似た制度どうしの<span style="white-space:nowrap">比較</span>」がカギになる科目。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">27</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">5</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">18/27</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/E_business_law_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 02: 事業開始/倒産／知的財産権 区切り -->
+  <div>
+    <div class="slide-no">02</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">経営法務 ／ E-1〜E-9</span></div>
+          <div class="title">事業開始・倒産／知的財産権</div>
+          <div class="desc">会社を始めるとき・たたむときの基本ルールから、特許・商標・意匠・実用新案・著作権という知的財産権の最頻出分野まで。</div>
+          <div class="covers">
+            <span class="chip">E-4 事業譲渡と会社分割</span>
+            <span class="chip">E-6 特許権</span>
+            <span class="chip">E-7 商標権</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 03: E-1 個人の事業開始 -->
+  <div>
+    <div class="slide-no">03 ／ E-1：個人の事業開始（個人事業の特徴、開業準備）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-1 ／ 個人の事業開始（個人事業の特徴、開業準備）</div><div class="title">無限責任か有限責任かが最大の違い</div><div class="overview">個人事業は開業が簡単な代わりに、失敗時のリスクが大きい。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">設立手続</span><span class="desc">個人事業：開業届のみ／法人：定款作成・認証・設立登記が必要</span></div>
+          <div class="row"><span class="name">責任の範囲</span><span class="desc">個人事業：無限責任（個人財産で返済義務）／法人：出資額の範囲の有限責任</span></div>
+          <div class="row"><span class="name">税金</span><span class="desc">個人事業：所得税（累進課税）／法人：法人税</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip none">－</span><span class="rank-label">直近10年単独出題なし</span></div>
+            <div class="related"><b>ひっかけ：</b>「登記が不要で簡単」と「無限責任か有限責任か」は別の話。簡単に始められる代わりにリスクが大きい表裏の関係。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 04: E-2 法人の事業開始 -->
+  <div>
+    <div class="slide-no">04 ／ E-2：法人の事業開始（会社の設立と登記）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-2 ／ 法人の事業開始（会社の設立と登記）</div><div class="title">発行可能株式総数は絶対的記載事項ではない</div><div class="overview">定款作成→認証→出資履行→設立時取締役選任→設立登記の順で会社が成立する。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">絶対的記載事項</span><span class="v">目的・商号・本店所在地・出資財産の価額（最低額）・発起人の氏名住所</span></div>
+            <div class="term-row"><span class="k">定款認証</span><span class="v">株式会社は公証人の認証が必要（合同会社は不要）</span></div>
+            <div class="term-row"><span class="k">設立登記</span><span class="v">登記により会社が法的に成立する（成立要件）</span></div>
+            <p class="note"><b>ひっかけ：</b>発行可能株式総数は絶対的記載事項に<b>含まれない</b>。定款に記載がなくても定款は無効にならないが、成立時までに別途定める必要がある。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>E-18 会社法（機関設計・取締役会の運営ルール）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: E-3 届出・手続 -->
+  <div>
+    <div class="slide-no">05 ／ E-3：届出・手続（許認可、労働保険・社会保険、税務上の届出）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-3 ／ 届出・手続（許認可、労働保険・社会保険、税務上の届出）</div><div class="title">業種によって必要な許認可が異なる</div><div class="overview">会社設立だけでは事業を始められない業種もある。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">許認可</span><span class="v">飲食業（保健所）、建設業（建設業許可）、古物商（公安委員会）等</span></div>
+            <div class="term-row"><span class="k">労働・社会保険</span><span class="v">従業員雇用時は労災・雇用保険、健康保険・厚生年金への加入手続</span></div>
+            <p class="note"><b>ひっかけ：</b>「許可」「認可」「届出」「登録」で行政手続の性質が異なる。個々の業種の詳細より「事前に確認すべき事項が複数ある」という全体像を理解しておけば十分。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip none">－</span><span class="rank-label">直近10年単独出題なし</span></div>
+            <div class="related"><b>関連：</b>E-2 法人の事業開始（会社設立から営業開始までの流れ）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 06: E-4 合併等の手続 -->
+  <div>
+    <div class="slide-no">06 ／ E-4：合併等の手続（合併・営業譲渡、組織変更）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-4 ／ 合併等の手続（合併・営業譲渡、組織変更）</div><div class="title">「バラ売り」か「まるごと引っ越し」か</div><div class="overview">経営法務で最頻出。包括承継か特定承継かで同意・保護手続の要否が変わる。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">事業譲渡</span><span class="combo">特定承継</span><span class="desc">個々の契約を個別移転。契約相手方の個別同意が必要。債権者保護手続の規定なし</span></div>
+          <div class="row"><span class="name">会社分割</span><span class="combo">包括承継</span><span class="desc">契約上の地位も一括移転。相手方の同意は不要だが原則債権者保護手続が必要</span></div>
+          <div class="row"><span class="name">合併</span><span class="combo">包括承継</span><span class="desc">消滅会社の権利義務全部が移転。同意不要、原則債権者保護手続が必要</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「事業譲渡も包括承継」「会社分割にも保護手続不要」は誤り。3点（承継の性質・同意要否・保護手続要否）をセットで覚える。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 07: E-4 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">07 ／ E-4：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-4 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第6問設問1）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">X社代表取締役甲氏と中小企業診断士の会話：「A事業部門をY社に譲渡する際、事業譲渡と会社分割とで契約関係の移転の効力に違いはあるか（空欄A）」「債権者保護手続に違いはあるか。会社分割で免責的債務引受をしてもらう予定（空欄B）」。空欄ＡとＢに入る記述の組み合わせとして、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>A：会社分割は包括承継で契約相手方の同意不要、事業譲渡は個別に同意が必要／B：会社分割は債権者保護手続が必要、事業譲渡は不要（ただし免責的債務引受には個別に債権者の同意が必要）</span></div>
+            <div class="choice"><span class="badge">イ</span><span>A：（アと同じ）／B：会社分割も事業譲渡も債権者保護手続が必要</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>A：会社分割も事業譲渡も包括承継で同意不要／B：会社分割も事業譲渡も債権者保護手続が必要</span></div>
+            <div class="choice"><span class="badge">エ</span><span>A：（ウと同じ）／B：会社分割も事業譲渡も債権者保護手続は不要</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第6問設問1</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 08: E-4 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">08 ／ E-4：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-4 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第6問設問1）</div><div class="overview">正解はア。事業譲渡は特定承継で同意必要、保護手続の規定はなし。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice correct"><span class="badge">ア</span><span>A：会社分割は包括承継で契約相手方の同意不要、事業譲渡は個別に同意が必要／B：会社分割は債権者保護手続が必要、事業譲渡は不要（ただし免責的債務引受には個別に債権者の同意が必要）</span></div>
+            <div class="choice"><span class="badge">イ</span><span>A：（アと同じ）／B：会社分割も事業譲渡も債権者保護手続が必要</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>A：会社分割も事業譲渡も包括承継で同意不要／B：会社分割も事業譲渡も債権者保護手続が必要</span></div>
+            <div class="choice"><span class="badge">エ</span><span>A：（ウと同じ）／B：会社分割も事業譲渡も債権者保護手続は不要</span></div>
+          </div>
+          <p class="explain"><b>正解：ア</b>。会社分割は分割契約・計画に定めた権利義務が包括的に承継され契約相手方の個別同意は不要（会社法759条等）。事業譲渡は個々の財産・契約ごとの特定承継で契約相手方の同意が原則必要。会社分割は原則債権者保護手続（官報公告・催告）が必要、事業譲渡には会社法上の規定はないが、免責的債務引受には民法上、債権者の個別承諾が必要（民法472条3項）。イ：事業譲渡にも保護手続が必要としている点が誤り。ウ・エ：事業譲渡を包括承継としている点が誤り。</p>
+          <p class="example"><span class="label">具体例</span><br>事業譲渡は個々の契約を一つひとつ相手方の同意を得て切り替える必要があり手間がかかるが、譲渡対象を個別に選別できる自由度がある。会社分割は包括的に移転する代わり、債権者保護のため保護手続を経る必要がある。</p>
+          <p class="related-note">関連知識：事業譲渡と会社分割の比較は経営法務の最頻出論点。「包括承継か特定承継か」「契約相手方の同意の要否」「債権者保護手続の要否」の3点をセットで押さえること。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第6問設問1／正解：past_exams/1st_stage_answers/r07/2025e.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 09: E-5 倒産等の手続 -->
+  <div>
+    <div class="slide-no">09 ／ E-5：倒産等の手続（会社更生法、民事再生法、会社法の解散・清算）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-5 ／ 倒産等の手続</div><div class="title">会社更生法は株式会社のみ、民事再生法は誰でも</div><div class="overview">再建型（民事再生・会社更生）と清算型（破産・解散清算）に大別される。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">民事再生法</span><span class="combo">再建型</span><span class="desc">株式会社に限らず利用可。現経営陣が続投し再建（DIP型）</span></div>
+          <div class="row"><span class="name">会社更生法</span><span class="combo">再建型・株式会社限定</span><span class="desc">更生管財人が経営権を握り現経営陣は原則退任。大企業向け</span></div>
+          <div class="row"><span class="name">破産法</span><span class="combo">清算型</span><span class="desc">破産管財人が財産を換価し配当後、会社を消滅させる</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>対象（株式会社限定か否か）と経営権の帰趨（続投か退任か）の違いが頻出。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 10: E-6 特許権 -->
+  <div>
+    <div class="slide-no">10 ／ E-6：産業財産権の内容と取得方法（特許権）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-6 ／ 産業財産権の内容と取得方法（特許権）</div><div class="title">職務発明の通常実施権は登録不要</div><div class="overview">出願から20年。職務発明では使用者等が無償の通常実施権を当然取得する。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">存続期間</span><span class="v">出願日から20年（延長制度あり）</span></div>
+            <div class="term-row"><span class="k">新規性喪失の例外</span><span class="v">公開日から1年以内に手続を伴い出願すれば新規性を失わない扱い</span></div>
+            <div class="term-row"><span class="k">職務発明</span><span class="v">特許を受ける権利は原則発明者本人。使用者等は無償の通常実施権を当然取得</span></div>
+            <p class="note"><b>ひっかけ：</b>使用者等の通常実施権は<b>登録不要</b>で法律上当然に発生し第三者にも対抗できる。「過去の職務」に属する発明も職務発明に含まれる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>E-11 知的財産権に関する契約（専用実施権・通常実施権の違い）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11: E-6 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">11 ／ E-6：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-6 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第9問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">特許法第35条に規定する職務発明に関する記述として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>従業者等がした発明については、その発明が職務発明である場合を除き、あらかじめ使用者等に特許を受ける権利を取得させることを定めた契約・勤務規則等の条項は、無効である。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>使用者等が有する通常実施権は、その発生後に特許権を取得した者に対しては、その効力を有しない。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>使用者等が有する通常実施権は、登録しなければ、その効力を生じない。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>職務発明は現在の職務に属する発明を指すので、同一企業内であっても従業者等の過去の職務に属する発明は、職務発明と認められる場合はない。</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第9問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12: E-6 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">12 ／ E-6：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-6 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第9問）</div><div class="overview">正解はア。条文どおり、自由発明への権利取得条項は無効。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice correct"><span class="badge">ア</span><span>従業者等がした発明については、その発明が職務発明である場合を除き、あらかじめ使用者等に特許を受ける権利を取得させることを定めた契約・勤務規則等の条項は、無効である。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>使用者等が有する通常実施権は、その発生後に特許権を取得した者に対しては、その効力を有しない。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>使用者等が有する通常実施権は、登録しなければ、その効力を生じない。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>職務発明は現在の職務に属する発明を指すので、同一企業内であっても従業者等の過去の職務に属する発明は、職務発明と認められる場合はない。</span></div>
+          </div>
+          <p class="explain"><b>正解：ア</b>。特許法35条2項どおりの記述で正しい（職務発明でない発明＝自由発明について会社に権利取得させる取り決めは無効）。イ・ウ：使用者等の法定通常実施権（35条1項）は<b>登録不要</b>で法律上当然に発生し、後に特許権を取得した第三者にも対抗できる。エ：条文は「現在<b>又は過去</b>の職務」と規定しており、過去の職務に属する発明も職務発明に含まれる。</p>
+          <p class="example"><span class="label">具体例</span><br>職務発明制度は①特許を受ける権利は原則発明者本人、②使用者等は無償の法定通常実施権を当然取得、③契約・勤務規則等であらかじめ使用者等に権利取得させることも可能、という3点構造。</p>
+          <p class="related-note">関連知識：存続期間等の基礎知識は`docs/07_key_formulas_and_frameworks.md`参照。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第9問／正解：past_exams/1st_stage_answers/r07/2025e.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 13: E-7 商標権 -->
+  <div>
+    <div class="slide-no">13 ／ E-7：産業財産権の内容と取得方法（商標権）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-7 ／ 産業財産権の内容と取得方法（商標権）</div><div class="title">更新すれば半永久的に権利を維持できる</div><div class="overview">登録日から10年、更新可。不使用が3年続くと誰でも取消審判を請求できる。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">存続期間</span><span class="v">登録日から10年（更新登録で何度でも延長可能）</span></div>
+            <div class="term-row"><span class="k">先使用権</span><span class="v">登録前から使用し周知になっていれば使い続けられる</span></div>
+            <div class="term-row"><span class="k">不使用取消審判</span><span class="v">継続3年以上不使用なら「何人も」取消しを請求できる</span></div>
+            <p class="note"><b>ひっかけ：</b>不使用取消審判の期間は「3年」（2年ではない）。請求権者は「利害関係人のみ」ではなく「何人も」。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>E-8 意匠権・実用新案権（存続期間の起算点・年数の横断比較）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 14: E-7 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">14 ／ E-7：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-7 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第16問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">X社代表取締役甲氏と中小企業診断士の会話。Y社が同一文字商標を先に登録しており、甲氏は自社の商標登録が難しいか相談。Y社はその商標を使用していない。「商標法第50条第1項の不使用取消審判は、継続して国内で【Ａ】年以上、登録商標の使用をしていない場合に請求できる」「不使用取消審判は【Ｂ】」。空欄ＡとＢに入る数値と記述の組み合わせとして、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>Ａ：2　Ｂ：誰でも請求することができます</span></div>
+            <div class="choice"><span class="badge">イ</span><span>Ａ：2　Ｂ：利害関係人のみが請求することができます</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>Ａ：3　Ｂ：誰でも請求することができます</span></div>
+            <div class="choice"><span class="badge">エ</span><span>Ａ：3　Ｂ：利害関係人のみが請求することができます</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第16問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 15: E-7 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">15 ／ E-7：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-7 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第16問）</div><div class="overview">正解はウ（3年、誰でも請求可能）。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>Ａ：2　Ｂ：誰でも請求することができます</span></div>
+            <div class="choice"><span class="badge">イ</span><span>Ａ：2　Ｂ：利害関係人のみが請求することができます</span></div>
+            <div class="choice correct"><span class="badge">ウ</span><span>Ａ：3　Ｂ：誰でも請求することができます</span></div>
+            <div class="choice"><span class="badge">エ</span><span>Ａ：3　Ｂ：利害関係人のみが請求することができます</span></div>
+          </div>
+          <p class="explain"><b>正解：ウ</b>。商標法50条1項は「継続して<b>3年</b>以上使用していないときは、<b>何人も</b>取消審判を請求できる」と規定する。ア・イ：期間を「2年」としている点が誤り。イ・エ：請求権者を「利害関係人のみ」としている点が誤り（無効審判など利害関係人限定の審判類型と対比される）。</p>
+          <p class="example"><span class="label">具体例</span><br>商標権の存続期間は登録から10年（更新可・半永久的）だが、不使用のまま3年が経過すると第三者から取消審判を請求されうる。商標は「使用してこそ価値がある」という思想（信用の化体）に基づく制度。</p>
+          <p class="related-note">関連知識：特許の新規性喪失例外の「1年」や他の年数規定と混同しないこと。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/E1JI2025.pdf（令和7年度第1次試験）第16問／正解：past_exams/1st_stage_answers/r07/2025e.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 16: E-8 意匠権・実用新案権 -->
+  <div>
+    <div class="slide-no">16 ／ E-8：産業財産権の内容と取得方法（意匠権・実用新案権）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-8 ／ 産業財産権の内容と取得方法（意匠権・実用新案権）</div><div class="title">存続期間の起算点と年数を横断整理する</div><div class="overview">特許・実用新案・意匠・商標で起算点も年数も異なる。混同が最頻出のひっかけ。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="split-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">意匠権</span><span class="v">出願日から25年（2020年4月以降の出願）</span></div>
+            <div class="term-row"><span class="k">実用新案権</span><span class="v">出願日から10年。無審査主義（実体審査なし）</span></div>
+            <div class="term-row"><span class="k">秘密意匠</span><span class="v">請求により登録日から最長3年間、公開を遅らせられる</span></div>
+            <p class="note"><b>ひっかけ：</b>「意匠権は登録から20年」は2020年改正前の知識で誤り。実用新案は無審査のため権利行使時に技術評価書の提示が必要。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 90">
+              <line x1="10" y1="80" x2="94" y2="80" stroke="#171717" stroke-width="1.2"/>
+              <rect x="14" y="40" width="14" height="40" fill="#f4f4f4" stroke="#171717"/>
+              <rect x="36" y="60" width="14" height="20" fill="#f4f4f4" stroke="#171717"/>
+              <rect x="58" y="15" width="14" height="65" fill="#FF3B1F"/>
+              <rect x="80" y="60" width="14" height="20" fill="#f4f4f4" stroke="#171717"/>
+              <text x="21" y="36" font-size="6" text-anchor="middle" fill="#171717">20年</text>
+              <text x="43" y="56" font-size="6" text-anchor="middle" fill="#171717">10年</text>
+              <text x="65" y="11" font-size="6" text-anchor="middle" fill="#FF3B1F" font-weight="700">25年</text>
+              <text x="87" y="49" font-size="6" text-anchor="middle" fill="#171717">10年</text>
+              <text x="87" y="56" font-size="5" text-anchor="middle" fill="#171717">+更新</text>
+              <text x="21" y="88" font-size="5.5" text-anchor="middle" fill="#171717">特許</text>
+              <text x="43" y="88" font-size="5.5" text-anchor="middle" fill="#171717">実用新案</text>
+              <text x="65" y="88" font-size="5.5" text-anchor="middle" fill="#171717">意匠</text>
+              <text x="87" y="88" font-size="5.5" text-anchor="middle" fill="#171717">商標</text>
+            </svg>
+            <div class="diagram-caption-mini">存続期間の比較（いずれも出願/登録日起算）</div>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>秘密意匠は「先に権利は確保しつつ公開時期を遅らせたい」ニーズに対応。関連意匠制度でバリエーションデザインをまとめて登録可能。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 17: E-9 著作権の内容 -->
+  <div>
+    <div class="slide-no">17 ／ E-9：著作権の内容（著作者人格権、著作権、著作隣接権）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">E-9 ／ 著作権の内容</div><div class="title">職務著作では会社自身が著作者になる</div><div class="overview">創作と同時に自動発生（無方式主義）。特許の職務発明とは扱いが対照的。</div></div>
+        <div class="tag">経営法務</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">著作権（財産権）</span><span class="v">複製権・上演権等。他人に譲渡できる</span></div>
+            <div class="term-row"><span class="k">著作者人格権</span><span class="v">氏名表示権・同一性保持権等。一身専属で譲渡できない</span></div>
+            <div class="term-row"><span class="k">職務著作</span><span class="v">会社の発意・従業員が職務上作成・会社名義公表なら会社が著作者</span></div>
+            <p class="note"><b>ひっかけ：</b>特許の職務発明は発明者本人が原則権利者だが、著作権の職務著作は要件を満たせば<b>会社自身</b>が著作者になる点が対照的。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>E-10 著作権の成立と保護（保護期間の詳細）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
