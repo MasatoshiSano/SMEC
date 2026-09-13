@@ -414,6 +414,32 @@ function drawProcessSteps(slide, x, y, w, h, steps) {
   });
 }
 
+// N-step vertical process flow with down-arrows — for the narrow right-column
+// diagram slot, where drawProcessSteps' horizontal boxes would be too cramped.
+function drawProcessStepsVertical(slide, x, y, w, h, steps) {
+  const gap = 0.22;
+  const n = steps.length;
+  const stepH = (h - gap * (n - 1)) / n;
+  steps.forEach((step, i) => {
+    const sy = y + i * (stepH + gap);
+    slide.addShape("rect", { x, y: sy, w, h: stepH, fill: { color: GHOST }, line: { color: LINE, width: 1 } });
+    const runs = [];
+    if (step.num) runs.push({ text: step.num + "\n", options: { fontFace: F_MONO, fontSize: 9, bold: true, color: RED, breakLine: true } });
+    runs.push({ text: step.label, options: { fontFace: F_HEAD, fontSize: 16, bold: true, color: INK } });
+    if (step.desc) runs.push({ text: "\n" + step.desc, options: { fontFace: F_BODY, fontSize: 10, bold: true, color: RED, breakLine: true } });
+    slide.addText(runs, {
+      x, y: sy, w, h: stepH, align: "center", valign: "middle",
+      isTextBox: true, margin: 0, lineSpacingMultiple: 1.15,
+    });
+    if (i < n - 1) {
+      slide.addText("↓", {
+        x, y: sy + stepH, w, h: gap, align: "center", valign: "middle",
+        fontFace: F_BODY, fontSize: 13, color: INK_SOFT, isTextBox: true, margin: 0,
+      });
+    }
+  });
+}
+
 module.exports = {
   INK, INK_SOFT, RED, LINE, GHOST, WHITE,
   F_HEAD, F_BODY, F_MONO,
@@ -433,4 +459,5 @@ module.exports = {
   drawQuadrant,
   draw5Forces,
   drawProcessSteps,
+  drawProcessStepsVertical,
 };

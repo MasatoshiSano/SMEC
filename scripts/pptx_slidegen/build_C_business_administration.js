@@ -9,7 +9,7 @@ const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
   addTermRows, addRowList, addExamQuestion, drawScopeBars, drawVennOverlap,
-  drawQuadrant, draw5Forces, drawProcessSteps,
+  drawQuadrant, draw5Forces, drawProcessSteps, drawProcessStepsVertical,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -182,28 +182,27 @@ addDividerSlide(pres, {
     { k: "機能的定義", v: "提供している「価値・機能」で定義する（例：「うちは人や物を運ぶサービスを提供する会社だ」）", gap: 0.5 },
   ], { fontSize: 11.5, labelW: 1.55 });
   cy += 0.1;
-  s.addText(
-    "機能的定義の方が視野が広がり新しい事業機会に気づきやすい。「鉄道会社が自分たちを『鉄道業』と狭く定義したために自動車・航空機の台頭に対応できなかった」というレビットの「マーケティング近視眼」は有名な失敗例。",
-    { x: proseX, y: cy, w: proseW, h: 0.65, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
-  );
-  cy += 0.72;
   s.addText([
     { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
-    { text: "コンビニチェーンが自社を「小売業」ではなく「生活インフラ業」と定義し直すと、公共料金の収納代行、ATM、宅配便の受付など、単なる「モノを売る」以上のサービス展開に踏み出しやすくなる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+    { text: "コンビニが自社を「小売業」ではなく「生活インフラ業」と定義し直すと、公共料金の収納代行・ATM・宅配受付など、単なる「モノを売る」以上の展開がしやすくなる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
   ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   cy += 0.93;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
-    { text: "ドメインの決め方（物理的 vs 機能的）と、C-3の「多角化」の判断を混同しないこと。ドメインは「自社の立ち位置の定義」、多角化は「新しい事業領域への進出」という別の概念。", options: { color: RED } },
+    { text: "ドメイン（自社の立ち位置の定義）とC-3「多角化」（新領域への進出）を混同しないこと。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
 
   drawScopeBars(s, diagX, 2.3, diagW, 3.0, {
     narrowLabel: "物理的定義（モノ）",
     wideLabel: "機能的定義（価値・機能）",
-    resultLabel: "→ 気づける事業機会が広がる",
+    resultLabel: "→ 事業機会が広がる",
   });
+  s.addText(
+    "レビットの「マーケティング近視眼」：鉄道会社が自らを「鉄道業」と狭く定義したため自動車・航空機の台頭に対応できなかった、という有名な失敗例。",
+    { x: diagX, y: 5.55, w: diagW, h: 0.85, fontFace: F_BODY, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
@@ -319,32 +318,29 @@ addDividerSlide(pres, {
   ], { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0 });
   cy += 0.38;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "関連型多角化", v: "既存事業と技術・顧客・販売チャネル等で関連がある分野に進出（例：カメラメーカーが医療用内視鏡事業に進出。レンズ技術という共通の強みを活かせる）", gap: 0.75 },
+    { k: "関連型多角化", v: "既存事業と技術・顧客・販売チャネル等で関連がある分野に進出（例：カメラメーカーが医療用内視鏡事業に進出）", gap: 0.6 },
     { k: "非関連型多角化", v: "既存事業とほとんど関連がない分野に進出（例：繊維会社が化粧品事業に進出）", gap: 0.5 },
   ], { fontSize: 11.5, labelW: 1.55 });
   cy += 0.1;
-  s.addShape("rect", { x: proseX, y: cy, w: proseW, h: 0.48, fill: { color: GHOST }, line: { type: "none" } });
-  s.addShape("line", { x: proseX, y: cy, w: 0, h: 0.48, line: { color: INK, width: 2.5 } });
-  s.addText([
-    { text: "シナジー（相乗効果）：", options: { bold: true } },
-    { text: "「1+1が2ではなく3以上になる効果」。技術・ブランド・販売網を複数事業で共有すると単独でやるより効率が良くなる。関連型多角化の方がシナジーを生みやすい。", options: {} },
-  ], { x: proseX + 0.15, y: cy, w: proseW - 0.3, h: 0.48, valign: "middle", fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
-  cy += 0.58;
   s.addText([
     { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
-    { text: "富士フイルムは写真フィルム事業で培った化学・材料技術（酸化を防ぐ技術等）を応用して化粧品事業（アンチエイジング）に進出した。一見畑違いだが技術的関連性が高い「関連型多角化」の代表例。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+    { text: "富士フイルムは写真フィルム事業で培った化学・材料技術を応用して化粧品事業（アンチエイジング）に進出した。技術的関連性が高い「関連型多角化」の代表例。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
   ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   cy += 0.93;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
-    { text: "「新市場に新技術で進出する」ことが必ずしも「多角化」とは限らない。アンゾフの成長マトリクスの「新製品×新市場」が多角化に該当。既存製品のままの海外展開（新市場開拓）や既存市場向けの新商品（新製品開発）と混同しないこと。", options: { color: RED } },
+    { text: "「新市場に新技術で進出する」＝多角化とは限らない。アンゾフの成長マトリクスの「新製品×新市場」が該当。新市場開拓・新製品開発と混同しないこと。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
 
   drawVennOverlap(s, diagX, 2.2, diagW, 2.6, {
     leftLabel: "既存事業", rightLabel: "新規事業", overlapLabel: "シナジー",
   });
+  s.addText(
+    "「1+1が2でなく3以上になる効果」。技術・ブランド・販売網を複数事業で共有すると効率が良くなる。関連型多角化ほどシナジーを生みやすい。",
+    { x: diagX, y: 5.55, w: diagW, h: 0.85, fontFace: F_BODY, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
@@ -362,18 +358,40 @@ addDividerSlide(pres, {
     overview: "市場成長率×市場シェアの2軸で事業を4分類し、どこに投資しどこから資金を引き上げるかを判断する。",
     tag: "企業経営理論",
   });
-  drawQuadrant(s, 0.55, 1.9, 12.25, 3.9, {
-    cells: [
-      { pos: "tl", label: "花形（スター）", sublabel: "稼ぐが投資も必要。将来の主力候補" },
-      { pos: "tr", label: "問題児", sublabel: "将来性はあるが今は稼げない。育てるか撤退か判断が必要" },
-      { pos: "bl", label: "金のなる木", sublabel: "投資が要らず安定して稼ぐ。他事業の資金源" },
-      { pos: "br", label: "負け犬", sublabel: "稼げず将来性も薄い。撤退候補" },
-    ],
-    axisCaption: "縦軸：市場成長率（上＝高い）／横軸：市場シェア（左＝高い）。「金のなる木」の資金を「問題児」に投資して「花形」に育てるのが基本セオリー。",
-  });
+  {
+    const proseX = 0.55, proseW = 7.4;
+    const diagX = 8.25, diagW = 4.05;
+    let cy = 1.85;
+    s.addText(
+      "市場成長率×市場シェアの2軸で事業を4分類し、資金配分を判断するフレームワーク。",
+      { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+    );
+    cy += 0.48;
+    cy = addTermRows(s, proseX, cy, proseW, [
+      { k: "花形", v: "稼ぐが投資も必要。将来の主力候補", gap: 0.4 },
+      { k: "問題児", v: "将来性はあるが今は稼げない。育てるか撤退か判断", gap: 0.4 },
+      { k: "金のなる木", v: "投資が要らず安定して稼ぐ。他事業の資金源", gap: 0.4 },
+      { k: "負け犬", v: "稼げず将来性も薄い。撤退候補", gap: 0.4 },
+    ], { fontSize: 11.5, labelW: 1.5 });
+    cy += 0.1;
+    s.addText([
+      { text: "ひっかけ：", options: { bold: true, color: RED } },
+      { text: "PPMは「市場の魅力度」と「自社の競争力」の2軸だけの単純化モデル。事業間のシナジーや社会的意義のある事業は考慮できない限界がある。", options: { color: RED } },
+    ], { x: proseX, y: cy, w: proseW, h: 0.7, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+    drawQuadrant(s, diagX, 1.9, diagW, 3.9, {
+      cells: [
+        { pos: "tl", label: "花形" },
+        { pos: "tr", label: "問題児" },
+        { pos: "bl", label: "金のなる木" },
+        { pos: "br", label: "負け犬" },
+      ],
+      axisCaption: "縦軸：市場成長率（上＝高い）／横軸：市場シェア（左＝高い）",
+    });
+  }
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "ひっかけ：PPMは「市場の魅力度」と「自社の競争力」の2軸だけの単純化モデルで、事業間のシナジーや社会的意義のある事業は考慮できないという限界がある。",
+    related: "関連：C-7 競争優位の戦略（各象限で有効な戦略の方向性が異なる）。",
     years: mkYears(new Set(["'16", "'17", "'19", "'20", "'21", "'22", "'23", "'24"])),
   });
 }
@@ -498,18 +516,39 @@ addDividerSlide(pres, {
     overview: "業界の競争構造を5つの力（ポーター）に分解し、力が弱いほど儲けやすい業界と判断する。",
     tag: "企業経営理論",
   });
-  draw5Forces(s, 1.4, 1.85, 10.5, 3.5, {
-    center: "業界内の\n既存競合",
-    top: "新規参入の脅威\n（参入障壁が低いほど大）",
-    bottom: "代替品の脅威（例：新聞にとってのニュースアプリ）",
-    left: "売り手の\n交渉力",
-    right: "買い手の\n交渉力",
-  });
-  s.addText([
-    { text: "もう1つの分析軸が", options: {} },
-    { text: "バリューチェーン（価値連鎖）分析", options: { bold: true } },
-    { text: "：活動を「主活動」（購買物流→製造→出荷物流→販売→サービス）と「支援活動」（全般管理・人事・技術開発・調達）に分け、付加価値の源泉を探る。", options: {} },
-  ], { x: 0.55, y: 5.5, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  {
+    const proseX = 0.55, proseW = 7.4;
+    const diagX = 8.25, diagW = 4.05;
+    let cy = 1.85;
+    s.addText(
+      "業界の競争構造を5つの力（ポーター）に分解し、力が弱いほど儲けやすい業界と判断する。",
+      { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+    );
+    cy += 0.48;
+    cy = addTermRows(s, proseX, cy, proseW, [
+      { k: "新規参入の脅威", v: "参入障壁が低いほど大きい", gap: 0.4 },
+      { k: "売り手の交渉力", v: "仕入先が強いと買い叩かれる", gap: 0.4 },
+      { k: "買い手の交渉力", v: "顧客が強いと値下げ圧力を受ける", gap: 0.4 },
+      { k: "代替品の脅威", v: "例：新聞紙にとってのニュースアプリ", gap: 0.4 },
+    ], { fontSize: 11.5, labelW: 2.1 });
+    cy += 0.1;
+    s.addText([
+      { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+      { text: "もう1つの分析軸がバリューチェーン（価値連鎖）分析：活動を「主活動」（購買物流→製造→出荷物流→販売→サービス）と「支援活動」に分け、付加価値の源泉を探る。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+    ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+    draw5Forces(s, diagX, 1.9, diagW, 3.9, {
+      center: "既存競合",
+      top: "新規参入",
+      bottom: "代替品",
+      left: "売り手",
+      right: "買い手",
+    });
+    s.addText(
+      "5フォース分析（ポーター）。中心の「既存競合」が4方向から受ける圧力を分析する。",
+      { x: diagX, y: 5.85, w: diagW, h: 0.55, fontFace: F_BODY, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+    );
+  }
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「参入障壁が高く撤退障壁が低い」のように複数条件を組み合わせた業界特性は、単純発想では判断できない。設問の前提条件を個別に確認すること。",
@@ -526,18 +565,39 @@ addDividerSlide(pres, {
     overview: "「競争優位の種類」×「狙う市場の広さ」の組み合わせで、とるべき戦略が変わる（ポーター）。",
     tag: "企業経営理論",
   });
-  drawQuadrant(s, 0.55, 1.9, 12.25, 3.9, {
-    cells: [
-      { pos: "tl", label: "コストリーダーシップ", sublabel: "業界最低コストで価格競争に勝つ（例：格安航空会社）" },
-      { pos: "tr", label: "差別化", sublabel: "品質・ブランド・デザインで独自の価値を出す（例：高級ホテル）" },
-      { pos: "bl", label: "コスト集中", sublabel: "特定の狭い顧客層に絞ってコストで勝つ" },
-      { pos: "br", label: "差別化集中", sublabel: "特定の狭い顧客層に絞って差別化で勝つ" },
-    ],
-    axisCaption: "縦軸：狙う市場の広さ（上＝広い市場全体、下＝特定の狭い層＝集中戦略）／横軸：競争優位の源泉（左＝コスト、右＝差別化）。両方を中途半端に狙うと収益性が落ちる（スタック・イン・ザ・ミドル）。",
-  });
+  {
+    const proseX = 0.55, proseW = 7.4;
+    const diagX = 8.25, diagW = 4.05;
+    let cy = 1.85;
+    s.addText(
+      "「競争優位の種類」×「狙う市場の広さ」の組み合わせで、とるべき戦略が変わる（ポーター）。",
+      { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+    );
+    cy += 0.48;
+    cy = addTermRows(s, proseX, cy, proseW, [
+      { k: "コストリーダーシップ", v: "業界最低コストで価格競争に勝つ（例：格安航空会社）", gap: 0.55 },
+      { k: "差別化", v: "品質・ブランド・デザインで独自の価値を出す（例：高級ホテル）", gap: 0.55 },
+      { k: "集中戦略", v: "特定の狭い顧客層に絞ってコスト or 差別化で勝つ", gap: 0.4 },
+    ], { fontSize: 11.5, labelW: 2.4 });
+    cy += 0.1;
+    s.addText([
+      { text: "ひっかけ：", options: { bold: true, color: RED } },
+      { text: "集中戦略は「誰に売るか」という別軸の話。両方を中途半端に狙うと収益性が落ちる（スタック・イン・ザ・ミドル）。", options: { color: RED } },
+    ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+    drawQuadrant(s, diagX, 1.9, diagW, 3.9, {
+      cells: [
+        { pos: "tl", label: "コストリーダーシップ" },
+        { pos: "tr", label: "差別化" },
+        { pos: "bl", label: "コスト集中" },
+        { pos: "br", label: "差別化集中" },
+      ],
+      axisCaption: "縦軸：狙う市場の広さ（上＝広い、下＝狭い）／横軸：優位の源泉（左＝コスト、右＝差別化）",
+    });
+  }
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "ひっかけ：集中戦略は「誰に売るか」の軸で、コストリーダーシップ・差別化そのものとは別軸。ユニクロのSPAによる効率化は単純な安売りでなく差別化的コストリーダーシップと解釈される。",
+    related: "関連：C-4 PPM（各象限で有効な戦略の方向性が異なる）。ユニクロのSPAは差別化的コストリーダーシップと解釈される。",
     years: mkYears(new Set(["'16", "'17", "'19", "'21", "'23", "'24", "'25"])),
   });
 }
@@ -1265,18 +1325,35 @@ addDividerSlide(pres, {
     overview: "組織は創業期→成長期→成熟期とライフサイクルをたどる。変革は3段階で進める。",
     tag: "企業経営理論",
   });
-  drawProcessSteps(s, 0.55, 2.0, 12.25, 2.7, [
-    { num: "STEP 1", label: "解凍", desc: "現状維持の意識を崩し、変化の必要性を認識させる" },
-    { num: "STEP 2", label: "変化", desc: "新しいやり方を実際に導入する" },
-    { num: "STEP 3", label: "再凍結", desc: "新しいやり方を定着させ、元に戻らないようにする" },
-  ]);
-  s.addText([
-    { text: "レヴィンの3段階モデル。", options: { bold: true } },
-    { text: "組織のライフサイクル（創業期→成長期→成熟期→再生・衰退期）では、各段階で直面する経営課題（資金調達→仕組み化→硬直化対応）が異なる。", options: {} },
-  ], { x: 0.55, y: 4.9, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  {
+    const proseX = 0.55, proseW = 7.4;
+    const diagX = 8.25, diagW = 3.4;
+    let cy = 1.85;
+    s.addText(
+      "組織変革はレヴィンの3段階モデルで進める。組織はライフサイクル（創業期→成長期→成熟期→再生・衰退期）もたどる。",
+      { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+    );
+    cy += 0.63;
+    cy = addTermRows(s, proseX, cy, proseW, [
+      { k: "解凍", v: "現状維持の意識を崩し、変化の必要性を認識させる", gap: 0.4 },
+      { k: "変化", v: "新しいやり方を実際に導入する", gap: 0.4 },
+      { k: "再凍結", v: "新しいやり方を定着させ、元に戻らないようにする", gap: 0.4 },
+    ], { fontSize: 11.5, labelW: 1.3 });
+    cy += 0.1;
+    s.addText([
+      { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+      { text: "新システム導入時、いきなり入れ替えず「今のままではまずい」と危機感を共有し（解凍）、試験導入し（変化）、新業務フローとして定着させる（再凍結）と成功しやすい。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+    ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+    drawProcessStepsVertical(s, diagX, 1.9, diagW, 4.5, [
+      { num: "STEP 1", label: "解凍" },
+      { num: "STEP 2", label: "変化" },
+      { num: "STEP 3", label: "再凍結" },
+    ]);
+  }
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "具体例：新システム導入時、いきなり入れ替えず「今のままではまずい」と危機感を共有し（解凍）、試験導入し（変化）、新業務フローとして定着させる（再凍結）と成功しやすい。",
+    related: "関連：組織のライフサイクルでは各段階の経営課題（資金調達→仕組み化→硬直化対応）が異なる。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
 }
@@ -1647,15 +1724,34 @@ addDividerSlide(pres, {
     overview: "製品は導入期→成長期→成熟期→衰退期の4段階をたどり、各段階で有効な戦略が異なる。",
     tag: "企業経営理論",
   });
-  drawProcessSteps(s, 0.55, 2.0, 12.25, 2.4, [
-    { num: "導入期", label: "認知拡大", desc: "販売量少、認知度が低い。製品の認知拡大に注力" },
-    { num: "成長期", label: "シェア拡大", desc: "販売量が急拡大、競合が参入。シェア・販売網の拡大" },
-    { num: "成熟期", label: "差別化", desc: "販売量ピーク・競争激化。差別化、ブランド強化、コスト効率化" },
-    { num: "衰退期", label: "撤退判断", desc: "販売量が減少。撤退判断、または縮小継続" },
-  ]);
-  s.addText([
-    { text: "新しいガジェットが発売直後（導入期）はアーリー・アダプター層に的を絞り、市場拡大につれ（成長期）大量生産・販路拡大を進め、競合増加で差別化が難しい時期（成熟期）にはブランドの独自性を強調する、という戦略の切り替えがPLCの考え方。", options: {} },
-  ], { x: 0.55, y: 4.6, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  {
+    const proseX = 0.55, proseW = 7.4;
+    const diagX = 8.25, diagW = 3.4;
+    let cy = 1.85;
+    s.addText(
+      "製品は導入期→成長期→成熟期→衰退期の4段階をたどり、各段階で有効な戦略が異なる。",
+      { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+    );
+    cy += 0.48;
+    cy = addTermRows(s, proseX, cy, proseW, [
+      { k: "導入期", v: "販売量少、認知度が低い。認知拡大に注力", gap: 0.4 },
+      { k: "成長期", v: "販売量が急拡大、競合が参入。シェア・販売網の拡大", gap: 0.4 },
+      { k: "成熟期", v: "販売量ピーク・競争激化。差別化、ブランド強化", gap: 0.4 },
+      { k: "衰退期", v: "販売量が減少。撤退判断、または縮小継続", gap: 0.4 },
+    ], { fontSize: 11.5, labelW: 1.1 });
+    cy += 0.1;
+    s.addText([
+      { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+      { text: "新しいガジェットが発売直後（導入期）はアーリー・アダプター層に的を絞り、市場拡大につれ（成長期）大量生産・販路拡大を進め、競合増加で差別化が難しい時期（成熟期）にはブランドの独自性を強調する。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+    ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+    drawProcessStepsVertical(s, diagX, 1.9, diagW, 4.5, [
+      { label: "導入期", desc: "認知拡大" },
+      { label: "成長期", desc: "シェア拡大" },
+      { label: "成熟期", desc: "差別化" },
+      { label: "衰退期", desc: "撤退判断" },
+    ]);
+  }
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "関連：C-37 ブランディング（成熟期の差別化戦略の柱となる）。",
