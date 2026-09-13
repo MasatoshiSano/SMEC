@@ -96,6 +96,15 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .forces-wrap .box.left{grid-column:1;grid-row:2;}
 .forces-wrap .box.right{grid-column:3;grid-row:2;}
 
+/* 3ステップの手順図（レヴィンの3段階モデルなど：番号付き→矢印） */
+.process-wrap{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.6/100);}
+.process-steps{flex:1;display:flex;align-items:stretch;gap:calc(var(--cw)*0.8/100);min-height:0;}
+.process-steps .step{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--ghost);border:1px solid var(--line);padding:calc(var(--cw)*0.6/100) calc(var(--cw)*0.5/100);min-height:0;overflow:hidden;}
+.process-steps .step .num{font-family:"Space Mono",monospace;font-weight:700;color:var(--red);font-size:calc(var(--cw)*0.8/100);}
+.process-steps .step .label{font-weight:900;font-size:calc(var(--cw)*1.1/100);margin-top:calc(var(--cw)*0.25/100);}
+.process-steps .step .desc{font-size:calc(var(--cw)*0.76/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.35/100);line-height:1.4;}
+.process-steps .arrow{flex:0 0 auto;display:flex;align-items:center;font-size:calc(var(--cw)*1.4/100);color:var(--ink-soft);}
+
 /* 表紙 */
 .cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
 .cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
@@ -1159,6 +1168,756 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 28: 組織論 区切り -->
+  <div>
+    <div class="slide-no">28</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">02</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 02</span><span class="part-label">企業経営理論 ／ C-15〜C-29</span></div>
+          <div class="title">組織論</div>
+          <div class="desc">人と人とをどう組み合わせれば、会社としての力を最大化できるかを扱う分野。モチベーション理論・リーダーシップ理論など心理学的な要素を含む論点が多い。</div>
+          <div class="covers">
+            <span class="chip">C-19 モチベーション理論</span>
+            <span class="chip">C-24 組織変革</span>
+            <span class="chip">C-25 労働関連法規</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 29: C-15 組織の考え方 -->
+  <div>
+    <div class="slide-no">29 ／ C-15：組織の考え方（組織目標、分業と調整、権限と責任）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-15 ／ 組織の考え方（組織目標、分業と調整、権限と責任）</div><div class="title">組織が機能するための3つの要素</div><div class="overview">共通目標のために複数人が協力する仕組みが組織。分業・調整・権限と責任の3つが土台になる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="20" cy="20" r="8" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="40" cy="20" r="8" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="40" r="8" fill="none" stroke="#FF3B1F" stroke-width="2"/>
+              <line x1="24" y1="26" x2="27" y2="34" stroke="#171717" stroke-width="1.4"/>
+              <line x1="36" y1="26" x2="33" y2="34" stroke="#171717" stroke-width="1.4"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">組織とは「共通の目標のために複数の人が協力する仕組み」。機能するには3つの要素が必要。</p>
+            <div class="term-row"><span class="k">分業</span><span class="v">仕事を細分化し、担当者が専門的に担当する（効率化につながる）</span></div>
+            <div class="term-row"><span class="k">調整</span><span class="v">分業した仕事がバラバラにならないよう全体をまとめる（会議・報告ライン・ルール等）</span></div>
+            <div class="term-row"><span class="k">権限と責任</span><span class="v">決定できる範囲（権限）とその結果への責任は原則セットでなければならない</span></div>
+            <p><span class="label">具体例</span><br>飲食店チェーンでは各店舗の店長に「仕入れ量を決める権限」と同時に「食材ロスを一定以下に抑える責任」を負わせる。権限だけ与えて責任は本部が負う、では店長の判断が甘くなりがち。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-16 組織構造の形態（分業・調整の具体的な型）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 30: C-16 組織構造の形態 -->
+  <div>
+    <div class="slide-no">30 ／ C-16：組織構造の形態（事業部制、職能別、マトリックス、ネットワーク）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-16 ／ 組織構造の形態</div><div class="title">4つの組織形態とメリット・デメリット</div><div class="overview">職能別・事業部制・マトリックス・ネットワークの4形態で、専門性と連携のトレードオフが変わる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">職能別組織</span><span class="combo">機能ごとに部門化</span><span class="desc">専門性が高まり効率的。ただし部門間連携が悪化しがちで全社視点の人材が育ちにくい</span></div>
+          <div class="row"><span class="name">事業部制組織</span><span class="combo">製品・地域ごとに部門化</span><span class="desc">事業ごとの意思決定が速く経営者人材が育ちやすい。ただし機能重複でコストがかさむ</span></div>
+          <div class="row"><span class="name">マトリックス組織</span><span class="combo">職能×事業の二重報告</span><span class="desc">柔軟に人材活用できる。ただし指揮命令系統が二重化し混乱を招きやすい（ワン・マン・ツー・ボス問題）</span></div>
+          <div class="row"><span class="name">ネットワーク組織</span><span class="combo">独立組織が緩やかに連携</span><span class="desc">柔軟性が高い。ただし統制が効きにくい</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「組織は戦略に従う」（チャンドラー）が有名だが、逆に「戦略は組織に従う」（既存の組織が戦略の選択肢を制約する）という視点もある。どちらか一方が絶対ではない。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 31: C-17 組織文化 -->
+  <div>
+    <div class="slide-no">31 ／ C-17：組織文化（レベル、経営戦略との関係、変革）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-17 ／ 組織文化（レベル、経営戦略との関係、変革）</div><div class="title">「うちの会社らしいやり方」が組織文化</div><div class="overview">メンバーに共有された価値観・行動様式。統一の力にも変革の足かせにもなる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="24" fill="none" stroke="#171717" stroke-width="1.4"/>
+              <circle cx="30" cy="30" r="15" fill="none" stroke="#171717" stroke-width="1.4"/>
+              <circle cx="30" cy="30" r="5" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>組織文化</b>とは、組織のメンバーに共有されている価値観・行動様式。「うちの会社らしいやり方」のこと。目に見える「制度・慣習」から目に見えにくい「価値観」「基本的な前提」まで階層があるとされる（シャインの組織文化論）。</p>
+            <p class="warn">強い組織文化はメンバーの行動を統一し効率を高める一方、環境変化時に「今までのやり方」に固執させ、変革の足かせになることもある。</p>
+            <p><span class="label">具体例</span><br>「顧客第一主義」を掲げる会社で、社員全員がそれを当たり前として行動している状態は強い組織文化が根付いている例。ただし文化が強すぎるとデジタル化のような新しい変化への対応が遅れることもある。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-24 組織変革（強い組織文化は変革の解凍段階を難しくする要因になりうる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 32: C-18 意思決定 -->
+  <div>
+    <div class="slide-no">32 ／ C-18：組織における個人：意思決定（限定合理性、認知バイアス）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-18 ／ 組織における個人：意思決定</div><div class="title">人は「最適解」でなく「満足解」で意思決定する</div><div class="overview">人間の合理性には限界がある（サイモンの限定合理性）。認知バイアスの影響も受ける。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="24" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <path d="M20 34 Q30 44 40 34" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="22" cy="24" r="2.5" fill="#171717"/>
+              <circle cx="38" cy="24" r="2.5" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">人間は経済学が想定するような「完全に合理的な意思決定」はできない（サイモンの<b>限定合理性</b>）。情報・時間・認知能力に限界があるため、「最適な答え」でなく「まあ満足できる答え」で打ち切る（<b>満足化原理</b>）。</p>
+            <p class="warn">人間の判断は<b>認知バイアス</b>（思考の偏り）の影響も受ける。例：一度決めたことに固執する、都合の良い情報ばかり集める、など。</p>
+            <p><span class="label">具体例</span><br>新商品の企画会議で、本来は市場調査をもっと徹底すべきなのに、時間的制約から「これくらいで十分だろう」と判断してしまうのは限定合理性・満足化原理の表れ。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">B</span><span class="rank-label">頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-22 集団の心理（グループシンクも集団レベルの非合理な意思決定の一種）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 33: C-19 モチベーション理論 -->
+  <div>
+    <div class="slide-no">33 ／ C-19：組織における個人：モチベーション理論</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-19 ／ 組織における個人：モチベーション理論</div><div class="title">社員のやる気を説明する4つの理論</div><div class="overview">提唱者名と理論の核心をセットで覚える。10年間ほぼ毎年出題される最頻出論点。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <path d="M30 6 L54 54 L6 54 Z" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <line x1="14" y1="42" x2="46" y2="42" stroke="#171717" stroke-width="1"/>
+              <line x1="20" y1="30" x2="40" y2="30" stroke="#171717" stroke-width="1"/>
+              <circle cx="30" cy="14" r="3" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">社員のやる気を高める要因を説明する代表理論4つ。</p>
+            <div class="term-row"><span class="k">マズロー</span><span class="v">欲求段階説：生理的→安全→社会的→承認→自己実現の5段階。低次が満たされると次の欲求が現れる</span></div>
+            <div class="term-row"><span class="k">ハーズバーグ</span><span class="v">動機づけ・衛生理論：満足に関わる要因（達成感等）と不満足に関わる要因（給与等）は別物</span></div>
+            <div class="term-row"><span class="k">期待理論</span><span class="v">（ブルーム）モチベーション＝期待×手段性×誘意性の掛け算で決まる</span></div>
+            <div class="term-row"><span class="k">目標設定理論</span><span class="v">（ロック）具体的でやや高難度な目標が、曖昧・簡単すぎる目標よりやる気を高める</span></div>
+            <p class="note"><b>ひっかけ：</b>ハーズバーグの動機づけ要因・衛生要因の区別が特に頻出。給与を上げても不満は減るが積極的な「やる気」は上がらない（給与は衛生要因）。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>給与を大幅に上げても意欲が変わらないのは、給与が「衛生要因」で不満防止にとどまるため。やる気を引き出すには達成感・裁量権拡大など「動機づけ要因」への働きかけが必要。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 34: C-20 リーダーシップ理論 -->
+  <div>
+    <div class="slide-no">34 ／ C-20：組織の中の人間関係・集団：リーダーシップ理論</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-20 ／ リーダーシップ理論</div><div class="title">「行動の型」と「状況対応」を区別する</div><div class="overview">PM理論はリーダーの行動の型、SL理論は部下の状況に応じたスタイル変化を説明する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="16" r="8" fill="none" stroke="#FF3B1F" stroke-width="2"/>
+              <circle cx="14" cy="44" r="6" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="46" cy="44" r="6" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <line x1="26" y1="22" x2="18" y2="38" stroke="#171717" stroke-width="1.2"/>
+              <line x1="34" y1="22" x2="42" y2="38" stroke="#171717" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">リーダーシップに関する代表理論。「行動の型」を分類する理論と「状況で変える」理論を区別する。</p>
+            <div class="term-row"><span class="k">PM理論</span><span class="v">（三隅二不二）P機能（目標達成）とM機能（集団維持）の2軸。両方高い「PM型」が理想</span></div>
+            <div class="term-row"><span class="k">SL理論</span><span class="v">（ハーシー＆ブランチャード）部下の成熟度に応じ指示型→説得型→参加型→委任型へスタイルを変える</span></div>
+            <div class="term-row"><span class="k">変革型リーダーシップ</span><span class="v">内発的動機づけで大きな変革を推進（対義語：アメとムチの交換型リーダーシップ）</span></div>
+            <p><span class="label">具体例</span><br>新入社員には具体的に指示する「指示型」、ベテランには仕事を任せる「委任型」が適切、というのがSL理論の考え方そのもの。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>PM理論は「行動の型」の分類、SL理論は「部下の状況に応じたスタイル変化」という違いを混同しないこと。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 35: C-21 パワーとコンフリクト -->
+  <div>
+    <div class="slide-no">35 ／ C-21：組織の中の人間関係・集団：パワーとコンフリクト</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-21 ／ パワーとコンフリクト</div><div class="title">パワーの源泉は役職だけではない</div><div class="overview">公式の権限以外にも複数のパワーの源泉があり、適度なコンフリクトは組織の活性化にもなる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="6" fill="#FF3B1F"/>
+              <circle cx="30" cy="12" r="5" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="12" cy="42" r="5" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="48" cy="42" r="5" fill="none" stroke="#171717" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">組織内では上下関係・部門間で「パワー（影響力）」の行使や意見対立（<b>コンフリクト</b>）が生じる。</p>
+            <div class="term-row"><span class="k">公式の権限</span><span class="v">地位に基づくパワー</span></div>
+            <div class="term-row"><span class="k">専門性パワー</span><span class="v">専門知識に基づくパワー</span></div>
+            <div class="term-row"><span class="k">準拠パワー</span><span class="v">人望に基づくパワー（以上、フレンチ＆レイヴンの分類）</span></div>
+            <p class="warn">コンフリクトは必ずしも悪ではない。適度なコンフリクトは新しい視点をもたらし組織を活性化するが、過度だと機能不全、皆無だと停滞した組織になりがち。</p>
+            <p><span class="label">具体例</span><br>新人でもその分野で誰より詳しい専門知識があれば、周囲から意見を求められる実質的な影響力（専門性パワー）を持つことがある。役職に基づく公式パワーとは別の源泉。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-20 リーダーシップ理論（パワーの使い方とリーダーシップスタイルは密接に関連）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 36: C-22 集団の心理 -->
+  <div>
+    <div class="slide-no">36 ／ C-22：組織の中の人間関係・集団：集団の心理</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-22 ／ 集団の心理</div><div class="title">集団は個人とは違う心理現象を起こす</div><div class="overview">グループシンク・グループシフト・心理的安全性という3つの集団心理現象を区別する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="20" cy="24" r="6" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="40" cy="24" r="6" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="30" cy="40" r="6" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <circle cx="30" cy="28" r="3" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">集団で意思決定すると、個人では起きない特有の心理現象が生じることがある。</p>
+            <div class="term-row"><span class="k">グループシンク</span><span class="v">団結・和を重視するあまり少数意見が出せず、不合理な結論に至る現象（集団浅慮）</span></div>
+            <div class="term-row"><span class="k">グループシフト</span><span class="v">議論の結果、個人で考えるより極端な結論（リスク志向 or 慎重）に振れる現象</span></div>
+            <div class="term-row"><span class="k">心理的安全性</span><span class="v">意見や懸念を安心して発言できる状態。生産性の高いチームの共通要因として注目</span></div>
+            <p><span class="label">具体例</span><br>会議で上司の意見に誰も異を唱えず危険な決定が承認されるのはグループシンクの典型。逆に率直に懸念を言い合える雰囲気（心理的安全性）があれば、こうした失敗を防ぎやすい。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-18 意思決定（限定合理性・認知バイアスは個人レベル、本論点は集団レベルの非合理性）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 37: C-23 組織間関係 -->
+  <div>
+    <div class="slide-no">37 ／ C-23：組織間関係：資源依存、取引コスト、クラスター</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-23 ／ 組織間関係：資源依存、取引コスト、クラスター</div><div class="title">会社は他組織との関係の中で活動する</div><div class="overview">資源依存・取引コスト・産業クラスターという3つの理論で組織間関係を説明する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="8" y="24" width="14" height="14" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <rect x="38" y="24" width="14" height="14" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <line x1="22" y1="31" x2="38" y2="31" stroke="#FF3B1F" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">会社は単独で存在せず、他の組織（取引先・競合・行政等）との関係の中で活動する。</p>
+            <div class="term-row"><span class="k">資源依存理論</span><span class="v">不足する経営資源を外部に依存し、その依存関係がパワー関係を生む（強く依存する相手には強く出られない）</span></div>
+            <div class="term-row"><span class="k">取引コスト理論</span><span class="v">市場で取引するか自社内で行うかは、交渉・契約・監視等の「取引コスト」を比較して決まる</span></div>
+            <div class="term-row"><span class="k">産業クラスター</span><span class="v">特定地域に関連企業・大学・研究機関が集積し情報交換・イノベーションが起きやすくなる（例：シリコンバレー）</span></div>
+            <p><span class="label">具体例</span><br>特定部品の他社との取引コスト（品質管理・納期調整の手間）が高すぎる場合、自社で内製化（垂直統合）した方が効率的、と判断されることがある（取引コスト理論）。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-5 垂直統合・M&amp;A・戦略的提携（取引コスト理論は垂直統合の是非を判断する理論的裏付け）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 38: C-24 組織変革と組織成長 -->
+  <div>
+    <div class="slide-no">38 ／ C-24：組織変革と組織成長</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-24 ／ 組織変革と組織成長</div><div class="title">レヴィンの3段階モデルで変革を進める</div><div class="overview">組織は創業期→成長期→成熟期とライフサイクルをたどる。変革は3段階で進める。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="process-wrap">
+          <div class="process-steps">
+            <div class="step"><span class="num">STEP 1</span><span class="label">解凍</span><span class="desc">現状維持の意識を崩し、変化の必要性を認識させる</span></div>
+            <div class="arrow">→</div>
+            <div class="step"><span class="num">STEP 2</span><span class="label">変化</span><span class="desc">新しいやり方を実際に導入する</span></div>
+            <div class="arrow">→</div>
+            <div class="step"><span class="num">STEP 3</span><span class="label">再凍結</span><span class="desc">新しいやり方を定着させ、元に戻らないようにする</span></div>
+          </div>
+          <div class="diagram-caption">レヴィンの3段階モデル。組織のライフサイクル（創業期→成長期→成熟期→再生・衰退期）では、各段階で直面する経営課題（資金調達→仕組み化→硬直化対応）が異なる。</div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>新システム導入時、いきなり入れ替えず「今のままではまずい」と危機感を共有し（解凍）、試験導入し（変化）、新業務フローとして定着させる（再凍結）と成功しやすい。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 39: C-25 労働関連法規 -->
+  <div>
+    <div class="slide-no">39 ／ C-25：人的資源管理：労働関連法規</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-25 ／ 人的資源管理：労働関連法規</div><div class="title">押さえるべき7つの労働関連法規</div><div class="overview">法律名と規制内容を正確に対応させる。適用対象・義務か努力義務かの違いに注意。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">労働基準法</span><span class="desc">労働時間・休憩・休日・賃金支払いなど労働条件の最低基準</span></div>
+          <div class="row"><span class="name">労働契約法</span><span class="desc">労働契約の締結・変更・終了に関するルール</span></div>
+          <div class="row"><span class="name">男女雇用機会均等法</span><span class="desc">性別を理由とする差別的取扱いの禁止</span></div>
+          <div class="row"><span class="name">育児・介護休業法</span><span class="desc">育児・介護のための休業制度</span></div>
+          <div class="row"><span class="name">パート・有期雇用労働法</span><span class="desc">正社員と非正規社員との不合理な待遇差の禁止（同一労働同一賃金）</span></div>
+          <div class="row"><span class="name">労働安全衛生法</span><span class="desc">労働者の安全と健康の確保</span></div>
+          <div class="row"><span class="name">労働者派遣法</span><span class="desc">派遣労働者の保護、派遣期間の制限など</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>正社員と契約社員とで基本給・賞与に不合理な差をつけるのは、パート・有期雇用労働法（同一労働同一賃金）に抵触するおそれがある。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 40: C-26 雇用管理 -->
+  <div>
+    <div class="slide-no">40 ／ C-26：人的資源管理：雇用管理（採用、配置、人事異動）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-26 ／ 人的資源管理：雇用管理</div><div class="title">ジョブローテーションでゼネラリストを育てる</div><div class="overview">日本企業に特徴的な定期的な人事異動の仕組みと、その狙いを理解する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <path d="M30 10 A20 20 0 1 1 10 30" fill="none" stroke="#171717" stroke-width="2"/>
+              <path d="M10 30 L4 24 M10 30 L16 24" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="30" cy="30" r="4" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">人材をどう採用し配置するかという管理分野。日本企業に特徴的な仕組みが<b>ジョブローテーション</b>（定期的な人事異動）。</p>
+            <p class="warn">特定の職務を限定せず様々な部署を経験させ、会社全体を理解した<b>ゼネラリスト</b>を育成する狙いがある。対比されるのが欧米型の「ジョブ型雇用」（特定の職務・スキルを明確に定義して採用）。</p>
+            <p><span class="label">具体例</span><br>入社した社員を営業部・経理部・製造部と数年おきに異動させ、幅広い業務知識を身につけさせるのは、日本型雇用に特徴的なジョブローテーションの一例。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-29 戦略的人的資源管理（採用・配置方針も経営戦略と整合させるべきという発想）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 41: C-27 評価・処遇 -->
+  <div>
+    <div class="slide-no">41 ／ C-27：人的資源管理：評価・処遇（人事評価、賃金体系）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-27 ／ 人的資源管理：評価・処遇</div><div class="title">3つの賃金体系とハロー効果に注意する</div><div class="overview">年功給・職務給・職能給の違いと、人事評価をゆがめるハロー効果を理解する。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="12" y="36" width="10" height="16" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <rect x="25" y="24" width="10" height="28" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <rect x="38" y="12" width="10" height="40" fill="none" stroke="#FF3B1F" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">社員の働きをどう評価し賃金に反映するか。代表的な賃金体系は3つ。</p>
+            <div class="term-row"><span class="k">年功給</span><span class="v">勤続年数・年齢に応じて賃金が上がる</span></div>
+            <div class="term-row"><span class="k">職務給</span><span class="v">職務の難易度・責任に応じて賃金を決める</span></div>
+            <div class="term-row"><span class="k">職能給</span><span class="v">個人の持つ能力（職能）に応じて賃金を決める</span></div>
+            <p class="note"><b>ひっかけ：</b>日本企業は伝統的に年功給・職能給中心だが、近年は成果や職務を重視する動きも進む。人事評価では評価者の主観による歪み（<b>ハロー効果</b>：1つの優れた点に引きずられ全体を過大評価）にも注意。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>具体例：</b>「彼は有名大学出身だから仕事もできるはずだ」という先入観で高評価をつけるのはハロー効果の典型例で、公正な人事評価を妨げる。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 42: C-28 人材育成 -->
+  <div>
+    <div class="slide-no">42 ／ C-28：人的資源管理：人材育成</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-28 ／ 人的資源管理：人材育成</div><div class="title">OJT・Off-JT・メンタリングの3手法</div><div class="overview">実務を通じて学ぶか、業務を離れて学ぶか、先輩が継続支援するかで手法が変わる。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="18" r="8" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <path d="M14 52 C14 38, 46 38, 46 52" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <circle cx="46" cy="14" r="4" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">人材育成の代表的な3手法。</p>
+            <div class="term-row"><span class="k">OJT</span><span class="v">On the Job Training。実際の仕事を通じて学ぶ</span></div>
+            <div class="term-row"><span class="k">Off-JT</span><span class="v">Off the Job Training。業務を離れて研修などで学ぶ</span></div>
+            <div class="term-row"><span class="k">メンタリング</span><span class="v">経験豊富な先輩社員が若手を継続的に支援する</span></div>
+            <p><span class="label">具体例</span><br>新人が先輩社員に同行して営業の実務を学ぶのはOJT、外部の研修会社が実施する集合研修に参加するのはOff-JT。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-26 雇用管理（ジョブローテーションもOJTの一形態と捉えられる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 43: C-29 戦略的人的資源管理 -->
+  <div>
+    <div class="slide-no">43 ／ C-29：人的資源管理：戦略的人的資源管理</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">C-29 ／ 人的資源管理：戦略的人的資源管理</div><div class="title">人事施策を経営戦略と一貫させる（SHRM）</div><div class="overview">採用・評価・育成・報酬を場当たり的でなく、経営戦略と整合させて設計する考え方。</div></div>
+        <div class="tag">企業経営理論</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="10" y="26" width="16" height="16" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <rect x="34" y="26" width="16" height="16" fill="none" stroke="#FF3B1F" stroke-width="1.6"/>
+              <line x1="26" y1="34" x2="34" y2="34" stroke="#171717" stroke-width="1.4"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede"><b>戦略的人的資源管理（SHRM）</b>：人事施策（採用・評価・育成・報酬等）を、会社全体の経営戦略と一貫性を持たせて設計する考え方。「どんな戦略を取るかで、必要な人材像・評価基準・育成方針も変わるべき」という発想。</p>
+            <p><span class="label">具体例</span><br>コストリーダーシップ戦略（C-7参照）の会社では効率性・生産性重視の評価制度が合理的だが、差別化戦略の会社では創造性・イノベーションを促す評価制度の方が戦略と整合的。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">C</span><span class="rank-label">出題実績あり</span></div>
+            <div class="related"><b>関連：</b>C-7 競争優位の戦略（採用すべき人事施策は戦略のタイプによって変わる）。出題頻度は低いが基本概念として押さえておく。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
             <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
             <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
             <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
