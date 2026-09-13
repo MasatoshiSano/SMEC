@@ -1,0 +1,999 @@
+<title>中小企業経営・政策 - スライド</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;
+  --cw:calc(min(100vw, 1020px) - 48px);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:calc(var(--cw)*1.85/100) calc(var(--cw)*2.26/100) calc(var(--cw)*0.93/100);border-bottom:calc(var(--cw)*0.16/100) solid var(--ink);flex:0 0 auto;gap:calc(var(--cw)*1.44/100);}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.98/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.55/100);font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:calc(var(--cw)*1.0/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.93/100);color:#fff;background:var(--ink);padding:calc(var(--cw)*0.31/100) calc(var(--cw)*0.93/100);align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:calc(var(--cw)*1.4/100) calc(var(--cw)*2.26/100) calc(var(--cw)*1.5/100);display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--cw)*0.55/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.05/100);color:#fff;background:var(--red);width:calc(var(--cw)*1.75/100);height:calc(var(--cw)*1.75/100);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-chip.none{background:var(--ink-soft);}
+.freq-top .rank-label{font-size:calc(var(--cw)*0.76/100);font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:calc(var(--cw)*0.78/100);color:var(--ink-soft);border-left:1px solid var(--line);padding-left:calc(var(--cw)*1.1/100);line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:calc(var(--cw)*0.68/100);color:var(--ink-soft);margin-right:calc(var(--cw)*0.9/100);white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.3/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.35/100);height:calc(var(--cw)*1.35/100);border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 過去問チェック */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .example{font-size:calc(var(--cw)*0.78/100);line-height:1.5;color:var(--ink);}
+.examq .example .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.62/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
+
+/* 番号なしの罫線区切りリスト */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
+
+/* 左2/3テキスト＋右1/3図解 */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:calc(var(--cw)*0.8/100);}
+.cover .main .title{font-size:calc(var(--cw)*5.2/100);font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:calc(var(--cw)*1.15/100);color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:calc(var(--cw)*62/100);}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:calc(var(--cw)*1.2/100);}
+.cover .scope{display:flex;gap:calc(var(--cw)*2.4/100);}
+.cover .scope .item{display:flex;flex-direction:column;gap:calc(var(--cw)*0.2/100);}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.6/100);font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:calc(var(--cw)*0.72/100);color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.85/100);border:1px solid rgba(255,255,255,.4);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*1/100);color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 calc(var(--cw)*4/100);overflow:hidden;}
+.divider .ghost-no{position:absolute;right:calc(var(--cw)*2/100);top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*22/100);line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:calc(var(--cw)*1.3/100);max-width:calc(var(--cw)*70/100);}
+.divider .kicker{display:flex;align-items:center;gap:calc(var(--cw)*1/100);}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:calc(var(--cw)*3.6/100);font-weight:900;line-height:1.15;}
+.divider .desc{font-size:calc(var(--cw)*1.08/100);color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:calc(var(--cw)*1.6/100);margin-top:calc(var(--cw)*0.4/100);flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);border:1px solid rgba(255,255,255,.35);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*0.9/100);color:#fff;opacity:.85;white-space:nowrap;}
+</style>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 07 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">中小企業経営・政策<span class="accent">。</span></div>
+          <div class="subtitle">中小企業経営（統計・経営実態）と中小企業政策（支援制度）の2分野、28<span style="white-space:nowrap">論点</span>。当年度の中小企業白書がそのまま出題範囲になる、唯一の時事色の強い科目。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">28</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">2</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">24/28</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/G_sme_management_policy_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 02: G-1〜G-17 区切り -->
+  <div>
+    <div class="slide-no">02</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">中小企業経営・政策 ／ G-1〜G-17</span></div>
+          <div class="title">中小企業経営</div>
+          <div class="desc">「そもそも中小企業とは何か」という中小企業基本法の定義から、統計データ・業種特性・経営課題、事業承継やDXなど最近の動向まで。</div>
+          <div class="covers">
+            <span class="chip">G-1 中小企業基本法の定義</span>
+            <span class="chip">G-5 ローカルベンチマーク</span>
+            <span class="chip">G-9 交際費特例</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 03: G-1 中小企業基本法の定義 -->
+  <div>
+    <div class="slide-no">03 ／ G-1：経済・産業における中小企業の役割、位置づけ（中小企業基本法の定義）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-1 ／ 中小企業基本法の定義</div><div class="title">資本金基準と従業員基準はどちらか一方でよい</div><div class="overview">飲食店業は「小売業」に分類される、業種区分の落とし穴が頻出。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">製造業・建設業等</span><span class="combo">資本金3億円以下</span><span class="desc">または従業員300人以下</span></div>
+          <div class="row"><span class="name">卸売業</span><span class="combo">資本金1億円以下</span><span class="desc">または従業員100人以下</span></div>
+          <div class="row"><span class="name">サービス業</span><span class="combo">資本金5,000万円以下</span><span class="desc">または従業員100人以下</span></div>
+          <div class="row"><span class="name">小売業（飲食店業含む）</span><span class="combo">資本金5,000万円以下</span><span class="desc">または従業員50人以下</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>基準はAND（両方満たす）ではなくOR（どちらか一方）。旅館業等は従業員基準の特例あり（例：旅館業は200人以下）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 04: G-1 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">04 ／ G-1：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-1 ／ 過去問で確認する</div><div class="title">こう出題される（令和6年度 第17問設問1）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">中小企業基本法第2条に基づく「中小企業者」に含まれる企業に関する正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。ａ：常時使用する従業員数が60人の日本料理店（資本金３千万円）。ｂ：常時使用する従業員数が80人の旅館（資本金６千万円）。ｃ：常時使用する従業員数が120人の生活関連サービス業（資本金８千万円）。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2024/G1JI2024.pdf（令和6年度第1次試験）第17問設問1</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: G-1 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">05 ／ G-1：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-1 ／ 過去問で確認する</div><div class="title">解答＆解説（令和6年度 第17問設問1）</div><div class="overview">正解はア。ａ・ｂはOR条件・特例業種で中小企業者に該当。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice correct"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正</span></div>
+          </div>
+          <p class="explain"><b>正解：ア</b>。ａ（正）：日本料理店（飲食店）は「小売業」に区分。従業員60人は基準（50人以下）超だが、資本金3,000万円は5,000万円以下を満たしOR条件で該当。ｂ（正）：旅館業は施行令の特例で従業員基準が200人以下に緩和。資本金6,000万円は超過だが従業員80人は特例基準内でOR条件により該当。ｃ（誤）：生活関連サービス業は特例なしの通常サービス業で基準は資本金5,000万円以下<b>または</b>従業員100人以下。資本金8,000万円・従業員120人はいずれも超過し非該当。</p>
+          <p class="example"><span class="label">具体例</span><br>資本金と従業員数の「どちらか一方」を満たせば足りるというOR条件が、業種区分の落とし穴と組み合わさって出題される。</p>
+          <p class="related-note">関連知識：飲食店業が小売業に含まれる点、旅館業等一部業種に従業員基準の特例がある点は毎年出題されうる定番のひっかけ。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2024/G1JI2024.pdf（令和6年度第1次試験）第17問設問1／正解：past_exams/1st_stage_answers/r06/2024g.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 06: G-2 各種統計にみる中小企業の動向 -->
+  <div>
+    <div class="slide-no">06 ／ G-2：各種統計にみる中小企業の動向</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-2 ／ 各種統計にみる中小企業の動向</div><div class="title">数は多いが、1社あたりの稼ぐ力は大企業に及ばない</div><div class="overview">具体的な数値は年度更新のため、この科目では「方向性」の理解が要になる。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">経済センサス</span><span class="v">国内すべての事業所・企業を対象にした国の基幹統計</span></div>
+            <div class="term-row"><span class="k">中小企業実態基本調査</span><span class="v">中小企業庁が実施。付加価値額等の財務データを把握</span></div>
+            <div class="term-row"><span class="k">法人企業統計調査</span><span class="v">財務省が実施。資本金階級別の財務諸表データを集計</span></div>
+            <p class="note"><b>ひっかけ：</b>中小企業は企業数ベースで大部分を占めるが、付加価値額シェアは企業数割合ほど高くない（数は多いが稼ぐ力は小さい）。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-5 中小企業の経営指標（個社レベルの分析ツール）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 07: G-3 産業構造と中小企業性業種 -->
+  <div>
+    <div class="slide-no">07 ／ G-3：産業構造と中小企業、中小企業性業種</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-3 ／ 産業構造と中小企業、中小企業性業種</div><div class="title">中小企業性業種＝斜陽産業ではない</div><div class="overview">大企業の規模の経済が働きにくい業種に中小企業が生き残りやすい。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">中小企業性業種</span><span class="v">大企業の参入が少なく中小企業が主な担い手（印刷業、繊維工業、伝統工芸品等）</span></div>
+            <div class="term-row"><span class="k">装置産業</span><span class="v">巨額の設備投資が必要で大企業中心（鉄鋼、石油化学、電力等）</span></div>
+            <p class="note"><b>ひっかけ：</b>「中小企業性業種＝衰退産業」は誤り。ブランド・地域性等で高収益を実現する企業も存在する。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-4 地域社会・地域産業（産地・企業城下町の形成）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 08: G-4 地域社会・地域産業と中小企業 -->
+  <div>
+    <div class="slide-no">08 ／ G-4：地域社会・地域産業と中小企業</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-4 ／ 地域社会・地域産業と中小企業</div><div class="title">「産地」は同業種の集積、「企業城下町」は親工場中心の構造</div><div class="overview">地域資源活用・農商工連携も近年重視される取り組み。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">産地</span><span class="desc">同業種の中小企業が特定地域に集積し、調達〜製造〜販売の分業体制を構築</span></div>
+          <div class="row"><span class="name">企業城下町</span><span class="desc">特定の大企業（親工場）を中心に下請企業群が地域に集積</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">B</span><span class="rank-label">頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「産地」と「企業城下町」の構造の違い（同業種集積か、親工場中心の下請構造か）を混同しない。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 09: G-5 中小企業の経営指標 -->
+  <div>
+    <div class="slide-no">09 ／ G-5：中小企業の経営指標（各種統計）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-5 ／ 中小企業の経営指標（各種統計）</div><div class="title">ローカルベンチマークは「企業の健康診断」</div><div class="overview">財務6指標＋非財務4視点＋商流・業務フローで総合的に把握する。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">財務6指標</span><span class="v">売上高増加率・営業利益率・労働生産性・EBITDA有利子負債倍率・営業運転資本回転期間・自己資本比率</span></div>
+            <div class="term-row"><span class="k">非財務4視点</span><span class="v">経営者・事業・関係者・内部管理体制への着目</span></div>
+            <p class="note"><b>ひっかけ：</b>「売上高人件費比率」「総資本回転率」等それらしい指標を紛れ込ませる出題に注意。6指標・4視点の正確な名称を覚える。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-2 各種統計にみる中小企業の動向（マクロ統計との対比）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 10: G-5 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">10 ／ G-5：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-5 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第11問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">経済産業省が提供するローカルベンチマーク（「企業の健康診断」）に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。ａ：財務分析における「6つの指標」には「売上高人件費比率」「総資本回転率」が含まれる。ｂ：非財務情報における「業務フロー」では自社業務の流れを把握し工夫や差別化ポイントを理解することが重要である。ｃ：非財務情報における「4つの視点」には「経営者への着目」「内部管理体制への着目」が含まれる。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第11問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11: G-5 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">11 ／ G-5：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-5 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第11問）</div><div class="overview">正解はウ。ａの2指標は6指標に含まれない。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice correct"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤</span></div>
+          </div>
+          <p class="explain"><b>正解：ウ</b>。ａ（誤）：財務6指標は①売上高増加率②営業利益率③労働生産性④EBITDA有利子負債倍率⑤営業運転資本回転期間⑥自己資本比率であり、「売上高人件費比率」「総資本回転率」は<b>含まれない</b>。ｂ（正）：業務フローの説明どおり正しい。ｃ（正）：非財務4視点（経営者・事業・関係者・内部管理体制）の説明どおり正しい。</p>
+          <p class="example"><span class="label">具体例</span><br>決算書の数字だけでなく、経営者の資質・後継者の有無、主要取引先との関係性、社内の情報共有体制まで含めて総合的に評価するのがローカルベンチマークの考え方。</p>
+          <p class="related-note">関連知識：財務の「6つの指標」と非財務の「4つの視点」＋「商流・業務フロー」の構成をセットで覚えること。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第11問／正解：past_exams/1st_stage_answers/r07/2025g.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12: G-6 中小企業経営の特質と課題 -->
+  <div>
+    <div class="slide-no">12 ／ G-6：中小企業経営の特質と課題（経営基盤、経営の多様性）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-6 ／ 中小企業経営の特質と課題（経営基盤、経営の多様性）</div><div class="title">「中小企業＝弱者」と単純化しない</div><div class="overview">積極的に成長投資・DXに取り組む企業は大企業と遜色ない例もある。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">資金調達力の弱さ</span><span class="v">信用力が低く間接金融に依存。直接金融は限定的</span></div>
+            <div class="term-row"><span class="k">人材確保の難しさ</span><span class="v">知名度・待遇面で大企業に見劣りし採用競争で不利</span></div>
+            <div class="term-row"><span class="k">経営者への依存度</span><span class="v">オーナー経営者の能力・健康状態が経営全体を左右</span></div>
+            <p class="note"><b>ひっかけ：</b>白書は「稼ぐ力を高めれば大企業と伍していける」と強調。「中小企業＝一律に弱い」という固定観念で解答すると矛盾する。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-12 経営革新・事業創造（「稼ぐ力」向上の取り組み）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 13: G-7 業種・業態別経営特質と課題 -->
+  <div>
+    <div class="slide-no">13 ／ G-7：業種・業態別経営特質と課題（建設・製造・卸小売・サービス業等）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-7 ／ 業種・業態別経営特質と課題</div><div class="title">建設業は重層下請、卸売業は「中抜き」の脅威</div><div class="overview">業種別の課題を取り違えないよう白書の業種別分析を押さえる。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">建設業</span><span class="desc">元請・下請・孫請の重層構造。価格転嫁・工期管理が難しい。担い手不足</span></div>
+          <div class="row"><span class="name">製造業</span><span class="desc">系列・下請依存が多い。下請からの脱却（自社製品開発）が課題</span></div>
+          <div class="row"><span class="name">卸売業</span><span class="desc">メーカー直接取引拡大・EC化による「中抜き」の脅威</span></div>
+          <div class="row"><span class="name">サービス業</span><span class="desc">労働集約的な業種が多く、労働生産性向上が大きな政策課題</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip none">－</span><span class="rank-label">直近10年単独出題なし</span></div>
+            <div class="related"><b>関連：</b>G-23 経営サポート（取引・官公需支援は下請問題への対応）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 14: G-8 中小企業の経営環境と経営革新 -->
+  <div>
+    <div class="slide-no">14 ／ G-8：中小企業の経営環境と経営革新（グローバル化、サプライチェーン）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-8 ／ 中小企業の経営環境と経営革新</div><div class="title">グローバル化＝海外進出が常に望ましい、ではない</div><div class="overview">供給網のリスク管理（分散・強靱化）という文脈で語られる。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">サプライチェーンの強靱化</span><span class="v">調達先の分散、国内回帰（リショアリング）、在庫適正化</span></div>
+            <div class="term-row"><span class="k">価格転嫁の推進</span><span class="v">原材料費・エネルギー・人件費上昇分を取引価格に反映</span></div>
+            <p class="note"><b>ひっかけ：</b>「グローバル化＝海外進出推進が常に望ましい」ではなく、リスク分散・強靱化の文脈で語られる点に注意。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">B</span><span class="rank-label">頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-15 海外展開（企業レベルの海外展開の進め方）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 15: G-9 金融・信用保証、税制 -->
+  <div>
+    <div class="slide-no">15 ／ G-9：金融・信用保証、税制</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-9 ／ 金融・信用保証、税制</div><div class="title">中小企業基本法の「中小企業者」と税制上の「中小法人」は別概念</div><div class="overview">税制優遇の多くは業種問わず資本金1億円以下で一律判定される。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">間接金融依存</span><span class="v">中小企業は信用力が乏しく銀行借入への依存度が高い</span></div>
+            <div class="term-row"><span class="k">中小企業基本法の基準</span><span class="v">業種ごとに資本金または従業員数のいずれかで判定</span></div>
+            <div class="term-row"><span class="k">租税特別措置法の基準</span><span class="v">業種問わず資本金1億円以下で一律判定（中小法人）</span></div>
+            <p class="note"><b>ひっかけ：</b>「中小企業基本法上の中小企業者」と「租税特別措置法上の中小法人」は判定基準が異なる別概念。税制の話は必ずどちらの基準か確認する。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-25 財務サポート（税制、事業承継税制の詳細）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 16: G-9 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">16 ／ G-9：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-9 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第27問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">交際費等は原則として損金の額に算入しないこととされている。ただし特例として、【Ａ】は800万円までの交際費等の【Ｂ】の損金算入、または接待飲食費の50％の損金算入の選択適用が認められている。空欄ＡとＢに入る語句の組み合わせとして、最も適切なものを下記の解答群から選べ。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>Ａ：資本金または出資金の額が１億円以下の法人　Ｂ：50％</span></div>
+            <div class="choice"><span class="badge">イ</span><span>Ａ：資本金または出資金の額が１億円以下の法人　Ｂ：全額</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>Ａ：中小企業基本法に定める中小企業に該当する法人　Ｂ：50％</span></div>
+            <div class="choice"><span class="badge">エ</span><span>Ａ：中小企業基本法に定める中小企業に該当する法人　Ｂ：全額</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第27問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 17: G-9 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">17 ／ G-9：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-9 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第27問）</div><div class="overview">正解はイ。判定基準は資本金1億円以下、控除枠は全額損金算入。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>Ａ：資本金または出資金の額が１億円以下の法人　Ｂ：50％</span></div>
+            <div class="choice correct"><span class="badge">イ</span><span>Ａ：資本金または出資金の額が１億円以下の法人　Ｂ：全額</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>Ａ：中小企業基本法に定める中小企業に該当する法人　Ｂ：50％</span></div>
+            <div class="choice"><span class="badge">エ</span><span>Ａ：中小企業基本法に定める中小企業に該当する法人　Ｂ：全額</span></div>
+          </div>
+          <p class="explain"><b>正解：イ</b>。租税特別措置法により、資本金（出資金）<b>1億円以下</b>の法人（大法人の100％子会社等除く）は、年800万円までの交際費等の<b>全額</b>損金算入、または接待飲食費50％相当額の損金算入のいずれか有利な方を選択適用できる。ア：Ａは正しいがＢの「50％」は誤り（800万円枠は全額算入が正しい）。ウ・エ：Ａの「中小企業基本法に定める中小企業」が誤り。この特例の対象は業種別の中小企業基本法基準ではなく、資本金1億円以下で一律判定する租税特別措置法上の「中小法人」。</p>
+          <p class="example"><span class="label">具体例</span><br>資本金3,000万円の製造業（中小企業基本法の基準を満たす）も、資本金1億円ぴったりの卸売業（中小企業基本法の基準は1億円以下でこちらも該当）も、いずれも資本金1億円以下という税制上の基準で判定される。</p>
+          <p class="related-note">関連知識：税制上の中小企業向け特例（軽減税率、交際費特例、少額減価償却資産の特例等）の多くは「資本金1億円以下」を基準にしている。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/G1JI2025.pdf（令和7年度第1次試験）第27問／正解：past_exams/1st_stage_answers/r07/2025g.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 18: G-10 労働・雇用・人材育成 -->
+  <div>
+    <div class="slide-no">18 ／ G-10：労働・雇用・人材育成</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-10 ／ 労働・雇用・人材育成</div><div class="title">人手不足対応は「採用を増やす」だけではない</div><div class="overview">多様な人材の活用と省力化・生産性向上の両輪で対応する。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">多様な人材の活用</span><span class="v">女性・高齢者・外国人材・副業兼業人材の労働参加を促す</span></div>
+            <div class="term-row"><span class="k">省力化・生産性向上</span><span class="v">DX・設備投資で少ない人手でも成果を上げる</span></div>
+            <div class="term-row"><span class="k">賃上げのジレンマ</span><span class="v">定着には賃上げが必要だが価格転嫁力の弱さが原資確保を阻む</span></div>
+            <p class="note"><b>ひっかけ：</b>「人手不足対応＝採用強化のみ」は不十分。省力化・多様な人材活用・賃上げの組合せが白書の問題意識。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-22 経営サポート（雇用人材支援策）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 19: G-11 環境対応・エネルギー対応 -->
+  <div>
+    <div class="slide-no">19 ／ G-11：環境対応・エネルギー対応</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-11 ／ 環境対応・エネルギー対応</div><div class="title">環境対応はコスト増だけの話ではない</div><div class="overview">取引先要請への対応リスクとコスト削減機会の両面がある。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">カーボンニュートラル</span><span class="v">2050年温室効果ガス排出実質ゼロを目指す政府目標</span></div>
+            <div class="term-row"><span class="k">サプライチェーン波及</span><span class="v">大企業の環境対応要請が取引先の中小企業にも波及</span></div>
+            <div class="term-row"><span class="k">GX関連補助金</span><span class="v">省エネ設備投資・再エネ導入の支援策</span></div>
+            <p class="note"><b>ひっかけ：</b>「負担が増えるだけ」という一面的理解は誤り。取引喪失リスクとコスト削減機会の両面から出題される。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip none">－</span><span class="rank-label">直近10年単独出題なし</span></div>
+            <div class="related"><b>関連：</b>G-8 中小企業の経営環境（サプライチェーン強靱化と同時に語られる）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 20: G-12 経営革新・事業創造、生産性向上 -->
+  <div>
+    <div class="slide-no">20 ／ G-12：経営革新・事業創造、生産性向上の取り組み</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-12 ／ 経営革新・事業創造、生産性向上の取り組み</div><div class="title">生産性向上＝人員削減ではない</div><div class="overview">「現状維持は最大のリスク」。付加価値額の増加と労働投入量の最適化の両輪。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">付加価値額の増加</span><span class="v">価格転嫁、成長投資、新事業展開、事業承継・M&Aによる再編</span></div>
+            <div class="term-row"><span class="k">労働投入量の最適化</span><span class="v">省力化投資、DX推進による生産性向上</span></div>
+            <p class="note"><b>ひっかけ：</b>「生産性向上＝人員削減」は誤り。限られた人手を高付加価値業務に振り向けることが本質。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-20 経営サポート（経営革新計画の認定制度）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 21: G-13 情報技術の活用・DX -->
+  <div>
+    <div class="slide-no">21 ／ G-13：中小企業経営に係る最近の動向：情報技術の活用・DX</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-13 ／ 情報技術の活用・DX</div><div class="title">ITツール導入＝DXではない</div><div class="overview">デジタイゼーション→デジタライゼーション→DXという段階の違いを意識する。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">DX</span><span class="v">デジタル技術で業務プロセス・ビジネスモデルを変革し競争優位を確立</span></div>
+            <div class="term-row"><span class="k">DX認定制度</span><span class="v">企業のDXへの取り組み方針を国が認定する制度</span></div>
+            <p class="note"><b>ひっかけ：</b>ツール導入自体はDXの手段の一つ。業務プロセス・事業モデルの変革を伴って初めてDXと呼べる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-13 経営革新と情報システム（F科目のDX論点と同一テーマ）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 22: G-14 事業承継・M&A -->
+  <div>
+    <div class="slide-no">22 ／ G-14：中小企業経営に係る最近の動向：事業承継・M&A</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-14 ／ 事業承継・M&A</div><div class="title">後継者不在は経営権・資産・税負担の3面から考える</div><div class="overview">第三者承継（M&A）が政策的に強く後押しされている。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">親族内承継</span><span class="desc">経営者の子など親族に引き継ぐ</span></div>
+          <div class="row"><span class="name">親族外承継</span><span class="combo">従業員承継</span><span class="desc">役員・従業員に引き継ぐ</span></div>
+          <div class="row"><span class="name">社外への引継ぎ</span><span class="combo">M&A・第三者承継</span><span class="desc">外部の企業・個人に譲渡。近年最も政策的に後押しされている</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-25 財務サポート（事業承継税制、税負担の軽減策）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 23: G-15 海外展開 -->
+  <div>
+    <div class="slide-no">23 ／ G-15：中小企業経営に係る最近の動向：海外展開</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-15 ／ 海外展開</div><div class="title">まず輸出から始める段階的アプローチが重視される</div><div class="overview">JETRO等の公的支援を活用しながら海外展開を進めるケースが多い。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">海外展開の段階</span><span class="v">輸出→ライセンス供与→海外直接投資（現地法人・工場設立）</span></div>
+            <div class="term-row"><span class="k">JETRO</span><span class="v">日本貿易振興機構。中小企業の海外展開を支援する公的機関</span></div>
+            <p class="note"><b>ひっかけ：</b>いきなり現地生産ではなく、輸出から始め市場の反応を見る手堅いアプローチが重視される。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-22 経営サポート（海外展開支援の具体的施策）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 24: G-16 創業・アントレプレナーシップ -->
+  <div>
+    <div class="slide-no">24 ／ G-16：中小企業経営に係る最近の動向：創業・アントレプレナーシップ</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-16 ／ 創業・アントレプレナーシップ</div><div class="title">「創業」と「第二創業」は異なる概念</div><div class="overview">日本は諸外国比で開業率が低く、創業の裾野拡大が政策課題。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">開業率</span><span class="v">日本は諸外国と比較して低水準にあると指摘される</span></div>
+            <div class="term-row"><span class="k">アントレプレナーシップ</span><span class="v">リスクを取って新しい事業に挑戦する起業家精神そのもの</span></div>
+            <div class="term-row"><span class="k">第二創業</span><span class="v">既存企業が新分野に進出すること（創業とは異なる概念）</span></div>
+            <p class="note"><b>ひっかけ：</b>創業支援策の対象が「新規開業者」か「既存企業の新事業展開（第二創業）」かを区別する。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-19 経営サポート（創業・ベンチャー支援の具体施策）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 25: G-17 知的財産権・無形資産の活用 -->
+  <div>
+    <div class="slide-no">25 ／ G-17：中小企業経営に係る最近の動向：知的財産権・無形資産の活用</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">G-17 ／ 知的財産権・無形資産の活用</div><div class="title">G科目で問われるのは「経営における活用のあり方」</div><div class="overview">知財の制度内容そのものはE科目（経営法務）の範囲。</div></div>
+        <div class="tag">中小企業経営・政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">無形資産</span><span class="v">ブランド・ノウハウ・顧客基盤・データ・人的資本等、B/Sに現れにくい価値</span></div>
+            <div class="term-row"><span class="k">知財経営</span><span class="v">独自の技術・ブランドを経営戦略に明確に位置づけ活用する考え方</span></div>
+            <div class="term-row"><span class="k">地域団体商標</span><span class="v">地域名＋商品名の商標を組合等が登録できる制度</span></div>
+            <p class="note"><b>ひっかけ：</b>特許権・商標権の制度要件はE科目の範囲。G科目は「経営における活用のあり方」というより経営寄りの視点で問われる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>G-21 経営サポート（知的財産支援策）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
