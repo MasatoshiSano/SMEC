@@ -6,7 +6,7 @@
 const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
-  addTermRows, addRowList, addExamQuestion,
+  addTermRows, addRowList, addExamQuestion, drawLineChart,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -477,6 +477,435 @@ addDividerSlide(pres, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "関連：B-16 利益計画（プロダクト・ミックス）でも同じ「差額で考える」発想を使う。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 16: 経営分析／利益と資金の管理 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "02",
+  partNo: "PART 02",
+  partLabel: "財務・会計 ／ B-12〜B-19",
+  title: "経営分析／利益と資金の管理",
+  desc: "B/S・P/Lの数値から会社の実力（儲ける力・安全性・生産性）を読み解く経営分析と、利益を計画的に生み出し資金繰りを管理する分野。「儲け」と「手元の現金」は別物、という視点が核心。",
+  chips: ["B-12 ROA・ROE", "B-15 CVP分析", "B-19 FCF"],
+  notes: "経営分析／利益と資金の管理パートの区切りスライド。",
+});
+
+// ---------- Slide 17: B-12 収益性分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-12 ／ 経営分析：収益性分析",
+    title: "ROEは3つの要素に分解できる",
+    overview: "会社がどれだけ効率よく儲けているかを見る分析。デュポン分解でROEの中身を切り分ける。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "ROA", v: "当期純利益 ÷ 総資産 × 100（総資産全体でどれだけ効率よく利益を生んだか）" },
+    { k: "ROE", v: "当期純利益 ÷ 自己資本 × 100（株主のお金でどれだけ効率よく利益を生んだか）" },
+    { k: "デュポン分解", v: "ROE ＝ 売上高純利益率 × 総資産回転率 × 財務レバレッジ" },
+  ], { fontSize: 11.5, labelW: 2.0, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "売上高1億円・当期純利益500万円・総資産5,000万円・自己資本2,500万円→ROA＝10％、ROE＝20％。総資産回転率2回転×財務レバレッジ2倍×純利益率5％＝20％で検算一致。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "負債を多く使う（財務レバレッジが高い）会社ほど、ROEはROAより大きく上振れしやすい。ROAの分子は当期純利益／経常利益のどちらか、問題文の指示に従うこと。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-13 安全性分析、B-23 最適資本構成（財務レバレッジは共通概念）。",
+    years: mkYears(new Set(["'18", "'19", "'23"])),
+  });
+}
+
+// ---------- Slide 18: B-13 安全性分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-13 ／ 経営分析：安全性分析",
+    title: "倒産せずに返済できる体力を測る",
+    overview: "短期・長期それぞれの支払い能力を見る代表指標。分母・分子の組み合わせを正確に。",
+    tag: "財務・会計",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "流動比率", tag: "流動資産÷流動負債", desc: "短期の支払い能力。200％以上が望ましいとされる" },
+    { name: "当座比率", tag: "当座資産÷流動負債", desc: "棚卸資産を除いた厳しめの短期支払い能力" },
+    { name: "自己資本比率", tag: "自己資本÷総資産", desc: "高いほど財務的に安定" },
+    { name: "固定長期適合率", tag: "固定資産÷(自己資本+固定負債)", desc: "100％超は短期資金で固定資産を賄う危険な状態" },
+  ], { nameW: 2.1, tagW: 3.1, rowH: 0.78 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：固定比率が100％超でも固定長期適合率が100％以下なら直ちに危険ではない。",
+    years: mkYears(new Set(["'16", "'17", "'19", "'20", "'21", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 19: B-14 生産性・成長性分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-14 ／ 経営分析：生産性・成長性分析",
+    title: "1人あたりどれだけ付加価値を生んだか",
+    overview: "限られた経営資源から生み出した付加価値を測る労働生産性と、規模の伸びを測る成長性分析。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "労働生産性", v: "付加価値額 ÷ 従業員数" },
+    { k: "控除法", v: "付加価値＝売上高－外部購入価値（材料費・外注費）" },
+    { k: "加算法", v: "付加価値＝経常利益＋人件費＋金融費用＋賃借料＋租税公課＋減価償却費" },
+    { k: "売上高増加率", v: "(当期売上高－前期売上高) ÷ 前期売上高 × 100" },
+  ], { fontSize: 11, labelW: 2.0, gap: 0.4 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "売上高3億円、外部購入価値1億8,000万円、従業員20人→控除法の付加価値＝1億2,000万円、労働生産性＝600万円／人。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.58, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.66;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "労働生産性が高い＝従業員の給料が高いとは限らない（利益として会社に残る場合もある）。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：B-12 収益性分析（同じ財務諸表から異なる切り口で会社を読み解く）。",
+    years: mkYears(new Set(["'18", "'22", "'23"])),
+  });
+}
+
+// ---------- Slide 20: B-15 CVP分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-15 ／ 経営分析：CVP分析（損益分岐点分析）",
+    title: "売上高がいくらで利益ゼロになるか",
+    overview: "原価を変動費・固定費に分解し、損益分岐点売上高・安全余裕率・営業レバレッジを求める。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 7.6;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "限界利益", v: "売上高－変動費" },
+    { k: "損益分岐点売上高", v: "固定費 ÷ 限界利益率" },
+    { k: "安全余裕率", v: "1－損益分岐点比率" },
+    { k: "営業レバレッジ度", v: "限界利益 ÷ 営業利益" },
+  ], { fontSize: 10.5, labelW: 2.1, gap: 0.42 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "固定費を削減し変動費を増やすと営業レバレッジは低下する。製造業は小売業より営業レバレッジが高い傾向。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  const rx = 8.55, rw = 4.05;
+  drawLineChart(s, rx, 1.95, rw, 3.7, {
+    xLabel: "", yLabel: "",
+    series: [
+      { x1: 0, y1: 0, x2: 1, y2: 1, color: INK, width: 2, label: "売上高", labelDx: -0.55, labelDy: -0.15 },
+      { x1: 0, y1: 0.3, x2: 1, y2: 0.65, color: RED, width: 2, label: "総原価", labelDx: -0.55, labelDy: -0.15 },
+    ],
+    point: { nx: 0.46, ny: 0.46, label: "BEP" },
+  });
+  s.addText("損益分岐点＝売上高線と総原価線の交点", { x: rx - 0.3, y: 5.75, w: rw + 0.6, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：売上500万・変動費200万・固定費240万→限界利益300万、損益分岐点400万、安全余裕率20％、営業レバレッジ5倍。",
+    years: mkYears(new Set(["'16", "'18", "'20", "'21", "'22", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 21: B-15 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-15 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第13問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "財務・会計",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "営業レバレッジ（オペレーティング・レバレッジ）に関する記述として、最も適切なものはどれか。",
+    stemH: 0.55,
+    choices: [
+      { badge: "ア", text: "営業レバレッジが低い企業は、営業レバレッジが高い企業に比べて、売上高が減少しても利益が減少しにくい状態であるといえる。" },
+      { badge: "イ", text: "営業レバレッジの状況は、営業利益と当期純利益から把握できる。" },
+      { badge: "ウ", text: "営業レバレッジは、一般的に、製造業の企業よりも小売業の企業の方が高くなる傾向にある。" },
+      { badge: "エ", text: "営業レバレッジは、固定費を削減して変動費を増やすことによって高めることができる。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第13問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 22: B-15 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-15 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第13問）",
+    overview: "正解はア。固定費比率が低い企業ほど、売上変動の利益への影響は小さい。",
+    tag: "財務・会計",
+  });
+  const choices = [
+    { badge: "ア", text: "営業レバレッジが低い企業は、営業レバレッジが高い企業に比べて、売上高が減少しても利益が減少しにくい状態であるといえる。" },
+    { badge: "イ", text: "営業レバレッジの状況は、営業利益と当期純利益から把握できる。" },
+    { badge: "ウ", text: "営業レバレッジは、一般的に、製造業の企業よりも小売業の企業の方が高くなる傾向にある。" },
+    { badge: "エ", text: "営業レバレッジは、固定費を削減して変動費を増やすことによって高めることができる。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。営業レバレッジ度＝限界利益÷営業利益で、固定費比率が高いほど値は大きくなる。固定費比率が低い企業ほど、売上高が変動しても利益への影響は相対的に小さい。イ：営業レバレッジ度は「限界利益÷営業利益」で計算するもので、営業利益と当期純利益からは把握できない。ウ：製造業の方が小売業よりも営業レバレッジは", options: {} },
+    { text: "高くなる", options: { bold: true } },
+    { text: "傾向にあり記述は逆。エ：固定費を削減し変動費を増やすと、営業レバレッジはむしろ", options: {} },
+    { text: "低下", options: { bold: true } },
+    { text: "する。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "固定費比率が高い＝ハイリスク・ハイリターンな費用構造、という理解が土台。CVP分析（損益分岐点）の考え方と表裏一体。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：docs/07_key_formulas_and_frameworks.mdのCVP分析参照。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第13問／正解：past_exams/1st_stage_answers/r07/2025b.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 23: B-16 利益計画 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-16 ／ 利益と資金の管理：利益計画",
+    title: "ボトルネック1単位あたりの限界利益で優先順位を決める",
+    overview: "複数製品を作る際、制約資源1単位あたりの限界利益が高い製品を優先する。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "限られた生産能力（ボトルネック）をどの製品にどれだけ振り向けるか（プロダクト・ミックス）は、「1個あたりの限界利益」ではなく「制約資源1単位あたりの限界利益」で優先順位を決める。",
+    { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 11.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.63;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "加工機械480分／日がボトルネック。製品X＝限界利益1,000円・機械5分（200円/分）、製品Y＝限界利益1,500円・機械10分（150円/分）。1個あたりはYが高いが、機械1分あたりではXの方が効率的→Xを優先。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.78;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「1個あたりの限界利益が高い方を優先」という単純な発想は、制約条件がある場合は誤り。必ず制約資源1単位あたりで比較する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "直近10年で1回出題",
+    related: "関連：B-11 原価情報の利用（差額原価収益分析と同じ「差で考える」発想）。",
+    years: mkYears(new Set(["'16"])),
+  });
+}
+
+// ---------- Slide 24: B-17 予算・実績差異分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-17 ／ 利益と資金の管理：予算・実績差異分析",
+    title: "価格差異と数量差異に分けて原因を切り分ける",
+    overview: "標準原価計算における差異分析。掛け合わせる数量（実際か標準か）の組み合わせがポイント。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "価格差異", v: "(実際価格－標準価格) × 実際消費量" },
+    { k: "数量差異", v: "(実際消費量－標準消費量) × 標準価格" },
+  ], { fontSize: 11.5, labelW: 1.7, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "標準：1kgあたり500円、1個2kg。実際：520円、2.2kg消費。価格差異＝(520－500)×2.2kg＝44円（不利）。数量差異＝(2.2－2)×500円＝100円（不利）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「価格のズレは実際消費量を掛ける」「数量のズレは標準価格で固定して掛ける」という掛け合わせる数量の組み合わせを逆にしやすい。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "直近10年で1回出題",
+    related: "関連：B-10 原価計算（標準原価計算の考え方がベース）。",
+    years: mkYears(new Set(["'21"])),
+  });
+}
+
+// ---------- Slide 25: B-18 資金繰りと資金計画 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-18 ／ 利益と資金の管理：資金繰りと資金計画",
+    title: "利益が出ていても現金が足りなくなる",
+    overview: "運転資金＝売上債権＋棚卸資産－仕入債務。急拡大局面ほど資金がショートしやすい。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "資金繰り：", options: { bold: true, color: INK } },
+    { text: "事業継続に必要な現金がいつ・いくら必要かを予測し、ショートしないよう管理すること。中心は「運転資金」の考え方。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  cy += 0.53;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "運転資金", v: "売上債権＋棚卸資産－仕入債務" },
+  ], { fontSize: 11.5, labelW: 1.7, gap: 0.4 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "売上債権2,000万・棚卸資産1,500万・仕入債務1,200万→運転資金＝2,300万円。売上急拡大で売掛金・在庫が膨らむと運転資金の必要額が増加する（黒字倒産の典型パターン）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.78, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.86;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「利益が出ている＝現金に余裕がある」とは限らない。「勘定合って銭足らず」の状況を理解しておく。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "直近10年で2回出題",
+    related: "関連：B-19 キャッシュ・フロー管理（CCCは運転資金を日数で見る指標）。",
+    years: mkYears(new Set(["'21", "'22"])),
+  });
+}
+
+// ---------- Slide 26: B-19 キャッシュ・フロー管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-19 ／ 利益と資金の管理：キャッシュ・フロー管理",
+    title: "FCF＝営業CF－投資CF",
+    overview: "自由に使える現金がFCF。CCCは仕入から回収までの日数を測る資金効率の指標。",
+    tag: "財務・会計",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "FCF", v: "営業キャッシュ・フロー－投資キャッシュ・フロー（設備投資額）" },
+    { k: "CCC", v: "売上債権回転日数＋棚卸資産回転日数－仕入債務回転日数（短いほど資金効率が良い）" },
+  ], { fontSize: 11.5, labelW: 1.3, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "当期純利益1,000万・減価償却費200万・売上債権150万増加・仕入債務80万増加・設備投資300万→営業CF1,130万、FCF＝1,130－300＝830万円。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「売上債権の増加額は加算」「設備投資額は加算」はB-6の向きを逆にした典型的な誤り。売上債権増加→減算、設備投資額→減算が正しい向き。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "直近10年で2回出題",
+    related: "関連：B-6 キャッシュ・フロー計算書（間接法の調整がこのFCF計算のベース）。",
+    years: mkYears(new Set(["'23", "'25"])),
+  });
+}
+
+// ---------- Slide 27: B-19 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-19 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第21問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "財務・会計",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "当期純利益からフリー・キャッシュ・フローを計算する場合の記述として、最も適切なものはどれか。なお、税金は存在しないものとする。",
+    stemH: 0.6,
+    choices: [
+      { badge: "ア", text: "売上債権の増加額は、当期純利益に加算される。" },
+      { badge: "イ", text: "減価償却費は、当期純利益から減算される。" },
+      { badge: "ウ", text: "仕入債務の増加額は、当期純利益に加算される。" },
+      { badge: "エ", text: "設備投資額は、当期純利益に加算される。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第21問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 28: B-19 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "B-19 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第21問）",
+    overview: "正解はウ。仕入債務の増加＝支払いの先延ばし＝現金流出が抑えられる＝加算。",
+    tag: "財務・会計",
+  });
+  const choices = [
+    { badge: "ア", text: "売上債権の増加額は、当期純利益に加算される。" },
+    { badge: "イ", text: "減価償却費は、当期純利益から減算される。" },
+    { badge: "ウ", text: "仕入債務の増加額は、当期純利益に加算される。" },
+    { badge: "エ", text: "設備投資額は、当期純利益に加算される。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "。仕入債務が増加する＝支払いを先延ばしできている＝現金流出が抑えられている、ということなので当期純利益に加算される。ア：売上債権が増加する＝まだ現金を回収できていない、ということなのでキャッシュベースでは", options: {} },
+    { text: "減算", options: { bold: true } },
+    { text: "しなければならない。イ：減価償却費は実際の現金支出を伴わない（非資金費用）ため、当期純利益に", options: {} },
+    { text: "加算", options: { bold: true } },
+    { text: "して戻す。エ：設備投資額は実際に現金が出ていく支出なので、当期純利益から", options: {} },
+    { text: "減算", options: { bold: true } },
+    { text: "する。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "FCF＝営業CF－投資CF、間接法での営業CFは「当期純利益＋非資金費用－運転資本の増加＋運転資本の減少」という構造。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：B-18の運転資金の定義（売上債権＋棚卸資産－仕入債務）と対応させて覚えること。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/B1JI2025.pdf（令和7年度第1次試験）第21問／正解：past_exams/1st_stage_answers/r07/2025b.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
   });
 }
 
