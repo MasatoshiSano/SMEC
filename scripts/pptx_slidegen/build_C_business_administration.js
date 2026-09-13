@@ -1041,7 +1041,74 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 30: C-16 組織構造の形態 ----------
+
+// ---------- Slide 30: C-15 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-15 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第14問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "組織における分業と調整に関する記述として、最も適切なものはどれか。",
+    stemH: 1.0,
+    choices: [
+      { badge: "ア", text: "作業現場において、仕事を分業し、個々の作業範囲を特定の領域に狭く限定すると、作業者のスキルが均質化し、業務の幅が広がるため、キャリア形成の選択肢も増える。" },
+      { badge: "イ", text: "作業手順を標準化し、作業内容を確定させることは、計画目標の達成率を高め、生産性向上につながる。このような標準化と計画目標の関係は、「計画のグレシャムの法則」として知られている。" },
+      { badge: "ウ", text: "仕事の分業が過度に進むと、組織メンバーは自分の仕事が組織全体にどのような意味を持っているか実感できず、仕事への意欲が低下することがある。こうした現象は、「アンダーマイニング効果」として知られている。" },
+      { badge: "エ", text: "仕事の分業を進めると、個々の作業が単純化され、機械化が容易となるため、各工程間の調整が不要となり、業務は効率化されやすい。" },
+      { badge: "オ", text: "定型的な作業は標準化によってあらかじめ調整し、想定外の事態には上位層が事後的に対応することで、仕事は効率的に行われる。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第14問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 31: C-15 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-15 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第14問）",
+    overview: "正解はオ。定型業務は標準化、例外は上位層の判断に委ねる分業が効率的。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "作業現場において、仕事を分業し、個々の作業範囲を特定の領域に狭く限定すると、作業者のスキルが均質化し、業務の幅が広がるため、キャリア形成の選択肢も増える。" },
+      { badge: "イ", text: "作業手順を標準化し、作業内容を確定させることは、計画目標の達成率を高め、生産性向上につながる。このような標準化と計画目標の関係は、「計画のグレシャムの法則」として知られている。" },
+      { badge: "ウ", text: "仕事の分業が過度に進むと、組織メンバーは自分の仕事が組織全体にどのような意味を持っているか実感できず、仕事への意欲が低下することがある。こうした現象は、「アンダーマイニング効果」として知られている。" },
+      { badge: "エ", text: "仕事の分業を進めると、個々の作業が単純化され、機械化が容易となるため、各工程間の調整が不要となり、業務は効率化されやすい。" },
+      { badge: "オ", text: "定型的な作業は標準化によってあらかじめ調整し、想定外の事態には上位層が事後的に対応することで、仕事は効率的に行われる。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 4 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：オ", options: { bold: true, color: RED } },
+    { text: "。定型業務は事前にルール・手順を標準化して調整し、例外・想定外の事態だけ上位層が個別に判断する役割分担が、分業と調整の基本的な考え方。ア：作業範囲を狭めると業務の幅はむしろ狭まり、キャリア選択肢が増えるとは言えない。イ：「計画のグレシャムの法則」は定型業務が非定型の計画業務を後回しにする現象を指し、標準化と生産性向上の説明とは無関係。ウ：「アンダーマイニング効果」は外的報酬が内発的動機づけを損なう現象で、過度な分業による疎外感とは別概念。エ：分業が進むほど工程間の調整の必要性はむしろ", options: {  } },
+    { text: "高まる", options: { bold: true } },
+    { text: "。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "組織の調整メカニズムには、標準化（ルール・手順）、階層による調整（上司の判断）、相互調整（現場同士の連絡）がある。定型業務は標準化、例外は階層に委ねる役割分担が効率的とされる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：「計画のグレシャムの法則」（サイモン）と「アンダーマイニング効果」（過剰正当化効果）はこの設問での使われ方が誤りで、用語の正しい意味を知っていれば消去できる。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第14問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 32: C-16 組織構造の形態 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1063,7 +1130,76 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 31: C-17 組織文化 ----------
+
+// ---------- Slide 33: C-16 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-16 ／ 過去問で確認する",
+    title: "こう出題される（令和5年度 第14問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "主要な組織形態に関する記述として、最も適切なものはどれか。",
+    stemH: 0.8,
+    choices: [
+      { badge: "ア", text: "機能別組織では、機能別部門の管理をそれぞれの部門の長に任せることから、事業部制組織よりも次世代経営者の育成を行いやすい。" },
+      { badge: "イ", text: "機能別組織では、知識の蓄積が容易であるため、事業の内容や範囲にかかわらず経営者は意思決定を迅速に行いやすい。" },
+      { badge: "ウ", text: "事業部制組織では、各事業部が自律的に判断できるために、事業部間で重複する投資が生じやすい。" },
+      { badge: "エ", text: "事業部制組織では、各事業部が素早く有機的に連携できるため、機能別組織よりも事業横断的なシナジーを創出しやすい。" },
+      { badge: "オ", text: "マトリックス組織は、複数の命令系統があることで組織運営が難しいため、不確実性が低い環境において採用されやすい。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2023/C1JI2023.pdf（令和5年度第1次試験）第14問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 34: C-16 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-16 ／ 過去問で確認する",
+    title: "解答＆解説（令和5年度 第14問）",
+    overview: "正解はウ。事業部制は自律性が高い分、事業部間で機能・投資が重複しやすい。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "機能別組織では、機能別部門の管理をそれぞれの部門の長に任せることから、事業部制組織よりも次世代経営者の育成を行いやすい。" },
+      { badge: "イ", text: "機能別組織では、知識の蓄積が容易であるため、事業の内容や範囲にかかわらず経営者は意思決定を迅速に行いやすい。" },
+      { badge: "ウ", text: "事業部制組織では、各事業部が自律的に判断できるために、事業部間で重複する投資が生じやすい。" },
+      { badge: "エ", text: "事業部制組織では、各事業部が素早く有機的に連携できるため、機能別組織よりも事業横断的なシナジーを創出しやすい。" },
+      { badge: "オ", text: "マトリックス組織は、複数の命令系統があることで組織運営が難しいため、不確実性が低い環境において採用されやすい。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "。事業部制組織は各事業部が損益責任を持ち自律的に意思決定できる反面、営業・経理などの機能を事業部ごとに重複して抱えやすく、投資の重複が生じる。ア：機能別組織は部門長が専門機能しか管理せず、全社視点を持つ次世代経営者は", options: {  } },
+    { text: "事業部制の方が", options: { bold: true } },
+    { text: "育ちやすい。イ：機能別組織は事業の幅が広がるほど部門間調整の手間が増え、意思決定はむしろ遅くなる。エ：事業部制は独立採算で動くため、事業部間の連携（横断シナジー）はむしろ機能別組織より生まれにくい。オ：マトリックス組織は", options: {  } },
+    { text: "不確実性の高い環境", options: { bold: true } },
+    { text: "でこそ採用される。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "機能別組織と事業部制組織は、専門性の高さ vs 事業ごとの機動力、効率性 vs 重複コストという表裏の関係にある。どちらの型かでメリット・デメリットが逆になる点を対比で押さえておく。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：マトリックス組織は「ワン・マン・ツー・ボス問題」（指揮命令系統の二重化）を抱えるが、複雑で変化の速い事業環境に対応するために採用される。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2023/C1JI2023.pdf（令和5年度第1次試験）第14問／正解：past_exams/1st_stage_answers/r05/2023c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 35: C-17 組織文化 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1098,7 +1234,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 32: C-18 意思決定 ----------
+// ---------- Slide 36: C-18 意思決定 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1137,7 +1273,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 33: C-19 モチベーション理論 ----------
+// ---------- Slide 37: C-19 モチベーション理論 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1172,7 +1308,76 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 34: C-20 リーダーシップ理論 ----------
+
+// ---------- Slide 38: C-19 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-19 ／ 過去問で確認する",
+    title: "こう出題される（令和5年度 第17問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "E. A. ロックとG. P. レイサムらが提唱した目標設定理論に則した管理者の判断と行動に関する記述として、最も適切なものはどれか。",
+    stemH: 1.1,
+    choices: [
+      { badge: "ア", text: "自分には目標を達成できる能力があるという信念を持つ人ほど、達成が困難な状況になると目標を断念する傾向があるため、自分の能力を過信しないように部下に伝えた。" },
+      { badge: "イ", text: "達成に多くの努力を要する目標は、達成できる見込みが立てづらく部下からの反発や抵抗が予想されるため、容易に達成できる業績目標を設定した。" },
+      { badge: "ウ", text: "達成の難易度が高い目標を設定するにあたっては、部下にその目標を受容させることが重要であるため、その目標が公正で妥当であることを強調して部下に伝えた。" },
+      { badge: "エ", text: "一人ひとりの目標の内容が職場で公表されると、目標に対するコミットメントが阻害されるため、各自の目標が互いに知られることのないように配慮した。" },
+      { badge: "オ", text: "明確な数値目標を設定すると、目標達成に対する心理的プレッシャーが高まり、部下の達成意欲が低下するため、自由に解釈できる定性的な目標を設定した。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2023/C1JI2023.pdf（令和5年度第1次試験）第17問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 39: C-19 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-19 ／ 過去問で確認する",
+    title: "解答＆解説（令和5年度 第17問）",
+    overview: "正解はウ。困難な目標も「公正・妥当」と伝え受容させることがモチベーションを高める。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "自分には目標を達成できる能力があるという信念を持つ人ほど、達成が困難な状況になると目標を断念する傾向があるため、自分の能力を過信しないように部下に伝えた。" },
+      { badge: "イ", text: "達成に多くの努力を要する目標は、達成できる見込みが立てづらく部下からの反発や抵抗が予想されるため、容易に達成できる業績目標を設定した。" },
+      { badge: "ウ", text: "達成の難易度が高い目標を設定するにあたっては、部下にその目標を受容させることが重要であるため、その目標が公正で妥当であることを強調して部下に伝えた。" },
+      { badge: "エ", text: "一人ひとりの目標の内容が職場で公表されると、目標に対するコミットメントが阻害されるため、各自の目標が互いに知られることのないように配慮した。" },
+      { badge: "オ", text: "明確な数値目標を設定すると、目標達成に対する心理的プレッシャーが高まり、部下の達成意欲が低下するため、自由に解釈できる定性的な目標を設定した。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "。目標設定理論では、具体的で困難な目標ほどモチベーションを高めるが、それには部下がその目標を自分のものとして受け入れる「目標受容」が前提となる。目標の公正さ・妥当性を伝えて納得感を高めることは目標受容を促す適切な行動。ア：自己効力感が高い人ほど困難な状況でも粘り強く取り組む傾向があり、逆の説明。イ：具体的で困難な目標の方が簡単な目標より高い成果を引き出すのが理論の核心。エ：目標の公表は一般にコミットメントを", options: {  } },
+    { text: "高める", options: { bold: true } },
+    { text: "（社会的公約の効果）。オ：明確な数値目標の方が努力の方向づけが明確になりモチベーションを", options: {  } },
+    { text: "高める", options: { bold: true } },
+    { text: "。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "C-19の各理論は「提唱者名」と「核心的な主張」をセットで押さえ、混同しないことが頻出対策のポイント（マズロー、ハーズバーグ、期待理論、目標設定理論）。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：目標設定理論のポイントは「①具体性」「②適度な困難さ」に加え、「③目標受容」と「④フィードバック」が成果に影響する点。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2023/C1JI2023.pdf（令和5年度第1次試験）第17問／正解：past_exams/1st_stage_answers/r05/2023c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 40: C-20 リーダーシップ理論 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1206,7 +1411,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 35: C-21 パワーとコンフリクト ----------
+// ---------- Slide 41: C-21 パワーとコンフリクト ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1248,7 +1453,72 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 36: C-22 集団の心理 ----------
+
+// ---------- Slide 42: C-21 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-21 ／ 過去問で確認する",
+    title: "こう出題される（令和6年度 第20問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "組織や集団においては、意見の相違や利害の不一致から、個人間でコンフリクトが発生することが一般的である。コンフリクトへの対処は、自己の利益を追求する度合いと、相手の利益追求を許容し協力する度合いとの組み合わせに応じて、「回避」、「競争」、「協調」、「妥協」、「適応」の5類型に分類される。コンフリクトへの対処に関する記述として、最も適切なものはどれか。",
+    stemH: 1.85,
+    choices: [
+      { badge: "ア", text: "「回避」とは、自己の利益を強く主張しない一方で相手の利益もあまり許容できない場合に、問題解決を延期して様子を見るという対処である。互いの対立点が表立つのを避けたい場合にとられやすい。" },
+      { badge: "イ", text: "「競争」とは、相手の利益を最大限に許容しつつ、相手に命令したり相手を説得したりすることで自己の利益も追求するという対処である。権力志向的で高い職位の人間から、順応的な低い職位の人間に対してとられやすい。" },
+      { badge: "ウ", text: "「協調」とは、双方がある程度の利益を獲得しつつ互いに犠牲も払うという対処である。互いの対立点を曖昧にすることでコンフリクトを自然に解消しようとする場合にとられやすい。" },
+      { badge: "エ", text: "「妥協」とは、当事者の一方のみが自己の利益を犠牲にして相手の利益を最大限に許容するという対処である。互いにある程度の利益をとりつつ犠牲も払うという折り合いがつけられない場合にとられやすい。" },
+      { badge: "オ", text: "「適応」とは、相手の利益を犠牲にして自己の利益を追求するという対処である。自己の利益を一方的に追求することで、相手との長期的な関係が損なわれても問題ないと判断される場合にとられやすい。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2024/C1JI2024.pdf（令和6年度第1次試験）第20問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 43: C-21 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-21 ／ 過去問で確認する",
+    title: "解答＆解説（令和6年度 第20問）",
+    overview: "正解はア。自己主張も協力度もどちらも低い組み合わせが「回避」。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "「回避」とは、自己の利益を強く主張しない一方で相手の利益もあまり許容できない場合に、問題解決を延期して様子を見るという対処である。互いの対立点が表立つのを避けたい場合にとられやすい。" },
+      { badge: "イ", text: "「競争」とは、相手の利益を最大限に許容しつつ、相手に命令したり相手を説得したりすることで自己の利益も追求するという対処である。権力志向的で高い職位の人間から、順応的な低い職位の人間に対してとられやすい。" },
+      { badge: "ウ", text: "「協調」とは、双方がある程度の利益を獲得しつつ互いに犠牲も払うという対処である。互いの対立点を曖昧にすることでコンフリクトを自然に解消しようとする場合にとられやすい。" },
+      { badge: "エ", text: "「妥協」とは、当事者の一方のみが自己の利益を犠牲にして相手の利益を最大限に許容するという対処である。互いにある程度の利益をとりつつ犠牲も払うという折り合いがつけられない場合にとられやすい。" },
+      { badge: "オ", text: "「適応」とは、相手の利益を犠牲にして自己の利益を追求するという対処である。自己の利益を一方的に追求することで、相手との長期的な関係が損なわれても問題ないと判断される場合にとられやすい。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。5類型は「自己の利益追求の強さ」×「相手への協力度」の2軸で整理される（トーマス＝キルマン・モデル）。自己主張・協力度がともに低いのが「回避」で、対立を先送りし様子見する対処という説明は定義どおり。イ：「相手の利益を最大限に許容」は協力度が高いことを意味し、協力度が低い「競争」の定義と矛盾。ウ・エ・オ：説明文と用語の対応が入れ替わっている（ウの説明は「妥協」、エの説明は「適応」、オの説明は「競争」の定義に近い）。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ウ・エ・オで「用語」と「説明文」が入れ替わって対応づけられている点に気づけるかがポイント。5類型を「自己主張×協力度」の2軸マトリクスで整理して覚えておくと素早く見抜ける。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：フレンチ＆レイヴンのパワーの分類（公式の権限・専門性パワー・準拠パワーなど）とあわせて、組織内の対人関係の理論として整理しておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2024/C1JI2024.pdf（令和6年度第1次試験）第20問／正解：past_exams/1st_stage_answers/r06/2024c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 44: C-22 集団の心理 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1282,7 +1552,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 37: C-23 組織間関係 ----------
+// ---------- Slide 45: C-23 組織間関係 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1316,7 +1586,76 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 38: C-24 組織変革と組織成長 ----------
+
+// ---------- Slide 46: C-23 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-23 ／ 過去問で確認する",
+    title: "こう出題される（令和6年度 第21問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "組織間関係や組織間ネットワークに関する記述として、最も適切なものはどれか。",
+    stemH: 0.7,
+    choices: [
+      { badge: "ア", text: "「埋め込まれた紐帯」では機会主義的行動が生じやすいため、組織間ネットワークにおける「埋め込まれた紐帯」の比率を減らすことが望ましい。" },
+      { badge: "イ", text: "「埋め込まれた紐帯」で結ばれた組織間ネットワークでは、暗黙的な知識の移転が促進されやすい。" },
+      { badge: "ウ", text: "「弱い紐帯の強み」を最大限享受しようとすれば、関係を取り結ぶ組織を絞り込み、弱い紐帯を強い紐帯に転換することが不可欠である。" },
+      { badge: "エ", text: "組織にとって新奇性の高い知識をより獲得するためには、これまでに築いてきた組織との紐帯をいっそう強めることが望ましい。" },
+      { badge: "オ", text: "他の組織からの影響を極力排除するためには、「埋め込まれた紐帯」のみによって構成される組織間ネットワークを構築することが望ましい。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2024/C1JI2024.pdf（令和6年度第1次試験）第21問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 47: C-23 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-23 ／ 過去問で確認する",
+    title: "解答＆解説（令和6年度 第21問）",
+    overview: "正解はイ。信頼関係に基づく「埋め込まれた紐帯」は暗黙知の移転を促す。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "「埋め込まれた紐帯」では機会主義的行動が生じやすいため、組織間ネットワークにおける「埋め込まれた紐帯」の比率を減らすことが望ましい。" },
+      { badge: "イ", text: "「埋め込まれた紐帯」で結ばれた組織間ネットワークでは、暗黙的な知識の移転が促進されやすい。" },
+      { badge: "ウ", text: "「弱い紐帯の強み」を最大限享受しようとすれば、関係を取り結ぶ組織を絞り込み、弱い紐帯を強い紐帯に転換することが不可欠である。" },
+      { badge: "エ", text: "組織にとって新奇性の高い知識をより獲得するためには、これまでに築いてきた組織との紐帯をいっそう強めることが望ましい。" },
+      { badge: "オ", text: "他の組織からの影響を極力排除するためには、「埋め込まれた紐帯」のみによって構成される組織間ネットワークを構築することが望ましい。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ", options: { bold: true, color: RED } },
+    { text: "。「埋め込まれた紐帯」（信頼関係に基づく緊密な取引関係）で結ばれた組織間では、頻繁で深いコミュニケーションが行われるため、言語化しにくい暗黙知の共有・移転が進みやすい。ア：埋め込まれた紐帯は信頼関係に基づくため、むしろ機会主義的行動を", options: {  } },
+    { text: "抑制する", options: { bold: true } },
+    { text: "。ウ：「弱い紐帯の強み」は疎遠で多様な相手とのつながりが新しい情報をもたらす考え方で、関係先を絞ることはこの強みを失わせる。エ：新奇性の高い知識は", options: {  } },
+    { text: "弱い紐帯", options: { bold: true } },
+    { text: "を通じてもたらされやすい。オ：埋め込まれた紐帯のみのネットワークは特定の関係先への依存が偏り、新しい情報を取りこぼすリスクがある。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "資源依存理論・取引コスト理論とあわせて、組織間関係論の代表的な視点を整理しておく。強い紐帯＝信頼・暗黙知の共有、弱い紐帯＝新しい情報の獲得、という対比が頻出。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：グラノヴェッターの「弱い紐帯の強み」と埋め込み理論は対比で出題されやすい。取引コスト理論（内製化 vs 市場取引の選択）ともセットで押さえておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2024/C1JI2024.pdf（令和6年度第1次試験）第21問／正解：past_exams/1st_stage_answers/r06/2024c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 48: C-24 組織変革と組織成長 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1358,7 +1697,74 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 39: C-25 労働関連法規 ----------
+
+// ---------- Slide 49: C-24 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-24 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第23問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "組織における個人が組織変革に抵抗を示す理由に関する記述として、最も不適切なものはどれか。",
+    stemH: 0.75,
+    choices: [
+      { badge: "ア", text: "外部環境が変化しているのに、組織内の慣習が従来の安定的かつ効率的な仕事の進め方を維持し強化していることに対して、危機感を抱くから。" },
+      { badge: "イ", text: "組織変革によって、従来よりも仕事の成果がうまく出せなくなることを心配するから。" },
+      { badge: "ウ", text: "組織変革によって、新しい仕事のやり方が少なくとも短期的には従来よりも非効率になると感じるから。" },
+      { badge: "エ", text: "組織変革によって、自らの職務にとって未知で不確実な状態がもたらされることに不安を感じるから。" },
+      { badge: "オ", text: "たとえ客観的に外部環境が変化したとしても、偏った情報を収集したり、情報を偏って解釈したりすることで、従来と同じ環境が現在も継続していると考えるから。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第23問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 50: C-24 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-24 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第23問）",
+    overview: "正解はア。「危機感を抱く」ことは変革を後押しする心理で、抵抗理由にはならない（最も不適切）。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "外部環境が変化しているのに、組織内の慣習が従来の安定的かつ効率的な仕事の進め方を維持し強化していることに対して、危機感を抱くから。" },
+      { badge: "イ", text: "組織変革によって、従来よりも仕事の成果がうまく出せなくなることを心配するから。" },
+      { badge: "ウ", text: "組織変革によって、新しい仕事のやり方が少なくとも短期的には従来よりも非効率になると感じるから。" },
+      { badge: "エ", text: "組織変革によって、自らの職務にとって未知で不確実な状態がもたらされることに不安を感じるから。" },
+      { badge: "オ", text: "たとえ客観的に外部環境が変化したとしても、偏った情報を収集したり、情報を偏って解釈したりすることで、従来と同じ環境が現在も継続していると考えるから。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "（最も不適切）。外部環境の変化と従来のやり方とのズレに「危機感を抱く」ことは、レヴィンの3段階モデルの「解凍」――変化の必要性を認識する段階――そのものであり、変革を", options: {  } },
+    { text: "後押しする", options: { bold: true } },
+    { text: "心理であって抵抗の理由にはならない。イ〜オはいずれも、成果への不安・短期的非効率さ・未知への不安・認知バイアスという、変革抵抗の典型的な理由として適切。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "レヴィンの3段階モデル（解凍→変化→再凍結）の「解凍」は変革に<b>抵抗しない</b>方向の心理（危機感の共有）。イ〜オはすべて「なぜ人は変わりたくないと感じるか」という抵抗側の心理を説明しており、アだけ論理の向きが逆。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：「最も不適切なものはどれか」型の設問では、他の選択肢群と論理の向きが逆になっている1つを探すのが定石。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第23問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 51: C-25 労働関連法規 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1383,7 +1789,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 40: C-26 雇用管理 ----------
+// ---------- Slide 52: C-26 雇用管理 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1420,7 +1826,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 41: C-27 評価・処遇 ----------
+// ---------- Slide 53: C-27 評価・処遇 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1461,7 +1867,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 42: C-28 人材育成 ----------
+// ---------- Slide 54: C-28 人材育成 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1495,7 +1901,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 43: C-29 戦略的人的資源管理 ----------
+// ---------- Slide 55: C-29 戦略的人的資源管理 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1523,7 +1929,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 44: マーケティング論 区切り ----------
+// ---------- Slide 56: マーケティング論 区切り ----------
 addDividerSlide(pres, {
   ghostNo: "03",
   partNo: "PART 03",
@@ -1534,7 +1940,7 @@ addDividerSlide(pres, {
   notes: "マーケティング論パートの区切りスライド。",
 });
 
-// ---------- Slide 45: C-30 マーケティングの基礎概念 ----------
+// ---------- Slide 57: C-30 マーケティングの基礎概念 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1566,7 +1972,72 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 46: C-31 マーケティング計画と戦略（STP、4P） ----------
+
+// ---------- Slide 58: C-30 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-30 ／ 過去問で確認する",
+    title: "こう出題される（令和5年度 第28問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "顧客価値に関する記述として、最も適切なものはどれか。",
+    stemH: 0.6,
+    choices: [
+      { badge: "ア", text: "顧客が製品やサービスに期待する最も基本的な機能によってもたらされる価値を、機能的価値という。最も基本的な価値であるため、機能的価値が不十分であったり不明確であったりする製品やサービスが顧客に受け入れられることはない。" },
+      { badge: "イ", text: "実際に製品やサービスを購入し、使用感などを経験してみなければ分からない価値を経験価値という。経験価値によって製品やサービスを訴求するためには、すでに利用した顧客によるクチコミなどをなるべく発生させないようにしつつ、プロモーションを行うべきである。" },
+      { badge: "ウ", text: "製品やサービスの機能的価値は、「あって当たり前」の本質機能と、付加的な付随機能に分けることができる。このうち本質機能による機能的価値は、1つでも欠ければ競合する製品やサービスに比べて大幅に魅力が劣るため、自社の製品やサービスを差別化するために最も力を入れなければならない価値である。", h: 0.72 },
+      { badge: "エ", text: "どのような基本的な機能を期待するかは顧客ごとに異なるのに対して、多くの顧客が製品やサービスに期待する感覚的価値は一般的に似通っているため、感覚的価値を訴求する製品やサービスは差別化が難しく、価格競争に陥りやすい。" },
+      { badge: "オ", text: "文脈価値とは、顧客が製品やサービスを利用した際の状況に依存する。すなわち、顧客による特定の製品やサービスの利用と、その際の周辺環境や情景あるいは誰と一緒に利用したか、などの状況とともに創り出される価値である。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2023/C1JI2023.pdf（令和5年度第1次試験）第28問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 59: C-30 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-30 ／ 過去問で確認する",
+    title: "解答＆解説（令和5年度 第28問）",
+    overview: "正解はオ。文脈価値は「いつ・どこで・誰と」利用したかという状況とともに生まれる価値。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "顧客が製品やサービスに期待する最も基本的な機能によってもたらされる価値を、機能的価値という。最も基本的な価値であるため、機能的価値が不十分であったり不明確であったりする製品やサービスが顧客に受け入れられることはない。" },
+      { badge: "イ", text: "実際に製品やサービスを購入し、使用感などを経験してみなければ分からない価値を経験価値という。経験価値によって製品やサービスを訴求するためには、すでに利用した顧客によるクチコミなどをなるべく発生させないようにしつつ、プロモーションを行うべきである。" },
+      { badge: "ウ", text: "製品やサービスの機能的価値は、「あって当たり前」の本質機能と、付加的な付随機能に分けることができる。このうち本質機能による機能的価値は、1つでも欠ければ競合する製品やサービスに比べて大幅に魅力が劣るため、自社の製品やサービスを差別化するために最も力を入れなければならない価値である。", h: 0.72 },
+      { badge: "エ", text: "どのような基本的な機能を期待するかは顧客ごとに異なるのに対して、多くの顧客が製品やサービスに期待する感覚的価値は一般的に似通っているため、感覚的価値を訴求する製品やサービスは差別化が難しく、価格競争に陥りやすい。" },
+      { badge: "オ", text: "文脈価値とは、顧客が製品やサービスを利用した際の状況に依存する。すなわち、顧客による特定の製品やサービスの利用と、その際の周辺環境や情景あるいは誰と一緒に利用したか、などの状況とともに創り出される価値である。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 4 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：オ", options: { bold: true, color: RED } },
+    { text: "。「文脈価値」は、製品・サービスそのものに固定的に備わる価値ではなく、利用状況に応じて生まれる価値、という定義どおりの説明。ア：機能面で多少劣っても他の価値で顧客に選ばれる製品は実際に多く、言い切りすぎ。イ：経験価値を伝えるには、むしろ既に利用した顧客の口コミを積極的に活用する方が効果的で逆の説明。ウ：本質機能は欠ければ不満につながるが他社も当然備えており、差別化の源泉にはなりにくい。エ：感覚的価値はむしろ個人差が大きく、独自性を打ち出しやすい差別化の源泉になりやすい。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "顧客価値は「機能的価値（基本機能）」「経験価値（使ってみて分かる価値）」「感覚的価値（デザイン・好み）」「文脈価値（利用状況に応じた価値）」に整理されることが多い。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：基本機能は差別化の土台にはなるが決め手にはなりにくく、感覚的価値・文脈価値の方が差別化に直結しやすい、という向きを押さえておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2023/C1JI2023.pdf（令和5年度第1次試験）第28問／正解：past_exams/1st_stage_answers/r05/2023c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 60: C-31 マーケティング計画と戦略（STP、4P） ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1591,7 +2062,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 47: C-32 マーケティング・リサーチ ----------
+// ---------- Slide 61: C-32 マーケティング・リサーチ ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1623,7 +2094,72 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 48: C-33 リレーションシップ・CRM ----------
+
+// ---------- Slide 62: C-32 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-32 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第28問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "マーケティング・リサーチに関する記述として、最も適切なものはどれか。",
+    stemH: 0.6,
+    choices: [
+      { badge: "ア", text: "1950年代から60年代にかけて、アメリカでは精神分析や臨床心理学を応用して消費者の深層心理を調べるニューロ・マーケティング・リサーチが盛んに行われたが、分析者による恣意的な解釈などが入り込む傾向があり、次第に行われなくなった。" },
+      { badge: "イ", text: "自社の製品に対する顧客の満足度（変数X：7点尺度で回答）と顧客の年収（変数Y）との間の相関分析を行った結果、相関係数がゼロであったため、XとYは相互に無関係であると結論づけた。" },
+      { badge: "ウ", text: "自社の製品に対する顧客の満足度（変数X：7点尺度で回答）を連続尺度とみて顧客の居住地（変数S：都道府県で回答）との間に関係があるかどうかを調べるために、カイ2乗分析を行った。" },
+      { badge: "エ", text: "自社の製品を購入した顧客からサービスセンターに寄せられる手紙とハガキの内容を分析した結果、製品Aより製品Bに寄せられる不満の方が多いことが分かった。このため、直ちに製品Bの販売を中止することにした。" },
+      { badge: "オ", text: "自社の製品を購入した全顧客を対象とする全数調査は、得られる回答データの正確性が高い一方で時間とコストの観点から現実的ではないため、単純無作為抽出法、層化抽出法などの標本抽出方法によるサンプリング調査が行われることが多い。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第28問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 63: C-32 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-32 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第28問）",
+    overview: "正解はオ。全数調査は非現実的なため、標本抽出によるサンプリング調査が一般的。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "1950年代から60年代にかけて、アメリカでは精神分析や臨床心理学を応用して消費者の深層心理を調べるニューロ・マーケティング・リサーチが盛んに行われたが、分析者による恣意的な解釈などが入り込む傾向があり、次第に行われなくなった。" },
+      { badge: "イ", text: "自社の製品に対する顧客の満足度（変数X：7点尺度で回答）と顧客の年収（変数Y）との間の相関分析を行った結果、相関係数がゼロであったため、XとYは相互に無関係であると結論づけた。" },
+      { badge: "ウ", text: "自社の製品に対する顧客の満足度（変数X：7点尺度で回答）を連続尺度とみて顧客の居住地（変数S：都道府県で回答）との間に関係があるかどうかを調べるために、カイ2乗分析を行った。" },
+      { badge: "エ", text: "自社の製品を購入した顧客からサービスセンターに寄せられる手紙とハガキの内容を分析した結果、製品Aより製品Bに寄せられる不満の方が多いことが分かった。このため、直ちに製品Bの販売を中止することにした。" },
+      { badge: "オ", text: "自社の製品を購入した全顧客を対象とする全数調査は、得られる回答データの正確性が高い一方で時間とコストの観点から現実的ではないため、単純無作為抽出法、層化抽出法などの標本抽出方法によるサンプリング調査が行われることが多い。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 4 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：オ", options: { bold: true, color: RED } },
+    { text: "。全数調査はデータの精度は高いが対象が多いほど時間・費用がかさみ非現実的になるため、母集団から一部を抽出する標本調査が実務では広く用いられる。ア：1950〜60年代に流行したのは「モチベーション・リサーチ」であり「ニューロ・マーケティング・リサーチ」は近年発展した別の手法で名称が誤り。イ：相関係数ゼロは「直線的な関係がない」ことを示すにすぎず、曲線的な関係の可能性を否定できない。ウ：カイ2乗分析は名義尺度同士のクロス集計向けで、連続尺度をそのまま扱うのには不向き。エ：手紙・ハガキの苦情は自発的な一部の声にすぎず（自己選択バイアス）、これだけで販売中止を判断するのは早計。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "マーケティング・リサーチでは「定性調査／定量調査」の使い分けに加え、データの尺度（名義・順序・間隔・比率）に応じた分析手法の選択が問われる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：全数調査（センサス）と標本調査（サンプリング）のコスト・精度のトレードオフは統計調査全般の基本知識として押さえておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第28問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 64: C-33 リレーションシップ・CRM ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1658,7 +2194,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 49: C-34 サービス・マーケティング ----------
+// ---------- Slide 65: C-34 サービス・マーケティング ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1680,7 +2216,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 50: C-35 デジタル・マーケティング ----------
+// ---------- Slide 66: C-35 デジタル・マーケティング ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1715,7 +2251,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 51: C-36 プロダクト・マネジメント：PLC、新製品開発 ----------
+// ---------- Slide 67: C-36 プロダクト・マネジメント：PLC、新製品開発 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1759,7 +2295,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 52: C-37 ブランディング ----------
+// ---------- Slide 68: C-37 ブランディング ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1792,7 +2328,76 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 53: C-38 消費者行動 ----------
+
+// ---------- Slide 69: C-37 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-37 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第37問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "ブランディングに関する記述として、最も適切なものはどれか。",
+    stemH: 0.6,
+    choices: [
+      { badge: "ア", text: "COO（Country of Origin）イメージは、製品に対する消費者の選好に影響を及ぼし、時間を経ても変化することはない。" },
+      { badge: "イ", text: "コ・ブランディングは、コミュニケーション・コストを削減できるが、ブランド・エクイティが希釈化するリスクがあるため、新製品には適用できない。" },
+      { badge: "ウ", text: "第三者ソース（専門誌、専門機関、知名度が高い評論家、ステータスがあるユーザーなど）による高評価は、ブランドに対する高い信頼性を付与し、消費者の態度を向上させるが、ソーシャルネットワーク上での影響力は極めて小さい。" },
+      { badge: "エ", text: "著名人による推奨は、当該著名人のイメージと結びつく知覚は形成されるが、ブランドが思い出されないリスクがあり、ファン以外の注意はひきつけられない。" },
+      { badge: "オ", text: "ライセンス供与は、在庫費用や製造費用をかけずにブランド認知を増やすことができるが、過剰露出になった場合、消費者の飽きが生じるリスクがある。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第37問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 70: C-37 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-37 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第37問）",
+    overview: "正解はオ。ブランド・ライセンシングは在庫・製造費を負わずに認知を広げられるが、過剰露出のリスクがある。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "COO（Country of Origin）イメージは、製品に対する消費者の選好に影響を及ぼし、時間を経ても変化することはない。" },
+      { badge: "イ", text: "コ・ブランディングは、コミュニケーション・コストを削減できるが、ブランド・エクイティが希釈化するリスクがあるため、新製品には適用できない。" },
+      { badge: "ウ", text: "第三者ソース（専門誌、専門機関、知名度が高い評論家、ステータスがあるユーザーなど）による高評価は、ブランドに対する高い信頼性を付与し、消費者の態度を向上させるが、ソーシャルネットワーク上での影響力は極めて小さい。" },
+      { badge: "エ", text: "著名人による推奨は、当該著名人のイメージと結びつく知覚は形成されるが、ブランドが思い出されないリスクがあり、ファン以外の注意はひきつけられない。" },
+      { badge: "オ", text: "ライセンス供与は、在庫費用や製造費用をかけずにブランド認知を増やすことができるが、過剰露出になった場合、消費者の飽きが生じるリスクがある。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 4 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：オ", options: { bold: true, color: RED } },
+    { text: "。ブランド・ライセンシング（他社に自社ブランド名の使用権を供与する仕組み）は、供与側が製造・在庫コストを負わずにブランド露出を増やせる一方、露出しすぎるとブランドの特別感が薄れ消費者が飽きるリスクがある。ア：COOイメージはその国の技術力・イメージの変化とともに", options: {  } },
+    { text: "時間の経過で変化しうる", options: { bold: true } },
+    { text: "。イ：コ・ブランディングはむしろ新製品の認知獲得のために活用されることが多い。ウ：近年はSNS上の口コミ・インフルエンサーの影響力はむしろ", options: {  } },
+    { text: "非常に大きい", options: { bold: true } },
+    { text: "。エ：著名人推奨は、そのファン層にはむしろ強く注意を引きつけられる。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ブランド要素の活用手法として、コ・ブランディング（共同ブランド展開）、ライセンス供与（使用権の供与）、セレブリティ・エンドースメント（著名人推奨）、第三者ソースの活用が代表的。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：それぞれの手法の「メリットと固有のリスク」をセットで覚えておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第37問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 71: C-38 消費者行動 ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1824,7 +2429,70 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 54: C-39 プライシング ----------
+
+// ---------- Slide 72: C-38 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-38 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第35問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "消費行動におけるさまざまな現象に関する記述として、最も適切なものはどれか。",
+    stemH: 0.55,
+    choices: [
+      { badge: "ア", text: "顕示的消費には、SNS映えする料理の写真を投稿したり、動画で自分の趣味のよさを公開したりする行為や、裕福な家庭における親が子供に高級品を身に着けさせる行為が含まれる。" },
+      { badge: "イ", text: "現代の消費スタイルを包括的に記述する概念であるリキッド消費は、永続的で、所有ベースで、物質主義的な消費スタイルである。" },
+      { badge: "ウ", text: "消費者情報処理の枠組みにおける快楽消費の評価基準には、感覚的な満足や空想、美的な楽しみ、感情的反応だけでなく、合理的判断や思考などの功利も含まれる。" },
+      { badge: "エ", text: "消費の文化的意味や消費経験のダイナミックな側面を解明する消費文化理論の研究では、参与観察、デプス・インタビューなどを用いた定性的アプローチがとられており、定量的アプローチはとられていない。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第35問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 73: C-38 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-38 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第35問）",
+    overview: "正解はア。SNS映え投稿や高級品の誇示はいずれも顕示的消費の現代的な現れ。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "顕示的消費には、SNS映えする料理の写真を投稿したり、動画で自分の趣味のよさを公開したりする行為や、裕福な家庭における親が子供に高級品を身に着けさせる行為が含まれる。" },
+      { badge: "イ", text: "現代の消費スタイルを包括的に記述する概念であるリキッド消費は、永続的で、所有ベースで、物質主義的な消費スタイルである。" },
+      { badge: "ウ", text: "消費者情報処理の枠組みにおける快楽消費の評価基準には、感覚的な満足や空想、美的な楽しみ、感情的反応だけでなく、合理的判断や思考などの功利も含まれる。" },
+      { badge: "エ", text: "消費の文化的意味や消費経験のダイナミックな側面を解明する消費文化理論の研究では、参与観察、デプス・インタビューなどを用いた定性的アプローチがとられており、定量的アプローチはとられていない。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。顕示的消費（ヴェブレンの誇示的消費）とは、自分の富や地位を他者に見せつけるための消費行動。SNSでの映える投稿や高級品を身につけさせる行為はいずれも該当する。イ：「リキッド消費」はむしろ「一時的」「アクセスベース」「脱物質主義的」であることが特徴で、説明は対比概念の「ソリッド消費」に近く逆。ウ：快楽消費の評価基準は「情緒的」側面が中心で、合理的判断などの「功利的」側面とは対比される概念。エ：消費文化理論は定性的アプローチが中心だが、定量的アプローチも併用されることがあり言い切りは誤り。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "顕示的消費（ヴェブレン）、リキッド消費（バーディ＆エッカート）、快楽消費（ハーシュマン＆ホルブルック）は消費者行動論の代表的な概念。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：似た名前の対概念（ソリッド消費 vs リキッド消費、功利的消費 vs 快楽的消費）とセットで整理しておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第35問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 74: C-39 プライシング ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1846,7 +2514,72 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 55: C-40 コミュニケーション ----------
+
+// ---------- Slide 75: C-39 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-39 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第30問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "プライシングに関する記述として、最も適切なものはどれか。",
+    stemH: 0.6,
+    choices: [
+      { badge: "ア", text: "価格を消費者による「支出の痛み」として捉えれば、価格は安いほど売れ行きは伸びることになるが、他方で価格を「品質のバロメーター」や「プレステージ」として捉えれば、必ずしも安い価格の方が売れ行きが伸びるとは言えない。" },
+      { badge: "イ", text: "顧客によって異なる価格を提示するプライシングは、鉄道サービスにおける学割やホテル業界におけるメンバーシップ制度などに見られるように古くから行われてきたが、時期によって価格を変えるプライシングが行われるようになったのは、デジタル・マーケティングによるダイナミック・プライシングが浸透した近年になってからである。", h: 0.72 },
+      { badge: "ウ", text: "サブスクリプションは、製品やサービスの所有権の移転を行わずに使用する権利だけを販売するものであり、音楽や映像などがデジタル化され所有権の移転を行わずに転送できるようになったことなどに示されるように、デジタル時代になって誕生した新しい契約形態である。" },
+      { badge: "エ", text: "自社製品を有利に扱ってくれる流通業者に対して、メーカーは割引価格などの金銭的見返りを提供することが多い。そのうち短期的な金銭的見返りは一般的にリベートと呼ばれ、長期的に提供されるアローワンスと区別される。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第30問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 76: C-39 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-39 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第30問）",
+    overview: "正解はア。価格には「安いほど得」と「高いほど高品質」という相反する2つの心理的な働きがある。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "価格を消費者による「支出の痛み」として捉えれば、価格は安いほど売れ行きは伸びることになるが、他方で価格を「品質のバロメーター」や「プレステージ」として捉えれば、必ずしも安い価格の方が売れ行きが伸びるとは言えない。" },
+      { badge: "イ", text: "顧客によって異なる価格を提示するプライシングは、鉄道サービスにおける学割やホテル業界におけるメンバーシップ制度などに見られるように古くから行われてきたが、時期によって価格を変えるプライシングが行われるようになったのは、デジタル・マーケティングによるダイナミック・プライシングが浸透した近年になってからである。", h: 0.72 },
+      { badge: "ウ", text: "サブスクリプションは、製品やサービスの所有権の移転を行わずに使用する権利だけを販売するものであり、音楽や映像などがデジタル化され所有権の移転を行わずに転送できるようになったことなどに示されるように、デジタル時代になって誕生した新しい契約形態である。" },
+      { badge: "エ", text: "自社製品を有利に扱ってくれる流通業者に対して、メーカーは割引価格などの金銭的見返りを提供することが多い。そのうち短期的な金銭的見返りは一般的にリベートと呼ばれ、長期的に提供されるアローワンスと区別される。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。価格には「安いほど得（支出の痛みが小さい）」という側面と、「高い価格＝高品質・ステータス」という品質・プレステージの手がかりとしての側面があり、後者が強い高級品などでは必ずしも安いほど売れるとは限らない。イ：時期による価格変動は航空業界のイールドマネジメントなどデジタル化以前から行われてきた慣行。ウ：所有権を移転せず利用権のみを販売する契約形態自体は新聞・雑誌の定期購読など", options: {  } },
+    { text: "デジタル化以前から存在", options: { bold: true } },
+    { text: "している。エ：短期的な見返りは一般に「アローワンス」、継続的なものは「リベート」と呼ばれ、呼び方が入れ替わっている。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "高級ブランド品は「顧客がブランド価値にどれだけ払う意思があるか」（需要ベース）で価格が決められ、あえて高価格を維持することでブランドイメージを守る例が、アの考え方と対応する。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：価格の心理的効果として「支出の痛み」と「品質・ステータスのシグナル」という相反する2つの働きがある点を押さえておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第30問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 77: C-40 コミュニケーション ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1881,7 +2614,74 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 56: C-41 プロモーション ----------
+
+// ---------- Slide 78: C-40 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-40 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第31問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "企業経営理論",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "マーケティング・コミュニケーションに関する記述として、最も適切なものはどれか。",
+    stemH: 0.6,
+    choices: [
+      { badge: "ア", text: "インフィード広告は、SNSのコンテキストやデザインとマッチさせて表示され、あたかも投稿の1つであるかのようにタイムラインに溶け込み、ユーザーの利用体験を妨げないことを目指す広告である。" },
+      { badge: "イ", text: "コミュニケーションに対する消費者の反応を表したモデルであるAIDMAモデルやAISASモデル、FCBグリッドなどの階層モデルでは、消費者の反応が認知段階から感情段階を経て行動段階に進むと考える点で共通している。" },
+      { badge: "ウ", text: "サードパーティ・クッキーの利用が法律などにより制限されると、インターネット広告の配信精度や広告効果が低下するリスクがあるが、リ・ターゲティング広告には影響はない。" },
+      { badge: "エ", text: "日本では2022年に改正された個人情報保護法において、クッキーは個人情報であり、個人情報保護の対象に含まれると規定された。" },
+      { badge: "オ", text: "ネイティブ広告においては、広告のデザインとフォーマットを広告が配信される媒体の記事やコンテンツの形式や機能と一体化させることが必要であるが、広告の内容やクリック後に表示される遷移先のコンテンツは自由に設定することができる。" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第31問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 79: C-40 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-40 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第31問）",
+    overview: "正解はア。インフィード広告はSNSのフィードに自然に溶け込み利用体験を妨げない広告。",
+    tag: "企業経営理論",
+  });
+  const choices = [
+      { badge: "ア", text: "インフィード広告は、SNSのコンテキストやデザインとマッチさせて表示され、あたかも投稿の1つであるかのようにタイムラインに溶け込み、ユーザーの利用体験を妨げないことを目指す広告である。" },
+      { badge: "イ", text: "コミュニケーションに対する消費者の反応を表したモデルであるAIDMAモデルやAISASモデル、FCBグリッドなどの階層モデルでは、消費者の反応が認知段階から感情段階を経て行動段階に進むと考える点で共通している。" },
+      { badge: "ウ", text: "サードパーティ・クッキーの利用が法律などにより制限されると、インターネット広告の配信精度や広告効果が低下するリスクがあるが、リ・ターゲティング広告には影響はない。" },
+      { badge: "エ", text: "日本では2022年に改正された個人情報保護法において、クッキーは個人情報であり、個人情報保護の対象に含まれると規定された。" },
+      { badge: "オ", text: "ネイティブ広告においては、広告のデザインとフォーマットを広告が配信される媒体の記事やコンテンツの形式や機能と一体化させることが必要であるが、広告の内容やクリック後に表示される遷移先のコンテンツは自由に設定することができる。" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 0 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ア", options: { bold: true, color: RED } },
+    { text: "。インフィード広告は、SNSやニュースアプリのフィードの中に周囲の投稿とデザインを合わせて自然に溶け込む形で配信され、利用体験を妨げにくいことを狙った広告形式。イ：FCBグリッドは「関与度×思考・感情のどちらが優位か」で反応を4パターンに分類する枠組みで、必ずしも一方向の順序を前提としない。ウ：リ・ターゲティング広告はまさにサードパーティ・クッキーでユーザーを識別する手法のため、制限の直接的な影響を", options: {  } },
+    { text: "受ける", options: { bold: true } },
+    { text: "。エ：クッキー単体は原則個人情報そのものには当たらず、一律の規定ではない。オ：ネイティブ広告は遷移先のコンテンツも整合性が重視され「自由に設定できる」わけではない。", options: {  } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.05, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.22 });
+  cy += 1.05;
+  s.addText([
+    { text: "具体例\\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "インフィード広告はネイティブ広告の一形態（フィード型ネイティブ広告）と位置づけられることが多い。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.72;
+  s.addText("関連知識：AIDMA/AISASなどの「階層モデル」とFCBグリッドのような「関与度モデル」は性質が異なる分類の仕方である点を区別しておくこと。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.50;
+  s.addText("出典：past_exams/1st_stage/1ji2025/C1JI2025.pdf（令和7年度第1次試験）第31問／正解：past_exams/1st_stage_answers/r07/2025c.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+// ---------- Slide 80: C-41 プロモーション ----------
 {
   const s = pres.addSlide();
   addHeader(s, {
@@ -1904,7 +2704,7 @@ addDividerSlide(pres, {
   });
 }
 
-// ---------- Slide 57: C-42 流通チャネル ----------
+// ---------- Slide 81: C-42 流通チャネル ----------
 {
   const s = pres.addSlide();
   addHeader(s, {

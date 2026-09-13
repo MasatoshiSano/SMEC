@@ -259,7 +259,7 @@ function addExamQuestion(slide, { stem, choices, correctIndex = -1, stemH = 1.0 
   }
   choices.forEach((c, i) => {
     const isCorrect = i === correctIndex;
-    const rowH = 0.52;
+    const rowH = c.h || 0.52;
     if (isCorrect) {
       slide.addShape("rect", { x: 0.55, y: cy - 0.03, w: 12.25, h: rowH, fill: { color: GHOST }, line: { type: "none" } });
       slide.addShape("line", { x: 0.55, y: cy - 0.03, w: 0, h: rowH, line: { color: RED, width: 3 } });
