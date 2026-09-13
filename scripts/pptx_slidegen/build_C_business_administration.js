@@ -9,8 +9,8 @@ const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
   addTermRows, addRowList, addExamQuestion, drawScopeBars, drawVennOverlap,
-  drawQuadrant, draw5Forces,
-  INK, INK_SOFT, RED, LINE, GHOST, F_BODY, F_MONO,
+  drawQuadrant, draw5Forces, drawProcessSteps,
+  INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
 const pres = newPres();
@@ -403,8 +403,8 @@ addDividerSlide(pres, {
   s.addText([
     { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
     { text: "自動車部品メーカーが鋼材メーカーを買収すれば「川上への垂直統合」、完成車メーカーを買収すれば「川下への垂直統合」。2社が共同出資でJVを設立するのは「戦略的提携」。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
-  cy += 0.68;
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -933,6 +933,516 @@ addDividerSlide(pres, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "関連：C-5 M&A（第三者承継としてのM&A、MBOによる従業員承継）。",
     years: mkYears(new Set(["'17", "'18", "'20", "'21", "'22"])),
+  });
+}
+
+// ---------- Slide 28: 組織論 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "02",
+  partNo: "PART 02",
+  partLabel: "企業経営理論 ／ C-15〜C-29",
+  title: "組織論",
+  desc: "人と人とをどう組み合わせれば、会社としての力を最大化できるかを扱う分野。モチベーション理論・リーダーシップ理論など心理学的な要素を含む論点が多い。",
+  chips: ["C-19 モチベーション理論", "C-24 組織変革", "C-25 労働関連法規"],
+  notes: "組織論パートの区切りスライド。",
+});
+
+// ---------- Slide 29: C-15 組織の考え方 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-15 ／ 組織の考え方（組織目標、分業と調整、権限と責任）",
+    title: "組織が機能するための3つの要素",
+    overview: "共通目標のために複数人が協力する仕組みが組織。分業・調整・権限と責任の3つが土台になる。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "組織とは「共通の目標のために複数の人が協力する仕組み」。機能するには3つの要素が必要。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "分業", v: "仕事を細分化し、担当者が専門的に担当する（効率化につながる）" },
+    { k: "調整", v: "分業した仕事がバラバラにならないよう全体をまとめる（会議・報告ライン・ルール等）" },
+    { k: "権限と責任", v: "決定できる範囲（権限）とその結果への責任は原則セットでなければならない" },
+  ], { fontSize: 11.5, labelW: 1.7, gap: 0.4 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "飲食店チェーンでは各店舗の店長に「仕入れ量を決める権限」と同時に「食材ロスを一定以下に抑える責任」を負わせる。権限だけ与えて責任は本部が負う、では店長の判断が甘くなりがち。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-16 組織構造の形態（分業・調整の具体的な型）。",
+    years: mkYears(new Set(["'16", "'17", "'19", "'20", "'21", "'22", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 30: C-16 組織構造の形態 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-16 ／ 組織構造の形態",
+    title: "4つの組織形態とメリット・デメリット",
+    overview: "職能別・事業部制・マトリックス・ネットワークの4形態で、専門性と連携のトレードオフが変わる。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "職能別組織", tag: "機能ごとに部門化", desc: "専門性が高まり効率的。ただし部門間連携が悪化しがちで全社視点の人材が育ちにくい" },
+    { name: "事業部制組織", tag: "製品・地域ごと", desc: "事業ごとの意思決定が速く経営者人材が育ちやすい。ただし機能重複でコストがかさむ" },
+    { name: "マトリックス組織", tag: "職能×事業の二重報告", desc: "柔軟に人材活用できる。ただし指揮命令系統が二重化し混乱を招きやすい" },
+    { name: "ネットワーク組織", tag: "独立組織が緩やかに連携", desc: "柔軟性が高い。ただし統制が効きにくい" },
+  ], { nameW: 2.3, tagW: 2.6 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「組織は戦略に従う」（チャンドラー）が有名だが、逆に「戦略は組織に従う」という視点もある。どちらか一方が絶対ではない。",
+    years: mkYears(new Set(["'16", "'17", "'20", "'21", "'22", "'23", "'25"])),
+  });
+}
+
+// ---------- Slide 31: C-17 組織文化 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-17 ／ 組織文化（レベル、経営戦略との関係、変革）",
+    title: "「うちの会社らしいやり方」が組織文化",
+    overview: "メンバーに共有された価値観・行動様式。統一の力にも変革の足かせにもなる。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "組織文化", options: { bold: true, color: INK } },
+    { text: "とは、組織のメンバーに共有されている価値観・行動様式。「うちの会社らしいやり方」のこと。目に見える「制度・慣習」から目に見えにくい「価値観」「基本的な前提」まで階層があるとされる（シャインの組織文化論）。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.72;
+  s.addShape("rect", { x: proseX, y: cy, w: proseW, h: 0.5, fill: { color: GHOST }, line: { type: "none" } });
+  s.addShape("line", { x: proseX, y: cy, w: 0, h: 0.5, line: { color: INK, width: 2.5 } });
+  s.addText("強い組織文化はメンバーの行動を統一し効率を高める一方、環境変化時に「今までのやり方」に固執させ、変革の足かせになることもある。", {
+    x: proseX + 0.15, y: cy, w: proseW - 0.3, h: 0.5, valign: "middle",
+    fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15,
+  });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "「顧客第一主義」を掲げる会社で、社員全員がそれを当たり前として行動している状態は強い組織文化が根付いている例。ただし文化が強すぎるとデジタル化のような新しい変化への対応が遅れることもある。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-24 組織変革（強い組織文化は変革の解凍段階を難しくする要因になりうる）。",
+    years: mkYears(new Set(["'17", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 32: C-18 意思決定 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-18 ／ 組織における個人：意思決定",
+    title: "人は「最適解」でなく「満足解」で意思決定する",
+    overview: "人間の合理性には限界がある（サイモンの限定合理性）。認知バイアスの影響も受ける。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "人間は経済学が想定するような「完全に合理的な意思決定」はできない（サイモンの", options: { color: INK } },
+    { text: "限定合理性", options: { bold: true, color: INK } },
+    { text: "）。情報・時間・認知能力に限界があるため、「最適な答え」でなく「まあ満足できる答え」で打ち切る（", options: { color: INK } },
+    { text: "満足化原理", options: { bold: true, color: INK } },
+    { text: "）。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.82;
+  s.addShape("rect", { x: proseX, y: cy, w: proseW, h: 0.5, fill: { color: GHOST }, line: { type: "none" } });
+  s.addShape("line", { x: proseX, y: cy, w: 0, h: 0.5, line: { color: INK, width: 2.5 } });
+  s.addText([
+    { text: "人間の判断は", options: {} },
+    { text: "認知バイアス", options: { bold: true } },
+    { text: "（思考の偏り）の影響も受ける。例：一度決めたことに固執する、都合の良い情報ばかり集める、など。", options: {} },
+  ], { x: proseX + 0.15, y: cy, w: proseW - 0.3, h: 0.5, valign: "middle", fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "新商品の企画会議で、本来は市場調査をもっと徹底すべきなのに、時間的制約から「これくらいで十分だろう」と判断してしまうのは限定合理性・満足化原理の表れ。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    related: "関連：C-22 集団の心理（グループシンクも集団レベルの非合理な意思決定の一種）。",
+    years: mkYears(new Set(["'19", "'24"])),
+  });
+}
+
+// ---------- Slide 33: C-19 モチベーション理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-19 ／ 組織における個人：モチベーション理論",
+    title: "社員のやる気を説明する4つの理論",
+    overview: "提唱者名と理論の核心をセットで覚える。10年間ほぼ毎年出題される最頻出論点。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "社員のやる気を高める要因を説明する代表理論4つ。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "マズロー", v: "欲求段階説：生理的→安全→社会的→承認→自己実現の5段階。低次が満たされると次の欲求が現れる", gap: 0.4 },
+    { k: "ハーズバーグ", v: "動機づけ・衛生理論：満足に関わる要因（達成感等）と不満足に関わる要因（給与等）は別物", gap: 0.4 },
+    { k: "期待理論", v: "（ブルーム）モチベーション＝期待×手段性×誘意性の掛け算で決まる", gap: 0.35 },
+    { k: "目標設定理論", v: "（ロック）具体的でやや高難度な目標が、曖昧・簡単すぎる目標よりやる気を高める", gap: 0.4 },
+  ], { fontSize: 11, labelW: 1.7 });
+  cy += 0.05;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "ハーズバーグの動機づけ要因・衛生要因の区別が特に頻出。給与を上げても不満は減るが積極的な「やる気」は上がらない（給与は衛生要因）。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：給与を大幅に上げても意欲が変わらないのは、給与が「衛生要因」で不満防止にとどまるため。やる気には達成感等「動機づけ要因」への働きかけが必要。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 34: C-20 リーダーシップ理論 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-20 ／ リーダーシップ理論",
+    title: "「行動の型」と「状況対応」を区別する",
+    overview: "PM理論はリーダーの行動の型、SL理論は部下の状況に応じたスタイル変化を説明する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "リーダーシップに関する代表理論。「行動の型」を分類する理論と「状況で変える」理論を区別する。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "PM理論", v: "（三隅二不二）P機能（目標達成）とM機能（集団維持）の2軸。両方高い「PM型」が理想" },
+    { k: "SL理論", v: "（ハーシー＆ブランチャード）部下の成熟度に応じ指示型→説得型→参加型→委任型へスタイルを変える", gap: 0.5 },
+    { k: "変革型リーダーシップ", v: "内発的動機づけで大きな変革を推進（対義語：アメとムチの交換型リーダーシップ）", gap: 0.45 },
+  ], { fontSize: 11.5, labelW: 2.1 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "新入社員には具体的に指示する「指示型」、ベテランには仕事を任せる「委任型」が適切、というのがSL理論の考え方そのもの。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：PM理論は「行動の型」の分類、SL理論は「部下の状況に応じたスタイル変化」という違いを混同しないこと。",
+    years: mkYears(new Set(["'18", "'19", "'21", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 35: C-21 パワーとコンフリクト ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-21 ／ パワーとコンフリクト",
+    title: "パワーの源泉は役職だけではない",
+    overview: "公式の権限以外にも複数のパワーの源泉があり、適度なコンフリクトは組織の活性化にもなる。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "組織内では上下関係・部門間で「パワー（影響力）」の行使や意見対立（", options: { color: INK } },
+    { text: "コンフリクト", options: { bold: true, color: INK } },
+    { text: "）が生じる。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0 });
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "公式の権限", v: "地位に基づくパワー" },
+    { k: "専門性パワー", v: "専門知識に基づくパワー" },
+    { k: "準拠パワー", v: "人望に基づくパワー（以上、フレンチ＆レイヴンの分類）" },
+  ], { fontSize: 11.5, labelW: 1.7, gap: 0.35 });
+  cy += 0.05;
+  s.addShape("rect", { x: proseX, y: cy, w: proseW, h: 0.45, fill: { color: GHOST }, line: { type: "none" } });
+  s.addShape("line", { x: proseX, y: cy, w: 0, h: 0.45, line: { color: INK, width: 2.5 } });
+  s.addText("コンフリクトは必ずしも悪ではない。適度なコンフリクトは新しい視点をもたらし組織を活性化するが、過度だと機能不全、皆無だと停滞した組織になりがち。", {
+    x: proseX + 0.15, y: cy, w: proseW - 0.3, h: 0.45, valign: "middle",
+    fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1,
+  });
+  cy += 0.53;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "新人でもその分野で誰より詳しい専門知識があれば、周囲から意見を求められる実質的な影響力（専門性パワー）を持つことがある。役職に基づく公式パワーとは別の源泉。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-20 リーダーシップ理論（パワーの使い方とリーダーシップスタイルは密接に関連）。",
+    years: mkYears(new Set(["'18", "'19", "'21", "'22", "'24"])),
+  });
+}
+
+// ---------- Slide 36: C-22 集団の心理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-22 ／ 集団の心理",
+    title: "集団は個人とは違う心理現象を起こす",
+    overview: "グループシンク・グループシフト・心理的安全性という3つの集団心理現象を区別する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "集団で意思決定すると、個人では起きない特有の心理現象が生じることがある。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "グループシンク", v: "団結・和を重視するあまり少数意見が出せず、不合理な結論に至る現象（集団浅慮）", gap: 0.4 },
+    { k: "グループシフト", v: "議論の結果、個人で考えるより極端な結論（リスク志向 or 慎重）に振れる現象", gap: 0.4 },
+    { k: "心理的安全性", v: "意見や懸念を安心して発言できる状態。生産性の高いチームの共通要因として注目", gap: 0.4 },
+  ], { fontSize: 11.5, labelW: 1.9 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "会議で上司の意見に誰も異を唱えず危険な決定が承認されるのはグループシンクの典型。逆に率直に懸念を言い合える雰囲気（心理的安全性）があれば、こうした失敗を防ぎやすい。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-18 意思決定（限定合理性・認知バイアスは個人レベル、本論点は集団レベルの非合理性）。",
+    years: mkYears(new Set(["'18", "'20", "'21", "'23"])),
+  });
+}
+
+// ---------- Slide 37: C-23 組織間関係 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-23 ／ 組織間関係：資源依存、取引コスト、クラスター",
+    title: "会社は他組織との関係の中で活動する",
+    overview: "資源依存・取引コスト・産業クラスターという3つの理論で組織間関係を説明する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "会社は単独で存在せず、他の組織（取引先・競合・行政等）との関係の中で活動する。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "資源依存理論", v: "不足する経営資源を外部に依存し、その依存関係がパワー関係を生む（強く依存する相手には強く出られない）", gap: 0.5 },
+    { k: "取引コスト理論", v: "市場で取引するか自社内で行うかは、交渉・契約・監視等の「取引コスト」を比較して決まる", gap: 0.4 },
+    { k: "産業クラスター", v: "特定地域に関連企業・大学・研究機関が集積し情報交換・イノベーションが起きやすくなる（例：シリコンバレー）", gap: 0.5 },
+  ], { fontSize: 11.5, labelW: 1.9 });
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "特定部品の他社との取引コスト（品質管理・納期調整の手間）が高すぎる場合、自社で内製化（垂直統合）した方が効率的、と判断されることがある（取引コスト理論）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-5 垂直統合・M&A・戦略的提携（取引コスト理論は垂直統合の是非を判断する理論的裏付け）。",
+    years: mkYears(new Set(["'19", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 38: C-24 組織変革と組織成長 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-24 ／ 組織変革と組織成長",
+    title: "レヴィンの3段階モデルで変革を進める",
+    overview: "組織は創業期→成長期→成熟期とライフサイクルをたどる。変革は3段階で進める。",
+    tag: "企業経営理論",
+  });
+  drawProcessSteps(s, 0.55, 2.0, 12.25, 2.7, [
+    { num: "STEP 1", label: "解凍", desc: "現状維持の意識を崩し、変化の必要性を認識させる" },
+    { num: "STEP 2", label: "変化", desc: "新しいやり方を実際に導入する" },
+    { num: "STEP 3", label: "再凍結", desc: "新しいやり方を定着させ、元に戻らないようにする" },
+  ]);
+  s.addText([
+    { text: "レヴィンの3段階モデル。", options: { bold: true } },
+    { text: "組織のライフサイクル（創業期→成長期→成熟期→再生・衰退期）では、各段階で直面する経営課題（資金調達→仕組み化→硬直化対応）が異なる。", options: {} },
+  ], { x: 0.55, y: 4.9, w: 12.25, h: 0.5, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：新システム導入時、いきなり入れ替えず「今のままではまずい」と危機感を共有し（解凍）、試験導入し（変化）、新業務フローとして定着させる（再凍結）と成功しやすい。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 39: C-25 労働関連法規 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-25 ／ 人的資源管理：労働関連法規",
+    title: "押さえるべき7つの労働関連法規",
+    overview: "法律名と規制内容を正確に対応させる。適用対象・義務か努力義務かの違いに注意。",
+    tag: "企業経営理論",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "労働基準法", desc: "労働時間・休憩・休日・賃金支払いなど労働条件の最低基準" },
+    { name: "労働契約法", desc: "労働契約の締結・変更・終了に関するルール" },
+    { name: "男女雇用機会均等法", desc: "性別を理由とする差別的取扱いの禁止" },
+    { name: "育児・介護休業法", desc: "育児・介護のための休業制度" },
+    { name: "パート・有期雇用労働法", desc: "正社員と非正規社員との不合理な待遇差の禁止（同一労働同一賃金）" },
+    { name: "労働安全衛生法", desc: "労働者の安全と健康の確保" },
+    { name: "労働者派遣法", desc: "派遣労働者の保護、派遣期間の制限など" },
+  ], { rowH: 0.6, nameW: 3.3 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：正社員と契約社員とで基本給・賞与に不合理な差をつけるのは、パート・有期雇用労働法（同一労働同一賃金）に抵触するおそれがある。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 40: C-26 雇用管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-26 ／ 人的資源管理：雇用管理",
+    title: "ジョブローテーションでゼネラリストを育てる",
+    overview: "日本企業に特徴的な定期的な人事異動の仕組みと、その狙いを理解する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "人材をどう採用し配置するかという管理分野。日本企業に特徴的な仕組みが", options: { color: INK } },
+    { text: "ジョブローテーション", options: { bold: true, color: INK } },
+    { text: "（定期的な人事異動）。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.48;
+  s.addShape("rect", { x: proseX, y: cy, w: proseW, h: 0.65, fill: { color: GHOST }, line: { type: "none" } });
+  s.addShape("line", { x: proseX, y: cy, w: 0, h: 0.65, line: { color: INK, width: 2.5 } });
+  s.addText([
+    { text: "特定の職務を限定せず様々な部署を経験させ、会社全体を理解した", options: {} },
+    { text: "ゼネラリスト", options: { bold: true } },
+    { text: "を育成する狙いがある。対比されるのが欧米型の「ジョブ型雇用」（特定の職務・スキルを明確に定義して採用）。", options: {} },
+  ], { x: proseX + 0.15, y: cy, w: proseW - 0.3, h: 0.65, valign: "middle", fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "入社した社員を営業部・経理部・製造部と数年おきに異動させ、幅広い業務知識を身につけさせるのは、日本型雇用に特徴的なジョブローテーションの一例。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-29 戦略的人的資源管理（採用・配置方針も経営戦略と整合させるべきという発想）。",
+    years: mkYears(new Set(["'16", "'17", "'25"])),
+  });
+}
+
+// ---------- Slide 41: C-27 評価・処遇 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-27 ／ 人的資源管理：評価・処遇",
+    title: "3つの賃金体系とハロー効果に注意する",
+    overview: "年功給・職務給・職能給の違いと、人事評価をゆがめるハロー効果を理解する。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "社員の働きをどう評価し賃金に反映するか。代表的な賃金体系は3つ。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "年功給", v: "勤続年数・年齢に応じて賃金が上がる" },
+    { k: "職務給", v: "職務の難易度・責任に応じて賃金を決める" },
+    { k: "職能給", v: "個人の持つ能力（職能）に応じて賃金を決める" },
+  ], { fontSize: 11.5, labelW: 1.4, gap: 0.35 });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "日本企業は伝統的に年功給・職能給中心だが、近年は成果や職務を重視する動きも進む。人事評価では評価者の主観による歪み（", options: { color: RED } },
+    { text: "ハロー効果", options: { bold: true, color: RED } },
+    { text: "：1つの優れた点に引きずられ全体を過大評価）にも注意。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "「彼は有名大学出身だから仕事もできるはずだ」という先入観で高評価をつけるのはハロー効果の典型例で、公正な人事評価を妨げる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-29 戦略的人的資源管理（評価制度も経営戦略のタイプと整合させるべき）。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'20", "'22", "'24"])),
+  });
+}
+
+// ---------- Slide 42: C-28 人材育成 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-28 ／ 人的資源管理：人材育成",
+    title: "OJT・Off-JT・メンタリングの3手法",
+    overview: "実務を通じて学ぶか、業務を離れて学ぶか、先輩が継続支援するかで手法が変わる。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "人材育成の代表的な3手法。",
+    { x: proseX, y: cy, w: proseW, h: 0.3, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0 }
+  );
+  cy += 0.38;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "OJT", v: "On the Job Training。実際の仕事を通じて学ぶ" },
+    { k: "Off-JT", v: "Off the Job Training。業務を離れて研修などで学ぶ" },
+    { k: "メンタリング", v: "経験豊富な先輩社員が若手を継続的に支援する" },
+  ], { fontSize: 11.5, labelW: 1.6, gap: 0.35 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "新人が先輩社員に同行して営業の実務を学ぶのはOJT、外部の研修会社が実施する集合研修に参加するのはOff-JT。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：C-26 雇用管理（ジョブローテーションもOJTの一形態と捉えられる）。",
+    years: mkYears(new Set(["'17", "'18", "'20"])),
+  });
+}
+
+// ---------- Slide 43: C-29 戦略的人的資源管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "C-29 ／ 人的資源管理：戦略的人的資源管理",
+    title: "人事施策を経営戦略と一貫させる（SHRM）",
+    overview: "採用・評価・育成・報酬を場当たり的でなく、経営戦略と整合させて設計する考え方。",
+    tag: "企業経営理論",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText([
+    { text: "戦略的人的資源管理（SHRM）", options: { bold: true, color: INK } },
+    { text: "：人事施策（採用・評価・育成・報酬等）を、会社全体の経営戦略と一貫性を持たせて設計する考え方。「どんな戦略を取るかで、必要な人材像・評価基準・育成方針も変わるべき」という発想。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, fontFace: F_BODY, fontSize: 11.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+  cy += 0.85;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "コストリーダーシップ戦略（C-7参照）の会社では効率性・生産性重視の評価制度が合理的だが、差別化戦略の会社では創造性・イノベーションを促す評価制度の方が戦略と整合的。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    related: "関連：C-7 競争優位の戦略（採用すべき人事施策は戦略のタイプによって変わる）。出題頻度は低いが基本概念として押さえておく。",
+    years: mkYears(new Set(["'16"])),
   });
 }
 

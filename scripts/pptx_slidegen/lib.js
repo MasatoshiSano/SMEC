@@ -389,6 +389,31 @@ function drawVennOverlap(slide, x, y, w, h, { leftLabel, rightLabel, overlapLabe
   });
 }
 
+// N-step horizontal process flow with arrows (e.g. Lewin's unfreeze-change-refreeze).
+function drawProcessSteps(slide, x, y, w, h, steps) {
+  const gap = 0.35;
+  const n = steps.length;
+  const stepW = (w - gap * (n - 1)) / n;
+  steps.forEach((step, i) => {
+    const sx = x + i * (stepW + gap);
+    slide.addShape("rect", { x: sx, y, w: stepW, h, fill: { color: GHOST }, line: { color: LINE, width: 1 } });
+    slide.addText([
+      { text: step.num + "\n", options: { fontFace: F_MONO, fontSize: 10, bold: true, color: RED, breakLine: true } },
+      { text: step.label + "\n", options: { fontFace: F_HEAD, fontSize: 14, bold: true, color: INK, breakLine: true } },
+      { text: step.desc, options: { fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT } },
+    ], {
+      x: sx + 0.15, y, w: stepW - 0.3, h, align: "center", valign: "middle",
+      isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+    });
+    if (i < n - 1) {
+      slide.addText("→", {
+        x: sx + stepW, y, w: gap, h, align: "center", valign: "middle",
+        fontFace: F_BODY, fontSize: 18, color: INK_SOFT, isTextBox: true, margin: 0,
+      });
+    }
+  });
+}
+
 module.exports = {
   INK, INK_SOFT, RED, LINE, GHOST, WHITE,
   F_HEAD, F_BODY, F_MONO,
@@ -407,4 +432,5 @@ module.exports = {
   drawVennOverlap,
   drawQuadrant,
   draw5Forces,
+  drawProcessSteps,
 };
