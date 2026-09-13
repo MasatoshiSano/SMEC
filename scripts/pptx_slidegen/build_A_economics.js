@@ -1072,6 +1072,422 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 39: PART4 消費と生産の理論・組織と戦略の経済学・所得分配 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "04",
+  partNo: "PART 04",
+  partLabel: "経済学・経済政策 ／ A-25〜A-36",
+  title: "消費と生産の理論・所得分配",
+  desc: "消費者・企業それぞれの内部の意思決定メカニズムから、不完全競争市場の分析（ゲーム理論・独占・寡占）、最後は所得がどう分配されるかまで、ミクロ経済学の応用範囲を一気に扱う。",
+  chips: ["A-27 生産関数・費用関数", "A-30 ゲーム理論", "A-31 独占・寡占"],
+  notes: "PART4区切りスライド。",
+});
+
+// ---------- Slide 40: A-25 効用理論・予算制約と消費者行動 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-25 ／ 効用理論・予算制約と消費者行動",
+    title: "無差別曲線と予算制約線が接する点で効用最大化",
+    overview: "消費者は限られた予算の中で、効用（満足度）が最大になるように購入量を決める。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "同じ満足度が得られるX財・Y財の組み合わせを結んだ線が無差別曲線。予算内でできるだけ高い効用に到達しようとする。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "無差別曲線", v: "原点に対して凸型の右下がり。原点から遠いほど効用水準が高い", gap: 0.4 },
+    { k: "限界代替率（MRS）", v: "X財1単位増の代わりに手放してよいY財の量。逓減する（限界代替率逓減の法則）", gap: 0.4 },
+    { k: "消費者均衡", v: "限界代替率＝価格比（Px/Py）が成り立つ点。無差別曲線と予算制約線が接する", gap: 0.4 },
+  ], { fontSize: 11, labelW: 2.3 });
+  cy += 0.1;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「限界代替率逓減の法則」（他財との交換比率が逓減）と「限界効用逓減の法則」（その財自体の追加的満足度が逓減）は別概念。混同しないこと。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-26 需要曲線の導出（消費者均衡から需要曲線を導く）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 41: A-26 需要曲線の導出 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-26 ／ 需要曲線の導出",
+    title: "代替効果と所得効果、そして例外のギッフェン財",
+    overview: "価格変化時の需要量の変化は代替効果と所得効果に分解できる。財の分類によって所得効果の向きが変わる。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "上級財（正常財）", tag: "所得↑→需要↑", desc: "代替効果・所得効果とも需要量を増やす方向。需要曲線は右下がり" },
+    { name: "下級財（劣等財）", tag: "所得↑→需要↓", desc: "所得効果は需要を減らす方向だが通常は代替効果が上回り、やはり右下がり" },
+    { name: "ギッフェン財", tag: "下級財の例外", desc: "所得効果が代替効果を上回る特殊な例外。価格が下がると需要量が減る（右上がり）" },
+  ], { rowH: 1.0, nameW: 2.4, tagW: 2.1 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「下級財は必ず右上がり」は誤り。下級財でも通常は右下がりで、代替効果を所得効果が上回る特殊例のみギッフェン財。",
+    years: mkYears(new Set(["'16", "'21", "'25"])),
+  });
+}
+
+// ---------- Slide 42: A-27 生産関数・費用関数 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-27 ／ 生産関数・費用関数",
+    title: "限界生産力逓減の法則とU字型の費用曲線",
+    overview: "資本を固定したまま労働投入を増やすと、生産量の増加分はやがて逓減する（限界生産力逓減の法則）。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "総費用（TC）", tag: "固定費用＋可変費用", desc: "固定費用は生産量ゼロでも発生し、生産量に応じて変わらない" },
+    { name: "平均費用（AC）", tag: "TC÷生産量", desc: "1単位あたりの総費用。限界生産力逓減の結果、短期はU字型になりやすい" },
+    { name: "平均可変費用（AVC）", tag: "可変費用÷生産量", desc: "1単位あたりの可変費用" },
+    { name: "限界費用（MC）", tag: "生産量+1の追加費用", desc: "平均費用曲線の最低点を通過する（MC＜ACならAC低下中、MC＞ACならAC上昇中）" },
+  ], { rowH: 0.75, nameW: 2.3, tagW: 2.3 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「固定費用も生産量に応じて増減する」は誤り。固定費用は生産量ゼロでも発生し金額は変わらない。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 43: A-28 利潤最大化と供給曲線 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-28 ／ 利潤最大化と供給曲線",
+    title: "利潤最大化条件はMR＝MC（完全競争ではP＝MC）",
+    overview: "企業は限界収入（MR）＝限界費用（MC）となる生産量で利潤を最大化する。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "MR（限界収入）がMC（限界費用）を上回る間は生産を増やすほど利潤が増え、下回れば減る。MR＝MCとなる点で利潤が最大化される。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "完全競争企業", v: "価格受容者（プライス・テイカー）。MR＝市場価格Pのため、利潤最大化条件は「P＝MC」", gap: 0.4 },
+    { k: "供給曲線", v: "完全競争企業の限界費用曲線そのもの（平均可変費用を上回る部分に限る）", gap: 0.4 },
+  ], { fontSize: 11.5, labelW: 2.0 });
+  cy += 0.1;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「企業は平均費用が最小になる生産量で利潤を最大化する」は誤り。利潤最大化条件はあくまで「限界収入＝限界費用」であり、平均費用最小の生産量とは一般に一致しない。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    related: "関連：A-27 生産関数・費用関数（限界費用曲線の形状が供給曲線の土台）。",
+    years: mkYears(new Set(["'16", "'22"])),
+  });
+}
+
+// ---------- Slide 44: A-29 情報の不完全性（情報の非対称性） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-29 ／ 情報の不完全性（情報の非対称性）",
+    title: "逆選択（契約前）とモラルハザード（契約後）",
+    overview: "取引の一方だけが多くの情報を持つ状態が情報の非対称性。発生タイミングの違いで2つの問題に分かれる。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "情報の非対称性が引き起こす2つの問題は、発生タイミング（契約前か後か）で区別する。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "逆選択", v: "契約前に生じる。質の良い売り手ほど市場から撤退し、質の悪い商品ばかり残る（中古車の「レモン市場」）", gap: 0.55 },
+    { k: "モラルハザード", v: "契約後に生じる。行動を観察されにくいことを利用し注意義務を怠る（火災保険加入後の油断など）", gap: 0.55 },
+  ], { fontSize: 11.5, labelW: 1.7 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "中古車市場では買い手が車の状態を判断できず「平均的な質」の価格しか払わないため、質の良い車の売り手が市場から撤退し、質の悪い車ばかりが出回る（逆選択）。対策としてシグナリング・スクリーニングがある。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「健康に不安のある人ほど保険に入りたがる」は逆選択、「保険加入後に不摂生になる」はモラルハザード。段階を確認する。",
+    years: mkYears(new Set(["'19", "'22", "'23"])),
+  });
+}
+
+// ---------- Slide 45: A-30 ゲーム理論（ナッシュ均衡、囚人のジレンマ等） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-30 ／ ゲーム理論（ナッシュ均衡、囚人のジレンマ等）",
+    title: "利得表から「動く誘因がない」組み合わせを探す",
+    overview: "ナッシュ均衡＝相手の戦略を所与としたとき、自分だけ変えても利得が改善しない組み合わせ。両者について最適反応を機械的に洗い出す。",
+    tag: "経済学・経済政策",
+  });
+  drawQuadrant(s, 0.55, 1.9, 12.25, 3.9, {
+    cells: [
+      { pos: "tl", label: "守る・守る", sublabel: "（50、40）" },
+      { pos: "tr", label: "守る・破る", sublabel: "（－20、60）" },
+      { pos: "bl", label: "破る・守る", sublabel: "（60、－20）" },
+      { pos: "br", label: "破る・破る", sublabel: "（0、0）★ナッシュ均衡" },
+    ],
+    axisCaption: "企業X（行）×企業Y（列）のカルテル利得表（カッコ内左＝X、右＝Y）。両者とも「破る」から動く誘因がなく、ここがナッシュ均衡（囚人のジレンマ構造）。",
+  });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「利得の合計が最大の組み合わせが必ずナッシュ均衡」は誤り。社会的に望ましい組み合わせとは限らない。",
+    years: mkYears(new Set(["'17", "'18", "'20", "'22", "'23"])),
+  });
+}
+
+// ---------- Slide 46: A-30 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-30 ／ 過去問で確認する",
+    title: "こう出題される（令和5年度 第22問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "経済学・経済政策",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "特定の財の市場において競合関係にある企業同士が、同一価格での販売を約束するカルテルを結ぶことは、互いの企業にとって有利となる場合がある。企業Ｘと企業Ｙは、それぞれ一定の販売価格で合意したカルテルを守るか、あるいはそれを破ってより低い価格で販売するかを選択するものとする。下表は両企業の利得表であり、カッコ内の左側が企業Ｘの利得、右側が企業Ｙの利得を表している（企業X＼企業Y：カルテルを守る＝(50,40)／カルテルを破る＝(-20,60)。企業Xがカルテルを破る場合：カルテルを守る＝(60,-20)／カルテルを破る＝(0,0)）。このゲームに関する記述として、最も適切な組み合わせを下記の解答群から選べ。\n\nａ　企業Ｘが「カルテルを守る」場合において、企業Ｙの最適反応は「カルテルを破る」である。\nｂ　企業Ｙが「カルテルを守る」場合において、企業Ｘの最適反応は「カルテルを守る」である。\nｃ　このゲームにおけるナッシュ均衡は、企業Ｘ、企業Ｙともに「カルテルを守る」ケースである。\nｄ　このゲームにおけるナッシュ均衡は、企業Ｘ、企業Ｙともに「カルテルを破る」ケースである。",
+    choices: [
+      { badge: "ア", text: "ａとｃ" },
+      { badge: "イ", text: "ａとｄ" },
+      { badge: "ウ", text: "ｂとｃ" },
+      { badge: "エ", text: "ｂとｄ" },
+    ],
+    stemH: 2.0,
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2023/A1JI2023.pdf（令和5年度第1次試験）第22問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 47: A-30 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-30 ／ 過去問で確認する",
+    title: "解答＆解説（令和5年度 第22問）",
+    overview: "正解はイ（ａとｄ）。ｂの最適反応の向きの取り違えに注意。",
+    tag: "経済学・経済政策",
+  });
+  const choices = [
+    { badge: "ア", text: "ａとｃ" },
+    { badge: "イ", text: "ａとｄ" },
+    { badge: "ウ", text: "ｂとｃ" },
+    { badge: "エ", text: "ｂとｄ" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ（ａとｄ）", options: { bold: true, color: RED } },
+    { text: "。ａ：Xが「守る」のときYの利得は守る40・破る60→Yの最適反応は「破る」＝正。ｂ：Yが「守る」のときXの利得は守る50・破る60→Xの最適反応は「破る」（「守る」としている点が誤り）。ｃ：（守る,守る）はXに「破る」へ逸脱する誘因があるためナッシュ均衡でない＝誤。ｄ：（破る,破る）はX・Yともに0→守るに変えると－20になり動く誘因がない＝ナッシュ均衡＝正。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.2, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 });
+  cy += 1.28;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "両者がカルテルを守れば高い利得（50,40）を得られるにもかかわらず、各企業には個別に裏切る誘因が働くため、社会的に望ましくない（破る,破る）がナッシュ均衡として実現する。典型的な囚人のジレンマ構造。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText("関連知識：ナッシュ均衡を求める手順は「各プレイヤーについて相手の各戦略に対する自分の最適反応を洗い出し、双方の最適反応が一致するマスを探す」という機械的な作業として身につける。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.35, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2,
+  });
+  cy += 0.42;
+  s.addText("出典：past_exams/1st_stage/1ji2023/A1JI2023.pdf（令和5年度第1次試験）第22問／正解：past_exams/1st_stage_answers/r05/2023a.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 48: A-31 独占の弊害と寡占化の協調行動 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-31 ／ 独占の弊害と寡占化の協調行動",
+    title: "独占は「価格支配者」、生産量過少・価格過大が弊害",
+    overview: "独占企業もMR＝MCで生産量を決めるが、右下がりの需要曲線に直面するため完全競争より生産量は過少・価格は過大になる。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "独占の弊害", tag: "価格支配者", desc: "完全競争と比べ生産量過少・価格過大。総余剰が減少し死荷重が発生" },
+    { name: "クールノー・モデル", tag: "数量競争", desc: "各企業が相手企業の生産量を所与として自社の最適生産量を決定" },
+    { name: "ベルトラン・モデル", tag: "価格競争", desc: "各企業が相手企業の価格を所与として自社の最適価格を決定" },
+    { name: "価格の下方硬直性", tag: "屈折需要曲線", desc: "値上げは追随されず顧客減、値下げは追随され値下げ競争になるため現状維持しがち" },
+  ], { rowH: 0.75, nameW: 2.5, tagW: 1.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：独占企業の価格はMRでなく需要曲線の高さで決まる。「独占企業はP＝MCで生産」は完全競争の条件。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'20", "'21", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 49: A-32 製品差別化と独占的競争 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-32 ／ 製品差別化と独占的競争",
+    title: "完全競争と独占の中間、長期的には超過利潤ゼロに収束",
+    overview: "独占的競争市場：多数の企業＋差別化された製品＋自由な参入退出。短期の超過利潤は新規参入で長期的に消える。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "独占的競争市場は完全競争と独占の中間的性質を持つ。飲食店やアパレルなど身の回りの多くの業種がこれにあたる。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "完全競争と同じ点", v: "多数の企業が存在し、参入・退出が自由", gap: 0.4 },
+    { k: "独占と同じ点", v: "製品が差別化されているため各社がある程度の価格支配力を持つ", gap: 0.4 },
+    { k: "長期均衡", v: "新規参入で需要曲線が左シフトし続け、最終的に利潤ゼロの水準に落ち着く", gap: 0.4 },
+  ], { fontSize: 11, labelW: 2.1 });
+  cy += 0.1;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "独占的競争は「独占と同じく長期的にも高い超過利潤を得続けられる」市場ではない。参入自由のため長期的には利潤ゼロに収束する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    related: "関連：A-31 独占の弊害（独占との違いを対比して理解する）。",
+    years: mkYears(new Set(["'20", "'22"])),
+  });
+}
+
+// ---------- Slide 50: A-33 規模の経済性・範囲の経済性 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-33 ／ 規模の経済性・範囲の経済性",
+    title: "「同じ製品を多く」か「複数の製品を一緒に」か",
+    overview: "規模の経済性は生産量、範囲の経済性は複数事業の組み合わせに着目する、別の着眼点の概念。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "規模の経済性・範囲の経済性はどちらも「大企業ほど有利」に見えるが、着眼点が異なる別概念。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "規模の経済性", v: "生産量（事業規模）が大きいほど1単位あたりの平均費用が下がる（固定費用の分散が主因）", gap: 0.5 },
+    { k: "範囲の経済性", v: "複数の異なる製品・事業を1社で手がける方が総費用が安く済む（設備・ノウハウの共有）", gap: 0.5 },
+  ], { fontSize: 11.5, labelW: 1.9 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "自動車メーカーが生産台数を増やすほど1台あたりの設備費負担が薄まるのが規模の経済性。同じ工場・エンジン技術で乗用車とトラックも作る方が別会社より安く済むのが範囲の経済性。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    related: "関連：C-3 多角化・シナジー（範囲の経済性の考え方と関連が深い概念）。",
+    years: mkYears(new Set(["'16"])),
+  });
+}
+
+// ---------- Slide 51: A-34 公正性・公平性の概念 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-34 ／ 公正性・公平性の概念",
+    title: "ジニ係数は0（完全平等）〜1（完全不平等）",
+    overview: "所得分配の公平性を測る道具がローレンツ曲線とジニ係数。値の大小の向きを取り違えないこと。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "ローレンツ曲線：横軸に所得の低い世帯からの累積比率、縦軸にその累積所得比率をとった曲線。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "ローレンツ曲線", v: "完全平等なら45度の均等分配線に一致。不平等なほど均等分配線より下に膨らむ", gap: 0.4 },
+    { k: "ジニ係数", v: "均等分配線とローレンツ曲線に囲まれた面積から算出。0（完全平等）〜1（完全不平等）", gap: 0.4 },
+    { k: "垂直的公平／水平的公平", v: "異なる状況の人には異なる扱い（累進課税）／同じ状況の人には同じ扱い", gap: 0.4 },
+  ], { fontSize: 11, labelW: 2.3 });
+  cy += 0.1;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「ジニ係数が1に近いほど平等」は逆。正しくは0に近いほど平等、1に近いほど不平等。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    related: "関連：A-36 所得再分配と税制（ジニ係数は再分配政策の効果測定にも使われる）。",
+    years: mkYears(new Set(["'20", "'25"])),
+  });
+}
+
+// ---------- Slide 52: A-35 生産要素市場と生産要素報酬 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-35 ／ 生産要素市場と生産要素報酬",
+    title: "賃金は労働の限界生産力価値で決まる（限界生産力説）",
+    overview: "生産要素（労働・資本）そのものが取引される市場。賃金は生産要素が生み出す追加的な価値によって決まる。",
+    tag: "経済学・経済政策",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  s.addText(
+    "企業が利潤最大化するように労働者の雇用量を決める条件は、追加で得られる収入と支払う賃金が等しい点。",
+    { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.48;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "労働の限界生産力価値", v: "労働を1単位追加で雇うことで得られる収入の増加分（限界生産物×製品価格）", gap: 0.45 },
+    { k: "限界生産力説", v: "賃金率＝労働の限界生産力価値。生産要素への報酬はその要素が生む追加的価値で決まる", gap: 0.45 },
+  ], { fontSize: 11.5, labelW: 2.3 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "もう1人雇うことで得られる生産物の増加分の市場価値が月30万円なら、企業が支払ってよい賃金の上限はおおよそ月30万円になる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.68;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「賃金は労働者の生活費を基準に決まる」という考え方と、経済学の「賃金は労働の限界生産力で決まる」（限界生産力説）を混同しないこと。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：A-28 利潤最大化（MR＝MCの考え方を生産要素市場に応用したもの）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'20", "'21", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 53: A-36 所得再分配と税制・補助金 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "A-36 ／ 所得再分配と税制・補助金",
+    title: "累進課税・社会保障・負の所得税で格差を是正する",
+    overview: "市場メカニズムに任せた結果の所得格差を是正するため、政府は税制・社会保障で所得の再分配を行う。",
+    tag: "経済学・経済政策",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "累進課税制度", tag: "垂直的公平", desc: "所得が高いほど税率も高くなる仕組み。所得税・相続税が代表例" },
+    { name: "社会保障制度", tag: "", desc: "年金・医療保険・生活保護・失業給付などを通じた所得移転" },
+    { name: "負の所得税", tag: "", desc: "一定所得を下回る世帯に給付を行う（マイナスの税を課す）という制度案" },
+  ], { rowH: 1.0, nameW: 2.5, tagW: 1.7 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：「消費税は高所得者ほど負担割合が高い累進的な税」は誤り。消費税は低所得者ほど所得に対する負担割合が高い逆進的な税。",
+    years: mkYears(new Set(["'17", "'22", "'24", "'25"])),
+  });
+}
+
 const outPath = path.join(__dirname, "..", "..", "slides", "1st_stage", "A_economics.pptx");
 pres.writeFile({ fileName: outPath }).then(() => {
   console.log("wrote", outPath);
