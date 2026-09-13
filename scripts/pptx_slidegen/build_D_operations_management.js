@@ -778,5 +778,458 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 27: 在庫・品質管理／店舗・商業集積 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "03",
+  partNo: "PART 03",
+  partLabel: "運営管理 ／ D-20〜D-28",
+  title: "在庫・品質管理／店舗集積",
+  desc: "在庫管理（ABC分析、EOQ）・品質管理（QC7つ道具）・廃棄物管理で第1部を締めくくり、視点を店舗に移して出店法規・商圏分析・業態・商品計画・仕入・陳列まで。",
+  chips: ["D-20 EOQ・発注方式", "D-21 QC7つ道具", "D-24 ライリーの法則"],
+  notes: "在庫・品質管理／店舗・商業集積パートの区切りスライド。",
+});
+
+// ---------- Slide 28: D-20 在庫管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-20 ／ 在庫管理（ABC分析、発注方式、EOQ）",
+    title: "定量発注は発注量固定、定期発注は発注時期固定",
+    overview: "ABC分析で重要度にメリハリをつけ、EOQで最適な発注量を求める。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "ABC分析", desc: "金額順に並べ累積構成比でA・B・Cにランク分け（パレートの法則）" },
+    { name: "定量発注方式", tag: "発注量固定", desc: "発注点で発注、発注間隔は需要により変動。Cランク向き" },
+    { name: "定期発注方式", tag: "発注時期固定", desc: "一定間隔で需要予測に基づき発注量を変動。Aランク向き" },
+    { name: "EOQ", tag: "経済的発注量", desc: "√(2×年間需要量×発注コスト÷単位あたり保管コスト)" },
+  ], { nameW: 2.3, tagW: 2.0, rowH: 0.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：安全係数は高くするほど欠品リスクが減る。ダブルビン方式の発注量は補充点相当量。",
+    years: mkYears(new Set(["'17", "'19", "'20", "'21", "'22", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 29: D-20 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-20 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第32問）",
+    overview: "前のスライドの内容で答えられるか、解答を見る前に考えてみる。",
+    tag: "運営管理",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "小売店舗における在庫管理に関する記述として、最も適切なものはどれか。",
+    stemH: 0.5,
+    choices: [
+      { badge: "ア", text: "安全在庫を設定する場合、欠品のリスクを小さくするためには、安全係数を低く設定する必要がある。", h: 0.6 },
+      { badge: "イ", text: "ダブルビン方式を採用している場合、発注量は補充点の2倍に相当する量である。", h: 0.6 },
+      { badge: "ウ", text: "定期発注方式を採用している場合、発注から納品までの調達期間を長くすると、発注のための需要予測量は多くなる。", h: 0.6 },
+      { badge: "エ", text: "定期発注方式を採用している場合、発注間隔を長くすると、発注1回当たりの発注量は少なくなる。", h: 0.6 },
+      { badge: "オ", text: "定量発注方式を採用している場合、発注点に基づいて発注すれば、販売量の増減にかかわらず、発注間隔は一定になる。", h: 0.6 },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第32問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 30: D-20 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-20 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第32問）",
+    overview: "正解はウ。調達期間が長いほど見積もるべき需要期間が延びる。",
+    tag: "運営管理",
+  });
+  const choices = [
+    { badge: "ア", text: "安全在庫を設定する場合、欠品のリスクを小さくするためには、安全係数を低く設定する必要がある。", h: 0.6 },
+    { badge: "イ", text: "ダブルビン方式を採用している場合、発注量は補充点の2倍に相当する量である。", h: 0.6 },
+    { badge: "ウ", text: "定期発注方式を採用している場合、発注から納品までの調達期間を長くすると、発注のための需要予測量は多くなる。", h: 0.6 },
+    { badge: "エ", text: "定期発注方式を採用している場合、発注間隔を長くすると、発注1回当たりの発注量は少なくなる。", h: 0.6 },
+    { badge: "オ", text: "定量発注方式を採用している場合、発注点に基づいて発注すれば、販売量の増減にかかわらず、発注間隔は一定になる。", h: 0.6 },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 2 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：ウ", options: { bold: true, color: RED } },
+    { text: "。定期発注方式では発注のたびに「調達期間＋発注サイクル」分の需要を予測して発注量を決める。調達期間を長くすると需要予測量は", options: {} },
+    { text: "多くなる", options: { bold: true } },
+    { text: "。ア：欠品リスクを下げるには安全係数を", options: {} },
+    { text: "高く", options: { bold: true } },
+    { text: "設定する必要がある。イ：ダブルビン方式の発注量はビン1つ分＝", options: {} },
+    { text: "補充点相当量", options: { bold: true } },
+    { text: "。エ：発注間隔を長くすると発注量はむしろ多くなる。オ：定量発注方式は発注量が一定で発注間隔は", options: {} },
+    { text: "変動", options: { bold: true } },
+    { text: "する。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.18 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "安全在庫＝安全係数×需要のばらつき（標準偏差）×√調達期間、で計算される。欠品率を下げたい場合は安全係数を高く設定する。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：定量発注方式は「発注量固定・発注時期変動」、定期発注方式は「発注時期固定・発注量変動」で整理する。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第32問／正解：past_exams/1st_stage_answers/r07/d_v2_20250902.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 31: D-21 品質管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-21 ／ 品質管理",
+    title: "数値データはQC7つ道具、言語データは新QC7つ道具",
+    overview: "扱うデータの種類で2つの道具群を使い分ける。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "QC7つ道具", tag: "数値データ", desc: "パレート図・特性要因図・ヒストグラム・チェックシート・散布図・層別・管理図" },
+    { name: "新QC7つ道具", tag: "言語データ", desc: "連関図法・親和図法・系統図法・マトリックス図法・PDPC法・アロー図法" },
+  ], { nameW: 2.3, tagW: 1.9, rowH: 1.3 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：名称と特徴の組み合わせ入替が頻出。TQM＝全社的品質管理、ISO9000＝品質国際規格。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 32: D-21 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-21 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第5問）",
+    overview: "組み合わせ問題。前のスライドの内容で答えられるか考えてみる。",
+    tag: "運営管理",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "以下に示すQC七つ道具、新QC七つ道具の名称と、その特徴に関する記述の組み合わせとして、最も適切なものを下記の解答群から選べ。\n【名称】ａ：マトリックス図法／ｂ：ヒストグラム／ｃ：連関図法／ｄ：チェックシート\n【特徴】①不良原因の中から対になる要素を見つけ解決手段の優先順位付けの重みを求める／②結果と要因の関係を分析し因果関係を明らかにする／③品質管理データを簡単に記録し現状を数値化する／④計量値の「ずれ」や「ばらつき」を視覚的に表し工程の実力をつかむ",
+    stemH: 1.3,
+    choices: [
+      { badge: "ア", text: "a：① b：② c：③ d：④" },
+      { badge: "イ", text: "a：① b：④ c：② d：③" },
+      { badge: "ウ", text: "a：② b：① c：④ d：③" },
+      { badge: "エ", text: "a：③ b：① c：④ d：②" },
+      { badge: "オ", text: "a：③ b：④ c：② d：①" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第5問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 33: D-21 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-21 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第5問）",
+    overview: "正解はイ。a：①、b：④、c：②、d：③が正しい対応。",
+    tag: "運営管理",
+  });
+  const choices = [
+    { badge: "ア", text: "a：① b：② c：③ d：④" },
+    { badge: "イ", text: "a：① b：④ c：② d：③" },
+    { badge: "ウ", text: "a：② b：① c：④ d：③" },
+    { badge: "エ", text: "a：③ b：① c：④ d：②" },
+    { badge: "オ", text: "a：③ b：④ c：② d：①" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ", options: { bold: true, color: RED } },
+    { text: "。ａ：マトリックス図法＝①（行と列に要素を配置し関連の強さから優先順位の重みを求める）。ｂ：ヒストグラム＝④（計量値データのばらつきを柱状図で表す）。ｃ：連関図法＝②（結果と要因を矢印で結び因果関係を整理）。ｄ：チェックシート＝③（点検項目にデータを記録し現状を数値化）。他の選択肢はいずれかの組み合わせで手法名と特徴がずれている。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 1.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "「数値データ→QC7つ道具」「言語データ・構造の整理→新QC7つ道具」という大枠で覚えたうえで、各手法の定義を1つずつ正確に区別する。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：マトリックス・データ解析法だけが新QC7つ道具の中で唯一数値データを扱う点は要注意。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第5問／正解：past_exams/1st_stage_answers/r07/d_v2_20250902.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 34: D-22 廃棄物等の管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-22 ／ 廃棄物等の管理（環境保全法規、ISO14000）",
+    title: "マニフェストで最終処分までを追跡する",
+    overview: "委託しても排出事業者の責任は完全には終わらない。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "廃棄物処理法", v: "適正処理を義務付け。産廃委託時はマニフェスト（管理票）交付・保管が必須" },
+    { k: "資源有効利用促進法", v: "3Rの考え方に基づき資源の有効利用・リサイクルを促す" },
+    { k: "ISO14000シリーズ", v: "環境マネジメントシステムの国際規格（ISO9000＝品質とは分野が異なる）" },
+  ], { fontSize: 11, labelW: 2.4, gap: 0.42 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「処理業者に委託すれば排出事業者の責任は完全に終わる」は誤り。最終処分までの適正処理を確認する責任は排出事業者に残る。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-3 環境配慮型生産（3R・LCAと同じ環境配慮の文脈）。",
+    years: mkYears(new Set(["'19", "'20", "'21", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 35: D-23 店舗施設に関する法律知識 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-23 ／ 店舗施設に関する法律知識",
+    title: "大店立地法の目的は「生活環境の保持」",
+    overview: "まちづくり三法。大店立地法は中小小売業の保護が目的ではない。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "大店立地法", desc: "1,000㎡超の店舗新設時、周辺の生活環境（交通・騒音・廃棄物）への配慮を義務付け" },
+    { name: "都市計画法", desc: "用途地域ごとに建てられる建物の用途を規制" },
+    { name: "中心市街地活性化法", desc: "郊外大型店の出店等で衰退した中心市街地を活性化する支援策" },
+  ], { nameW: 2.6, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：大店立地法の目的を「中小小売業者の保護」と誤解しない（旧大店法との違い）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 36: D-24 店舗立地と出店 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-24 ／ 店舗立地と出店（立地条件、商圏分析）",
+    title: "人口に比例、距離の2乗に反比例",
+    overview: "ライリーの法則とハフモデル。どちらも重力モデル的な考え方。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "ライリーの法則", v: "吸引力比(A:B)＝(人口A÷人口B)×(距離B÷距離A)²" },
+    { k: "ハフモデル", v: "来店確率＝(売場面積÷距離ᵈ)÷Σ(各店の売場面積÷距離ᵈ)" },
+  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "人口比A:B=3:8で吸引力比3:2→距離比A:B＝1:2（人口で劣るA市の方がX町に近い位置にある）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.58, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.66;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "距離の比を「2乗する」のを忘れる計算ミスに注意。公式の丸暗記だけでなく結果の意味も確認する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-25 商業集積（出店先の業態選択にもつながる）。",
+    years: mkYears(new Set(["'18", "'20", "'21", "'22", "'25"])),
+  });
+}
+
+// ---------- Slide 37: D-24 過去問チェック（設問） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-24 ／ 過去問で確認する",
+    title: "こう出題される（令和7年度 第24問）",
+    overview: "計算問題。前のスライドの公式で自分の手で計算してみる。",
+    tag: "運営管理",
+  });
+  const cy = addExamQuestion(s, {
+    stem: "A市とB市の人口比がA：B＝3：8である場合、それぞれの市がその中間にあるX町からどの程度の購買力を吸引できるか、ライリー・モデルを用いて計算した。計算した結果、A市とB市の吸引力の比がA：B＝3：2のとき、X町からA市までの距離XAとX町からB市までの距離XBの比として、最も適切なものはどれか。",
+    stemH: 0.75,
+    choices: [
+      { badge: "ア", text: "XA：XB＝1：4" },
+      { badge: "イ", text: "XA：XB＝1：2" },
+      { badge: "ウ", text: "XA：XB＝1：1" },
+      { badge: "エ", text: "XA：XB＝2：1" },
+      { badge: "オ", text: "XA：XB＝4：1" },
+    ],
+  });
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第24問", {
+    x: 0.55, y: cy + 0.15, w: 12.25, h: 0.3,
+    fontFace: F_MONO, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 38: D-24 過去問チェック（解答＆解説） ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-24 ／ 過去問で確認する",
+    title: "解答＆解説（令和7年度 第24問）",
+    overview: "正解はイ（1：2）。人口で劣るA市の方がX町に近い。",
+    tag: "運営管理",
+  });
+  const choices = [
+    { badge: "ア", text: "XA：XB＝1：4" },
+    { badge: "イ", text: "XA：XB＝1：2" },
+    { badge: "ウ", text: "XA：XB＝1：1" },
+    { badge: "エ", text: "XA：XB＝2：1" },
+    { badge: "オ", text: "XA：XB＝4：1" },
+  ];
+  let cy = addExamQuestion(s, { choices, correctIndex: 1 });
+  cy += 0.08;
+  s.addShape("line", { x: 0.55, y: cy, w: 12.25, h: 0, line: { color: INK, width: 1 } });
+  cy += 0.1;
+  s.addText([
+    { text: "正解：イ（1：2）", options: { bold: true, color: RED } },
+    { text: "。吸引力の比＝(人口A÷人口B)×(距離XB÷距離XA)²。3／2＝(3／8)×(XB／XA)²より、(XB／XA)²＝(3/2)÷(3/8)＝4→XB／XA＝2。よってXA：XB＝", options: {} },
+    { text: "1：2", options: { bold: true } },
+    { text: "。", options: {} },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.85, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.93;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "人口で劣るA市がB市より吸引力で善戦する（3：2）には、A市の方がX町に近い位置（XA＜XB）である必要があり、計算結果と整合する。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy, w: 12.25, h: 0.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.58;
+  s.addText("関連知識：2都市の吸引力が等しくなる商圏分岐点を求める「コンバースの法則」もあわせて押さえるとよい。", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+  cy += 0.38;
+  s.addText("出典：past_exams/1st_stage/1ji2025/D1JI2025.pdf（令和7年度第1次試験）第24問／正解：past_exams/1st_stage_answers/r07/d_v2_20250902.pdf", {
+    x: 0.55, y: cy, w: 12.25, h: 0.3, fontFace: F_MONO, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 39: D-25 商業集積と業種・業態 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-25 ／ 商業集積と業種・業態",
+    title: "業種は「何を売るか」、業態は「どう売るか」",
+    overview: "近年の小売業の変化は多くが「業態」の多様化として説明される。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "ショッピングセンター（SC）", v: "デベロッパーが計画的に開発・運営する複数テナント施設" },
+    { k: "商店街", v: "特定地域に自然発生的に形成された独立店舗の集まり" },
+    { k: "業種／業態", v: "何を売るか（酒屋・米屋）／どう売るか（コンビニ・専門店）" },
+  ], { fontSize: 11, labelW: 2.8, gap: 0.42 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「業種」と「業態」を逆に覚えない。コンビニ・ドラッグストア・ネットスーパーの台頭は「業態」の多様化。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-26 商品販売計画（業態ごとに品揃えの幅・奥行きが変わる）。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 40: D-26 商品販売計画 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-26 ／ 商品販売計画",
+    title: "「幅」と「奥行き」は別の軸",
+    overview: "マーチャンダイジング＝何を・どれだけ・いつ・いくらで仕入れて売るかの計画。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "幅", v: "取り扱う商品カテゴリーの多さ（例：コンビニは幅広い）" },
+    { k: "奥行き（深さ）", v: "1カテゴリー内のバリエーションの豊富さ（例：専門店は奥行きが深い）" },
+  ], { fontSize: 11, labelW: 2.0, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "コンビニは食品・日用品・雑誌など幅広く（幅が広い）、各カテゴリー内の品目数は絞る。スポーツ用品専門店は幅は狭いが、1競技用品のブランド・モデル数（奥行き）は豊富。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.78, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.86;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「品揃えが多いか少ないか」の1軸で捉えない。幅と奥行きは別の軸で店舗の戦略的性格を表す。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-28 売場構成・陳列（VMDによる商品の見せ方）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 41: D-27 商品調達・取引条件 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-27 ／ 商品調達・取引条件",
+    title: "消化仕入は「売れた時点」で仕入が成立",
+    overview: "在庫リスクを仕入先側が負う特殊な仕入形態。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "随時仕入", desc: "必要な都度、その時の状況に応じて仕入れる" },
+    { name: "一括大量仕入", desc: "まとめて大量仕入で単価を下げる（在庫リスク増）" },
+    { name: "消化（売上）仕入", desc: "店頭商品が実際に売れた時点で仕入が成立（百貨店等）" },
+  ], { nameW: 2.6, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "B", rankLabel: "直近10年で2回出題",
+    related: "ひっかけ：「店頭に並べた時点で仕入成立」は誤り。実際に販売された時点で成立する。",
+    years: mkYears(new Set(["'16", "'19"])),
+  });
+}
+
+// ---------- Slide 42: D-28 売場構成・陳列 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-28 ／ 売場構成・陳列（VMD、棚割り）",
+    title: "VP→PP→IPで大きさが変わる",
+    overview: "店舗全体・コーナー・個々の商品という3階層で視覚的に演出する。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "VP", tag: "Visual Presentation", desc: "ストア全体・ウィンドウ等での提案演出" },
+    { name: "PP", tag: "Point of Presentation", desc: "コーナーの目立つ場所での訴求" },
+    { name: "IP", tag: "Item Presentation", desc: "個々の商品の陳列（棚割り）" },
+  ], { nameW: 1.2, tagW: 2.9, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "具体例：売れ筋商品を目線の高さ（ゴールデンライン）に配置し、関連商品を近くに並べる（クロスMD）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
 pres.writeFile({ fileName: path.join(__dirname, "../../slides/1st_stage/D_operations_management.pptx") })
   .then(() => console.log("wrote", "slides/1st_stage/D_operations_management.pptx"));
