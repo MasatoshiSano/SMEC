@@ -440,6 +440,58 @@ function drawProcessStepsVertical(slide, x, y, w, h, steps) {
   });
 }
 
+// ---------- 経済学専用グラフ（座標軸＋直線で表す需要供給曲線・IS-LM分析・
+// 45度線分析など）。pptxgenjsに滑らかな曲線を描く手段がないため、教科書の
+// 慣例どおりどれも直線（右下がり/右上がりの直線）で描く。座標は0〜1に正規化
+// したチャート内座標(nx,ny)で指定し、原点(0,0)=左下、(1,1)=右上として扱う。 ----------
+
+function drawLineSeg(slide, ax1, ay1, ax2, ay2, opts = {}) {
+  const x = Math.min(ax1, ax2), y = Math.min(ay1, ay2);
+  const w = Math.abs(ax2 - ax1) || 0.0001, h = Math.abs(ay2 - ay1) || 0.0001;
+  const flipV = (ax2 - ax1) * (ay2 - ay1) < 0;
+  slide.addShape("line", { x, y, w, h, flipV, line: { color: opts.color || INK, width: opts.width || 1.5, dashType: opts.dashType } });
+}
+
+// x,y,w,h: bounding box in inches. axis: {xLabel, yLabel}. series: [{x1,y1,x2,y2 (normalized 0-1),
+// color, width, dashType, label, labelDx, labelDy}]. point: {nx, ny, label, guides: true}.
+function drawLineChart(slide, x, y, w, h, { xLabel, yLabel, series = [], point, gridPad = 0.35 } = {}) {
+  const ax = x + gridPad, ay = y + h, bx = x + w, by = y + gridPad;
+  // axis lines with arrowheads
+  slide.addShape("line", { x: ax, y: ay, w: bx - ax, h: 0, line: { color: INK, width: 1.6, endArrowType: "triangle" } });
+  slide.addShape("line", { x: ax, y: by, w: 0, h: ay - by, line: { color: INK, width: 1.6, endArrowType: "triangle" }, flipV: true });
+  if (xLabel) slide.addText(xLabel, { x: bx - 1.1, y: ay - 0.32, w: 1.1, h: 0.3, align: "right", fontFace: F_BODY, fontSize: 10, bold: true, color: INK, isTextBox: true, margin: 0 });
+  if (yLabel) slide.addText(yLabel, { x: ax + 0.05, y: by - 0.05, w: 1.1, h: 0.28, align: "left", fontFace: F_BODY, fontSize: 10, bold: true, color: INK, isTextBox: true, margin: 0 });
+
+  const toX = (nx) => ax + nx * (bx - ax);
+  const toY = (ny) => ay - ny * (ay - by);
+
+  series.forEach((s) => {
+    const x1 = toX(s.x1), y1 = toY(s.y1), x2 = toX(s.x2), y2 = toY(s.y2);
+    drawLineSeg(slide, x1, y1, x2, y2, { color: s.color || INK, width: s.width || 2, dashType: s.dashType });
+    if (s.label) {
+      slide.addText(s.label, {
+        x: x2 + (s.labelDx || 0.05), y: y2 + (s.labelDy || -0.15), w: 0.6, h: 0.3,
+        fontFace: F_BODY, fontSize: 11, bold: true, color: s.color || INK, isTextBox: true, margin: 0,
+      });
+    }
+  });
+
+  if (point) {
+    const px = toX(point.nx), py = toY(point.ny);
+    if (point.guides !== false) {
+      drawLineSeg(slide, ax, py, px, py, { color: INK_SOFT, width: 0.75, dashType: "dash" });
+      drawLineSeg(slide, px, ay, px, py, { color: INK_SOFT, width: 0.75, dashType: "dash" });
+    }
+    slide.addShape("ellipse", { x: px - 0.05, y: py - 0.05, w: 0.1, h: 0.1, fill: { color: INK }, line: { type: "none" } });
+    if (point.label) {
+      slide.addText(point.label, {
+        x: px + 0.08, y: py - 0.32, w: 0.5, h: 0.28,
+        fontFace: F_BODY, fontSize: 11, bold: true, color: INK, isTextBox: true, margin: 0,
+      });
+    }
+  }
+}
+
 module.exports = {
   INK, INK_SOFT, RED, LINE, GHOST, WHITE,
   F_HEAD, F_BODY, F_MONO,
@@ -460,4 +512,5 @@ module.exports = {
   draw5Forces,
   drawProcessSteps,
   drawProcessStepsVertical,
+  drawLineChart,
 };
