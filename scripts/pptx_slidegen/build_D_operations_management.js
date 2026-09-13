@@ -460,5 +460,323 @@ addDividerSlide(pres, {
   });
 }
 
+// ---------- Slide 16: 作業の管理／設備の管理／物の管理 区切り ----------
+addDividerSlide(pres, {
+  ghostNo: "02",
+  partNo: "PART 02",
+  partLabel: "運営管理 ／ D-10〜D-19",
+  title: "生産統制と作業・設備管理",
+  desc: "計画通りに実行できているかをチェックする生産統制から、標準時間・作業改善、5S・TPMによる設備管理、工場レイアウト、資材・外注管理まで。",
+  chips: ["D-13 ECRSの原則", "D-14 5S・TPM", "D-16 SLP"],
+  notes: "生産統制／作業・設備・物の管理パートの区切りスライド。",
+});
+
+// ---------- Slide 17: D-10 生産統制 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-10 ／ 生産統制",
+    title: "「モノ」「能力」「スケジュール」を管理する",
+    overview: "計画通りに実行できているかを日々チェック・調整する3つの管理。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "現品管理", tag: "モノ", desc: "仕掛品・材料・製品が今どこに・どれだけあるかを把握し紛失・取り違えを防ぐ" },
+    { name: "余力管理", tag: "能力", desc: "職場・設備の保有能力と実際の負荷を比較し過負荷・手待ちを調整する" },
+    { name: "進捗管理", tag: "スケジュール", desc: "計画に対する実際の進み具合を把握し、遅れていれば挽回策を打つ" },
+  ], { nameW: 2.0, tagW: 1.6, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：3つの管理対象を入れ替えた誤答が定番。名称と対象を正確に対応させる。",
+    years: mkYears(new Set(["'16", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 18: D-11 作業管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-11 ／ 作業管理",
+    title: "標準時間＝正味時間＋余裕時間",
+    overview: "熟練者が正常なペースで作業するのに必要な時間。外掛け法と内掛け法で余裕率の定義が違う。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "正味時間", v: "観測時間の代表値×レイティング係数" },
+    { k: "外掛け法", v: "標準時間＝正味時間×（1＋余裕率）" },
+    { k: "内掛け法", v: "標準時間＝正味時間÷（1－余裕率）" },
+    { k: "標準作業", v: "サイクルタイム・作業順序・標準手持ちの3要素（トヨタ生産方式）" },
+  ], { fontSize: 10.5, labelW: 1.9, gap: 0.38 });
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "観測時間48秒、レイティング110％→正味時間52.8秒。外掛け余裕率20％→標準時間＝52.8×1.2＝63.36秒。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.58, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.66;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "外掛け法・内掛け法は割る対象が違うため余裕率の数値自体が変わる。標準作業の3要素と標準時間の構成要素を混同しない。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-5 セル生産方式（多能工化が前提条件）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 19: D-12 作業の分析手法 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-12 ／ 作業の分析手法",
+    title: "工程図記号で「見える化」する",
+    overview: "貯蔵（計画的）と滞留（計画外）の違いが頻出のひっかけ。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "○ 加工", desc: "形状・性質を変える作業" },
+    { name: "⇒ 運搬", desc: "位置を移動させる" },
+    { name: "□／◇ 検査", desc: "□数量検査（個数・重量）／◇品質検査（規格適合）" },
+    { name: "▽／D 貯蔵・滞留", desc: "▽計画的にためる／D計画外のやむを得ない足止め" },
+  ], { nameW: 2.5, rowH: 0.9 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "動作分析：ギルブレス夫妻のサーブリッグ分析（つかむ・運ぶ・探す等に分解）。D-13につながる。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 20: D-13 作業の改善 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-13 ／ 作業の改善",
+    title: "まず「なくせないか」から考える",
+    overview: "ECRSはE→C→R→Sの順で検討する。順番自体が頻出の出題ポイント。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "E：排除", v: "その作業自体をなくせないか（最初に検討）" },
+    { k: "C：結合", v: "複数の作業を1つにまとめられないか" },
+    { k: "R：交換", v: "作業の順序・場所を入れ替えられないか" },
+    { k: "S：簡素化", v: "より簡単な方法にできないか" },
+  ], { fontSize: 11, labelW: 1.6, gap: 0.38 });
+  cy += 0.08;
+  s.addText([
+    { text: "動作経済の原則：", options: { bold: true, color: INK } },
+    { text: "身体の使用／作業場の配置／工具・設備の設計、の3分類でムダのない動き方・環境を作る。", options: { color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 10.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.48;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「まず簡素化を検討し、それでも難しければ排除を検討する」のように順序を入れ替えた記述は誤り。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-12 動作分析（サーブリッグ分析の結果がここでの改善につながる）。",
+    years: mkYears(new Set(["'17", "'19", "'20", "'22", "'23", "'25"])),
+  });
+}
+
+// ---------- Slide 21: D-14 設備管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-14 ／ 設備管理（5S、TPM）",
+    title: "自主保全が現場のオペレーターの手で行われる",
+    overview: "5Sは職場環境の基本活動。TPMは全員参加の設備保全活動。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "整理／整頓", v: "不要品を捨てる／必要な物をすぐ取り出せる状態に置く" },
+    { k: "清掃・清潔・躾", v: "掃除しながら点検／維持する／ルールを守る習慣" },
+    { k: "TPM・自主保全", v: "現場オペレーター自身が日常点検・簡単な保全を行う" },
+    { k: "設備総合効率（OEE）", v: "時間稼働率×性能稼働率×良品率" },
+  ], { fontSize: 10.5, labelW: 2.3, gap: 0.38 });
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "時間稼働率90％×性能稼働率約92.6％×良品率95％＝設備総合効率約79.2％。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.58, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.66;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「整理」と「整頓」の意味を入れ替えた選択肢が頻出。自主保全は保全担当者だけでなく現場オペレーターも行う。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-17 設備投資の経済性分析（設備の更新判断につながる）。",
+    years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 22: D-15 設備の評価と更新 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-15 ／ 設備の評価と更新",
+    title: "耐用年数は税法上の目安であって物理的限界ではない",
+    overview: "稼働率・減価償却・耐用年数を踏まえて設備更新を判断する。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "稼働率", v: "実際生産量 ÷ 標準（基準）生産量 × 100" },
+    { k: "減価償却", v: "取得原価を耐用年数にわたり費用配分（定額法／定率法）" },
+    { k: "耐用年数", v: "税法上定められた使用可能期間の目安（物理的限界とは別）" },
+  ], { fontSize: 11, labelW: 1.6, gap: 0.42 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「耐用年数＝実際に使用できる物理的限界」は誤り。老朽化による稼働率・良品率低下、修理費増加も総合的に考慮して更新判断する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  s.addShape("line", { x: 0.55, y: 6.55, w: 12.25, h: 0, line: { color: INK, width: 0.75 } });
+  s.addShape("ellipse", { x: 0.55, y: 6.63, w: 0.36, h: 0.36, fill: { color: INK_SOFT }, line: { type: "none" } });
+  s.addText("－", { x: 0.55, y: 6.63, w: 0.36, h: 0.36, align: "center", valign: "middle", fontFace: F_MONO, fontSize: 13, bold: true, color: "FFFFFF", isTextBox: true, margin: 0 });
+  s.addText("集計データなし　／　関連：D-17 設備投資の経済性分析（更新すべきかの投資判断）。", {
+    x: 1.0, y: 6.63, w: 11.5, h: 0.36, valign: "middle", fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0,
+  });
+}
+
+// ---------- Slide 23: D-16 工場計画 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-16 ／ 工場計画（SLP、DI分析、プラントレイアウト）",
+    title: "勘や経験ではなく体系的にレイアウトを決める",
+    overview: "SLPは物の流れ分析→近接性評価→レイアウト案作成の手順で進める。",
+    tag: "運営管理",
+  });
+  addRowList(s, 0.55, 1.95, 12.25, [
+    { name: "SLP", desc: "P-Q分析で物の流れを把握→アクティビティ相互関係図（A・E・I・O・U・X）→レイアウト案" },
+    { name: "DI分析", desc: "方向（Direction）と関係の強さ（Intensity）から工程間の結びつきを検討" },
+    { name: "機能別／製品別／固定型", desc: "工程ごとにまとめる／加工順に並べる／大型製品の周りに配置" },
+  ], { nameW: 2.6, rowH: 1.2 });
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "ひっかけ：SLPは体系的・定量的な手順。DI分析は「距離の近さだけ」ではなく方向＋強さの2視点。",
+    years: mkYears(new Set(["'17", "'18", "'19", "'20", "'21", "'23", "'24", "'25"])),
+  });
+}
+
+// ---------- Slide 24: D-17 設備投資の経済性分析 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-17 ／ 設備投資の経済性分析",
+    title: "回収期間法は時間的価値を考慮しない",
+    overview: "設備更新の判断は「変化する部分（差額）」に着目する差額原価収益分析の考え方。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "回収期間法", v: "投資額 ÷ 年間キャッシュフロー（簡便だが時間的価値を考慮しない）" },
+    { k: "NPV法", v: "将来CFを割り引いた合計－投資額。プラスなら投資価値あり" },
+  ], { fontSize: 11, labelW: 1.7, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "投資額600万円、年間CF200万円→回収期間＝600÷200＝3年。4年目以降の利益や割引率は考慮されない。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「回収期間が短い投資ほど必ず優れている」とは限らない。より厳密にはNPV法（B-26参照）を使う。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：財務・会計B-24〜B-26（NPV法・IRR法の詳細）。",
+    years: mkYears(new Set(["'16", "'19", "'23", "'24"])),
+  });
+}
+
+// ---------- Slide 25: D-18 資材管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-18 ／ 資材管理（資材計画、常備品）",
+    title: "常備品は在庫管理、非常備品は都度手配",
+    overview: "生産に必要な資材を、必要な時に必要な量だけ調達・管理する活動。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "常備品", v: "多くの製品に共通し継続的に使う資材（ネジ等）。発注点方式で管理" },
+    { k: "非常備品", v: "特定注文にのみ使う資材（特注部品）。都度手配" },
+  ], { fontSize: 11, labelW: 1.7, gap: 0.42 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "常備品は在庫を持って継続管理、非常備品は注文ごとに個別手配、という対応を正確に覚える。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "C", rankLabel: "直近10年で1回出題",
+    related: "関連：D-20 在庫管理（常備品の発注方式・EOQへつながる）。",
+    years: mkYears(new Set(["'24"])),
+  });
+}
+
+// ---------- Slide 26: D-19 調達・外注管理 ----------
+{
+  const s = pres.addSlide();
+  addHeader(s, {
+    kicker: "D-19 ／ 調達・外注管理",
+    title: "外注は単なるコスト削減策ではない",
+    overview: "自社に無い技術の活用、生産能力の変動吸収など多様な目的で行われる。",
+    tag: "運営管理",
+  });
+  const proseX = 0.55, proseW = 12.25;
+  let cy = 1.85;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "外注のメリット", v: "技術・設備の活用、生産能力の変動吸収、固定費の変動費化" },
+    { k: "外注のデメリット", v: "技術・ノウハウ流出リスク、品質管理の難しさ、依存度上昇リスク" },
+  ], { fontSize: 11, labelW: 1.9, gap: 0.42 });
+  cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "繁忙期にだけ生産量が急増する部品加工を近隣の協力会社に外注し、自社で新規設備投資・人員採用をせずに需要変動へ対応する。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "外注比率を高めすぎると自社の技術力・ノウハウの空洞化リスクにつながる点も出題対象。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  addFreqBar(s, {
+    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    related: "関連：D-18 資材管理（非常備品の都度手配・外部調達との接点）。",
+    years: mkYears(new Set(["'16", "'17", "'24"])),
+  });
+}
+
 pres.writeFile({ fileName: path.join(__dirname, "../../slides/1st_stage/D_operations_management.pptx") })
   .then(() => console.log("wrote", "slides/1st_stage/D_operations_management.pptx"));
