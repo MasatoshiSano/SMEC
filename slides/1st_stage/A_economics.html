@@ -1,0 +1,491 @@
+<title>経済学・経済政策 - スライド</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;
+  --cw:calc(min(100vw, 1020px) - 48px);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:calc(var(--cw)*1.85/100) calc(var(--cw)*2.26/100) calc(var(--cw)*0.93/100);border-bottom:calc(var(--cw)*0.16/100) solid var(--ink);flex:0 0 auto;gap:calc(var(--cw)*1.44/100);}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.98/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.55/100);font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:calc(var(--cw)*1.0/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.93/100);color:#fff;background:var(--ink);padding:calc(var(--cw)*0.31/100) calc(var(--cw)*0.93/100);align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:calc(var(--cw)*1.4/100) calc(var(--cw)*2.26/100) calc(var(--cw)*1.5/100);display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--cw)*0.55/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.05/100);color:#fff;background:var(--red);width:calc(var(--cw)*1.75/100);height:calc(var(--cw)*1.75/100);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-label{font-size:calc(var(--cw)*0.76/100);font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:calc(var(--cw)*0.78/100);color:var(--ink-soft);border-left:1px solid var(--line);padding-left:calc(var(--cw)*1.1/100);line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:calc(var(--cw)*0.68/100);color:var(--ink-soft);margin-right:calc(var(--cw)*0.9/100);white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.3/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.35/100);height:calc(var(--cw)*1.35/100);border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 過去問チェック：実際の過去問をそのまま提示し、直前のスライドで答えられるかを確認する */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .example{font-size:calc(var(--cw)*0.78/100);line-height:1.5;color:var(--ink);}
+.examq .example .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.62/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
+
+/* T3型の罫線区切りリスト */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
+
+/* 2x2マトリクス */
+.quadrant-wrap{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.quadrant-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:calc(var(--cw)*0.5/100);min-height:0;}
+.quadrant-grid .cell{background:var(--ghost);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--cw)*0.4/100);min-height:0;overflow:hidden;}
+.quadrant-grid .cell .label{font-weight:900;font-size:calc(var(--cw)*1.15/100);color:var(--ink);}
+.quadrant-grid .cell .sub{font-size:calc(var(--cw)*0.76/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.25/100);line-height:1.4;}
+.diagram-caption{flex:0 0 auto;font-size:calc(var(--cw)*0.74/100);color:var(--ink-soft);text-align:center;line-height:1.4;}
+
+/* 放射状の力学図 */
+.forces-wrap{flex:1;display:grid;grid-template-columns:1fr 1.3fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:calc(var(--cw)*0.35/100);min-height:0;overflow:hidden;}
+.forces-wrap .box{display:flex;align-items:center;justify-content:center;text-align:center;font-size:calc(var(--cw)*0.76/100);line-height:1.35;padding:calc(var(--cw)*0.3/100);border:1px solid var(--line);background:#fff;min-height:0;overflow:hidden;}
+.forces-wrap .box.center{background:var(--red);color:#fff;font-weight:700;font-size:calc(var(--cw)*0.85/100);border:none;grid-column:2;grid-row:2;}
+.forces-wrap .box.top{grid-column:2;grid-row:1;}
+.forces-wrap .box.bottom{grid-column:2;grid-row:3;}
+.forces-wrap .box.left{grid-column:1;grid-row:2;}
+.forces-wrap .box.right{grid-column:3;grid-row:2;}
+
+/* 手順図：番号付き→矢印 */
+.process-wrap{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.6/100);}
+.process-steps{flex:1;display:flex;align-items:stretch;gap:calc(var(--cw)*0.8/100);min-height:0;}
+.process-steps .step{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--ghost);border:1px solid var(--line);padding:calc(var(--cw)*0.6/100) calc(var(--cw)*0.5/100);min-height:0;overflow:hidden;}
+.process-steps .step .num{font-family:"Space Mono",monospace;font-weight:700;color:var(--red);font-size:calc(var(--cw)*0.8/100);}
+.process-steps .step .label{font-weight:900;font-size:calc(var(--cw)*1.1/100);margin-top:calc(var(--cw)*0.25/100);}
+.process-steps .step .desc{font-size:calc(var(--cw)*0.76/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.35/100);line-height:1.4;}
+.process-steps .arrow{flex:0 0 auto;display:flex;align-items:center;font-size:calc(var(--cw)*1.4/100);color:var(--ink-soft);}
+
+/* 左2/3テキスト＋右1/3図解（SVG viewBox方式。狭いカラムに calc(var(--cw)*N/100) は
+   使わない＝カード全体幅基準のため狭いカラムでは字が溢れる。SVGはviewBox基準で
+   一様スケールするのでこの問題が原理的に起きない） */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
+/* 経済学専用グラフ（docs/slide_template/economics_6.html 準拠）：座標軸グラフを
+   図メイン＋右に凡例(.gside/.tside)、または図中央＋下にキャプション(.gcap-*)で配置。
+   SVGは同じ「viewBoxでcontainのように収まるだけ縮む」方式。 */
+.gside{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.tside{flex:0 0 30%;display:flex;flex-direction:column;justify-content:center;gap:calc(var(--cw)*0.82/100);padding-left:calc(var(--cw)*1.65/100);border-left:1px solid var(--line);}
+.tside .row{font-size:calc(var(--cw)*0.93/100);color:var(--ink-soft);line-height:1.55;}
+.tside .row b{color:var(--ink);}
+.gcap-wrap{display:flex;flex-direction:column;width:100%;flex:1;gap:calc(var(--cw)*0.62/100);min-height:0;}
+.gcap-graph{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;}
+.gcap-text{font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;text-align:center;max-width:92%;margin:0 auto;flex:0 0 auto;}
+.chart-frame{width:100%;height:100%;flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.chart-frame svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+/* Before/After 2枚比較（曲線シフト等）：Cの.split-wrap（テキスト＋図解）とは別物のため ecmp- で区別 */
+.ecmp-wrap{flex:1;display:flex;align-items:stretch;gap:calc(var(--cw)*0.62/100);min-height:0;}
+.ecmp-panel{flex:1;display:flex;flex-direction:column;align-items:stretch;gap:calc(var(--cw)*0.41/100);min-width:0;min-height:0;}
+.ecmp-panel .cap{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.82/100);color:var(--ink-soft);}
+.ecmp-arrow{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0 calc(var(--cw)*0.41/100);}
+.ecmp-arrow .glyph{font-size:calc(var(--cw)*2/100);color:var(--red);line-height:1;}
+.ecmp-arrow .lab{font-size:calc(var(--cw)*0.72/100);color:var(--red);font-weight:700;text-align:center;white-space:nowrap;}
+svg text{font-family:"Noto Sans JP",sans-serif;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:calc(var(--cw)*0.8/100);}
+.cover .main .title{font-size:calc(var(--cw)*5.2/100);font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:calc(var(--cw)*1.15/100);color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:calc(var(--cw)*62/100);}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:calc(var(--cw)*1.2/100);}
+.cover .scope{display:flex;gap:calc(var(--cw)*2.4/100);}
+.cover .scope .item{display:flex;flex-direction:column;gap:calc(var(--cw)*0.2/100);}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.6/100);font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:calc(var(--cw)*0.72/100);color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.85/100);border:1px solid rgba(255,255,255,.4);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*1/100);color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 calc(var(--cw)*4/100);overflow:hidden;}
+.divider .ghost-no{position:absolute;right:calc(var(--cw)*2/100);top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*22/100);line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:calc(var(--cw)*1.3/100);max-width:calc(var(--cw)*70/100);}
+.divider .kicker{display:flex;align-items:center;gap:calc(var(--cw)*1/100);}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:calc(var(--cw)*3.6/100);font-weight:900;line-height:1.15;}
+.divider .desc{font-size:calc(var(--cw)*1.08/100);color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:calc(var(--cw)*1.6/100);margin-top:calc(var(--cw)*0.4/100);flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);border:1px solid rgba(255,255,255,.35);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*0.9/100);color:#fff;opacity:.85;white-space:nowrap;}
+</style>
+
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <pattern id="econGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24,0 L0,0 0,24" fill="none" stroke="#eef0f2" stroke-width="1"/>
+    </pattern>
+    <pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#FF3B1F" stroke-width="2.2"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 01 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">経済学<span class="accent">・</span>経済政策<span class="accent">。</span></div>
+          <div class="subtitle">マクロ経済学とミクロ経済学の2<span style="white-space:nowrap">分野</span>、36<span style="white-space:nowrap">論点</span>。「用語の定義」と「グラフの動く方向」を正確に押さえれば得点源にできる、数式・グラフ問題中心の科目。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">36</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">4</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">28/36</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/A_economics_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 2: 経済指標の見方や読み方 区切り -->
+  <div>
+    <div class="slide-no">2</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">経済学・経済政策 ／ A-1〜A-6</span></div>
+          <div class="title">経済指標の見方や読み方</div>
+          <div class="desc">日本経済は今どんな状態にあるのか。それを客観的に把握するための「ものさし」となる経済指標を扱う。ニュースで見る数字の意味を正確に理解することがゴール。</div>
+          <div class="covers">
+            <span class="chip">A-1 GDP</span>
+            <span class="chip">A-3 物価指数</span>
+            <span class="chip">A-6 国際収支</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 3: A-1：国民経済計算の概念・国民所得統計 -->
+  <div>
+    <div class="slide-no">3 ／ A-1：国民経済計算の概念・国民所得統計</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-1 ／ 国民経済計算の概念・国民所得統計</div><div class="title">GDPは「国内」の付加価値の合計</div><div class="overview">同じ経済活動を生産・分配・支出の3側面から見ても合計額は必ず一致する（三面等価の原則）。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">GDP</span><span class="combo">国内総生産</span><span class="desc">国内で生産された付加価値の合計（国籍を問わない）</span></div>
+          <div class="row"><span class="name">GNI／GNP</span><span class="combo">国民総所得</span><span class="desc">自国民（居住者）が生み出した所得の合計。GNI＝GDP＋海外からの純所得受取</span></div>
+          <div class="row"><span class="name">NNP</span><span class="combo">国民純生産</span><span class="desc">GNP（GNI）から固定資本減耗（減価償却相当）を差し引いたもの</span></div>
+          <div class="row"><span class="name">NI</span><span class="combo">国民所得</span><span class="desc">NNPから間接税を差し引き、補助金を加えたもの</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>ひっかけ：GDPは一定期間の「フロー」概念。ある時点の資産総額を示す「ストック」（国富等）と混同しないこと。中古品・株式の売買はGDPに計上されない。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 4: A-2：雇用統計（失業率、有効求人倍率等） -->
+  <div>
+    <div class="slide-no">4 ／ A-2：雇用統計（失業率、有効求人倍率等）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-2 ／ 雇用統計（失業率、有効求人倍率等）</div><div class="title">完全失業率と有効求人倍率で労働市場を見る</div><div class="overview">15歳以上人口は労働力人口と非労働力人口に分かれ、労働力人口はさらに就業者と完全失業者に分かれる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="20" cy="20" r="9" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <circle cx="40" cy="20" r="9" fill="#FF3B1F"/>
+              <path d="M10 48 C10 36, 30 36, 30 48" fill="none" stroke="#171717" stroke-width="1.6"/>
+              <path d="M30 48 C30 36, 50 36, 50 48" fill="none" stroke="#171717" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">15歳以上人口は「労働力人口」（働く意思のある人）と「非労働力人口」に分かれ、労働力人口はさらに「就業者」と「完全失業者」に分かれる。</p>
+            <div class="term-row"><span class="k">完全失業率</span><span class="v">完全失業者数 ÷ 労働力人口 × 100。仕事がなく、求職活動をしている人が対象</span></div>
+            <div class="term-row"><span class="k">有効求人倍率</span><span class="v">有効求人数 ÷ 有効求職者数。1.0超は「人手不足・売り手市場」を示す</span></div>
+            <p><span class="label">具体例</span><br>好景気で企業が採用を増やすと有効求人倍率は上昇し、完全失業率は低下する傾向。不況期は逆の動きになる。</p>
+            <p class="note"><b>ひっかけ：</b>完全失業率の低下＝景気回復とは限らない。求職をあきらめた人（求職意欲喪失効果）が非労働力人口に移ると、分母が縮み見かけ上失業率が下がることがある。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-4 景気動向指数（完全失業率は遅行指数の代表例）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 5: A-3：物価指数（CPI、GDPデフレーター等） -->
+  <div>
+    <div class="slide-no">5 ／ A-3：物価指数（CPI、GDPデフレーター等）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-3 ／ 物価指数（CPI、GDPデフレーター等）</div><div class="title">3つの物価指数と2つの計算方式</div><div class="overview">物価の測り方には対象範囲の異なる3指標と、ウェイトの取り方が異なる2つの計算方式がある。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">CPI</span><span class="combo">消費者物価指数</span><span class="desc">総務省公表。消費者が購入する財・サービスの価格変動（ラスパイレス方式）</span></div>
+          <div class="row"><span class="name">CGPI</span><span class="combo">企業物価指数</span><span class="desc">日本銀行公表。企業間で取引される商品（原材料・中間財）の価格変動</span></div>
+          <div class="row"><span class="name">GDPデフレーター</span><span class="combo">名目GDP÷実質GDP×100</span><span class="desc">経済全体（消費・投資・政府支出・輸出入）の物価動向（パーシェ方式に近い）</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>ひっかけ：CPI（ラスパイレス方式＝基準年数量固定）は代替効果を反映できず物価上昇率を実態より高めに示す傾向。CPIとGDPデフレーターは算出方式が異なる点が頻出。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 6: A-4：景気動向指数（DI・CI） -->
+  <div>
+    <div class="slide-no">6 ／ A-4：景気動向指数（DI・CI）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-4 ／ 景気動向指数（DI・CI）</div><div class="title">DIは波及度合い、CIは大きさを見る</div><div class="overview">内閣府が毎月公表する景気動向指数には、着目点の異なるDIとCIの2種類がある。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <polyline points="6,44 20,30 32,36 54,12" fill="none" stroke="#171717" stroke-width="2"/>
+              <circle cx="54" cy="12" r="3.5" fill="#FF3B1F"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">景気動向指数は複数の経済指標（約30種）を統合したもの。着目点の違う2種類がある。</p>
+            <div class="term-row"><span class="k">DI（拡散指数）</span><span class="v">改善している指標の割合。景気の「波及の度合い（範囲）」を見る。50%が拡張／後退の境目</span></div>
+            <div class="term-row"><span class="k">CI（合成指数）</span><span class="v">各指標の変化率を合成。景気変動の「大きさ・テンポ（量）」を見る</span></div>
+            <p><span class="label">具体例</span><br>景気回復期は、まず株価・新規求人数（先行指数）が上向き、生産・有効求人倍率（一致指数）が続き、最後に失業率（遅行指数）が下がる、という順序で波及する。</p>
+            <p class="note"><b>ひっかけ：</b>「DIは量、CIは範囲」という説明は逆。DI＝波及度合い（範囲）、CI＝大きさ・テンポ（量）が正しい対応。景気の「山」「谷」は一致指数をもとに事後決定される。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-2 雇用統計（完全失業率は遅行指数の代表例）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 7: A-5：マネーストック統計 -->
+  <div>
+    <div class="slide-no">7 ／ A-5：マネーストック統計</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-5 ／ マネーストック統計</div><div class="title">M1〜M3の違いは「対象金融機関の広さ」</div><div class="overview">金融機関・中央政府を除く経済主体が保有する通貨量の残高。範囲の狭いものから広いものへ4段階に分類される。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">M1</span><span class="combo">現金＋預金通貨</span><span class="desc">いつでも引き出せる現金通貨と普通・当座預金</span></div>
+          <div class="row"><span class="name">M2</span><span class="combo">M1＋準通貨＋CD</span><span class="desc">対象は国内銀行・信用金庫等に限定（ゆうちょ銀行等は含まない）</span></div>
+          <div class="row"><span class="name">M3</span><span class="combo">M1・M2の範囲を拡大</span><span class="desc">ゆうちょ銀行・信用組合・農協なども含む全預金取扱機関が対象</span></div>
+          <div class="row"><span class="name">広義流動性</span><span class="combo">最も広い範囲</span><span class="desc">M3に金銭信託・投資信託・国債・外債等の金融商品を加えたもの</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>ひっかけ：M1〜M3の違いは通貨の種類でなく対象金融機関の広さ。マネタリーベース（日銀が直接供給する通貨）とマネーストックは別概念で、両者は信用乗数を介した間接的な関係。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 8: A-6：国際収支・為替レート -->
+  <div>
+    <div class="slide-no">8 ／ A-6：国際収支・為替レート</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-6 ／ 国際収支・為替レート</div><div class="title">経常収支＋資本移転等収支－金融収支＋誤差脱漏＝0</div><div class="overview">国際収支統計は一国が一定期間に外国と行った取引の記録。複式簿記の考え方に基づく恒等式が成り立つ。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="22" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <text x="30" y="36" text-anchor="middle" font-family="Space Mono" font-weight="700" font-size="18" fill="#FF3B1F">¥</text>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">国際収支統計は一国が一定期間に外国と行った取引の記録。3つの大項目で構成される。</p>
+            <div class="term-row"><span class="k">経常収支</span><span class="v">貿易・サービス収支、第一次所得収支（配当・利子）、第二次所得収支（無償の資金移動）の合計</span></div>
+            <div class="term-row"><span class="k">資本移転等収支</span><span class="v">対価を伴わない資本の移転（インフラ無償援助等）</span></div>
+            <div class="term-row"><span class="k">金融収支</span><span class="v">対外的な金融資産・負債の増減。海外への投資（資産の増加）はプラスとして計上</span></div>
+            <p><span class="label">具体例</span><br>近年の日本は貿易収支が赤字の月・年もあるが、過去の対外投資から得られる配当・利子収入（第一次所得収支）が大幅黒字のため、経常収支全体は黒字を維持している。</p>
+            <p class="note"><b>ひっかけ：</b>金融収支は「対外資産の増加はプラス」と符号が直感に反する。「金融収支の黒字＝海外への資金流出（対外資産の増加）超過」という意味を正しく理解すること。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-16 国際収支と為替レート決定理論（為替レート変動の理論的背景）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
