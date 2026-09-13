@@ -1,0 +1,798 @@
+<title>経営情報システム - スライド</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink-soft:#8a8a8a;--red:#FF3B1F;--line:#e6e6e6;--ghost:#f4f4f4;
+  --cw:calc(min(100vw, 1020px) - 48px);}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;margin:0;padding:32px 0 90px;}
+.deck{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:28px;padding:0 24px;}
+.slide-no{font-family:"Space Mono",monospace;font-size:.72rem;color:var(--ink-soft);padding-left:2px;}
+
+.mock-frame{position:relative;width:100%;}
+.mock-frame::before{content:"";display:block;padding-top:56.25%;}
+.mock{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);font-family:"Zen Kaku Gothic New",sans-serif;display:flex;flex-direction:column;}
+.mock.dark{background:var(--ink);color:#fff;}
+
+.head{display:flex;align-items:flex-start;justify-content:space-between;padding:calc(var(--cw)*1.85/100) calc(var(--cw)*2.26/100) calc(var(--cw)*0.93/100);border-bottom:calc(var(--cw)*0.16/100) solid var(--ink);flex:0 0 auto;gap:calc(var(--cw)*1.44/100);}
+.head .kicker{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.98/100);color:var(--ink-soft);letter-spacing:.05em;}
+.head .title{font-size:calc(var(--cw)*1.55/100);font-weight:900;margin-top:2px;line-height:1.3;}
+.head .overview{font-size:calc(var(--cw)*1.0/100);color:var(--ink-soft);margin-top:4px;line-height:1.5;max-width:98%;font-family:"Noto Sans JP",sans-serif;font-weight:400;}
+.head .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.93/100);color:#fff;background:var(--ink);padding:calc(var(--cw)*0.31/100) calc(var(--cw)*0.93/100);align-self:flex-start;flex:0 0 auto;white-space:nowrap;}
+.body{flex:1;min-height:0;padding:calc(var(--cw)*1.4/100) calc(var(--cw)*2.26/100) calc(var(--cw)*1.5/100);display:flex;flex-direction:column;}
+
+/* 文章primary：アイコン＋プロース */
+.icon-wrap{flex:1;display:flex;gap:calc(var(--cw)*1.8/100);min-height:0;min-width:0;overflow:hidden;}
+.icon-mark{flex:0 0 auto;width:calc(var(--cw)*5.2/100);height:100%;max-height:calc(var(--cw)*5.2/100);display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
+.icon-mark svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.prose{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:calc(var(--cw)*0.5/100);overflow:hidden;}
+.prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
+.prose p b{font-weight:700;}
+.prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
+.prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
+.prose .term-row .v{color:var(--ink-soft);}
+.prose .warn{font-size:calc(var(--cw)*0.88/100);line-height:1.55;background:var(--ghost);padding:calc(var(--cw)*0.5/100) calc(var(--cw)*0.8/100);border-left:2px solid var(--ink);}
+.prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
+.prose .note b{color:var(--red);}
+.prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+
+/* 頻出データ帯 */
+.freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
+.freq-top{display:flex;align-items:center;gap:calc(var(--cw)*1.5/100);}
+.freq-top .rank{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--cw)*0.55/100);}
+.freq-top .rank-chip{flex:0 0 auto;font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*1.05/100);color:#fff;background:var(--red);width:calc(var(--cw)*1.75/100);height:calc(var(--cw)*1.75/100);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.freq-top .rank-chip.none{background:var(--ink-soft);}
+.freq-top .rank-label{font-size:calc(var(--cw)*0.76/100);font-weight:700;white-space:nowrap;}
+.freq-top .related{flex:1;min-width:0;font-size:calc(var(--cw)*0.78/100);color:var(--ink-soft);border-left:1px solid var(--line);padding-left:calc(var(--cw)*1.1/100);line-height:1.5;}
+.freq-top .related b{color:var(--ink);font-weight:700;}
+.freq-timeline{display:flex;align-items:center;gap:calc(var(--cw)*0.2/100);}
+.freq-timeline .yr-title{flex:0 0 auto;font-size:calc(var(--cw)*0.68/100);color:var(--ink-soft);margin-right:calc(var(--cw)*0.9/100);white-space:nowrap;}
+.freq-timeline .yr{flex:1;display:flex;flex-direction:column;align-items:center;gap:calc(var(--cw)*0.3/100);}
+.freq-timeline .dot{width:calc(var(--cw)*1.35/100);height:calc(var(--cw)*1.35/100);border-radius:50%;border:1.3px solid var(--line);background:#fff;}
+.freq-timeline .dot.on{background:var(--red);border-color:var(--red);}
+.freq-timeline .yr-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);}
+.freq-timeline .yr-label.on{color:var(--ink);font-weight:700;}
+
+/* 過去問チェック */
+.examq{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.examq .stem{font-size:calc(var(--cw)*0.88/100);line-height:1.55;color:var(--ink);}
+.examq .choices{display:flex;flex-direction:column;gap:calc(var(--cw)*0.28/100);}
+.examq .choice{display:flex;gap:calc(var(--cw)*0.65/100);font-size:calc(var(--cw)*0.82/100);line-height:1.5;padding:calc(var(--cw)*0.12/100) 0;}
+.examq .choice .badge{flex:0 0 auto;font-weight:700;color:var(--ink-soft);}
+.examq .choice.correct{background:var(--ghost);border-left:2px solid var(--red);padding-left:calc(var(--cw)*0.55/100);margin-left:-calc(var(--cw)*0.6/100);}
+.examq .choice.correct .badge{color:var(--red);}
+.examq .explain{font-size:calc(var(--cw)*0.8/100);line-height:1.5;border-top:1px solid var(--ink);padding-top:calc(var(--cw)*0.5/100);margin-top:calc(var(--cw)*0.1/100);color:var(--ink);}
+.examq .explain b{color:var(--red);}
+.examq .example{font-size:calc(var(--cw)*0.78/100);line-height:1.5;color:var(--ink);}
+.examq .example .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.62/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.examq .related-note{font-size:calc(var(--cw)*0.74/100);line-height:1.45;color:var(--ink-soft);}
+.examq .source{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.64/100);color:var(--ink-soft);margin-top:calc(var(--cw)*0.2/100);}
+
+/* 番号なしの罫線区切りリスト */
+.matrix-rows{flex:1;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;overflow:hidden;}
+.matrix-rows .row{display:flex;align-items:baseline;gap:calc(var(--cw)*1.2/100);padding:calc(var(--cw)*0.7/100) 0;border-top:1px solid var(--line);}
+.matrix-rows .row:first-child{border-top:none;}
+.matrix-rows .row .name{flex:0 0 auto;white-space:nowrap;font-size:calc(var(--cw)*0.98/100);font-weight:900;}
+.matrix-rows .row .combo{flex:0 0 auto;font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);color:var(--red);white-space:nowrap;}
+.matrix-rows .row .desc{flex:1;font-size:calc(var(--cw)*0.88/100);color:var(--ink-soft);line-height:1.55;}
+
+/* 左2/3テキスト＋右1/3図解 */
+.split-wrap{flex:1;display:flex;gap:calc(var(--cw)*2/100);min-height:0;min-width:0;overflow:hidden;}
+.split-wrap .prose{flex:0 0 60%;}
+.split-diagram{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;gap:calc(var(--cw)*0.5/100);}
+.split-diagram svg{display:block;width:auto;height:auto;max-width:100%;max-height:100%;}
+.split-diagram .diagram-caption-mini{flex:0 0 auto;font-size:calc(var(--cw)*0.66/100);color:var(--ink-soft);text-align:center;line-height:1.35;}
+
+/* 表紙 */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--cw)*3.2/100) calc(var(--cw)*3.6/100);}
+.cover .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.cover .eyebrow{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);letter-spacing:.08em;color:#fff;opacity:.65;}
+.cover .subject-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1/100);color:var(--red);}
+.cover .main{display:flex;flex-direction:column;gap:calc(var(--cw)*0.8/100);}
+.cover .main .title{font-size:calc(var(--cw)*5.2/100);font-weight:900;line-height:1.05;}
+.cover .main .title .accent{color:var(--red);}
+.cover .main .subtitle{font-size:calc(var(--cw)*1.15/100);color:#fff;opacity:.75;font-family:"Noto Sans JP",sans-serif;line-height:1.7;max-width:calc(var(--cw)*62/100);}
+.cover .bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,.25);padding-top:calc(var(--cw)*1.2/100);}
+.cover .scope{display:flex;gap:calc(var(--cw)*2.4/100);}
+.cover .scope .item{display:flex;flex-direction:column;gap:calc(var(--cw)*0.2/100);}
+.cover .scope .num{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.6/100);font-weight:700;color:var(--red);}
+.cover .scope .lbl{font-size:calc(var(--cw)*0.72/100);color:#fff;opacity:.65;}
+.cover .tag{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.85/100);border:1px solid rgba(255,255,255,.4);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*1/100);color:#fff;}
+
+/* 大分類の区切り */
+.divider{flex:1;position:relative;display:flex;align-items:center;padding:0 calc(var(--cw)*4/100);overflow:hidden;}
+.divider .ghost-no{position:absolute;right:calc(var(--cw)*2/100);top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-weight:700;font-size:calc(var(--cw)*22/100);line-height:1;color:rgba(255,255,255,.06);pointer-events:none;}
+.divider .content{position:relative;display:flex;flex-direction:column;gap:calc(var(--cw)*1.3/100);max-width:calc(var(--cw)*70/100);}
+.divider .kicker{display:flex;align-items:center;gap:calc(var(--cw)*1/100);}
+.divider .kicker .part-no{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:var(--red);font-weight:700;}
+.divider .kicker .part-label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*1.1/100);color:#fff;opacity:.6;letter-spacing:.06em;}
+.divider .title{font-size:calc(var(--cw)*3.6/100);font-weight:900;line-height:1.15;}
+.divider .desc{font-size:calc(var(--cw)*1.08/100);color:#fff;opacity:.8;font-family:"Noto Sans JP",sans-serif;line-height:1.8;}
+.divider .covers{display:flex;gap:calc(var(--cw)*1.6/100);margin-top:calc(var(--cw)*0.4/100);flex-wrap:wrap;}
+.divider .covers .chip{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.78/100);border:1px solid rgba(255,255,255,.35);padding:calc(var(--cw)*0.35/100) calc(var(--cw)*0.9/100);color:#fff;opacity:.85;white-space:nowrap;}
+</style>
+
+<div class="deck">
+
+  <!-- 01: 表紙 -->
+  <div>
+    <div class="slide-no">01</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="cover">
+        <div class="top">
+          <span class="eyebrow">中小企業診断士 第1次試験</span>
+          <span class="subject-no">SUBJECT 06 / 07</span>
+        </div>
+        <div class="main">
+          <div class="title">経営情報システム<span class="accent">。</span></div>
+          <div class="subtitle">ハードウェア・ソフトウェアからネットワーク・データベース、経営とITの結びつきまで24<span style="white-space:nowrap">論点</span>。「文系だから苦手」を克服し、得点源にできる科目。</div>
+        </div>
+        <div class="bottom">
+          <div class="scope">
+            <div class="item"><span class="num">24</span><span class="lbl">収録論点数</span></div>
+            <div class="item"><span class="num">2</span><span class="lbl">分野</span></div>
+            <div class="item"><span class="num">21/24</span><span class="lbl">頻出ランクA</span></div>
+          </div>
+          <span class="tag">docs/textbook/F_information_systems_textbook.md</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 02: F-1〜F-11 区切り -->
+  <div>
+    <div class="slide-no">02</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">01</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 01</span><span class="part-label">経営情報システム ／ F-1〜F-11</span></div>
+          <div class="title">情報通信技術に関する基礎的知識</div>
+          <div class="desc">コンピュータの仕組み（ハード・ソフト）から、プログラムの作り方、システム構成、データベース・ネットワークの基礎まで、ITの土台となる知識。</div>
+          <div class="covers">
+            <span class="chip">F-9 正規化</span>
+            <span class="chip">F-10 プロトコル</span>
+            <span class="chip">F-11 信頼性設計</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 03: F-1 ハードウェア -->
+  <div>
+    <div class="slide-no">03 ／ F-1：ハードウェア（構成要素、機能と処理）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-1 ／ ハードウェア（構成要素、機能と処理）</div><div class="title">主記憶は揮発性、補助記憶は不揮発性</div><div class="overview">RAIDレベルごとの最低必要台数・耐えられる故障台数が頻出。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">主記憶装置</span><span class="v">CPUが直接読み書きするRAM。電源を切るとデータが消える（揮発性）</span></div>
+            <div class="term-row"><span class="k">補助記憶装置</span><span class="v">HDD・SSD等。電源を切ってもデータは消えない（不揮発性）</span></div>
+            <div class="term-row"><span class="k">RAID1</span><span class="v">ミラーリング。1台故障しても継続稼働。実質容量は半分</span></div>
+            <div class="term-row"><span class="k">RAID5／RAID6</span><span class="v">最低3台／4台必要。1台／2台までの故障に耐える</span></div>
+            <p class="note"><b>ひっかけ：</b>「主記憶装置は不揮発性」は誤り。RAIDの最低必要台数・耐障害台数を数値で入れ替える出題に注意。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-11 システム評価（信頼性設計の考え方全般）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 04: F-2 ソフトウェア -->
+  <div>
+    <div class="slide-no">04 ／ F-2：ソフトウェア（OS、ミドルウェア、パッケージ）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-2 ／ ソフトウェア（OS、ミドルウェア、パッケージ）</div><div class="title">ミドルウェアはOSの一部ではない</div><div class="overview">OS→ミドルウェア→アプリケーションソフトという3層構造で理解する。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">OS</span><span class="v">ハードウェアを管理し複数アプリが動く土台。メモリ管理・タスク管理を担う</span></div>
+            <div class="term-row"><span class="k">ミドルウェア</span><span class="v">OSとアプリの中間層。DBMS・Webサーバソフト等、共通機能を提供</span></div>
+            <div class="term-row"><span class="k">パッケージソフト</span><span class="v">既製品。オーダーメイド（個別開発）ソフトと対比される</span></div>
+            <p class="note"><b>ひっかけ：</b>「ミドルウェアはOSの一部」は誤り。OSとは独立した中間層のソフトウェア。パッケージは既製機能の範囲内でのみカスタマイズ可能。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-8 外部情報資源の活用（クラウドで提供される範囲との対比）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 05: F-3 プログラム設計 -->
+  <div>
+    <div class="slide-no">05 ／ F-3：プログラム設計（アルゴリズム、データ構造）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-3 ／ プログラム設計（アルゴリズム、データ構造）</div><div class="title">スタックはLIFO、キューはFIFO</div><div class="overview">二分探索は事前にソート済みであることが前提。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">スタック</span><span class="combo">LIFO</span><span class="desc">後から入れたものを先に取り出す。積み重ねたお皿のイメージ</span></div>
+          <div class="row"><span class="name">キュー</span><span class="combo">FIFO</span><span class="desc">先に入れたものを先に取り出す。レジの待ち行列のイメージ</span></div>
+          <div class="row"><span class="name">二分探索</span><span class="desc">データがソート済みである前提で範囲を半分ずつ絞り込む（線形探索より高速）</span></div>
+          <div class="row"><span class="name">計算量</span><span class="combo">O(log n)&lt;O(n)&lt;O(n²)</span><span class="desc">データ量が増えたときの処理時間の増え方。左ほど効率が良い</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>LIFO/FIFOの入出力順序、計算量の大小関係を逆に覚える誤りに注意。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 06: F-4 ソフトウェア開発 -->
+  <div>
+    <div class="slide-no">06 ／ F-4：ソフトウェア開発（構造化、オブジェクト指向）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-4 ／ ソフトウェア開発（構造化、オブジェクト指向）</div><div class="title">カプセル化は複数クラスの統合ではない</div><div class="overview">構造化の3構造と、オブジェクト指向の3性質を区別する。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">構造化の3構造</span><span class="v">順次・選択（分岐）・反復（繰り返し）の組み合わせで表現</span></div>
+            <div class="term-row"><span class="k">カプセル化</span><span class="v">データと処理を1つのクラスにまとめ、外部から実装を隠す</span></div>
+            <div class="term-row"><span class="k">継承</span><span class="v">親クラスの性質を子クラスが引き継ぐこと</span></div>
+            <div class="term-row"><span class="k">ポリモーフィズム</span><span class="v">同じ名前の命令でもオブジェクトの種類により処理内容が異なる性質</span></div>
+            <p class="note"><b>ひっかけ：</b>「カプセル化＝複数クラスの統合」は誤り。「継承＝機能の呼び出し」も不正確（親の性質を引き継ぐ関係）。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-16／F-17 情報システム開発（開発プロセスとの関係）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 07: F-5 システム構成 -->
+  <div>
+    <div class="slide-no">07 ／ F-5：システム構成（クライアントサーバ、仮想化）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-5 ／ システム構成（クライアントサーバ、仮想化）</div><div class="title">P2Pはサーバを介さず対等に通信する方式</div><div class="overview">仮想化は独立したOS環境を複数動かす技術で、マルチタスクとは異なる。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">3層クライアントサーバ</span><span class="v">クライアント・アプリケーションサーバ・DBサーバで役割分担</span></div>
+            <div class="term-row"><span class="k">P2P</span><span class="v">サーバを介さず対等なコンピュータ同士が直接通信</span></div>
+            <div class="term-row"><span class="k">仮想化（ハイパーバイザー）</span><span class="v">1台の物理機に複数の独立した仮想環境を作る</span></div>
+            <div class="term-row"><span class="k">コンテナ技術</span><span class="v">仮想化より軽量にアプリ実行環境を分離（例：Docker）</span></div>
+            <p class="note"><b>ひっかけ：</b>「P2Pはクライアントサーバ方式の一種」は誤り。仮想化は「マルチタスク」とは異なる独立OS環境の技術。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-8 外部情報資源の活用（クラウドは仮想化技術を土台にする）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 08: F-6 情報処理の形態 -->
+  <div>
+    <div class="slide-no">08 ／ F-6：情報処理の形態（集中/分散/並列、リアルタイム/バッチ）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-6 ／ 情報処理の形態（集中/分散/並列、リアルタイム/バッチ）</div><div class="title">ATMはリアルタイム、給与計算はバッチ</div><div class="overview">「即時性」か「まとめて効率化」かで使い分ける。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">集中処理</span><span class="v">1台に処理を集約。管理は容易だが故障すると全体停止</span></div>
+            <div class="term-row"><span class="k">分散処理</span><span class="v">複数台に処理を分散。柔軟だが管理は複雑</span></div>
+            <div class="term-row"><span class="k">リアルタイム処理</span><span class="v">発生の都度即座に処理（例：ATM）</span></div>
+            <div class="term-row"><span class="k">バッチ処理</span><span class="v">ためて一括処理（例：夜間の給与計算）</span></div>
+            <p class="note"><b>ひっかけ：</b>「バッチ処理は結果がすぐ得られ緊急業務向き」は誤り。即時性が要るのはリアルタイム処理。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">C</span><span class="rank-label">出題実績あり</span></div>
+            <div class="related"><b>関連：</b>F-9 データベース（トランザクション管理もリアルタイム性と関連）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 09: F-7 ヒューマンインタフェース -->
+  <div>
+    <div class="slide-no">09 ／ F-7：ヒューマンインタフェース（Webデザイン、マルチメディア）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-7 ／ ヒューマンインタフェース（Webデザイン、マルチメディア）</div><div class="title">JPEGは非可逆圧縮、元の画質には戻せない</div><div class="overview">ユーザビリティとアクセシビリティは別の観点。両方を意図的に設計する。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">ユーザビリティ</span><span class="v">目的の操作をどれだけ効率よく・迷わず行えるか（使いやすさ）</span></div>
+            <div class="term-row"><span class="k">アクセシビリティ</span><span class="v">誰もが情報・機能に到達し利用できるか（利用の公平性）</span></div>
+            <div class="term-row"><span class="k">可逆圧縮</span><span class="v">完全に元通りに復元できる（例：ZIP、PNG）</span></div>
+            <div class="term-row"><span class="k">非可逆圧縮</span><span class="v">情報を間引き高圧縮率を実現、元に戻せない（例：JPEG、MP3）</span></div>
+            <p class="note"><b>ひっかけ：</b>「JPEGは可逆圧縮」は誤り。「ユーザビリティが高ければアクセシビリティも自動的に満たされる」も誤り。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-15 情報システムの適用領域（Webシステムのユーザ体験設計）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 10: F-8 外部情報資源の活用 -->
+  <div>
+    <div class="slide-no">10 ／ F-8：外部情報資源の活用（クラウド、OSS）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-8 ／ 外部情報資源の活用（クラウド、OSS）</div><div class="title">SaaSは開発ではなく既製アプリの利用</div><div class="overview">SaaS/PaaS/IaaSは「どこまで自分で管理するか」の範囲で区別する。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">SaaS</span><span class="desc">アプリケーションソフトそのものを提供。利用者はデータの入力・利用のみ</span></div>
+          <div class="row"><span class="name">PaaS</span><span class="desc">開発・実行の基盤（OS・DB等）を提供。利用者は自社アプリを用意</span></div>
+          <div class="row"><span class="name">IaaS</span><span class="desc">サーバ・ストレージ等インフラのみ提供。利用者がOS以上すべて管理</span></div>
+          <div class="row"><span class="name">OSS</span><span class="desc">ソースコード公開。ライセンス条件下で改変・再配布が可能なことが多い</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>ひっかけ：</b>「SaaSは利用者が自らアプリを開発して稼働させる」はPaaSの説明で誤り。OSSは改変・再配布が一律禁止ではない。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 11: F-9 データベース -->
+  <div>
+    <div class="slide-no">11 ／ F-9：データベースの種類と構成、DBMS（正規化）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-9 ／ データベースの種類と構成、DBMS（正規化）</div><div class="title">主キーが単一属性なら第2正規形は自動的にクリア</div><div class="overview">正規化は1NF→2NF→3NFの順に、重複・矛盾のリスクを段階的に排除する。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">第1正規形</span><span class="v">各セルに単一の値のみ。繰り返し項目がない</span></div>
+            <div class="term-row"><span class="k">第2正規形</span><span class="v">非キー属性が主キーの一部にのみ依存する状態（部分関数従属）がない</span></div>
+            <div class="term-row"><span class="k">第3正規形</span><span class="v">非キー属性同士が間接的に決まる関係（推移的関数従属）がない</span></div>
+            <div class="term-row"><span class="k">ACID特性</span><span class="v">原子性・一貫性・独立性・永続性。トランザクションが満たすべき4性質</span></div>
+            <p class="note"><b>ひっかけ：</b>主キーが単一属性の表は第1正規形なら自動的に第2正規形も満たす（部分関数従属は複合キーでのみ発生）。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-3 プログラム設計（データ構造の基礎知識）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 12: F-9 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">12 ／ F-9：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-9 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第11問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">ある学校における開講講座の一覧表（主キー：開講コード。講座コード・講座名・講師コード・講師が列にあり、同一講座を複数の開講コードで開講し、講師は開講コードの異なる同一名の講座を担当することがある）に関する正規化の観点からの記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。ａ：第1正規形である。ｂ：第2正規形である。ｃ：第3正規形である。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：正　ｂ：誤　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/F1JI2025.pdf（令和7年度第1次試験）第11問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 13: F-9 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">13 ／ F-9：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-9 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第11問）</div><div class="overview">正解はイ。単一属性の主キーなら第2正規形は自動的にクリアする。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice correct"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：正　ｂ：誤　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤</span></div>
+          </div>
+          <p class="explain"><b>正解：イ</b>。ａ（正）：各セルに単一の値のみで繰り返し項目がなく第1正規形を満たす。ｂ（正）：主キーは「開講コード」という単一属性で、複合キーではないため部分関数従属が発生しようがなく、第1正規形なら自動的に第2正規形も満たす。ｃ（誤）：「開講コード→講座コード→講座名」「開講コード→講師コード→講師」という<b>推移的関数従属</b>が存在するため第3正規形の条件を満たさない。</p>
+          <p class="example"><span class="label">具体例</span><br>この表を「開講講座マスタ（講座コード・講座名）」等に分割すれば、講座名の重複入力・更新漏れを防げる（第3正規形への分解）。</p>
+          <p class="related-note">関連知識：主キーが複合キー（例：受注番号＋商品コード）の場合にのみ部分関数従属の検討が必要になる点も対比で押さえておくこと。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/F1JI2025.pdf（令和7年度第1次試験）第11問／正解：past_exams/1st_stage_answers/r07/f_v2_20250902.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 14: F-10 通信ネットワーク -->
+  <div>
+    <div class="slide-no">14 ／ F-10：通信ネットワークの種類と構成、プロトコル</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-10 ／ 通信ネットワークの種類と構成、プロトコル</div><div class="title">信頼性のTCP、速度のUDP</div><div class="overview">似た役割のプロトコルを入れ替えるひっかけが頻出。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">TCP／UDP</span><span class="v">TCP＝信頼性重視（再送制御あり）／UDP＝速度重視（再送制御なし）</span></div>
+            <div class="term-row"><span class="k">IP</span><span class="v">宛先IPアドレスに基づく経路選択とアドレス指定</span></div>
+            <div class="term-row"><span class="k">DHCP</span><span class="v">機器にIPアドレス等の設定情報を自動的に割り当てる</span></div>
+            <div class="term-row"><span class="k">ARP／DNS</span><span class="v">ARP＝IPからMACアドレスを解決／DNS＝ドメイン名をIPアドレスに変換</span></div>
+            <p class="note"><b>ひっかけ：</b>経路選択のIPとアドレス解決のARP、設定自動割当のDHCPと監視のSNMPを混同しない。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-20 情報セキュリティ管理・対策（暗号化通信のHTTPS等）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 15: F-10 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">15 ／ F-10：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-10 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第5問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">情報ネットワークで用いられる通信プロトコルに関する記述とその用語の組み合わせとして、最も適切なものを下記の解答群から選べ。ａ：信頼性よりも速度を重視し、確認や再送制御を行わないプロトコル。ｂ：機器にIPアドレス等の設定情報を自動的に割り当てるプロトコル。ｃ：正しい宛先に経路選択・アドレス指定を行うプロトコル。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：TCP　ｂ：SNMP　ｃ：ARP</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：TCP　ｂ：SNMP　ｃ：IP</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：UDP　ｂ：DHCP　ｃ：ARP</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：UDP　ｂ：DHCP　ｃ：IP</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：UDP　ｂ：SNMP　ｃ：ARP</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/F1JI2025.pdf（令和7年度第1次試験）第5問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 16: F-10 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">16 ／ F-10：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-10 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第5問）</div><div class="overview">正解はエ。ａ＝UDP、ｂ＝DHCP、ｃ＝IPが正しい対応。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：TCP　ｂ：SNMP　ｃ：ARP</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：TCP　ｂ：SNMP　ｃ：IP</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：UDP　ｂ：DHCP　ｃ：ARP</span></div>
+            <div class="choice correct"><span class="badge">エ</span><span>ａ：UDP　ｂ：DHCP　ｃ：IP</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：UDP　ｂ：SNMP　ｃ：ARP</span></div>
+          </div>
+          <p class="explain"><b>正解：エ</b>。ａ＝<b>UDP</b>（接続確立・再送制御を行わず速度優先。TCPは逆に信頼性重視）。ｂ＝<b>DHCP</b>（IPアドレス等の設定を自動割当。SNMPは機器の稼働監視用でこの機能はない）。ｃ＝<b>IP</b>（経路選択とアドレス指定。ARPはIPからMACアドレスを解決するのみで経路選択は行わない）。</p>
+          <p class="example"><span class="label">具体例</span><br>TCP/IPの階層で、IP＝ネットワーク層、TCP/UDP＝トランスポート層、DHCP・SNMP＝アプリケーション層に位置づけられる。</p>
+          <p class="related-note">関連知識：「信頼性のTCP・速度のUDP」「自動割当のDHCP」「経路選択のIP」「アドレス解決のARP」「監視のSNMP」という役割の対応をセットで暗記しておくこと。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/F1JI2025.pdf（令和7年度第1次試験）第5問／正解：past_exams/1st_stage_answers/r07/f_v2_20250902.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 17: F-11 システム評価 -->
+  <div>
+    <div class="slide-no">17 ／ F-11：システム評価（性能、信頼性、経済性）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-11 ／ システム評価（性能、信頼性、経済性）</div><div class="title">「事前に防ぐ」か「起きたらどうするか」で整理する</div><div class="overview">似た名前の信頼性設計用語を入れ替える出題が最頻出。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="prose">
+            <div class="term-row"><span class="k">フォールトアボイダンス</span><span class="v">部品の品質を高め故障自体を未然に防ぐ</span></div>
+            <div class="term-row"><span class="k">フォールトトレランス</span><span class="v">多重化・冗長化で一部故障しても全体は動き続ける</span></div>
+            <div class="term-row"><span class="k">フェイルセーフ／フェイルソフト</span><span class="v">セーフ＝安全側に導く／ソフト＝機能を縮退させ継続</span></div>
+            <div class="term-row"><span class="k">稼働率</span><span class="v">MTBF ÷（MTBF＋MTTR）で算出</span></div>
+            <p class="note"><b>ひっかけ：</b>フェイルオーバ（待機系へ切替）とフェイルソフト（機能縮退）、フォールトアボイダンスとトレランスを入れ替える出題に注意。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>F-1 ハードウェア（RAIDも信頼性設計の一種）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 18: F-11 過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">18 ／ F-11：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-11 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第10問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">情報システムの信頼性設計に関する記述として、最も適切なものはどれか。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>フェイルオーバとは、故障や障害が発生したときに、一部の機能を低下させても、限定的ながら重要な機能だけでも稼働し続けるように設計することである。</span></div>
+            <div class="choice"><span class="badge">イ</span><span>フォールトアボイダンスとは、部品一つ一つの信頼性を高めることで、故障や障害が発生しないように設計することである。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>フォールトトレランスとは、人為的な操作ミスがあっても危険が生じず、システムに異常が起こらないように設計することである。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>フォールトマスキングとは、故障や障害が発生したときに、システムの被害を最小限にとどめるように設計することである。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>フォールバックとは、故障や障害が発生したときに、待機系システムが処理を継続するように設計することである。</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/F1JI2025.pdf（令和7年度第1次試験）第10問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- 19: F-11 過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">19 ／ F-11：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">F-11 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第10問）</div><div class="overview">正解はイ。フォールトアボイダンスは故障の未然防止を指す。</div></div>
+        <div class="tag">経営情報システム</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>フェイルオーバとは、故障や障害が発生したときに、一部の機能を低下させても、限定的ながら重要な機能だけでも稼働し続けるように設計することである。</span></div>
+            <div class="choice correct"><span class="badge">イ</span><span>フォールトアボイダンスとは、部品一つ一つの信頼性を高めることで、故障や障害が発生しないように設計することである。</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>フォールトトレランスとは、人為的な操作ミスがあっても危険が生じず、システムに異常が起こらないように設計することである。</span></div>
+            <div class="choice"><span class="badge">エ</span><span>フォールトマスキングとは、故障や障害が発生したときに、システムの被害を最小限にとどめるように設計することである。</span></div>
+            <div class="choice"><span class="badge">オ</span><span>フォールバックとは、故障や障害が発生したときに、待機系システムが処理を継続するように設計することである。</span></div>
+          </div>
+          <p class="explain"><b>正解：イ</b>。フォールトアボイダンスは部品一つひとつの品質・信頼性を高め故障自体を未然に防ぐ設計思想で記述どおり正しい。ア：これは<b>フェイルソフト</b>の説明（フェイルオーバは待機系への自動切替）。ウ：これは<b>フールプルーフ</b>の説明（フォールトトレランスは多重化で故障を許容）。エ：これは<b>フェイルセーフ</b>の説明（フォールトマスキングは多重化結果の照合で影響を隠蔽）。オ：これは<b>フェイルオーバ</b>の説明（フォールバックは機能を縮退させ継続運用）。</p>
+          <p class="example"><span class="label">具体例</span><br>MTBFが200時間、MTTRが10時間なら稼働率は200÷(200+10)≒95.2％。MTBFを増やす（フォールトアボイダンスの発想）かMTTRを減らせば稼働率は上がる。</p>
+          <p class="related-note">関連知識：「事前に防ぐ（アボイダンス）」「起きても耐える（トレランス）」「起きたら安全側（セーフ）」「起きたら縮退（ソフト）」「起きたら切替（オーバ）」「誤操作防止（フールプルーフ）」で整理すること。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/F1JI2025.pdf（令和7年度第1次試験）第10問／正解：past_exams/1st_stage_answers/r07/f_v2_20250902.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
