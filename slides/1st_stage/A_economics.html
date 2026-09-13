@@ -117,6 +117,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 /* 経済学専用グラフ（docs/slide_template/economics_6.html 準拠）：座標軸グラフを
    図メイン＋右に凡例(.gside/.tside)、または図中央＋下にキャプション(.gcap-*)で配置。
    SVGは同じ「viewBoxでcontainのように収まるだけ縮む」方式。 */
+.chart-row{flex:1;display:flex;min-height:0;min-width:0;overflow:hidden;}
 .gside{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;}
 .tside{flex:0 0 30%;display:flex;flex-direction:column;justify-content:center;gap:calc(var(--cw)*0.82/100);padding-left:calc(var(--cw)*1.65/100);border-left:1px solid var(--line);}
 .tside .row{font-size:calc(var(--cw)*0.93/100);color:var(--ink-soft);line-height:1.55;}
@@ -481,6 +482,783 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
             <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
             <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 9: マクロ経済理論・国際経済 区切り -->
+  <div>
+    <div class="slide-no">9</div>
+    <div class="mock-frame">
+    <div class="mock dark">
+      <div class="divider">
+        <span class="ghost-no">02</span>
+        <div class="content">
+          <div class="kicker"><span class="part-no">PART 02</span><span class="part-label">経済学・経済政策 ／ A-7〜A-17</span></div>
+          <div class="title">マクロ経済理論・国際経済</div>
+          <div class="desc">一国全体の経済がどう動くかを理論的に説明するマクロ経済学の中核。45度線分析・IS-LM分析という2大フレームワークに加え、開放経済（貿易・為替）まで扱う、A科目で最も出題数が多い山場。</div>
+          <div class="covers">
+            <span class="chip">A-9 IS-LM分析</span>
+            <span class="chip">A-14 比較生産費説</span>
+            <span class="chip">A-17 マンデル=フレミング</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 10: A-7：生産物市場とGDP決定理論 -->
+  <div>
+    <div class="slide-no">10 ／ A-7：生産物市場とGDP決定理論</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-7 ／ 生産物市場とGDP決定理論</div><div class="title">45度線分析：総支出線と45度線の交点で均衡GDPが決まる</div><div class="overview">有効需要の原理：GDPの水準は需要（Y=C+I+G）の大きさで決まる。政府支出の増加はそれ以上にGDPを押し上げる（乗数効果）。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:400px;">
+              <svg viewBox="0 0 400 250">
+                <rect x="50" y="10" width="330" height="210" fill="url(#econGrid)"/>
+                <line x1="50" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+                <polygon points="380,220 372,216 372,224" fill="#171717"/>
+                <line x1="50" y1="220" x2="50" y2="10" stroke="#171717" stroke-width="1.6"/>
+                <polygon points="50,10 46,18 54,18" fill="#171717"/>
+                <text x="384" y="224" font-size="11" font-weight="700">国民所得 Y</text>
+                <text x="10" y="8" font-size="11" font-weight="700">総支出 E</text>
+                <line x1="50" y1="220" x2="250" y2="20" stroke="#8a8a8a" stroke-width="1.4" stroke-dasharray="4 3"/>
+                <text x="255" y="18" font-size="10.5" fill="#8a8a8a">45°（E＝Y）</text>
+                <line x1="50" y1="190" x2="350" y2="110" stroke="#FF3B1F" stroke-width="1.8"/>
+                <text x="355" y="108" font-size="11" font-weight="700" fill="#FF3B1F">C+I+G</text>
+                <line x1="50" y1="179" x2="91" y2="179" stroke="#171717" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="91" y1="179" x2="91" y2="220" stroke="#171717" stroke-width="1" stroke-dasharray="3 3"/>
+                <circle cx="91" cy="179" r="4" fill="#171717"/>
+                <text x="98" y="172" font-size="11" font-weight="700">均衡点</text>
+                <text x="84" y="234" font-size="9.5">Y*</text>
+              </svg>
+            </div>
+          </div>
+          <div class="gcap-text">総支出線（C+I+G）の傾き＝限界消費性向（1より小さい）のため45度線より緩やか。政府支出Gを1増やすとGDPは1/(1-c)倍（乗数）増加する。均衡予算（同額増税とセット）でもGDPは支出増加分だけ増える（均衡予算乗数＝1）。</div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>C-9 IS-LM分析（財市場の均衡を利子率も含めて拡張したもの）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 11: A-8：貨幣市場と利子率 -->
+  <div>
+    <div class="slide-no">11 ／ A-8：貨幣市場と利子率</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-8 ／ 貨幣市場と利子率</div><div class="title">貨幣需要の3つの動機（流動性選好理論）</div><div class="overview">ケインズは貨幣を持ちたがる動機を3つに整理した。投機的動機だけが利子率に依存する点がポイント。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="22" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <path d="M30 16 V30 L40 38" stroke="#FF3B1F" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">貨幣需要は「所得が増えるほど増加し、利子率が上がるほど減少する」性質を持つ。3つの動機に整理される。</p>
+            <div class="term-row"><span class="k">取引動機</span><span class="v">日々の決済のための需要。所得に依存する</span></div>
+            <div class="term-row"><span class="k">予備的動機</span><span class="v">不測の事態に備える需要。これも所得に依存する</span></div>
+            <div class="term-row"><span class="k">投機的動機</span><span class="v">投資タイミングを計る需要。利子率が低いほど大きくなる</span></div>
+            <p><span class="label">具体例</span><br>好況で所得が増えると取引に必要なお金が増え利子率に上昇圧力。金融緩和で貨幣供給を増やすと利子率は低下圧力を受ける。</p>
+            <p class="note"><b>ひっかけ：</b>投機的動機は「利子率」に依存し「所得」には依存しない。取引・予備的動機は逆に「所得」に依存し「利子率」にはあまり依存しない。この対応を入れ替えた設問に注意。流動性の罠（利子率が下限に達し金融政策が効かなくなる状態）もあわせて押さえる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">B</span><span class="rank-label">頻出論点</span></div>
+            <div class="related"><b>関連：</b>A-9 IS-LM分析（貨幣市場の均衡がLM曲線として組み込まれる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 12: A-9：IS-LM曲線・分析 -->
+  <div>
+    <div class="slide-no">12 ／ A-9：IS-LM曲線・分析</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-9 ／ IS-LM曲線・分析</div><div class="title">財市場と貨幣市場を同時に満たすIS-LM分析</div><div class="overview">IS曲線（財市場の均衡）は右下がり、LM曲線（貨幣市場の均衡）は右上がり。交点で均衡GDPと均衡利子率が決まる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="chart-row">
+          <div class="gside">
+            <div class="chart-frame" style="max-width:520px;">
+              <svg viewBox="0 0 400 250">
+                <rect x="50" y="20" width="330" height="200" fill="url(#econGrid)"/>
+                <line x1="50" y1="220" x2="380" y2="220" stroke="#171717" stroke-width="1.6"/>
+                <polygon points="380,220 372,216 372,224" fill="#171717"/>
+                <line x1="50" y1="220" x2="50" y2="20" stroke="#171717" stroke-width="1.6"/>
+                <polygon points="50,20 46,28 54,28" fill="#171717"/>
+                <text x="386" y="224" font-size="11" font-weight="700">Y</text>
+                <text x="30" y="16" font-size="11" font-weight="700">r</text>
+                <line x1="70" y1="40" x2="370" y2="190" stroke="#171717" stroke-width="2"/>
+                <text x="374" y="195" font-size="12" font-weight="700">IS</text>
+                <line x1="70" y1="190" x2="370" y2="40" stroke="#FF3B1F" stroke-width="2"/>
+                <text x="374" y="42" font-size="12" font-weight="700" fill="#FF3B1F">LM</text>
+                <line x1="50" y1="115" x2="220" y2="115" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="220" y1="115" x2="220" y2="220" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 3"/>
+                <circle cx="220" cy="115" r="4.5" fill="#171717"/>
+                <text x="227" y="107" font-size="11" font-weight="700">E</text>
+                <text x="24" y="119" font-size="9.5">r*</text>
+                <text x="213" y="234" font-size="9.5">Y*</text>
+              </svg>
+            </div>
+          </div>
+          <div class="tside">
+          <div class="row"><b>IS曲線</b>：財市場の均衡。右下がり（利子率↓→投資↑→GDP↑）</div>
+          <div class="row"><b>LM曲線</b>：貨幣市場の均衡。右上がり（GDP↑→取引需要↑→利子率↑）</div>
+          <div class="row"><b style="color:#171717">財政政策</b>→ISが右へシフト（利子率上昇でクラウディングアウト発生）</div>
+          <div class="row"><b style="color:#FF3B1F">金融政策</b>→LMが右へシフト</div>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>ひっかけ：IS・LM曲線が緩やかなほど「もう一方」の政策が効きやすい（IS緩やか→金融政策が効く、LM緩やか→財政政策が効く）という対応関係が頻出。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 13: A-9：過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">13 ／ A-9：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-9 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第10問設問2）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">IS曲線とLM曲線に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。<br><br>ａ　限界消費性向が大きいほどIS曲線の傾きはより緩やかになり、貨幣供給の増加によるGDPの拡大効果は大きくなる。<br>ｂ　投資の利子感応度が小さいほど、IS曲線の傾きはより急になり、貨幣供給の増加によるGDPの拡大効果は小さくなる。<br>ｃ　貨幣需要の所得感応度が大きいほど、LM曲線の傾きはより緩やかになり、政府支出の増加によるGDPの拡大効果は小さくなる。<br>ｄ　貨幣需要の利子感応度が大きいほど、LM曲線の傾きはより緩やかになり、政府支出の増加によるGDPの拡大効果は大きくなる。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第10問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 14: A-9：過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">14 ／ A-9：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-9 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第10問設問2）</div><div class="overview">正解はア。cの前半（LM曲線の傾きの説明）が誤りである点に注意。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice correct"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+          </div>
+          <p class="explain"><b>正解：ア</b>（a正・b正・c誤・d正）。ａ：限界消費性向cが大きいほど乗数1/(1-c)が大きくIS曲線は緩やかになり、金融政策の効果は大きくなる＝正。ｂ：投資の利子感応度が小さいとIS曲線は急になり、金融政策の効果は小さくなる＝正。ｃ：貨幣需要の所得感応度が大きいとLM曲線は<b>急</b>になる（「緩やかになる」が誤り）。ｄ：貨幣需要の利子感応度が大きいとLM曲線は緩やかになり、財政政策の効果は大きくなる＝正。</p>
+          <p class="example"><span class="label">具体例</span><br>投資が利子率にほとんど反応しない経済（IS曲線が急）では、金融緩和で利子率を下げても設備投資は増えにくく金融政策の効果は限定的。逆にこの経済では財政政策の方がGDP押し上げ効果が大きい。</p>
+          <p class="related-note">関連知識：IS・LM曲線の傾きの4決定要因（限界消費性向・投資の利子感応度・貨幣需要の所得感応度・貨幣需要の利子感応度）と政策効果の対応は「その曲線自体が緩やかであるほど、もう一方の政策が効きやすい」という覚え方が有効。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第10問／正解：past_exams/1st_stage_answers/r07/2025a.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 15: A-10：政府支出・租税と財政政策 -->
+  <div>
+    <div class="slide-no">15 ／ A-10：政府支出・租税と財政政策</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-10 ／ 政府支出・租税と財政政策</div><div class="title">裁量的財政政策とビルトイン・スタビライザー</div><div class="overview">財政政策は歳出・歳入を通じて景気を調整する。政府が発動する裁量的政策と、制度に組み込まれた自動調整機能がある。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="14" y="14" width="32" height="32" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <line x1="14" y1="30" x2="46" y2="30" stroke="#FF3B1F" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">財政政策は歳出（政府支出）・歳入（租税）を通じて景気を調整する。不況期は拡張的、好況期は緊縮的に運用する。</p>
+            <div class="term-row"><span class="k">裁量的財政政策</span><span class="v">政府が意図的・都度判断で発動する政策</span></div>
+            <div class="term-row"><span class="k">ビルトイン・スタビライザー</span><span class="v">累進課税・失業保険給付など、制度に組み込まれた自動安定化機能</span></div>
+            <p><span class="label">具体例</span><br>不況期に所得税を減税しても、消費者が「将来の増税」を予想して減税分を貯蓄に回すと、期待ほど消費が増えない（リカードの中立命題）。</p>
+            <p class="note"><b>ひっかけ：</b>ビルトイン・スタビライザーは「政府が都度判断して発動する政策」ではなく、税制・社会保障制度に組み込まれた自動的な機能。クラウディングアウト（A-9）・リカードの中立命題は財政政策の効果を弱める要因として頻出。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>A-9 IS-LM分析（クラウディングアウトは財政政策の効果を弱める代表的な要因）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 16: A-11：貨幣理論と金融政策 -->
+  <div>
+    <div class="slide-no">16 ／ A-11：貨幣理論と金融政策</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-11 ／ 貨幣理論と金融政策</div><div class="title">中央銀行が持つ6つの金融政策手段</div><div class="overview">日本銀行が金利・通貨量を調整して物価安定・景気調整を図る手段。買いオペ＝資金供給（緩和）の方向を正確に覚える。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">公開市場操作</span><span class="combo">オペレーション</span><span class="desc">国債等の売買で資金量を調整。買いオペ＝資金供給（緩和）、売りオペ＝資金吸収（引締）</span></div>
+          <div class="row"><span class="name">政策金利操作</span><span class="combo">無担保コールレート</span><span class="desc">中央銀行が誘導目標とする短期金利を操作</span></div>
+          <div class="row"><span class="name">預金準備率操作</span><span class="combo">準備率</span><span class="desc">金融機関が中央銀行に預け入れる比率を上下させ貸出余力を調整</span></div>
+          <div class="row"><span class="name">量的緩和政策</span><span class="combo">QE</span><span class="desc">政策金利がほぼゼロになった後、資金供給「量」そのものを拡大</span></div>
+          <div class="row"><span class="name">マイナス金利政策</span><span class="combo"></span><span class="desc">日銀当座預金の一部にマイナス金利を適用し貸出・投資を促す</span></div>
+          <div class="row"><span class="name">イールドカーブ・コントロール</span><span class="combo">YCC</span><span class="desc">長期金利（長期国債利回り）にも誘導目標を設定</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>ひっかけ：「買いオペは資金を吸収する」は誤り。買いオペは資金を「供給する」緩和的な政策。売りオペとの方向を逆に覚えないこと。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 17: A-12：雇用と物価水準（フィリップス曲線等） -->
+  <div>
+    <div class="slide-no">17 ／ A-12：雇用と物価水準（フィリップス曲線等）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-12 ／ 雇用と物価水準（フィリップス曲線等）</div><div class="title">短期は右下がり、長期は垂直（自然失業率仮説）</div><div class="overview">フィリップス曲線はインフレ率と失業率のトレードオフを示す。ただし長期的にはこのトレードオフは成立しない。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <path d="M10 15 Q30 15, 50 45" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <line x1="30" y1="8" x2="30" y2="52" stroke="#FF3B1F" stroke-width="1.8" stroke-dasharray="3 3"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">フィリップス曲線：縦軸インフレ率、横軸失業率の右下がりの関係。「失業率を下げようとするとインフレ率が高まる」という経験則。</p>
+            <div class="term-row"><span class="k">短期フィリップス曲線</span><span class="v">右下がり。インフレ率と失業率のトレードオフが観察される</span></div>
+            <div class="term-row"><span class="k">自然失業率仮説</span><span class="v">予想インフレ率が織り込まれると曲線が上方シフト。長期は自然失業率の水準で垂直になる</span></div>
+            <p><span class="label">具体例</span><br>1970年代の石油危機後、原油高でインフレが進む一方、不況で失業率も高止まりする「スタグフレーション」が発生し、単純なフィリップス曲線の想定が崩れた。</p>
+            <p class="note"><b>ひっかけ：</b>「インフレ率と失業率のトレードオフは長期でも常に成立する」は誤り。トレードオフが成立するのは人々が物価上昇を予想していない「短期」のみで、予想が織り込まれる「長期」の曲線は自然失業率の水準で垂直になる。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-11 金融政策（金融緩和で失業率を恒常的に下げることはできず、長期的にはインフレ率だけが高まる）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 18: A-13：景気変動と景気循環 -->
+  <div>
+    <div class="slide-no">18 ／ A-13：景気変動と景気循環</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-13 ／ 景気変動と景気循環</div><div class="title">4つの景気循環：周期の短い順に原因とペアで覚える</div><div class="overview">キチン（在庫）＜ジュグラー（設備）＜クズネッツ（建築）＜コンドラチェフ（技術革新）の順に周期が長くなる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="gcap-wrap">
+          <div class="gcap-graph">
+            <div class="chart-frame" style="max-width:460px;">
+              <svg viewBox="0 0 400 250">
+                <rect x="40" y="20" width="350" height="210" fill="url(#econGrid)"/>
+                <path d="M40,200 C75,160 95,130 122,130 C145,130 155,140 165,147 L40,200 Z" fill="#FF3B1F" opacity=".08"/>
+                <path d="M248,112 C260,90 270,60 288,60 C315,60 350,75 370,90 L370,60 Z" fill="#FF3B1F" opacity=".08"/>
+                <path d="M165,147 C180,156 195,160 205,165 C222,170 235,140 248,112 Z" fill="#2e5495" opacity=".1"/>
+                <line x1="40" y1="230" x2="390" y2="230" stroke="#171717" stroke-width="1.6"/>
+                <polygon points="390,230 382,226 382,234" fill="#171717"/>
+                <line x1="40" y1="230" x2="40" y2="20" stroke="#171717" stroke-width="1.6"/>
+                <polygon points="40,20 36,28 44,28" fill="#171717"/>
+                <text x="393" y="234" font-size="11" font-weight="700">時間</text>
+                <text x="8" y="16" font-size="11" font-weight="700">経済活動水準</text>
+                <line x1="40" y1="200" x2="370" y2="60" stroke="#8a8a8a" stroke-width="1.3" stroke-dasharray="4 3"/>
+                <text x="300" y="90" font-size="10" fill="#8a8a8a">成長トレンド</text>
+                <path d="M40,200 C75,160 95,130 122,130 C145,130 155,140 165,147 C180,156 195,160 205,165 C222,170 235,140 248,112 C260,90 270,60 288,60 C315,60 350,75 370,90" fill="none" stroke="#FF3B1F" stroke-width="2.2"/>
+                <circle cx="122" cy="130" r="4" fill="#171717"/>
+                <text x="105" y="118" font-size="10" font-weight="700">山（好況）</text>
+                <circle cx="205" cy="165" r="4" fill="#171717"/>
+                <text x="188" y="188" font-size="10" font-weight="700">谷（不況）</text>
+                <circle cx="288" cy="60" r="4" fill="#171717"/>
+                <text x="271" y="48" font-size="10" font-weight="700">山（好況）</text>
+                <text x="150" y="205" font-size="9" fill="#8a8a8a">後退期</text>
+                <text x="238" y="205" font-size="9" fill="#8a8a8a">回復期</text>
+              </svg>
+            </div>
+          </div>
+          <div class="gcap-text">キチン（約40か月・在庫投資）／ジュグラー（約7〜10年・設備投資）／クズネッツの波（約15〜25年・建築）／コンドラチェフ（約50年・技術革新）。周期と原因のペアを入れ替えた誤答が頻出。</div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-4 景気動向指数（DI・CI）とあわせて景気の波を把握する視点。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 19: A-13：過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">19 ／ A-13：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-13 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第6問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">景気循環の周期性に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。<br><br>ａ　コンドラチェフ・サイクルは、約50年の周期をもつ景気循環で、大規模な技術革新などに起因して生じると考えられている。<br>ｂ　キチン・サイクルは、約20年の周期をもつ景気循環で、住宅や商工業建築の建て替えなどに起因して生じると考えられている。<br>ｃ　ジュグラー・サイクルは、約7〜10年の周期をもつ景気循環で、生産設備の更新投資などに起因して生じると考えられている。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第6問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 20: A-13：過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">20 ／ A-13：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-13 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第6問）</div><div class="overview">正解はウ。ｂはキチン・サイクルとクズネッツの波の説明が入れ替わっている。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice correct"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+          </div>
+          <p class="explain"><b>正解：ウ</b>（a正・b誤・c正）。ａ：コンドラチェフ・サイクルは約50年周期・技術革新が原動力＝正。ｂ：キチン・サイクルは本来「約40か月（3〜4年）」の在庫投資による短期循環。「約20年・住宅や商工業建築の建て替え」はクズネッツの波の説明であり、名称と内容が入れ替わっている＝誤。ｃ：ジュグラー・サイクルは約7〜10年・設備投資が原因＝正。</p>
+          <p class="example"><span class="label">具体例</span><br>企業が在庫を積みすぎ、その後在庫調整で生産を絞る数年単位のサイクルはキチン・サイクルの典型例。鉄道・電力の普及のような技術革新が経済を長期に押し上げる動きはコンドラチェフ・サイクルとして説明される。</p>
+          <p class="related-note">関連知識：4大景気循環（キチン・ジュグラー・クズネッツ・コンドラチェフ）は「周期の長さ×原因（在庫・設備・建築・技術革新）」のペアで暗記する。周期と原因を入れ替えた誤答パターンが頻出。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第6問／正解：past_exams/1st_stage_answers/r07/2025a.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 21: A-14：比較生産費説と貿易理論 -->
+  <div>
+    <div class="slide-no">21 ／ A-14：比較生産費説と貿易理論</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-14 ／ 比較生産費説と貿易理論</div><div class="title">「相対的な得意」で特化すると両国とも得をする</div><div class="overview">リカードの比較生産費説：絶対優位でなく比較優位（機会費用の小ささ）に基づいて特化・貿易すれば両国の生産量が増える。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <path d="M10 40 L25 20 L40 40 Z" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <path d="M30 40 L45 20 L52 40 Z" fill="none" stroke="#FF3B1F" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">機会費用（ある財1単位の生産に必要な労働量 ÷ もう一方の財1単位に必要な労働量）が相手国より低い財に特化すると、貿易の利益が生まれる。</p>
+            <div class="term-row"><span class="k">絶対優位</span><span class="v">ある国が2財のどちらも他国より効率よく作れること（貿易の必要条件ではない）</span></div>
+            <div class="term-row"><span class="k">比較優位</span><span class="v">相対的に機会費用が低い財を持つこと。これに基づき特化すれば両国とも得をする</span></div>
+            <p><span class="label">具体例</span><br>カカオ1単位の労働量：A国5、B国4。大豆1単位：A国10、B国2。A国のカカオの機会費用＝5÷10＝0.5、B国＝4÷2＝2。A国はカカオに、B国は大豆に比較優位を持ち、それぞれ完全特化すると特化前より多く生産・消費できる。</p>
+            <p class="note"><b>ひっかけ：</b>機会費用の式（自国の労働量÷もう一方の財の労働量）をどちらの財について聞かれているか取り違えないこと。「A国がどちらも効率的に作れる（絶対優位）としても、比較優位に基づけば双方に貿易の利益がある」という点も頻出。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-23 経済余剰（貿易の利益を余剰の増加として捉える視点）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 22: A-14：過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">22 ／ A-14：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-14 ／ 過去問で確認する</div><div class="title">こう出題される（令和6年度 第22問）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">下表に従って、比較生産費説に基づく国際分業を考える。カカオ1単位を生産するのに必要な労働量は、Ａ国では5、Ｂ国では4である。同様に、大豆1単位を生産するのに必要な労働量は、Ａ国では10、Ｂ国では2である。労働は両国で同質で、当初はどちらの国もカカオと大豆をそれぞれ40単位ずつ生産していたものとする。このような状況に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。<br><br>ａ　Ａ国におけるカカオ1単位の機会費用は、大豆2単位である。<br>ｂ　Ｂ国における大豆のカカオに対する相対価格は、Ａ国のそれよりも高い。<br>ｃ　Ｂ国で2つの財の生産に必要となる労働量の合計は240である。<br>ｄ　当初の労働量を維持しながら、Ａ国がカカオの生産に、Ｂ国が大豆の生産にそれぞれ完全特化したとき、各国におけるカカオと大豆の生産量はどちらも120となる。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：正</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2024/A1JI2024.pdf（令和6年度第1次試験）第22問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 23: A-14：過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">23 ／ A-14：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-14 ／ 過去問で確認する</div><div class="title">解答＆解説（令和6年度 第22問）</div><div class="overview">正解はエ。機会費用の式（自国の労働量÷もう一方の財の労働量）を正確に適用できるかがカギ。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+            <div class="choice correct"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：正</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+          </div>
+          <p class="explain"><b>正解：エ</b>（a誤・b誤・c正・d正）。ａ：Ａ国のカカオ1単位の機会費用＝5÷10＝<b>大豆0.5単位</b>（「2単位」はＢ国の機会費用）＝誤。ｂ：大豆の相対価格（大豆の労働量÷カカオの労働量）はＡ国＝10÷5＝2、Ｂ国＝2÷4＝0.5。Ｂ国の方が<b>低い</b>ため「Ｂ国の方が高い」は誤。ｃ：Ｂ国の総労働量＝4×40＋2×40＝160＋80＝240＝正。ｄ：Ａ国はカカオに600÷5＝120単位、Ｂ国は大豆に240÷2＝120単位、完全特化。両国とも120＝正。</p>
+          <p class="example"><span class="label">具体例</span><br>特化前は両国合計でカカオ80単位・大豆80単位だったのに対し、特化後は各国120単位ずつを生産でき、貿易を通じてより多くの量を消費できる可能性が生まれる（貿易の利益）。</p>
+          <p class="related-note">関連知識：「各国の総労働量（一定）÷特化財の労働係数＝特化後の生産量」という計算パターンは頻出。機会費用の式（自国の労働量÷もう一方の財の労働量）をどちらの財について問われているか取り違えないこと。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2024/A1JI2024.pdf（令和6年度第1次試験）第22問／正解：past_exams/1st_stage_answers/r06/2024a.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 24: A-15：貿易政策（関税・非関税障壁） -->
+  <div>
+    <div class="slide-no">24 ／ A-15：貿易政策（関税・非関税障壁）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-15 ／ 貿易政策（関税・非関税障壁）</div><div class="title">保護貿易は社会全体の総余剰を減らす</div><div class="overview">関税・非関税障壁いずれも国内生産者を保護する一方、自由貿易と比べ社会全体の総余剰は小さくなる（死荷重の発生）。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="icon-wrap">
+          <div class="icon-mark">
+            <svg viewBox="0 0 60 60">
+              <rect x="12" y="24" width="36" height="24" fill="none" stroke="#171717" stroke-width="1.8"/>
+              <line x1="12" y1="24" x2="48" y2="48" stroke="#FF3B1F" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div class="prose">
+            <p class="lede">自由貿易は理論上、両国全体の余剰を最大化するが、各国政府は国内産業保護のため保護貿易政策をとることがある。</p>
+            <div class="term-row"><span class="k">関税</span><span class="v">輸入品への課税。国内価格↑で消費者余剰↓・生産者余剰↑・政府に関税収入。総余剰は死荷重の分だけ減少</span></div>
+            <div class="term-row"><span class="k">非関税障壁</span><span class="v">輸入数量割当（クオータ）、輸出自主規制、国内基準を使った実質的な輸入制限など</span></div>
+            <p><span class="label">具体例</span><br>輸入農産物に高関税をかけると、消費者は割高な価格を負担（消費者余剰↓）するが、国内農家は保護され（生産者余剰↑）、政府に関税収入が入る。社会全体の総余剰は自由貿易時より小さくなる。</p>
+            <p class="note"><b>ひっかけ：</b>関税は「政府の収入になる」点で、単純な数量制限である「輸入数量割当」と経済効果が異なる（割当では本来関税収入になる部分が輸入枠を得た業者の利益になることがある）。</p>
+          </div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>A-23 経済余剰（死荷重の考え方の土台）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 25: A-16：国際収支と為替レート決定理論 -->
+  <div>
+    <div class="slide-no">25 ／ A-16：国際収支と為替レート決定理論</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-16 ／ 国際収支と為替レート決定理論</div><div class="title">為替レートの決定理論とマーシャル＝ラーナー条件</div><div class="overview">為替レートの変動要因を説明する2理論と、円安が貿易収支を改善させる条件（弾力性の和）を押さえる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="matrix-rows">
+          <div class="row"><span class="name">購買力平価説</span><span class="combo">PPP</span><span class="desc">二国間の物価上昇率の差で為替レートが決まる。自国の物価上昇率が高いほど自国通貨は減価</span></div>
+          <div class="row"><span class="name">金利平価説</span><span class="combo"></span><span class="desc">内外の金利差が為替レートの予想変化率と等しくなるよう調整される</span></div>
+          <div class="row"><span class="name">マーシャル＝ラーナー条件</span><span class="combo">弾力性の和＞1</span><span class="desc">輸出入の価格弾力性の和が1超なら円安は貿易収支を改善、＝1なら不変、＜1なら悪化</span></div>
+          <div class="row"><span class="name">Jカーブ効果</span><span class="combo"></span><span class="desc">円安直後は数量が反応せず貿易収支が一時悪化し、時間経過とともに改善する現象</span></div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>ひっかけ：弾力性の和＝1のケースを「悪化する」とする誤りが典型。正しくは「変化しない（中立）」。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'20</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 26: A-16：過去問チェック（設問） -->
+  <div>
+    <div class="slide-no">26 ／ A-16：過去問チェック（設問）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-16 ／ 過去問で確認する</div><div class="title">こう出題される（令和7年度 第11問設問2）</div><div class="overview">前のスライドの内容で答えられるか、解答を見る前に考えてみる。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <p class="stem">円建ての貿易収支NXが、NX＝PX(e)－eP＊M(e)と表されるとする（X(e)は輸出量、M(e)は輸入量、eは円建て為替レート、Pは円建て輸出財価格（一定）、P＊はドル建て輸入財価格（一定））。為替レートの変化が貿易収支に及ぼす影響に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。<br><br>ａ　為替レートが変化しても輸出量と輸入量は変化しないとき、為替レートの円安・ドル高への変化は、貿易収支を悪化させる。<br>ｂ　輸入の価格弾力性と輸出の価格弾力性がいずれも1より大きいとき、為替レートの円安・ドル高への変化は、貿易収支を改善させる。<br>ｃ　輸入の価格弾力性と輸出の価格弾力性の合計が1に等しいとき、為替レートの円安・ドル高への変化は、貿易収支を悪化させる。</p>
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+          </div>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第11問</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 27: A-16：過去問チェック（解答＆解説） -->
+  <div>
+    <div class="slide-no">27 ／ A-16：過去問チェック（解答＆解説）</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-16 ／ 過去問で確認する</div><div class="title">解答＆解説（令和7年度 第11問設問2）</div><div class="overview">正解はイ。ｃは「悪化」でなく「変化しない（中立）」が正しい。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="examq">
+          <div class="choices">
+            <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+            <div class="choice correct"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+            <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+            <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+            <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+          </div>
+          <p class="explain"><b>正解：イ</b>（a正・b正・c誤）。ａ：輸出入数量が一定なら円安（eの上昇）は輸入代金の円換算額（eP＊M(e)）だけを機械的に押し上げ貿易収支は悪化＝正（Jカーブ効果の谷の局面と同じ理屈）。ｂ：弾力性の和が1超なら数量効果が価格効果を上回り貿易収支は改善＝正。ｃ：弾力性の和がちょうど1のときは数量効果と価格効果が相殺し貿易収支は<b>変化しない</b>（「悪化する」は誤り）。</p>
+          <p class="example"><span class="label">具体例</span><br>急激な円安直後は輸入企業が契約済み数量のまま購入を続け輸入代金（円換算）が膨らみ貿易収支が一時悪化する（Jカーブの谷）。時間をかけて数量調整が進むと貿易収支は改善に向かう。</p>
+          <p class="related-note">関連知識：マーシャル＝ラーナー条件（弾力性の和＞1で円安は貿易収支を改善）は、短期は数量が反応しにくく弾力性の和が小さいため悪化し、時間とともに改善するJカーブ効果とセットで理解する。</p>
+          <p class="source">出典：past_exams/1st_stage/1ji2025/A1JI2025.pdf（令和7年度第1次試験）第11問／正解：past_exams/1st_stage_answers/r07/2025a.pdf</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- 28: A-17：国際マクロ経済の理論と政策 -->
+  <div>
+    <div class="slide-no">28 ／ A-17：国際マクロ経済の理論と政策</div>
+    <div class="mock-frame">
+    <div class="mock">
+      <div class="head">
+        <div><div class="kicker">A-17 ／ 国際マクロ経済の理論と政策</div><div class="title">為替相場制度で財政・金融政策の効き方が正反対になる</div><div class="overview">マンデル＝フレミング・モデル：資本移動自由な小国では、変動相場制と固定相場制で政策効果が逆転する。</div></div>
+        <div class="tag">経済学・経済政策</div>
+      </div>
+      <div class="body">
+        <div class="quadrant-wrap">
+          <div class="quadrant-grid">
+            <div class="cell"><span class="label">変動相場制×財政政策</span><span class="sub">効果はほぼ無効。利子率↑→自国通貨高→純輸出減で相殺</span></div>
+            <div class="cell"><span class="label">変動相場制×金融政策</span><span class="sub">効果は有効。利子率↓→自国通貨安→輸出増でGDP拡大</span></div>
+            <div class="cell"><span class="label">固定相場制×財政政策</span><span class="sub">効果は増幅。為替介入が金融緩和と同様の効果を持つ</span></div>
+            <div class="cell"><span class="label">固定相場制×金融政策</span><span class="sub">効果は無効。為替介入で緩和効果が打ち消される</span></div>
+          </div>
+          <div class="diagram-caption">資本移動が自由な小国が前提。「変動相場制→財政無効・金融有効」「固定相場制→財政有効・金融無効」という対応関係が最重要。</div>
+        </div>
+        <div class="freq-section">
+          <div class="freq-top">
+            <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
+            <div class="related"><b>関連：</b>関連：A-9 IS-LM分析（開放経済への拡張モデル）。</div>
+          </div>
+          <div class="freq-timeline">
+            <span class="yr-title">出題年度（過去10年）</span>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'16</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'17</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'18</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'19</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'20</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'21</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'22</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'23</span></div>
+            <div class="yr"><span class="dot on"></span><span class="yr-label on">'24</span></div>
+            <div class="yr"><span class="dot"></span><span class="yr-label">'25</span></div>
           </div>
         </div>
       </div>
