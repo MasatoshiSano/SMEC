@@ -6,7 +6,7 @@
 const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
-  addTermRows, addRowList, addExamQuestion,
+  addTermRows, addRowList, addExamQuestion, drawProcessStepsVertical,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -280,14 +280,20 @@ addDividerSlide(pres, {
     overview: "正規化は1NF→2NF→3NFの順に、重複・矛盾のリスクを段階的に排除する。",
     tag: "経営情報システム",
   });
-  const proseX = 0.55, proseW = 12.25;
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "正規化はデータの重複や更新時の矛盾を防ぐため、表を第1正規形から第3正規形へと段階的に整理する手続き。右図のとおり、後の段階に進むほどより厳密な条件をクリアする必要がある。",
+    { x: proseX, y: cy, w: proseW, h: 0.95, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 1.05;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "第1正規形", v: "各セルに単一の値のみ。繰り返し項目がない" },
     { k: "第2正規形", v: "非キー属性が主キーの一部にのみ依存する状態（部分関数従属）がない" },
     { k: "第3正規形", v: "非キー属性同士が間接的に決まる関係（推移的関数従属）がない" },
     { k: "ACID特性", v: "原子性・一貫性・独立性・永続性。トランザクションが満たすべき4性質" },
-  ], { fontSize: 10.5, labelW: 1.9, gap: 0.36 });
+  ], { fontSize: 9.5, labelW: 1.85, gap: 0.38 });
   cy += 0.08;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
@@ -295,6 +301,12 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "主キーが単一属性の表は第1正規形なら自動的に第2正規形も満たす（部分関数従属は複合キーでのみ発生）。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  drawProcessStepsVertical(s, diagX, 1.9, diagW, 4.0, [
+    { num: "1NF", label: "第1正規形", desc: "繰り返し項目を排除" },
+    { num: "2NF", label: "第2正規形", desc: "部分関数従属を排除" },
+    { num: "3NF", label: "第3正規形", desc: "推移的関数従属を排除" },
+  ]);
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
@@ -703,20 +715,59 @@ addDividerSlide(pres, {
     overview: "V字モデルで各設計工程と対応するテスト工程が結びつく。",
     tag: "経営情報システム",
   });
-  const proseX = 0.55, proseW = 12.25;
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "ウォーターフォール型は工程を上流から下流へ一方向に進める開発手法。右図のとおり各設計工程と対応するテスト工程を線でつなぐとV字の形になることから、この対応関係をV字モデルと呼ぶ。",
+    { x: proseX, y: cy, w: proseW, h: 0.85, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.95;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "工程の流れ", v: "要件定義→外部設計→内部設計→プログラミング→テスト→運用保守" },
     { k: "テストの順序", v: "単体テスト→結合テスト→システムテスト→運用テスト" },
-    { k: "V字モデル", v: "要件定義⇔運用テスト、外部設計⇔システムテスト等の対応関係" },
-  ], { fontSize: 11, labelW: 2.0, gap: 0.42 });
+  ], { fontSize: 10, labelW: 2.0, gap: 0.42 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「要件変更に柔軟」は誤り。手戻りコストが大きく変更には弱い（柔軟なのはF-17のアジャイル型）。テスト順序の入れ替えにも注意。", options: { color: RED } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  // V字モデル対応図（手組み：左＝設計工程、右＝テスト工程を行ごとに対応させる）
+  {
+    const bw = 1.85, gapMid = 0.35, rowH = 0.75, rowGap = 0.2;
+    const leftX = diagX, rightX = diagX + bw + gapMid;
+    const vRows = [
+      { l: "要件定義", r: "運用テスト" },
+      { l: "外部設計", r: "システムテスト" },
+      { l: "内部設計", r: "結合テスト" },
+      { l: "プログラミング", r: "単体テスト", hi: true },
+    ];
+    s.addText("設計工程", { x: leftX, y: 1.55, w: bw, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 9, bold: true, color: INK, isTextBox: true, margin: 0 });
+    s.addText("テスト工程", { x: rightX, y: 1.55, w: bw, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 9, bold: true, color: INK, isTextBox: true, margin: 0 });
+    vRows.forEach((row, i) => {
+      const ry = 1.9 + i * (rowH + rowGap);
+      const fill = row.hi ? RED : GHOST;
+      const textColor = row.hi ? "FFFFFF" : INK;
+      s.addShape("rect", { x: leftX, y: ry, w: bw, h: rowH, fill: { color: fill }, line: row.hi ? { type: "none" } : { color: INK, width: 1 } });
+      s.addText(row.l, { x: leftX + 0.05, y: ry, w: bw - 0.1, h: rowH, align: "center", valign: "middle", fontFace: F_BODY, fontSize: 9.5, bold: true, color: textColor, isTextBox: true, margin: 0 });
+      s.addShape("rect", { x: rightX, y: ry, w: bw, h: rowH, fill: { color: fill }, line: row.hi ? { type: "none" } : { color: INK, width: 1 } });
+      s.addText(row.r, { x: rightX + 0.05, y: ry, w: bw - 0.1, h: rowH, align: "center", valign: "middle", fontFace: F_BODY, fontSize: 9.5, bold: true, color: textColor, isTextBox: true, margin: 0 });
+      s.addShape("line", { x: leftX + bw, y: ry + rowH / 2, w: gapMid, h: 0, line: { color: INK_SOFT, width: 1, dashType: "dash" } });
+      if (i < vRows.length - 1) {
+        const ay = ry + rowH + rowGap / 2;
+        s.addText("↓", { x: leftX, y: ay - 0.13, w: bw, h: 0.26, align: "center", fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0 });
+        s.addText("↑", { x: rightX, y: ay - 0.13, w: bw, h: 0.26, align: "center", fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0 });
+      }
+    });
+    const lastRowBottom = 1.9 + vRows.length * (rowH + rowGap) - rowGap;
+    s.addText("設計工程（左）とテスト工程（右）が１対１で対応するV字モデル", {
+      x: diagX, y: lastRowBottom + 0.08, w: diagW, h: 0.35, align: "center",
+      fontFace: F_BODY, fontSize: 8, color: INK_SOFT, isTextBox: true, margin: 0,
+    });
+  }
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
