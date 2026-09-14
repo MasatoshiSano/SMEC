@@ -6,7 +6,7 @@
 const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
-  addTermRows, addRowList, addExamQuestion, drawBarChart,
+  addTermRows, addRowList, addExamQuestion, drawBarChart, drawProcessStepsVertical,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -110,12 +110,31 @@ addDividerSlide(pres, {
     overview: "3Rの優先順位と、製品の一生涯を評価するLCA。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
-    { name: "①リデュース", desc: "そもそも廃棄物・使用資源の発生量を減らす（最優先）" },
-    { name: "②リユース", desc: "使えるものはそのまま繰り返し使う" },
-    { name: "③リサイクル", desc: "使い終わったものを資源として再生利用する（優先順位は最後）" },
-    { name: "LCA", desc: "原材料採取→製造→輸送→使用→廃棄まで一生涯の環境負荷を定量評価" },
-  ], { nameW: 1.9, rowH: 0.9 });
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
+  let cy = 1.85;
+  s.addText(
+    "3Rは「まず発生源を減らす」ことを最優先とする優先順位が決まっており、この順序を無視した対策は評価されない。LCAは3Rの効果も含め、製品の一生涯を通じた環境負荷を定量的に評価する枠組み。",
+    { x: proseX, y: cy, w: proseW, h: 0.95, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 1.05;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "LCA", v: "原材料採取→製造→輸送→使用→廃棄まで一生涯の環境負荷を定量評価" },
+  ], { fontSize: 10.5, labelW: 1.3, gap: 0.55 });
+  cy += 0.1;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "LCAは「製造工程だけ」を評価するのではなく、原材料調達から廃棄までの全過程の環境負荷を定量評価する点に注意。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  drawProcessStepsVertical(s, diagX, 1.9, diagW, 4.0, [
+    { num: "①", label: "リデュース", desc: "発生量そのものを減らす（最優先）" },
+    { num: "②", label: "リユース", desc: "そのまま繰り返し使う" },
+    { num: "③", label: "リサイクル", desc: "資源として再生利用（最後）" },
+  ]);
+
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：LCAは製造工程だけでなく調達〜廃棄までの全体を対象とする。",
@@ -190,6 +209,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 7.6;
   let cy = 1.85;
+  s.addText(
+    "タクトタイムは「これだけの時間で1個作らなければならない」という目標値であるのに対し、サイクルタイムは実際に最も時間のかかる工程（ネック工程）で決まる実績値。両者の違いを区別したうえで、ネック工程をどう見つけるかが計算問題の鍵になる。",
+    { x: proseX, y: cy, w: proseW, h: 0.85, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.95;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "タクトタイム", v: "実稼働時間 ÷ 必要生産数（目標値）" },
     { k: "ラインバランシング効率", v: "各工程作業時間合計 ÷ (工程数×サイクルタイム) × 100" },
@@ -666,11 +690,32 @@ addDividerSlide(pres, {
     overview: "SLPは物の流れ分析→近接性評価→レイアウト案作成の手順で進める。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
-    { name: "SLP", desc: "P-Q分析で物の流れを把握→アクティビティ相互関係図（A・E・I・O・U・X）→レイアウト案" },
-    { name: "DI分析", desc: "方向（Direction）と関係の強さ（Intensity）から工程間の結びつきを検討" },
-    { name: "機能別／製品別／固定型", desc: "工程ごとにまとめる／加工順に並べる／大型製品の周りに配置" },
-  ], { nameW: 2.6, rowH: 1.2 });
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
+  let cy = 1.85;
+  s.addText(
+    "SLPは勘や経験に頼らず、物の流れの分析結果を定量的な近接性評価につなげ、レイアウト案へ落とし込む体系的な手順。右図の3段階を順に踏むことで、担当者の主観に左右されにくい配置が決まる。",
+    { x: proseX, y: cy, w: proseW, h: 0.95, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 1.05;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "DI分析", v: "方向（Direction）と関係の強さ（Intensity）から工程間の結びつきを検討" },
+    { k: "機能別／製品別／固定型", v: "工程ごとにまとめる／加工順に並べる／大型製品の周りに配置" },
+  ], { fontSize: 9.5, labelW: 2.5, gap: 0.55 });
+  cy += 0.08;
+  s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
+  cy += 0.08;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "DI分析は「距離の近さだけ」ではなく方向＋強さの2視点で工程間の結びつきを評価する。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  drawProcessStepsVertical(s, diagX, 1.9, diagW, 4.0, [
+    { num: "①", label: "P-Q分析", desc: "物の流れを数値で把握" },
+    { num: "②", label: "アクティビティ相関図", desc: "A・E・I・O・U・Xで近接性評価" },
+    { num: "③", label: "レイアウト案", desc: "具体的な配置を決定" },
+  ]);
+
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：SLPは体系的・定量的な手順。DI分析は「距離の近さだけ」ではなく方向＋強さの2視点。",
@@ -1030,24 +1075,45 @@ addDividerSlide(pres, {
     overview: "ライリーの法則とハフモデル。どちらも重力モデル的な考え方。",
     tag: "運営管理",
   });
-  const proseX = 0.55, proseW = 12.25;
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "人口が多い都市ほど、また距離が近い都市ほど、周辺の町からの購買力を強く吸引する。ライリーの法則はこの直感を「人口に比例、距離の2乗に反比例」という式で表したもので、人口で劣る都市でも距離が近ければ形勢が逆転しうる点が出題の核心。",
+    { x: proseX, y: cy, w: proseW, h: 1.1, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 1.2;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "ライリーの法則", v: "吸引力比(A:B)＝(人口A÷人口B)×(距離B÷距離A)²" },
     { k: "ハフモデル", v: "来店確率＝(売場面積÷距離ᵈ)÷Σ(各店の売場面積÷距離ᵈ)" },
-  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
-  cy += 0.1;
-  s.addText([
-    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
-    { text: "人口比A:B=3:8で吸引力比3:2→距離比A:B＝1:2（人口で劣るA市の方がX町に近い位置にある）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.58, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
-  cy += 0.66;
+  ], { fontSize: 9.5, labelW: 1.9, gap: 0.5 });
+  cy += 0.08;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "距離の比を「2乗する」のを忘れる計算ミスに注意。公式の丸暗記だけでなく結果の意味も確認する。", options: { color: RED } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  // 重力モデルの図解：A市（人口少・近い）とB市（人口多・遠い）がX町を挟んで引き合う
+  const gy = 3.6;
+  s.addShape("line", { x: 9.5, y: gy, w: 1.0, h: 0, line: { color: INK, width: 1 } });
+  s.addShape("ellipse", { x: 8.4, y: gy - 0.55, w: 1.1, h: 1.1, fill: { color: GHOST }, line: { color: INK, width: 1 } });
+  s.addText([
+    { text: "A市\n", options: { bold: true, fontSize: 11, color: INK, breakLine: true } },
+    { text: "人口3", options: { fontSize: 9, color: INK_SOFT } },
+  ], { x: 8.4, y: gy - 0.55, w: 1.1, h: 1.1, align: "center", valign: "middle", fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  s.addShape("ellipse", { x: 10.5, y: gy - 0.825, w: 1.65, h: 1.65, fill: { color: GHOST }, line: { color: INK, width: 1 } });
+  s.addText([
+    { text: "B市\n", options: { bold: true, fontSize: 12, color: INK, breakLine: true } },
+    { text: "人口8", options: { fontSize: 9.5, color: INK_SOFT } },
+  ], { x: 10.5, y: gy - 0.825, w: 1.65, h: 1.65, align: "center", valign: "middle", fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  const xTownX = 9.83;
+  s.addShape("ellipse", { x: xTownX - 0.05, y: gy - 0.05, w: 0.1, h: 0.1, fill: { color: RED }, line: { type: "none" } });
+  s.addText("X町", { x: xTownX - 0.3, y: gy - 0.5, w: 0.6, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 10, bold: true, color: RED, isTextBox: true, margin: 0 });
+  s.addText("距離1", { x: 9.5, y: gy + 0.1, w: xTownX - 9.5, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 9, bold: true, color: RED, isTextBox: true, margin: 0 });
+  s.addText("距離2", { x: xTownX, y: gy + 0.1, w: 10.5 - xTownX, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 9, color: INK, isTextBox: true, margin: 0 });
+  s.addText("人口で劣るA市の方がX町に近い（距離比1：2）", { x: diagX - 0.3, y: gy + 1.0, w: diagW + 0.6, h: 0.4, align: "center", fontFace: F_BODY, fontSize: 9, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",

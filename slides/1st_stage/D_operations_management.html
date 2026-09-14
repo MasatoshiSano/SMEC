@@ -188,6 +188,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">工場管理者はこの7つの指標を同時に追いかけているが、実際には一方を追求すると他方が犠牲になりやすいトレードオフの関係にある。7つの頭文字を覚えるだけでなく、互いにどう綱引きするかを理解することが問われる。</p>
             <div class="term-row"><span class="k">P：生産性</span><span class="v">少ない人・設備・時間でどれだけ多く作れるか</span></div>
             <div class="term-row"><span class="k">Q：品質</span><span class="v">不良品を出さず要求品質を満たすか</span></div>
             <div class="term-row"><span class="k">C：コスト</span><span class="v">材料費・労務費・経費をどれだけ抑えられるか</span></div>
@@ -233,6 +234,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">JITという考え方を実際に動かす仕組みがかんばん方式であり、社内の情報を一元管理するERP、社外まで含めた供給連鎖全体を最適化するSCMへと、管理の範囲が現場から社内、そして社外へと広がっていく関係にある。</p>
             <div class="term-row"><span class="k">JIT</span><span class="v">必要な物を必要な時に必要な量だけ作る・運ぶ（トヨタ生産方式）</span></div>
             <div class="term-row"><span class="k">かんばん方式</span><span class="v">後工程が使った分だけ前工程に指示する情報伝達の道具（プル型）</span></div>
             <div class="term-row"><span class="k">ERP</span><span class="v">会計・人事・生産・販売を1システムで統合管理</span></div>
@@ -274,11 +276,28 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">運営管理</div>
       </div>
       <div class="body">
-        <div class="matrix-rows">
-          <div class="row"><span class="name">①リデュース</span><span class="desc">そもそも廃棄物・使用資源の発生量を減らす（最優先）</span></div>
-          <div class="row"><span class="name">②リユース</span><span class="desc">使えるものはそのまま繰り返し使う</span></div>
-          <div class="row"><span class="name">③リサイクル</span><span class="desc">使い終わったものを資源として再生利用する（優先順位は最後）</span></div>
-          <div class="row"><span class="name">LCA</span><span class="desc">原材料採取→製造→輸送→使用→廃棄まで一生涯の環境負荷を定量評価</span></div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">3Rは「まず発生源を減らす」ことを最優先とする優先順位が決まっており、この順序を無視した対策は評価されない。LCAは3Rの効果も含め、製品の一生涯を通じた環境負荷を定量的に評価する枠組み。</p>
+            <div class="term-row"><span class="k">LCA</span><span class="v">原材料採取→製造→輸送→使用→廃棄まで一生涯の環境負荷を定量評価</span></div>
+            <p class="note"><b>ひっかけ：</b>LCAは「製造工程だけ」を評価するのではなく、原材料調達から廃棄までの全過程の環境負荷を定量評価する点に注意。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 100">
+              <rect x="6" y="6" width="88" height="24" fill="#FF3B1F"/>
+              <text x="50" y="17" font-size="6.5" text-anchor="middle" fill="#ffffff" font-weight="700">①リデュース（最優先）</text>
+              <text x="50" y="26" font-size="5" text-anchor="middle" fill="#ffffff">発生量そのものを減らす</text>
+              <text x="50" y="38" font-size="7" text-anchor="middle" fill="#171717">↓</text>
+              <rect x="6" y="42" width="88" height="24" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="50" y="53" font-size="6.5" text-anchor="middle" fill="#171717" font-weight="700">②リユース</text>
+              <text x="50" y="62" font-size="5" text-anchor="middle" fill="#8a8a8a">使えるものはそのまま使う</text>
+              <text x="50" y="74" font-size="7" text-anchor="middle" fill="#171717">↓</text>
+              <rect x="6" y="78" width="88" height="20" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="50" y="88" font-size="6.5" text-anchor="middle" fill="#171717" font-weight="700">③リサイクル</text>
+              <text x="50" y="96" font-size="5" text-anchor="middle" fill="#8a8a8a">資源として再生利用（最後）</text>
+            </svg>
+            <div class="diagram-caption-mini">優先順位：①リデュース＞②リユース＞③リサイクル</div>
+          </div>
         </div>
         <div class="freq-section">
           <div class="freq-top">
@@ -316,6 +335,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">VA/VEもコンカレントエンジニアリングも、設計段階でどれだけ多くの視点を早期に取り込めるかという発想は共通している。前者は「価値」という数式で機能とコストのバランスを問い、後者は各部門が同時並行で検討することで開発期間そのものを短縮する。</p>
             <div class="term-row"><span class="k">VA/VE</span><span class="v">価値（V）＝機能（F）÷コスト（C）を高める体系的活動</span></div>
             <div class="term-row"><span class="k">コンカレントエンジニアリング</span><span class="v">設計・生産技術・調達・販売が同時並行で検討し開発期間を短縮</span></div>
             <p><span class="label">具体例</span><br>家電メーカーが企画段階から設計者・生産技術者・調達担当者が一緒に検討し、「金型が高額」「量産時に調達しにくい」等の懸念を早期に反映するのがコンカレントエンジニアリング。</p>
@@ -397,6 +417,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="split-wrap">
           <div class="prose">
+            <p class="lede">タクトタイムは「これだけの時間で1個作らなければならない」という目標値であるのに対し、サイクルタイムは実際に最も時間のかかる工程（ネック工程）で決まる実績値。両者の違いを区別したうえで、ネック工程をどう見つけるかが計算問題の鍵になる。</p>
             <div class="term-row"><span class="k">タクトタイム</span><span class="v">実稼働時間 ÷ 必要生産数（目標値）</span></div>
             <div class="term-row"><span class="k">ラインバランシング効率</span><span class="v">各工程作業時間合計 ÷ (工程数×サイクルタイム) × 100</span></div>
             <p class="note"><b>ひっかけ：</b>分母のサイクルタイムには「平均」ではなく「最大（ネック工程）」の時間を使う。</p>
@@ -506,6 +527,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">どちらも過去の実績から次期の需要を見積もる手法だが、各期の実績にどれだけ重みを置くかという考え方が異なる。移動平均法は均等ウェイト、指数平滑法は直近ほど重視というシンプルな対比で覚えると計算ミスが減る。</p>
             <div class="term-row"><span class="k">移動平均法</span><span class="v">直近n期間の実績値の単純平均。各期に均等なウェイト</span></div>
             <div class="term-row"><span class="k">指数平滑法</span><span class="v">次期予測値＝α×当期実績値＋(1－α)×当期予測値</span></div>
             <p><span class="label">具体例</span><br>先月実績100個・予測90個。α＝0.3→次期予測93個。α＝0.6→次期予測96個。αが大きいほど直近実績（100個）に近づく。</p>
@@ -548,6 +570,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">MPS（何をいつ・いくつ作るか）とBOM（1個あたり何がいくつ必要か）という2つの計画情報を掛け合わせることで、部品ごとの総所要量が決まり、そこから在庫・入庫予定を差し引いた正味所要量が発注量として導かれる、という一連の流れで理解する。</p>
             <div class="term-row"><span class="k">MPS</span><span class="v">最終製品を「いつ・いくつ作るか」定めた基準生産計画</span></div>
             <div class="term-row"><span class="k">BOM</span><span class="v">製品1個に必要な部品・員数を示す部品表</span></div>
             <div class="term-row"><span class="k">正味所要量</span><span class="v">総所要量－（現在庫＋入庫予定）</span></div>
@@ -591,6 +614,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">PERTのクリティカルパスが「複数の作業のうちどこが全体の遅れに直結するか」を示すのに対し、ジョンソンの規則は「複数のジョブをどの順番で投入すれば全体の完了が最短になるか」を決める手法。どちらも計画通りに進めるための事前設計という点で共通する。</p>
             <div class="term-row"><span class="k">クリティカルパス</span><span class="v">PERT図で最も時間のかかる経路。余裕時間ゼロで遅れが全体に直結</span></div>
             <div class="term-row"><span class="k">ジョンソンの規則</span><span class="v">第1工程が短いジョブは前方へ昇順、第2工程が短いジョブは後方へ降順</span></div>
             <p><span class="label">具体例</span><br>4ジョブa,b,c,dの投入順序＝a→c→d→b（前方は第1工程時間昇順、後方は第2工程時間降順）。</p>
@@ -748,6 +772,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">標準時間は「正味時間」に「余裕時間」を上乗せしたものだが、外掛け法か内掛け法かで余裕率の掛け方（何を基準に割合を取るか）が変わる。標準作業の3要素とあわせて、混同しやすい用語を1つずつ区別する。</p>
             <div class="term-row"><span class="k">正味時間</span><span class="v">観測時間の代表値×レイティング係数</span></div>
             <div class="term-row"><span class="k">外掛け法</span><span class="v">標準時間＝正味時間×（1＋余裕率）</span></div>
             <div class="term-row"><span class="k">内掛け法</span><span class="v">標準時間＝正味時間÷（1－余裕率）</span></div>
@@ -832,6 +857,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">ECRSは「なくせないか→まとめられないか→入れ替えられないか→簡単にできないか」という順に検討する改善の優先順位で、動作経済の原則が示す具体的な工夫と組み合わせて使う。</p>
             <div class="term-row"><span class="k">E：排除</span><span class="v">その作業自体をなくせないか（最初に検討）</span></div>
             <div class="term-row"><span class="k">C：結合</span><span class="v">複数の作業を1つにまとめられないか</span></div>
             <div class="term-row"><span class="k">R：交換</span><span class="v">作業の順序・場所を入れ替えられないか</span></div>
@@ -876,6 +902,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">5Sは職場環境を整える基本活動、TPMはそれを土台に設備そのものの故障をゼロに近づける全員参加の保全活動。自主保全はTPMの中核で、現場のオペレーター自身が担う点が最大のポイント。</p>
             <div class="term-row"><span class="k">整理／整頓</span><span class="v">不要品を捨てる／必要な物をすぐ取り出せる状態に置く</span></div>
             <div class="term-row"><span class="k">清掃・清潔・躾</span><span class="v">掃除しながら点検／維持する／ルールを守る習慣</span></div>
             <div class="term-row"><span class="k">TPM・自主保全</span><span class="v">現場オペレーター自身が日常点検・簡単な保全を行う</span></div>
@@ -920,6 +947,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">設備を「いつ更新すべきか」は、稼働率・良品率の低下や修理費の増加といった実態面と、減価償却・耐用年数という会計上の目安の両方を突き合わせて判断する。</p>
             <div class="term-row"><span class="k">稼働率</span><span class="v">実際生産量 ÷ 標準（基準）生産量 × 100</span></div>
             <div class="term-row"><span class="k">減価償却</span><span class="v">取得原価を耐用年数にわたり費用配分（定額法／定率法）</span></div>
             <div class="term-row"><span class="k">耐用年数</span><span class="v">税法上定められた使用可能期間の目安（物理的限界とは別）</span></div>
@@ -947,10 +975,29 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">運営管理</div>
       </div>
       <div class="body">
-        <div class="matrix-rows">
-          <div class="row"><span class="name">SLP</span><span class="desc">P-Q分析で物の流れを把握→アクティビティ相互関係図（A・E・I・O・U・X）→レイアウト案</span></div>
-          <div class="row"><span class="name">DI分析</span><span class="desc">方向（Direction）と関係の強さ（Intensity）から工程間の結びつきを検討</span></div>
-          <div class="row"><span class="name">機能別／製品別／固定型</span><span class="desc">工程ごとにまとめる／加工順に並べる／大型製品の周りに配置</span></div>
+        <div class="split-wrap">
+          <div class="prose">
+            <p class="lede">SLPは勘や経験に頼らず、物の流れの分析結果を定量的な近接性評価につなげ、レイアウト案へ落とし込む体系的な手順。右図の3段階を順に踏むことで、担当者の主観に左右されにくい配置が決まる。</p>
+            <div class="term-row"><span class="k">DI分析</span><span class="v">方向（Direction）と関係の強さ（Intensity）から工程間の結びつきを検討</span></div>
+            <div class="term-row"><span class="k">機能別／製品別／固定型</span><span class="v">工程ごとにまとめる／加工順に並べる／大型製品の周りに配置</span></div>
+            <p class="note"><b>ひっかけ：</b>DI分析は「距離の近さだけ」ではなく方向＋強さの2視点で工程間の結びつきを評価する。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 100">
+              <rect x="6" y="6" width="88" height="24" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="50" y="17" font-size="6" text-anchor="middle" fill="#171717" font-weight="700">①P-Q分析</text>
+              <text x="50" y="26" font-size="5" text-anchor="middle" fill="#8a8a8a">物の流れを数値で把握</text>
+              <text x="50" y="38" font-size="7" text-anchor="middle" fill="#171717">↓</text>
+              <rect x="6" y="42" width="88" height="24" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="50" y="52" font-size="5.6" text-anchor="middle" fill="#171717" font-weight="700">②アクティビティ相関図</text>
+              <text x="50" y="61" font-size="5" text-anchor="middle" fill="#8a8a8a">A・E・I・O・U・Xで近接性評価</text>
+              <text x="50" y="74" font-size="7" text-anchor="middle" fill="#171717">↓</text>
+              <rect x="6" y="78" width="88" height="20" fill="#FF3B1F"/>
+              <text x="50" y="88" font-size="6" text-anchor="middle" fill="#ffffff" font-weight="700">③レイアウト案</text>
+              <text x="50" y="96" font-size="5" text-anchor="middle" fill="#ffffff">具体的な配置を決定</text>
+            </svg>
+            <div class="diagram-caption-mini">SLPの3段階（分析→評価→配置の順で進める）</div>
+          </div>
         </div>
         <div class="freq-section">
           <div class="freq-top">
@@ -988,6 +1035,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">設備更新の判断は「変化する部分」だけに着目する差額原価収益分析が基本だが、その評価方法にも簡便な回収期間法と、お金の時間的価値まで考慮するNPV法という水準の違いがある。</p>
             <div class="term-row"><span class="k">回収期間法</span><span class="v">投資額 ÷ 年間キャッシュフロー（簡便だが時間的価値を考慮しない）</span></div>
             <div class="term-row"><span class="k">NPV法</span><span class="v">将来CFを割り引いた合計－投資額。プラスなら投資価値あり</span></div>
             <p><span class="label">具体例</span><br>投資額600万円、年間CF200万円→回収期間＝600÷200＝<b>3年</b>。4年目以降の利益や割引率は考慮されない。</p>
@@ -1030,6 +1078,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">資材は「多くの製品に共通し繰り返し使うか」で管理方法が分かれる。常備品は在庫を持って継続的に管理し、非常備品は注文が来るたびに個別に手配する。</p>
             <div class="term-row"><span class="k">常備品</span><span class="v">多くの製品に共通し継続的に使う資材（ネジ等）。発注点方式で管理</span></div>
             <div class="term-row"><span class="k">非常備品</span><span class="v">特定注文にのみ使う資材（特注部品）。都度手配</span></div>
             <p class="note"><b>ひっかけ：</b>常備品は在庫を持って継続管理、非常備品は注文ごとに個別手配、という対応を正確に覚える。</p>
@@ -1071,6 +1120,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">外注は単なるコスト削減策ではなく、自社にない技術の活用や生産能力の変動吸収など複数の目的で行われる一方、技術・ノウハウの流出や依存度の上昇というリスクも併せ持つ。</p>
             <div class="term-row"><span class="k">外注のメリット</span><span class="v">技術・設備の活用、生産能力の変動吸収、固定費の変動費化</span></div>
             <div class="term-row"><span class="k">外注のデメリット</span><span class="v">技術・ノウハウ流出リスク、品質管理の難しさ、依存度上昇リスク</span></div>
             <p><span class="label">具体例</span><br>繁忙期にだけ生産量が急増する部品加工を近隣の協力会社に外注し、自社で新規設備投資・人員採用をせずに需要変動へ対応する。</p>
@@ -1321,6 +1371,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">産業廃棄物を業者に委託しても、排出事業者の管理責任は最終処分まで消えない。マニフェスト制度はその責任を「追跡できる形」にするための仕組みで、資源有効利用促進法・ISO14000と役割を分けて理解する。</p>
             <div class="term-row"><span class="k">廃棄物処理法</span><span class="v">適正処理を義務付け。産廃委託時はマニフェスト（管理票）交付・保管が必須</span></div>
             <div class="term-row"><span class="k">資源有効利用促進法</span><span class="v">3Rの考え方に基づき資源の有効利用・リサイクルを促す</span></div>
             <div class="term-row"><span class="k">ISO14000シリーズ</span><span class="v">環境マネジメントシステムの国際規格（ISO9000＝品質とは分野が異なる）</span></div>
@@ -1400,12 +1451,31 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">運営管理</div>
       </div>
       <div class="body">
-        <div class="icon-wrap">
+        <div class="split-wrap">
           <div class="prose">
+            <p class="lede">人口が多い都市ほど、また距離が近い都市ほど、周辺の町からの購買力を強く吸引する。ライリーの法則はこの直感を「人口に比例、距離の2乗に反比例」という式で表したもので、人口で劣る都市でも距離が近ければ形勢が逆転しうる点が出題の核心。</p>
             <div class="term-row"><span class="k">ライリーの法則</span><span class="v">吸引力比(A:B)＝(人口A÷人口B)×(距離B÷距離A)²</span></div>
             <div class="term-row"><span class="k">ハフモデル</span><span class="v">来店確率＝(売場面積÷距離ᵈ)÷Σ(各店の売場面積÷距離ᵈ)</span></div>
-            <p><span class="label">具体例</span><br>人口比A:B=3:8で吸引力比3:2→距離比A:B＝<b>1:2</b>（人口で劣るA市の方がX町に近い位置にある）。</p>
             <p class="note"><b>ひっかけ：</b>距離の比を「2乗する」のを忘れる計算ミスに注意。公式の丸暗記だけでなく結果の意味も確認する。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 92 58">
+              <line x1="20" y1="35" x2="56" y2="35" stroke="#171717" stroke-width="1"/>
+              <line x1="20" y1="32" x2="20" y2="38" stroke="#171717" stroke-width="1"/>
+              <line x1="32" y1="32" x2="32" y2="38" stroke="#171717" stroke-width="1"/>
+              <line x1="56" y1="32" x2="56" y2="38" stroke="#171717" stroke-width="1"/>
+              <circle cx="12" cy="35" r="8" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <circle cx="69" cy="35" r="13" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <circle cx="32" cy="35" r="1.8" fill="#FF3B1F"/>
+              <text x="12" y="22" font-size="6" text-anchor="middle" fill="#171717" font-weight="700">A市</text>
+              <text x="12" y="38" font-size="5" text-anchor="middle" fill="#8a8a8a">人口3</text>
+              <text x="69" y="17" font-size="6.5" text-anchor="middle" fill="#171717" font-weight="700">B市</text>
+              <text x="69" y="38" font-size="5.5" text-anchor="middle" fill="#8a8a8a">人口8</text>
+              <text x="32" y="26" font-size="5.5" text-anchor="middle" fill="#FF3B1F" font-weight="700">X町</text>
+              <text x="26" y="50" font-size="5" text-anchor="middle" fill="#FF3B1F" font-weight="700">距離1</text>
+              <text x="44" y="50" font-size="5" text-anchor="middle" fill="#171717">距離2</text>
+            </svg>
+            <div class="diagram-caption-mini">人口で劣るA市の方がX町に近い（距離比1：2）</div>
           </div>
         </div>
         <div class="freq-section">
@@ -1498,6 +1568,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">商店街が自然発生的に形成されるのに対し、SCはデベロッパーが計画的に開発する点が対照的。近年の小売業の変化の多くは、何を売るかという「業種」ではなく、どう売るかという「業態」の多様化として説明される。</p>
             <div class="term-row"><span class="k">ショッピングセンター（SC）</span><span class="v">デベロッパーが計画的に開発・運営する複数テナント施設</span></div>
             <div class="term-row"><span class="k">商店街</span><span class="v">特定地域に自然発生的に形成された独立店舗の集まり</span></div>
             <div class="term-row"><span class="k">業種／業態</span><span class="v">何を売るか（酒屋・米屋）／どう売るか（コンビニ・専門店）</span></div>
@@ -1540,6 +1611,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">品揃えの豊富さは「幅（カテゴリー数）」と「奥行き（1カテゴリー内のバリエーション）」という別の2軸で表される。コンビニは幅が広く奥行きが浅い、専門店は幅が狭く奥行きが深い、という対比で整理する。</p>
             <div class="term-row"><span class="k">幅</span><span class="v">取り扱う商品カテゴリーの多さ（例：コンビニは幅広い）</span></div>
             <div class="term-row"><span class="k">奥行き（深さ）</span><span class="v">1カテゴリー内のバリエーションの豊富さ（例：専門店は奥行きが深い）</span></div>
             <p><span class="label">具体例</span><br>コンビニは食品・日用品・雑誌など幅広く（幅が広い）、各カテゴリー内の品目数は絞る。スポーツ用品専門店は幅は狭いが、1競技用品のブランド・モデル数（奥行き）は豊富。</p>
@@ -1682,6 +1754,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">価格戦略はEDLPかハイ・ロー・プライシングかという「どう値付けするか」の選択にとどまらず、粗利益率と回転率をかけ合わせた交差比率で在庫効率まで含めて評価することが重要になる。</p>
             <div class="term-row"><span class="k">EDLP</span><span class="v">特売せず常に低価格を維持（集客効果は生まれにくい）</span></div>
             <div class="term-row"><span class="k">ハイ・ロー・プライシング</span><span class="v">普段は通常価格、定期的に特売でメリハリをつける</span></div>
             <div class="term-row"><span class="k">交差比率</span><span class="v">粗利益率 × 商品回転率</span></div>
@@ -1725,6 +1798,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">プロモーションは「まず来店してもらう」店外施策と、「来店後に追加で買ってもらう」店内施策という異なる段階を担っており、どちらの効果を狙った施策かを区別して考える。</p>
             <div class="term-row"><span class="k">店外プロモーション</span><span class="v">チラシ・屋外広告・SNS広告など来店を促す活動</span></div>
             <div class="term-row"><span class="k">店内プロモーション</span><span class="v">POP広告・実演・試食など来店後の追加購買を促す活動</span></div>
             <div class="term-row"><span class="k">リベート・共同販促</span><span class="v">メーカーの販売奨励金、小売店とメーカーの共同キャンペーン</span></div>
@@ -1767,6 +1841,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">店舗では欠品がその場の販売機会損失に直結するため、在庫を「持ちすぎない」ことと「切らさない」ことのバランスが工場以上にシビアに問われる。商品回転率はそのバランスを測る代表的な指標。</p>
             <div class="term-row"><span class="k">商品回転率</span><span class="v">売上高（または売上原価） ÷ 平均在庫高</span></div>
             <p><span class="label">具体例</span><br>年間売上高1,200万円・平均在庫高200万円→商品回転率＝年<b>6回</b>。業界平均より低ければ過剰在庫・品揃え見直しの材料になる。</p>
             <p class="note"><b>ひっかけ：</b>回転率を上げすぎると発注頻度増による事務コスト増、欠品リスク増につながる。D-29の交差比率のように収益性とのバランスで評価する。</p>
@@ -1808,6 +1883,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">輸配送の効率化には、1台あたりの積載効率を高める共同輸配送と、輸送手段そのものを切り替えるモーダルシフトという2つのアプローチがある。どちらも環境負荷の低減とドライバー不足対応という共通の狙いを持つ。</p>
             <div class="term-row"><span class="k">モーダルシフト</span><span class="v">トラック輸送の一部を鉄道・船舶に切り替える取り組み</span></div>
             <div class="term-row"><span class="k">共同輸配送</span><span class="v">複数荷主が1台のトラックに積み合わせ、積載効率を高める</span></div>
             <p><span class="label">具体例</span><br>食品メーカーA社・B社が別々に走らせていたトラックを1台に積み合わせ、台数・走行距離を減らしながら両社の商品を届ける。</p>
@@ -1888,6 +1964,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">POSデータから「何と何が一緒に買われやすいか」を数値で捉えるのがアソシエーション分析。支持度・信頼度・リフト値は分母・分子が少しずつ異なるため、どの割合を求めているのかを毎回意識して計算する。</p>
             <div class="term-row"><span class="k">支持度</span><span class="v">該当組み合わせのレシート数 ÷ 全レシート数</span></div>
             <div class="term-row"><span class="k">信頼度</span><span class="v">A・B両方を含むレシート数 ÷ Aを含むレシート数</span></div>
             <div class="term-row"><span class="k">リフト値</span><span class="v">信頼度(A→B) ÷ Bの単独出現率。1超なら正の相関</span></div>
@@ -1979,6 +2056,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">商品を識別する技術は、バーコード（JANコード）から電子タグ（RFID）へと進化している。1つずつ近づけて読み取る必要があるか、複数を離れた場所から一括で読み取れるかが両者の決定的な違い。</p>
             <div class="term-row"><span class="k">JANコード（GTIN）</span><span class="v">標準13桁／短縮8桁。GS1事業者コード＋商品コード＋チェックデジット</span></div>
             <div class="term-row"><span class="k">電子タグ（RFID）</span><span class="v">ICチップ＋アンテナ。複数タグを離れた場所から一括読取できる</span></div>
             <div class="term-row"><span class="k">EPC</span><span class="v">GS1識別コード＋個体別シリアル番号。同じ商品でも1点ずつ識別可能</span></div>
