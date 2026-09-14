@@ -39,6 +39,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .prose .note{font-size:calc(var(--cw)*0.82/100);color:var(--red);border-top:1px solid var(--line);padding-top:calc(var(--cw)*0.55/100);margin-top:calc(var(--cw)*0.05/100);line-height:1.5;}
 .prose .note b{color:var(--red);}
 .prose .label{font-family:"Space Mono",monospace;font-size:calc(var(--cw)*0.7/100);font-weight:700;color:var(--ink-soft);letter-spacing:.03em;text-transform:uppercase;}
+.body>p.lede{flex:0 0 auto;margin:0 0 calc(var(--cw)*1/100) 0;font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
 
 /* 頻出データ帯 */
 .freq-section{flex:0 0 auto;padding-top:calc(var(--cw)*0.9/100);margin-top:calc(var(--cw)*0.85/100);border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:calc(var(--cw)*0.65/100);}
@@ -235,6 +236,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">GDP・GNI（GNP）・NNP・NIは無関係な4つの用語ではなく、GDPを起点に「集計範囲を国民ベースに変える」「減価償却を引く」「間接税・補助金を調整する」という一連の計算でつながる所得概念の連鎖。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">GDP</span><span class="combo">国内総生産</span><span class="desc">国内で生産された付加価値の合計（国籍を問わない）</span></div>
           <div class="row"><span class="name">GNI／GNP</span><span class="combo">国民総所得</span><span class="desc">自国民（居住者）が生み出した所得の合計。GNI＝GDP＋海外からの純所得受取</span></div>
@@ -324,6 +326,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">3つの物価指数の違いは「何を測るか（対象範囲）」だけでなく、CPIとGDPデフレーターでは「どうウェイトを付けるか（計算方式）」も異なる点が試験で問われる、2つの軸の組み合わせ。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">CPI</span><span class="combo">消費者物価指数</span><span class="desc">総務省公表。消費者が購入する財・サービスの価格変動（ラスパイレス方式）</span></div>
           <div class="row"><span class="name">CGPI</span><span class="combo">企業物価指数</span><span class="desc">日本銀行公表。企業間で取引される商品（原材料・中間財）の価格変動</span></div>
@@ -410,6 +413,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">M1〜M3の違いは「通貨の種類」ではなく「対象とする金融機関の範囲の広さ」。ゆうちょ銀行・信用組合などをどこまで含めるかで段階的に範囲が広がっていく。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">M1</span><span class="combo">現金＋預金通貨</span><span class="desc">いつでも引き出せる現金通貨と普通・当座預金</span></div>
           <div class="row"><span class="name">M2</span><span class="combo">M1＋準通貨＋CD</span><span class="desc">対象は国内銀行・信用金庫等に限定（ゆうちょ銀行等は含まない）</span></div>
@@ -790,6 +794,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">6つの手段は歴史的に発展した順に並ぶ。政策金利操作・公開市場操作・預金準備率操作という伝統的な手段だけでは金利がゼロに近づくと打つ手がなくなるため、量的緩和・マイナス金利・YCCという非伝統的な手段が追加されてきた。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">公開市場操作</span><span class="combo">オペレーション</span><span class="desc">国債等の売買で資金量を調整。買いオペ＝資金供給（緩和）、売りオペ＝資金吸収（引締）</span></div>
           <div class="row"><span class="name">政策金利操作</span><span class="combo">無担保コールレート</span><span class="desc">中央銀行が誘導目標とする短期金利を操作</span></div>
@@ -1142,6 +1147,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">為替レートが「なぜ動くか」を説明する理論（購買力平価説・金利平価説）と、「動いた結果、貿易収支がどうなるか」を判定する条件（マーシャル＝ラーナー条件）は別の話。後者はさらに短期と長期で結果が違う（Jカーブ効果）点まで押さえる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">購買力平価説</span><span class="combo">PPP</span><span class="desc">二国間の物価上昇率の差で為替レートが決まる。自国の物価上昇率が高いほど自国通貨は減価</span></div>
           <div class="row"><span class="name">金利平価説</span><span class="combo"></span><span class="desc">内外の金利差が為替レートの予想変化率と等しくなるよう調整される</span></div>
@@ -1344,6 +1350,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">古典派の3つの考え方は別々の主張ではなく、いずれも「市場メカニズム（価格の伸縮性）を信頼すれば自動的に完全雇用が実現する」という一つの立場から出てくる帰結。ケインズ理論（A-18）とは正反対の前提に立つ点が対比の軸になる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">セイの法則</span><span class="combo">供給が需要を創造</span><span class="desc">生産物は生産者の所得となりそのまま支出に回るため、需要不足の不況は本来生じない</span></div>
           <div class="row"><span class="name">価格の伸縮性</span><span class="combo">自動調整</span><span class="desc">失業が発生しても賃金が下がり労働需要が回復、市場メカニズムで自動的に完全雇用が実現する</span></div>
@@ -1495,6 +1502,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">弾力性の大きさ（1より大きいか小さいか）によって、値下げが売上を増やすか減らすかが逆転する。極端なケース（0・∞）は需要曲線の形（垂直・水平）とそのまま対応している。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">弾力性＞1</span><span class="combo">弾力的</span><span class="desc">価格を下げると支出総額（売上）は増加する</span></div>
           <div class="row"><span class="name">弾力性＝1</span><span class="combo">単位弾力的</span><span class="desc">価格を変えても支出総額は変化しない</span></div>
@@ -1652,6 +1660,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">完全競争市場ならA-23の総余剰最大化（パレート効率性）が実現するはずだが、現実にはそれを崩す要因が4つある。うち独占・寡占と情報の非対称性は、A-31・A-29でそれぞれ詳しく扱う内容の入口にあたる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">外部性</span><span class="combo">外部不経済／外部経済</span><span class="desc">対価のやり取りなしに第三者に影響。悪影響（公害）は生産過大、良い影響（受粉）は過少になりがち</span></div>
           <div class="row"><span class="name">公共財</span><span class="combo">非競合性・非排除性</span><span class="desc">フリーライダー問題により民間市場だけでは十分な量が供給されにくい</span></div>
@@ -1761,6 +1770,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">価格が下がったとき需要量が増えるか減るかは、代替効果と所得効果という2つの力の合成で決まる。財の分類（上級財・下級財・ギッフェン財）は、この2つの力がどちらの向きに、どれだけ強く働くかの違いを表している。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">上級財（正常財）</span><span class="combo">所得↑→需要↑</span><span class="desc">代替効果・所得効果とも需要量を増やす方向。需要曲線は右下がり</span></div>
           <div class="row"><span class="name">下級財（劣等財）</span><span class="combo">所得↑→需要↓</span><span class="desc">所得効果は需要を減らす方向だが通常は代替効果が上回り、やはり右下がり</span></div>
@@ -1799,6 +1809,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">労働を増やすほど追加的な生産量がだんだん小さくなる「限界生産力逓減の法則」が、短期の費用曲線がU字型を描く理由の土台。TC・AC・AVC・MCは互いに計算式でつながっている。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">総費用（TC）</span><span class="combo">固定費用＋可変費用</span><span class="desc">固定費用は生産量ゼロでも発生し、生産量に応じて変わらない</span></div>
           <div class="row"><span class="name">平均費用（AC）</span><span class="combo">TC÷生産量</span><span class="desc">1単位あたりの総費用。限界生産力逓減の結果、短期はU字型になりやすい</span></div>
@@ -2027,6 +2038,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">独占企業もMR＝MCで生産量を決める点は完全競争と同じだが、右下がりの需要曲線に直面するため生産量過少・価格過大になる（独占の弊害）。企業が複数いる寡占市場では、これに企業同士の駆け引き（数量か価格か）と協調行動が加わる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">独占の弊害</span><span class="combo">価格支配者</span><span class="desc">完全競争と比べ生産量過少・価格過大。総余剰が減少し死荷重が発生</span></div>
           <div class="row"><span class="name">クールノー・モデル</span><span class="combo">数量競争</span><span class="desc">各企業が相手企業の生産量を所与として自社の最適生産量を決定</span></div>
@@ -2262,6 +2274,7 @@ svg text{font-family:"Noto Sans JP",sans-serif;}
         <div class="tag">経済学・経済政策</div>
       </div>
       <div class="body">
+        <p class="lede">市場に任せた結果生じる所得格差（A-34）を政府が是正する手段は、大きく「税でならす」（累進課税）と「給付でならす」（社会保障・負の所得税）の2系統に整理できる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">累進課税制度</span><span class="combo">垂直的公平</span><span class="desc">所得が高いほど税率も高くなる仕組み。所得税・相続税が代表例</span></div>
           <div class="row"><span class="name">社会保障制度</span><span class="combo"></span><span class="desc">年金・医療保険・生活保護・失業給付などを通じた所得移転</span></div>
