@@ -7,7 +7,7 @@ const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
   addTermRows, addRowList, addExamQuestion, drawBarChart,
-  INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
+  INK, INK_SOFT, RED, LINE, GHOST, WHITE, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
 const pres = newPres();
@@ -45,7 +45,11 @@ addDividerSlide(pres, {
     overview: "個人事業は開業が簡単な代わりに、失敗時のリスクが大きい。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "個人事業と法人の違いは、突き詰めると「登記の要否」ではなく「責任の範囲」に行き着く。表の3つの観点はすべて、開業のしやすさとリスクの大きさのトレードオフという1つの構図の表れ。",
+    { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "設立手続", desc: "個人事業：開業届のみ／法人：定款作成・認証・設立登記が必要" },
     { name: "責任の範囲", desc: "個人事業：無限責任（個人財産で返済義務）／法人：出資額の範囲の有限責任" },
     { name: "税金", desc: "個人事業：所得税（累進課税）／法人：法人税" },
@@ -68,6 +72,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "会社設立は定款作成から設立登記までの一連の手続きであり、登記によって会社が法的に成立する。絶対的記載事項と、成立までに別途定めればよい事項（発行可能株式総数）を区別できるかが問われる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "絶対的記載事項", v: "目的・商号・本店所在地・出資財産の価額（最低額）・発起人の氏名住所" },
     { k: "定款認証", v: "株式会社は公証人の認証が必要（合同会社は不要）" },
@@ -99,6 +108,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "会社を設立しても、業種によっては許認可や労働・社会保険の手続がなければ事業を開始できない。個々の業種の細部よりも、E-2（会社設立）に続く一連の流れとして全体像を押さえておけば足りる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "許認可", v: "飲食業（保健所）、建設業（建設業許可）、古物商（公安委員会）等" },
     { k: "労働・社会保険", v: "従業員雇用時は労災・雇用保険、健康保険・厚生年金への加入手続" },
@@ -127,11 +141,49 @@ addDividerSlide(pres, {
     overview: "経営法務で最頻出。包括承継か特定承継かで同意・保護手続の要否が変わる。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
-    { name: "事業譲渡", tag: "特定承継", desc: "個々の契約を個別移転。契約相手方の個別同意が必要。債権者保護手続の規定なし" },
-    { name: "会社分割", tag: "包括承継", desc: "契約上の地位も一括移転。相手方の同意は不要だが原則債権者保護手続が必要" },
-    { name: "合併", tag: "包括承継", desc: "消滅会社の権利義務全部が移転。同意不要、原則債権者保護手続が必要" },
-  ], { nameW: 1.8, tagW: 1.6, rowH: 1.2 });
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
+  let cy = 1.85;
+  s.addText(
+    "事業を他社に引き継がせる方法は、契約を一つずつ個別に移し替える「特定承継」と、権利義務をまとめて一括移転する「包括承継」に分かれる。どちらを選ぶかで、契約相手方の同意の要否・債権者保護手続の要否まで芋づる式に変わる。",
+    { x: proseX, y: cy, w: proseW, h: 0.85, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.28 }
+  );
+  cy += 0.92;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "事業譲渡", v: "特定承継。個々の契約を個別移転し契約相手方の個別同意が必要。債権者保護手続の規定なし", gap: 0.62 },
+    { k: "会社分割", v: "包括承継。契約上の地位も一括移転し相手方の同意は不要。原則債権者保護手続が必要", gap: 0.62 },
+    { k: "合併", v: "包括承継。消滅会社の権利義務全部が移転し同意不要。原則債権者保護手続が必要", gap: 0.62 },
+  ], { fontSize: 10.5, labelW: 1.5 });
+  cy += 0.05;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「事業譲渡も包括承継」「会社分割にも保護手続不要」は誤り。事業譲渡＝特定承継、会社分割・合併＝包括承継、と正確に対応させる。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  // two-box comparison: piecemeal transfer (事業譲渡) vs bulk transfer (会社分割・合併)
+  {
+    const boxY = 1.9, boxH = 3.9, boxW = (diagW - 0.15) / 2;
+    const leftX = diagX, rightX = diagX + boxW + 0.15;
+    s.addShape("rect", { x: leftX, y: boxY, w: boxW, h: boxH, fill: { color: GHOST }, line: { color: INK, width: 1 } });
+    s.addText([
+      { text: "事業譲渡\n", options: { bold: true, fontSize: 12, color: INK, breakLine: true } },
+      { text: "個々の契約を\nひとつずつ移転\n\n", options: { fontSize: 8.5, color: INK_SOFT, breakLine: true } },
+      { text: "「特定承継」\n", options: { bold: true, fontSize: 10.5, color: INK, breakLine: true } },
+      { text: "（個別の同意が必要）", options: { fontSize: 7.5, color: INK_SOFT } },
+    ], { x: leftX + 0.08, y: boxY, w: boxW - 0.16, h: boxH, align: "center", valign: "middle", fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+    s.addShape("rect", { x: rightX, y: boxY, w: boxW, h: boxH, fill: { color: RED }, line: { type: "none" } });
+    s.addText([
+      { text: "会社分割・合併\n", options: { bold: true, fontSize: 12, color: WHITE, breakLine: true } },
+      { text: "権利義務を\nまとめて移転\n\n", options: { fontSize: 8.5, color: WHITE, breakLine: true } },
+      { text: "「包括承継」\n", options: { bold: true, fontSize: 10.5, color: WHITE, breakLine: true } },
+      { text: "（同意は不要）", options: { fontSize: 7.5, color: WHITE } },
+    ], { x: rightX + 0.08, y: boxY, w: boxW - 0.16, h: boxH, align: "center", valign: "middle", fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+    s.addText("個別に移すか、一括で移すかの違い", {
+      x: diagX, y: boxY + boxH + 0.12, w: diagW, h: 0.3, align: "center",
+      fontFace: F_BODY, fontSize: 8, color: INK_SOFT, isTextBox: true, margin: 0,
+    });
+  }
+
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「事業譲渡も包括承継」「会社分割にも保護手続不要」は誤り。3点（承継の性質・同意要否・保護手続要否）をセットで覚える。",
@@ -211,7 +263,11 @@ addDividerSlide(pres, {
     overview: "再建型（民事再生・会社更生）と清算型（破産・解散清算）に大別される。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "会社が立ち行かなくなったときの手続は、会社を存続させる「再建型」と会社をたたむ「清算型」に大別される。同じ再建型でも民事再生と会社更生では対象と経営権の帰趨が異なる点が最大のひっかけ。",
+    { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "民事再生法", tag: "再建型", desc: "株式会社に限らず利用可。現経営陣が続投し再建（DIP型）" },
     { name: "会社更生法", tag: "再建型・株式会社限定", desc: "更生管財人が経営権を握り現経営陣は原則退任。大企業向け" },
     { name: "破産法", tag: "清算型", desc: "破産管財人が財産を換価し配当後、会社を消滅させる" },
@@ -234,6 +290,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "特許権は出願・審査を経て発生する権利で、新規性・進歩性という要件、そして職務発明という会社員ならではの論点が頻出する。E-9（著作権の職務著作）と対比すると理解が深まる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "存続期間", v: "出願日から20年（延長制度あり）" },
     { k: "新規性喪失の例外", v: "公開日から1年以内に手続を伴い出願すれば新規性を失わない扱い" },
@@ -332,6 +393,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "商標権は更新を重ねれば半永久的に維持できる点で、他の産業財産権と一線を画す。不使用取消審判の「3年」「何人も」という数字・請求権者の正確な暗記が得点に直結する。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "存続期間", v: "登録日から10年（更新登録で何度でも延長可能）" },
     { k: "先使用権", v: "登録前から使用し周知になっていれば使い続けられる" },
@@ -431,6 +497,11 @@ addDividerSlide(pres, {
   const proseX = 0.55, proseW = 7.4;
   const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "特許・実用新案・意匠・商標はいずれも産業財産権だが、起算点（出願日か登録日か）と年数がそれぞれ異なる。右図のとおり横断的に整理して覚えるのが最も効率的。",
+    { x: proseX, y: cy, w: proseW, h: 0.75, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.82;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "意匠権", v: "出願日から25年（2020年4月以降の出願）", gap: 0.42 },
     { k: "実用新案権", v: "出願日から10年。無審査主義（実体審査なし）", gap: 0.42 },
@@ -474,6 +545,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "著作権は特許と異なり出願・登録なしに創作と同時に発生する（無方式主義）。財産権としての著作権と、譲渡できない著作者人格権の違い、そして職務著作で「会社自身が著作者になる」という職務発明との対照性がポイント。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "著作権（財産権）", v: "複製権・上演権等。他人に譲渡できる" },
     { k: "著作者人格権", v: "氏名表示権・同一性保持権等。一身専属で譲渡できない" },
@@ -516,6 +592,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "著作権の保護期間は、著作者が個人（死後起算）か、無名・法人名義・映画（公表後起算）かで起算点が変わる。E-9で見た著作権の成立を前提に、「いつまで」保護されるかを扱う。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "原則", v: "著作者の死後70年" },
     { k: "無名・変名・法人名義", v: "公表後70年" },
@@ -546,7 +627,11 @@ addDividerSlide(pres, {
     overview: "著作権譲渡は「翻訳権等」が留保推定される点に注意。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "知的財産権は譲渡もライセンスもできるが、「著作権譲渡は一部権利が留保推定される」「実施権は登録の要否が種類で異なる」という、似て非なる2つの制度が同じ論点の中に同居している。E-6の職務発明の法定通常実施権も、この「通常実施権は登録不要」という原則の一例。",
+    { x: 0.55, y: 1.68, w: 12.25, h: 0.55, valign: "top", fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "著作権譲渡契約", desc: "「著作権を譲渡する」とのみ記載すると翻訳権・翻案権等は譲渡人に留保されたと推定される" },
     { name: "専用実施権", tag: "登録が効力発生要件", desc: "独占的な実施権。設定範囲では特許権者自身も実施不可。自ら差止請求も可能" },
     { name: "通常実施権", tag: "登録不要", desc: "非独占的で複数の相手に重ねて許諾可。当事者間の契約のみで効力発生" },
@@ -568,7 +653,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.7;
+  s.addText(
+    "営業秘密は特許のように出願・登録する制度ではなく、秘密管理性・有用性・非公知性という3要件をすべて満たして初めて法的保護を受ける。国際的な知財保護の土台となるパリ条約・PCTもあわせて押さえる。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "秘密管理性", v: "秘密として管理する意思が従業員等にも客観的に認識できる状態" },
     { k: "有用性", v: "事業活動に役立つ技術上・営業上の情報であること" },
@@ -601,6 +691,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "契約は書面がなくても申込みと承諾の意思表示が合致すれば成立するのが原則で、例外的に書面を要する契約類型（保証契約等）がある。定型約款は、この原則に「表示していれば合意とみなす」という民法改正の特則を加えたもの。",
+    { x: proseX, y: cy, w: proseW, h: 0.65, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.72;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "契約の成立", v: "「申込み」と「承諾」の意思表示が合致した時点。書面は原則不要" },
     { k: "例外", v: "保証契約は書面（電磁的記録を含む）を要件とする" },
@@ -630,7 +725,11 @@ addDividerSlide(pres, {
     overview: "上流工程は準委任、仕様確定後の開発・実装は請負が採用されやすい。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "中小企業の実務でよく登場する4つの契約類型は、それぞれ何を約束し何を約束しないかが異なる。特にシステム開発契約は「請負か準委任か」で受託側が負う義務の重さが変わる点が頻出。",
+    { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "秘密保持契約", tag: "NDA", desc: "M&A検討・共同開発の前段階でほぼ必ず締結。目的外使用・第三者開示を禁止" },
     { name: "請負契約", desc: "成果物の完成を約束。完成義務を負う（システム開発の仕様確定後の工程）" },
     { name: "準委任契約", desc: "業務の遂行を約束。完成義務までは負わない（要件定義等の上流工程）" },
@@ -653,7 +752,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.7;
+  s.addText(
+    "英文契約に特有の条項は、日本国内の契約書にはあまり登場しない独特な表現が多いが、趣旨を理解すれば選択肢の正誤を判断できる。とりわけ仲裁条項は、E-16で扱う紛争解決手続の選択肢の一つでもある。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "準拠法条項", v: "契約の解釈・履行にどの国の法律を適用するか" },
     { k: "仲裁条項", v: "非公開・原則一審制。仲裁判断は確定判決と同様の効力" },
@@ -684,7 +788,11 @@ addDividerSlide(pres, {
     overview: "「公開・非公開」「審級の有無」「合意か判断か」で4手続を整理する。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "紛争解決の4手続は「公開か非公開か」「審級があるか」「合意による解決か判断による解決か」という3つの軸の組み合わせで整理できる。少額訴訟は訴訟の中でも簡易・迅速な特別ルールという位置づけ。",
+    { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "訴訟", desc: "裁判所が判決で強制的に解決。原則公開、控訴・上告の審級制度あり" },
     { name: "少額訴訟", tag: "60万円以下", desc: "簡易裁判所。原則1回の期日で審理、即日判決。同一裁判所で年10回まで" },
     { name: "民事調停", desc: "話し合いによる合意で解決。調停調書は確定判決と同様の効力" },
@@ -707,7 +815,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.68;
+  s.addText(
+    "消滅時効・保証・契約不適合責任・共有・遺留分は一見バラバラの制度に見えるが、いずれも2020年施行の民法改正で規律が整理された分野であり、経営法務で最頻出。特に遺留分はE-23の事業承継特例の前提知識になる。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "消滅時効", v: "主観的起算点から5年、客観的起算点から10年のいずれか早い方" },
     { k: "個人根保証", v: "極度額を書面で定めないと無効。事業性融資は公正証書による保証意思確認が原則必要" },
@@ -808,7 +921,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.68;
+  s.addText(
+    "会社法上の会社は株式会社と持分会社に大別され、株式会社はさらに規模・上場の有無に応じて機関設計を選択する。とりわけ取締役会の運営ルールは、E-19やE-2とあわせて会社法分野の最頻出テーマを形成する。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "招集通知", v: "会日の1週間前までに発する。定款の定めにより短縮可能" },
     { k: "決議の定足数", v: "過半数の出席・過半数の賛成。特別利害関係取締役は定足数からも除外" },
@@ -909,7 +1027,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.68;
+  s.addText(
+    "取締役は会社に対して善管注意義務・忠実義務を負い、会社の計算（配当・資本組入れ）にも財源規制という制約がある。E-18の機関設計、E-23の株価算定とあわせて会社法分野を構成する。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "剰余金の配当", v: "原則株主総会決議。分配可能額を超える配当は不可（財源規制）" },
     { k: "資本金組入れ", v: "払込額の2分の1を超えない額は資本準備金にできる" },
@@ -952,7 +1075,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.7;
+  s.addText(
+    "金融商品取引法は、投資家保護のため証券の発行時（発行開示）と流通後（継続開示）の両方で情報開示を義務付ける。開示書類の具体名はE-26に出題が集約されるため、この論点は制度の全体像として理解しておく。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "発行開示", v: "新たに証券を発行する際の有価証券届出書等" },
     { k: "継続開示", v: "上場会社等が事業年度ごとに提出する有価証券報告書等" },
@@ -982,7 +1110,11 @@ addDividerSlide(pres, {
     overview: "不正競争防止法は号ごとに要件（周知性・著名性・混同の要否）が異なる。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "独占禁止法の課徴金減免制度（リニエンシー）と、不正競争防止法上の4類型はどちらも公正な競争秩序を守る制度だが、不正競争防止法は号ごとに周知性・著名性・混同の要否という要件が異なる点がポイント。",
+    { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "周知表示混同惹起", tag: "2条1項1号", desc: "周知の商品等表示と同一・類似を使用し混同を生じさせる行為（混同要件あり）" },
     { name: "著名表示冒用", tag: "2条1項2号", desc: "著名な商品等表示と同一・類似を使用する行為（混同は要件ではない）" },
     { name: "不正ドメイン取得", tag: "2条1項19号", desc: "不正の利益目的等でのドメイン名取得・使用（周知・著名性は不要）" },
@@ -1074,7 +1206,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.68;
+  s.addText(
+    "製造物責任法（PL法）は、通常の不法行為責任と異なり過失の証明なしに「欠陥」の証明だけで請求できる被害者保護の制度。消費者契約法・景品表示法は、それぞれ契約段階・表示段階で消費者を守る別の法律として併記される。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "PL法の対象", v: "製造・加工された動産。未加工農林畜水産物や不動産、ソフトウェア単体は対象外" },
     { k: "請求権の期間", v: "知った時から3年（生命・身体侵害は5年）、引渡しから10年" },
@@ -1105,11 +1242,62 @@ addDividerSlide(pres, {
     overview: "後継者の自社株式承継が遺留分侵害額請求を受けるリスクを防ぐ特例。",
     tag: "経営法務",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
-    { name: "除外合意", desc: "贈与株式・事業用資産の価額を遺留分算定の財産から除外する合意" },
-    { name: "固定合意", desc: "遺留分算定時の自社株式評価額を合意時の時価に固定（株式のみ）" },
-    { name: "効力発生要件", desc: "推定相続人全員の合意＋経済産業大臣の確認＋家庭裁判所の許可" },
-  ], { nameW: 2.0, tagW: 0, rowH: 1.2 });
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
+  let cy = 1.85;
+  s.addText(
+    "後継者に自社株式を集中して承継させると、他の相続人の遺留分を侵害しやすく、後継者が遺留分侵害額請求を受けて経営に必要な株式を手放しかねない。経営承継円滑化法の2つの合意は、右図のとおり遺留分の算定基準そのものを動かしてこのリスクを防ぐ特例。",
+    { x: proseX, y: cy, w: proseW, h: 1.0, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 1.08;
+  cy = addTermRows(s, proseX, cy, proseW, [
+    { k: "除外合意", v: "贈与株式・事業用資産の価額を遺留分算定の財産から除外する合意", gap: 0.6 },
+    { k: "固定合意", v: "遺留分算定時の自社株式評価額を合意時の時価に固定する合意（株式のみ）", gap: 0.6 },
+    { k: "効力発生要件", v: "推定相続人全員の合意＋経済産業大臣の確認＋家庭裁判所の許可", gap: 0.6 },
+  ], { fontSize: 10, labelW: 1.7 });
+  cy += 0.05;
+  s.addText([
+    { text: "ひっかけ：", options: { bold: true, color: RED } },
+    { text: "「除外＝計算から外す」「固定＝評価額を止める」を混同しない。固定合意は自社株式のみに使える。", options: { color: RED } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  // 3-bar comparison: 遺留分算定の基準となる評価額のイメージ（合意なし／固定合意／除外合意）。
+  // 数値は教科書に記載がないため捏造せず、相対的な高さのみで示す。
+  {
+    const baseY = 1.9, baseH = 4.0;
+    const axisY = baseY + baseH - 0.35;
+    s.addShape("line", { x: diagX, y: axisY, w: diagW, h: 0, line: { color: INK, width: 1.25 } });
+    const bars = [
+      { label: "合意なし", caption: "相続開始時の\n時価まで成長", h: 2.75, fill: GHOST, textColor: INK },
+      { label: "固定合意", caption: "合意時点で\n評価額を固定", h: 1.35, fill: GHOST, textColor: INK },
+      { label: "除外合意", caption: "対象外\n（ゼロ）", h: 0.12, fill: RED, textColor: RED },
+    ];
+    const barW = 0.95, gap = (diagW - bars.length * barW) / (bars.length + 1);
+    let bx = diagX + gap;
+    bars.forEach((b) => {
+      const by = axisY - b.h;
+      s.addShape("rect", {
+        x: bx, y: by, w: barW, h: Math.max(b.h, 0.03),
+        fill: { color: b.fill }, line: b.fill === GHOST ? { color: INK, width: 1 } : { type: "none" },
+      });
+      s.addText(b.caption, {
+        x: bx - 0.2, y: by - 0.5, w: barW + 0.4, h: 0.46,
+        fontFace: F_BODY, fontSize: 7.5, bold: b.fill !== GHOST, color: b.textColor,
+        align: "center", isTextBox: true, margin: 0, lineSpacingMultiple: 1.05,
+      });
+      s.addText(b.label, {
+        x: bx - 0.15, y: axisY + 0.06, w: barW + 0.3, h: 0.3,
+        fontFace: F_BODY, fontSize: 8.5, bold: b.fill !== GHOST, color: INK,
+        align: "center", isTextBox: true, margin: 0,
+      });
+      bx += barW + gap;
+    });
+    s.addText("遺留分算定の基準となる評価額のイメージ", {
+      x: diagX, y: axisY + 0.42, w: diagW, h: 0.3,
+      fontFace: F_BODY, fontSize: 8, color: INK_SOFT, align: "center", isTextBox: true, margin: 0,
+    });
+  }
+
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「除外＝計算から外す」「固定＝評価額を止める」を混同しない。固定合意は自社株式のみに使える。",
@@ -1128,6 +1316,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "知財関連の国際条約はE-12で扱った通りで、それ以外の代表格がウィーン売買条約（CISG）。準拠法を契約書で定めていない場合に自動的に適用されうる点が、E-15の準拠法条項の重要性を裏付ける。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "ウィーン売買条約（CISG）", v: "国際的な物品売買契約に適用されるルールを統一する条約" },
     { k: "準拠法条項との関係", v: "契約書で準拠法を定めていないと、両国が加盟国なら適用されうる" },
@@ -1158,6 +1351,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "企業が資金を調達する方法は、金融機関からの借入（間接金融）と、株式・社債で投資家から直接集める（直接金融）の2つに大別される。この基礎知識が、E-26の開示制度・E-27の上場手続の前提になる。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "間接金融", v: "金融機関からの借入" },
     { k: "直接金融", v: "株式・社債を発行して投資家から直接資金を集める" },
@@ -1188,7 +1386,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.7;
+  s.addText(
+    "金融商品取引法上の開示は、新規発行時の「発行開示」と、上場後継続的に行う「継続開示」の2つの場面に分かれる。E-20で見た開示規制の全体像を、具体的な書類名に落とし込んだのがこの論点。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "有価証券届出書", v: "発行開示。一定額以上の募集・売出しの際に提出" },
     { k: "有価証券報告書", v: "継続開示。事業年度終了後原則3か月以内に提出" },
@@ -1219,7 +1422,12 @@ addDividerSlide(pres, {
     tag: "経営法務",
   });
   const proseX = 0.55, proseW = 12.25;
-  let cy = 1.85;
+  let cy = 1.7;
+  s.addText(
+    "社債は「議決権のない借入」、株式公開（IPO）は「形式基準と実質基準の両方をクリアする」もの。E-25の直接金融、E-26の継続開示義務とあわせて、資本市場へのアクセスに関する一連の知識を締めくくる。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.52;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "社債", v: "議決権はなく、利息支払と元本償還を受ける権利を持つ" },
     { k: "社債管理者", v: "社債権者保護のため一定の場合に設置が必要（銀行・信託会社等）" },
