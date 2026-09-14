@@ -179,6 +179,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">コンピュータは5大装置（入力・記憶・演算・制御・出力）から成り立ち、演算と制御を担うのがCPU。記憶装置は「動作中に使うか、電源を切っても残すか」で主記憶と補助記憶に分かれ、補助記憶の信頼性を高める技術がRAIDである。</p>
             <div class="term-row"><span class="k">主記憶装置</span><span class="v">CPUが直接読み書きするRAM。電源を切るとデータが消える（揮発性）</span></div>
             <div class="term-row"><span class="k">補助記憶装置</span><span class="v">HDD・SSD等。電源を切ってもデータは消えない（不揮発性）</span></div>
             <div class="term-row"><span class="k">RAID1</span><span class="v">ミラーリング。1台故障しても継続稼働。実質容量は半分</span></div>
@@ -222,6 +223,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">ソフトウェアはハードウェアを直接管理するOSを土台に、その上にOSとアプリの中間で共通機能を提供するミドルウェア、さらにその上に利用者が使うアプリケーションソフトが積み重なる3層構造で理解する。</p>
             <div class="term-row"><span class="k">OS</span><span class="v">ハードウェアを管理し複数アプリが動く土台。メモリ管理・タスク管理を担う</span></div>
             <div class="term-row"><span class="k">ミドルウェア</span><span class="v">OSとアプリの中間層。DBMS・Webサーバソフト等、共通機能を提供</span></div>
             <div class="term-row"><span class="k">パッケージソフト</span><span class="v">既製品。オーダーメイド（個別開発）ソフトと対比される</span></div>
@@ -304,6 +306,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">プログラムを「わかりやすく、直しやすく」作るための考え方には、処理を3つの基本構造の組み合わせで表す構造化プログラミングと、データと処理をモノ（オブジェクト）としてまとめるオブジェクト指向という、系統の異なる2つのアプローチがある。</p>
             <div class="term-row"><span class="k">構造化の3構造</span><span class="v">順次・選択（分岐）・反復（繰り返し）の組み合わせで表現</span></div>
             <div class="term-row"><span class="k">カプセル化</span><span class="v">データと処理を1つのクラスにまとめ、外部から実装を隠す</span></div>
             <div class="term-row"><span class="k">継承</span><span class="v">親クラスの性質を子クラスが引き継ぐこと</span></div>
@@ -347,6 +350,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">複数のコンピュータをどう組み合わせてシステムを作るかという問いに対し、役割を分担して答えるのがクライアントサーバ方式とP2P方式、1台のハードウェアを論理的に分割して答えるのが仮想化・コンテナ技術である。</p>
             <div class="term-row"><span class="k">3層クライアントサーバ</span><span class="v">クライアント・アプリケーションサーバ・DBサーバで役割分担</span></div>
             <div class="term-row"><span class="k">P2P</span><span class="v">サーバを介さず対等なコンピュータ同士が直接通信</span></div>
             <div class="term-row"><span class="k">仮想化（ハイパーバイザー）</span><span class="v">1台の物理機に複数の独立した仮想環境を作る</span></div>
@@ -390,6 +394,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">情報処理の分類には「どこで処理するか」という処理場所の軸（集中処理・分散処理）と、「いつ処理するか」という処理タイミングの軸（リアルタイム処理・バッチ処理）があり、混同せず別の軸として整理する。</p>
             <div class="term-row"><span class="k">集中処理</span><span class="v">1台に処理を集約。管理は容易だが故障すると全体停止</span></div>
             <div class="term-row"><span class="k">分散処理</span><span class="v">複数台に処理を分散。柔軟だが管理は複雑</span></div>
             <div class="term-row"><span class="k">リアルタイム処理</span><span class="v">発生の都度即座に処理（例：ATM）</span></div>
@@ -433,6 +438,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">この論点は、画面や操作性の「使いやすさ」を測る2つの評価軸（ユーザビリティ・アクセシビリティ）と、画像・音声・動画などのマルチメディアデータを効率よく扱うための圧縮技術という、2つのテーマから成る。</p>
             <div class="term-row"><span class="k">ユーザビリティ</span><span class="v">目的の操作をどれだけ効率よく・迷わず行えるか（使いやすさ）</span></div>
             <div class="term-row"><span class="k">アクセシビリティ</span><span class="v">誰もが情報・機能に到達し利用できるか（利用の公平性）</span></div>
             <div class="term-row"><span class="k">可逆圧縮</span><span class="v">完全に元通りに復元できる（例：ZIP、PNG）</span></div>
@@ -514,13 +520,30 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">経営情報システム</div>
       </div>
       <div class="body">
-        <div class="icon-wrap">
+        <div class="split-wrap">
           <div class="prose">
+            <p class="lede">正規化はデータの重複や更新時の矛盾を防ぐため、表を第1正規形から第3正規形へと段階的に整理する手続き。右図のとおり、後の段階に進むほどより厳密な条件をクリアする必要がある。</p>
             <div class="term-row"><span class="k">第1正規形</span><span class="v">各セルに単一の値のみ。繰り返し項目がない</span></div>
             <div class="term-row"><span class="k">第2正規形</span><span class="v">非キー属性が主キーの一部にのみ依存する状態（部分関数従属）がない</span></div>
             <div class="term-row"><span class="k">第3正規形</span><span class="v">非キー属性同士が間接的に決まる関係（推移的関数従属）がない</span></div>
             <div class="term-row"><span class="k">ACID特性</span><span class="v">原子性・一貫性・独立性・永続性。トランザクションが満たすべき4性質</span></div>
             <p class="note"><b>ひっかけ：</b>主キーが単一属性の表は第1正規形なら自動的に第2正規形も満たす（部分関数従属は複合キーでのみ発生）。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 100">
+              <rect x="6" y="6" width="88" height="24" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="50" y="17" font-size="6" text-anchor="middle" fill="#171717" font-weight="700">第1正規形（1NF）</text>
+              <text x="50" y="26" font-size="5" text-anchor="middle" fill="#8a8a8a">繰り返し項目を排除</text>
+              <text x="50" y="38" font-size="7" text-anchor="middle" fill="#171717">↓</text>
+              <rect x="6" y="42" width="88" height="24" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="50" y="53" font-size="6" text-anchor="middle" fill="#171717" font-weight="700">第2正規形（2NF）</text>
+              <text x="50" y="62" font-size="5" text-anchor="middle" fill="#8a8a8a">部分関数従属を排除</text>
+              <text x="50" y="74" font-size="7" text-anchor="middle" fill="#171717">↓</text>
+              <rect x="6" y="78" width="88" height="20" fill="#FF3B1F"/>
+              <text x="50" y="89" font-size="6" text-anchor="middle" fill="#ffffff" font-weight="700">第3正規形（3NF）</text>
+              <text x="50" y="97" font-size="5" text-anchor="middle" fill="#ffffff">推移的関数従属を排除</text>
+            </svg>
+            <div class="diagram-caption-mini">正規化の3段階（下へ進むほど条件が厳しくなる）</div>
           </div>
         </div>
         <div class="freq-section">
@@ -613,6 +636,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">コンピュータ同士が通信するための共通ルールがプロトコルで、それぞれ「どの役割を担うか」で整理すると混同しにくい。TCP／UDPは信頼性と速度の、IPは経路選択の、DHCP・ARP・DNSはそれぞれ異なる補助的な役割を担う。</p>
             <div class="term-row"><span class="k">TCP／UDP</span><span class="v">TCP＝信頼性重視（再送制御あり）／UDP＝速度重視（再送制御なし）</span></div>
             <div class="term-row"><span class="k">IP</span><span class="v">宛先IPアドレスに基づく経路選択とアドレス指定</span></div>
             <div class="term-row"><span class="k">DHCP</span><span class="v">機器にIPアドレス等の設定情報を自動的に割り当てる</span></div>
@@ -710,6 +734,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">信頼性を高める設計の考え方は、故障が起きる前に防ぐか、起きた後にどう対応するかという視点で整理すると、似た名前の用語も混同しにくくなる。稼働率はMTBF（平均故障間隔）とMTTR（平均修復時間）という2つの時間指標から算出される。</p>
             <div class="term-row"><span class="k">フォールトアボイダンス</span><span class="v">部品の品質を高め故障自体を未然に防ぐ</span></div>
             <div class="term-row"><span class="k">フォールトトレランス</span><span class="v">多重化・冗長化で一部故障しても全体は動き続ける</span></div>
             <div class="term-row"><span class="k">フェイルセーフ／フェイルソフト</span><span class="v">セーフ＝安全側に導く／ソフト＝機能を縮退させ継続</span></div>
@@ -829,6 +854,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">情報システム戦略は、会社全体の設計図を描く全体最適化計画から個別システム化計画へと段階を踏んで具体化されるのが本来の姿で、この一連の流れを経営戦略と橋渡ししながら統括する役職がCIOである。</p>
             <div class="term-row"><span class="k">全体最適化計画</span><span class="v">会社全体の設計図。どの業務にどのシステムを配置するか</span></div>
             <div class="term-row"><span class="k">個別システム化計画</span><span class="v">全体最適化計画をもとに個別システムの開発を具体化</span></div>
             <div class="term-row"><span class="k">CIO</span><span class="v">最高情報責任者。経営戦略とIT戦略を橋渡しする役職</span></div>
@@ -871,6 +897,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">DXは単なるIT化ではなく、ビジネスプロセスを作り直すBPRや定型作業を自動化するRPAといった手段を通じて、業務・組織・ビジネスモデルそのものを変革することを指す。これを怠るリスクとして経産省が提起したのが「2025年の崖」である。</p>
             <div class="term-row"><span class="k">DX</span><span class="v">デジタル技術で業務プロセス・組織・ビジネスモデルそのものを変革</span></div>
             <div class="term-row"><span class="k">BPR</span><span class="v">既存業務を前提とせずゼロベースで業務プロセスを再設計</span></div>
             <div class="term-row"><span class="k">RPA</span><span class="v">定型的な事務作業をソフトウェアロボットに自動化させる</span></div>
@@ -990,12 +1017,45 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">経営情報システム</div>
       </div>
       <div class="body">
-        <div class="icon-wrap">
+        <div class="split-wrap">
           <div class="prose">
+            <p class="lede">ウォーターフォール型は工程を上流から下流へ一方向に進める開発手法。右図のとおり各設計工程と対応するテスト工程を線でつなぐとV字の形になることから、この対応関係をV字モデルと呼ぶ。</p>
             <div class="term-row"><span class="k">工程の流れ</span><span class="v">要件定義→外部設計→内部設計→プログラミング→テスト→運用保守</span></div>
             <div class="term-row"><span class="k">テストの順序</span><span class="v">単体テスト→結合テスト→システムテスト→運用テスト</span></div>
-            <div class="term-row"><span class="k">V字モデル</span><span class="v">要件定義⇔運用テスト、外部設計⇔システムテスト等の対応関係</span></div>
             <p class="note"><b>ひっかけ：</b>「要件変更に柔軟」は誤り。手戻りコストが大きく変更には弱い（柔軟なのはF-17のアジャイル型）。テスト順序の入れ替えにも注意。</p>
+          </div>
+          <div class="split-diagram">
+            <svg viewBox="0 0 100 100">
+              <text x="23" y="6" font-size="5" text-anchor="middle" fill="#171717" font-weight="700">設計工程</text>
+              <text x="77" y="6" font-size="5" text-anchor="middle" fill="#171717" font-weight="700">テスト工程</text>
+              <rect x="2" y="9" width="42" height="18" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="23" y="19.6" font-size="4.6" text-anchor="middle" fill="#171717" font-weight="700">要件定義</text>
+              <rect x="56" y="9" width="42" height="18" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="77" y="19.6" font-size="4.6" text-anchor="middle" fill="#171717" font-weight="700">運用テスト</text>
+              <line x1="44" y1="18" x2="56" y2="18" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="23" y="31" font-size="5" text-anchor="middle" fill="#8a8a8a">↓</text>
+              <text x="77" y="31" font-size="5" text-anchor="middle" fill="#8a8a8a">↑</text>
+              <rect x="2" y="32" width="42" height="18" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="23" y="42.6" font-size="4.6" text-anchor="middle" fill="#171717" font-weight="700">外部設計</text>
+              <rect x="56" y="32" width="42" height="18" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="77" y="42.6" font-size="4.6" text-anchor="middle" fill="#171717" font-weight="700">システムテスト</text>
+              <line x1="44" y1="41" x2="56" y2="41" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="23" y="54" font-size="5" text-anchor="middle" fill="#8a8a8a">↓</text>
+              <text x="77" y="54" font-size="5" text-anchor="middle" fill="#8a8a8a">↑</text>
+              <rect x="2" y="55" width="42" height="18" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="23" y="65.6" font-size="4.6" text-anchor="middle" fill="#171717" font-weight="700">内部設計</text>
+              <rect x="56" y="55" width="42" height="18" fill="#f4f4f4" stroke="#171717" stroke-width="1"/>
+              <text x="77" y="65.6" font-size="4.6" text-anchor="middle" fill="#171717" font-weight="700">結合テスト</text>
+              <line x1="44" y1="64" x2="56" y2="64" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="23" y="77" font-size="5" text-anchor="middle" fill="#8a8a8a">↓</text>
+              <text x="77" y="77" font-size="5" text-anchor="middle" fill="#8a8a8a">↑</text>
+              <rect x="2" y="78" width="42" height="18" fill="#FF3B1F"/>
+              <text x="23" y="88.6" font-size="4.6" text-anchor="middle" fill="#ffffff" font-weight="700">プログラミング</text>
+              <rect x="56" y="78" width="42" height="18" fill="#FF3B1F"/>
+              <text x="77" y="88.6" font-size="4.6" text-anchor="middle" fill="#ffffff" font-weight="700">単体テスト</text>
+              <line x1="44" y1="87" x2="56" y2="87" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,2"/>
+            </svg>
+            <div class="diagram-caption-mini">設計工程（左）とテスト工程（右）が１対１で対応するV字モデル</div>
           </div>
         </div>
         <div class="freq-section">
@@ -1034,6 +1094,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">アジャイル型開発は、要件を最初にすべて固定せず、小さな単位で計画・実装・テストを繰り返しながら柔軟に進める点が共通の思想で、スクラムの役割・イベント、XPのプラクティス、DevOpsの文化はいずれもこの思想を具体化した仕組みである。</p>
             <div class="term-row"><span class="k">デイリースクラム</span><span class="v">毎日の進捗共有（15分程度）。成果物提示はスプリントレビューの役割</span></div>
             <div class="term-row"><span class="k">スプリントレビュー</span><span class="v">完成機能をステークホルダーに見せフィードバックを得る場</span></div>
             <div class="term-row"><span class="k">ペアプログラミング</span><span class="v">XPのプラクティス。2人が1台の端末でレビューしながら開発</span></div>
@@ -1131,6 +1192,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">この論点は、開発前の計画づくり（WBSによる作業分解）から、進行中の進捗管理（PERT図・クリティカルパス）、稼働後の運用（インシデント管理・問題管理）まで、プロジェクトのライフサイクル全体にわたる管理手法を扱う。</p>
             <div class="term-row"><span class="k">ワークパッケージ</span><span class="v">WBS最下位の作業単位。進捗・コスト管理の最小単位</span></div>
             <div class="term-row"><span class="k">100％ルール</span><span class="v">上位作業を抜け漏れ・重複なく下位作業に分解する原則</span></div>
             <div class="term-row"><span class="k">クリティカルパス</span><span class="v">PERT図で最も時間のかかる作業経路（遅れると全体が遅れる）</span></div>
@@ -1228,6 +1290,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">情報セキュリティは「漏れない（機密性）」「正しい（完全性）」「使える（可用性）」の3要素を守ることが土台であり、そのうえで被害の大きさに応じてリスクへの対応方針（回避・低減・移転・受容）を選ぶ。</p>
             <div class="term-row"><span class="k">機密性</span><span class="v">許可された人だけが情報にアクセスできる（例：権限設定）</span></div>
             <div class="term-row"><span class="k">完全性</span><span class="v">情報が正確で不正に改ざん・破壊されていない（例：改ざん検知）</span></div>
             <div class="term-row"><span class="k">可用性</span><span class="v">必要なときに情報・システムを使える（例：二重化、バックアップ）</span></div>
@@ -1258,6 +1321,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">F-19で見た情報セキュリティの3要素を実現する具体的な技術・手順を扱う論点で、EPP・EDRは侵入の前後、暗号化・多要素認証は主に機密性を守る技術、ランサムウェア対策はそれらを組み合わせた実践例にあたる。</p>
             <div class="term-row"><span class="k">EPP／EDR</span><span class="v">EPP＝侵入の事前防止／EDR＝侵入後の検知・対応</span></div>
             <div class="term-row"><span class="k">共通鍵／公開鍵暗号</span><span class="v">共通鍵＝高速だが鍵配送に工夫要／公開鍵＝安全だが低速</span></div>
             <div class="term-row"><span class="k">多要素認証</span><span class="v">知識・所持・生体の複数要素を組み合わせる</span></div>
@@ -1355,6 +1419,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">完成したシステムの良し悪しは、機能性・信頼性など6つの観点で測る品質面と、ROI・TCOで測る経済面という、異なる2つの評価軸で判断する。</p>
             <div class="term-row"><span class="k">品質特性</span><span class="v">機能性・信頼性・使用性・効率性・保守性・移植性</span></div>
             <div class="term-row"><span class="k">効率性</span><span class="v">限られた資源（処理時間・メモリ）で効率よく動作するか</span></div>
             <div class="term-row"><span class="k">ROI</span><span class="v">投資額に対する利益の割合（経済性評価の指標）</span></div>
@@ -1397,6 +1462,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">この論点で扱う手法はいずれも、経営における意思決定を勘や経験だけに頼らず数理的なモデルで裏付けるという共通の目的を持つ。何を最適化したいか（利益・期間・待ち時間等）によって使うべき手法が異なる。</p>
             <div class="term-row"><span class="k">線形計画法</span><span class="v">制約条件下で利益最大化・コスト最小化する生産量の組合せを求める</span></div>
             <div class="term-row"><span class="k">デシジョンツリー分析</span><span class="v">選択肢と不確実な事象を樹木状に図示し期待値で判断</span></div>
             <div class="term-row"><span class="k">待ち行列理論</span><span class="v">窓口数やサービス時間から行列の長さ・待ち時間を予測</span></div>
@@ -1439,6 +1505,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">データ分析の手法は、「未知の値を予測する」回帰分析と、「多数の変数の背後にある構造やグループを発見する」多変量解析（主成分分析・因子分析・クラスター分析等）とに大別され、それぞれ目的が異なる点を区別する。</p>
             <div class="term-row"><span class="k">回帰分析</span><span class="v">説明変数から目的変数を予測する式を求める。2変数以上は重回帰分析</span></div>
             <div class="term-row"><span class="k">主成分分析</span><span class="v">多数の変数を情報量を保ったまま少数の合成変数に要約</span></div>
             <div class="term-row"><span class="k">因子分析</span><span class="v">観測変数の背後にある共通の要因（因子）を推定</span></div>
@@ -1482,6 +1549,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">機械学習は「正解データの有無」で教師あり学習・教師なし学習・強化学習に分類され、その発展形であるディープラーニングを土台に文章生成AIのLLMが登場した。LLMの実務利用ではハルシネーションのリスクを理解しておく必要がある。</p>
             <div class="term-row"><span class="k">教師あり学習</span><span class="v">正解データを使って学習し、新しいデータを予測（分類・回帰）</span></div>
             <div class="term-row"><span class="k">教師なし学習</span><span class="v">正解データなしにデータ自体のパターン・構造を発見</span></div>
             <div class="term-row"><span class="k">LLM</span><span class="v">大量の文章データを学習し文章生成・要約・翻訳を行うAIモデル</span></div>
