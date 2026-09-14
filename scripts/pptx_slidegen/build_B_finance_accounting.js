@@ -85,7 +85,11 @@ addDividerSlide(pres, {
     overview: "1年に1回、それまでの取引記録をまとめて財務諸表を作る一連のプロセス。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "決算は年に1回、この5ステップを順番に踏んで初めて正しい財務諸表が完成する。特に③精算表は試算表→決算整理→P/L・B/Sの流れを1枚で確認できるため、この一連の手順そのものが試験で頻出する。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.55, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.5, 12.25, [
     { name: "①試算表", desc: "各勘定科目の残高を一覧化し、借方合計＝貸方合計になっているか検算する" },
     { name: "②決算整理", desc: "減価償却など、期中の記録だけでは反映されない項目を修正する仕訳を行う" },
     { name: "③精算表", desc: "試算表→決算整理→P/L・B/Sへの流れを1枚にまとめる（試験で頻出）" },
@@ -149,7 +153,11 @@ addDividerSlide(pres, {
     overview: "1年間の経営成績を、儲けの種類ごとに5段階の利益で表す。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "1年間の儲けは一段階では終わらない。本業の儲け、財務活動を含めた儲け、臨時的な損益を含めた儲けと、性質の異なる収益・費用を順番に差し引きながら5段階の利益を積み上げていく。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.55, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.5, 12.25, [
     { name: "①売上総利益", tag: "売上高－原価", desc: "いわゆる「粗利」" },
     { name: "②営業利益", tag: "①－販管費", desc: "本業でどれだけ儲けたか" },
     { name: "③経常利益", tag: "②＋営業外損益", desc: "本業＋財務活動を含めた通常の儲け" },
@@ -297,7 +305,11 @@ addDividerSlide(pres, {
     overview: "株主・投資家・債権者への財務状況の開示。根拠法令とタイミングの対応が頻出。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "同じ決算内容でも、根拠となる法令（会社法・金融商品取引法・取引所規則）が異なる複数の書類で、速報性の高いものから順に段階的に開示される。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "決算短信", tag: "取引所規則", desc: "決算発表時に投資家へ最速で開示する速報資料" },
     { name: "有価証券報告書", tag: "金商法", desc: "事業年度ごとの最も詳細で公的な開示書類（決算短信より遅い）" },
     { name: "半期報告書", tag: "金商法", desc: "2024年4月以後、四半期報告書は廃止され第2四半期はこれに統合" },
@@ -428,7 +440,11 @@ addDividerSlide(pres, {
     overview: "材料費・労務費・経費の3要素。生産形態・算定タイミング・固定費の扱いで方法が分かれる。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "原価計算は1つの方法に決まっているわけではなく、「何を作るか」「いつ計算するか」「固定費を含めるか」という3つの独立した軸を組み合わせて選ぶ。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "個別 vs 総合", desc: "受注生産（造船・建設）は個別原価計算、大量見込生産（食品等）は総合原価計算" },
     { name: "実際 vs 標準", desc: "実際にかかったコストを事後集計するのが実際原価計算、あらかじめ標準原価を決め差異分析するのが標準原価計算" },
     { name: "全部 vs 直接", desc: "固定費を製品原価に含めるのが全部原価計算（制度会計）、含めないのが直接原価計算（社内判断・CVP分析用）" },
@@ -502,6 +518,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "「儲かっているか」を1つの指標だけで見るのではなく、分母の異なるROAとROEを使い分け、さらにROEをデュポン分解で3要素に切り分けることで、どこで稼いでいるかを読み解く。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "ROA", v: "当期純利益 ÷ 総資産 × 100（総資産全体でどれだけ効率よく利益を生んだか）" },
     { k: "ROE", v: "当期純利益 ÷ 自己資本 × 100（株主のお金でどれだけ効率よく利益を生んだか）" },
@@ -536,7 +557,11 @@ addDividerSlide(pres, {
     overview: "短期・長期それぞれの支払い能力を見る代表指標。分母・分子の組み合わせを正確に。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "安全性分析は短期（流動比率・当座比率）と長期（自己資本比率・固定長期適合率）それぞれの視点から、倒産せず返済を続けられる財務体力を複数の指標で多面的にチェックする。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.45, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.4, 12.25, [
     { name: "流動比率", tag: "流動資産÷流動負債", desc: "短期の支払い能力。200％以上が望ましいとされる" },
     { name: "当座比率", tag: "当座資産÷流動負債", desc: "棚卸資産を除いた厳しめの短期支払い能力" },
     { name: "自己資本比率", tag: "自己資本÷総資産", desc: "高いほど財務的に安定" },
@@ -560,6 +585,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "労働生産性は限られた人員でどれだけ付加価値を生み出せたかを測る指標で、控除法・加算法という2通りの計算方法があり、成長性分析（売上高増加率）と合わせて会社の伸びしろを評価する。",
+    { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.58;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "労働生産性", v: "付加価値額 ÷ 従業員数" },
     { k: "控除法", v: "付加価値＝売上高－外部購入価値（材料費・外注費）" },
@@ -597,6 +627,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 7.6;
   let cy = 1.85;
+  s.addText(
+    "売上高から変動費・固定費を差し引くと、損益分岐点・安全余裕率・営業レバレッジまで一連の指標を導ける。",
+    { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.63;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "限界利益", v: "売上高－変動費" },
     { k: "損益分岐点売上高", v: "固定費 ÷ 限界利益率" },
@@ -742,6 +777,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "標準原価と実際原価のズレ（原価差異）は「予算より多くかかった」で終わらせず、単価が違ったのか（価格差異）、使った量が違ったのか（数量差異）に分解して原因を切り分ける。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "価格差異", v: "(実際価格－標準価格) × 実際消費量" },
     { k: "数量差異", v: "(実際消費量－標準消費量) × 標準価格" },
@@ -816,6 +856,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "B-6で見た営業CFの計算に、設備投資による資金流出（投資CF）を反映させたものがFCF。CCCは、その資金効率を売上債権・棚卸資産・仕入債務の回転日数から日数換算した指標。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "FCF", v: "営業キャッシュ・フロー－投資キャッシュ・フロー（設備投資額）" },
     { k: "CCC", v: "売上債権回転日数＋棚卸資産回転日数－仕入債務回転日数（短いほど資金効率が良い）" },
@@ -929,7 +974,11 @@ addDividerSlide(pres, {
     overview: "「調達元（内部／外部）」と「資金の流れ（直接／間接）」は別々の分類軸。",
     tag: "財務・会計",
   });
-  drawQuadrant(s, 0.55, 1.95, 12.25, 4.3, {
+  s.addText(
+    "資金調達は「誰から集めるか（内部／外部）」と「どの経路で集めるか（直接／間接）」という独立した2つの軸で分類でき、どちらか一方だけでは整理できない。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  drawQuadrant(s, 0.55, 2.4, 12.25, 3.85, {
     cells: [
       { pos: "tl", label: "内部金融", sublabel: "内部留保、減価償却費" },
       { pos: "tr", label: "直接金融", sublabel: "株式・社債発行（投資家から直接）" },
@@ -956,6 +1005,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "会社の調達コストは負債と自己資本で性質が異なるため、まず個別に計算し、調達額の割合に応じて加重平均したものをWACC（会社全体の資本コスト）として使う。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "負債コスト", v: "税引前負債コスト×(1－実効税率)（税引後で考える）" },
     { k: "自己資本コスト", v: "配当割引モデル：1株当たり予想配当÷株価（成長率ゼロの場合）" },
@@ -1124,6 +1178,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "株主への利益還元には、現金を直接渡す配当と、自社株買いで発行済株式数を減らし1株あたりの価値を高める方法の2通りがあり、還元の仕方が異なる。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "配当", v: "利益の一部を現金で株主に分配する" },
     { k: "自社株買い", v: "発行済株式数が減りEPS・BPSが向上する（株価上昇で還元）" },
@@ -1160,6 +1219,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "資本構成と企業価値の関係は、税金を考えないMM理論の無関連命題から出発し、節税効果を加えた修正MM理論、さらに倒産コストとのバランスを考えるトレードオフ理論へと議論が発展する。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "MM理論（無税）", v: "資本構成を変えても企業価値は変化しない（無関連命題）" },
     { k: "修正MM理論", v: "負債の節税効果の分だけ企業価値は増加する" },
@@ -1196,6 +1260,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 7.6;
   let cy = 1.85;
+  s.addText(
+    "将来のお金は今のお金より価値が低い（貨幣の時間価値）。この割引計算がB-26のNPV法・IRR法など投資評価の土台になる。",
+    { x: proseX, y: cy, w: proseW, h: 0.55, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.63;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "現在価値", v: "CFn ÷ (1＋r)^n（rは割引率、nは年数）" },
   ], { fontSize: 10.5, labelW: 1.6, gap: 0.42 });
@@ -1238,6 +1307,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "貨幣の時間価値を考慮しない分、計算が簡単な2つの簡便法。まず投資の妥当性を素早くスクリーニングし、より精緻な判断はB-26のNPV法等に譲る、という位置づけで理解するとよい。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "回収期間法", v: "投資額 ÷ 年間キャッシュフロー（短いほど良いと判断）" },
     { k: "会計的投資利益率法（ARR）", v: "平均年間利益 ÷ 平均（初期）投資額 × 100" },
@@ -1274,6 +1348,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "B-24の割引計算を投資判断の意思決定基準に発展させたのがこの3手法。割引後の金額差で判断するNPV法、割引率そのもので判断するIRR法、投資額あたりの効率で判断するPI法と、切り口が異なる。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "NPV法", v: "将来CFの現在価値の合計－初期投資額。NPV＞0なら実行" },
     { k: "IRR法", v: "NPV＝0になる割引率。IRR＞資本コストなら実行" },
@@ -1375,6 +1454,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "B-24〜B-26の投資評価は将来CFが確定している前提だったが、実際には不確実性を伴うため、期待値法・感応度分析・デシジョンツリー分析で判断を補強する。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "期待値法", v: "複数シナリオの発生確率×CFの加重平均でNPV等を計算" },
     { k: "感応度分析", v: "前提条件を変化させNPV等の変化を分析、リスク要因を特定" },
@@ -1422,6 +1506,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "複数の証券を組み合わせて保有すると、個別銘柄固有のリスクは打ち消し合って減らせるが、市場全体が動くリスクだけはどれだけ分散しても消えずに残る。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "分散投資効果", v: "組み合わせる証券の相関係数（－1〜＋1）が低いほど大きい" },
     { k: "個別リスク", v: "分散投資で消せる、個別銘柄固有のリスク" },
@@ -1456,7 +1545,11 @@ addDividerSlide(pres, {
     overview: "効率的市場仮説の3段階と、市場リスクプレミアムをモデル化したCAPM。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "効率的市場仮説は、株価にどこまでの情報が織り込まれているかによってウィーク型からストロング型まで3段階に分かれ、段階が進むほどより多くの情報を使っても超過収益を得ることが難しくなる。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.55, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.5, 12.25, [
     { name: "ウィーク型", desc: "過去の株価・出来高情報。テクニカル分析でも超過収益は得られない" },
     { name: "セミストロング型", desc: "公表されている全情報。ファンダメンタルズ分析でも超過収益は得られない" },
     { name: "ストロング型", desc: "未公表の内部情報も含む全情報。インサイダー情報でも超過収益は得られない" },
@@ -1479,6 +1572,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "理論上の株価は将来受け取る配当の現在価値の合計（配当割引モデル）で計算できるが、実務ではより簡便なPER・PBRという相対指標も併用して割高・割安を判断する。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "配当割引モデル", v: "株価＝来期予想配当 ÷ (株主資本コスト－配当成長率)" },
     { k: "PER", v: "株価 ÷ 1株当たり利益（EPS）。低いほど割安とされることが多い" },
@@ -1515,6 +1613,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "企業価値の評価法にはDCF法・残余利益モデルなど複数あるが、いずれの方法でも企業価値から有利子負債を差し引いて初めて株主だけの取り分（株主価値）になる、という関係は共通している。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "DCF法", v: "将来FCFをWACCで割引いた事業価値＋非事業用資産＝企業価値" },
     { k: "残余利益モデル", v: "現在の純資産＋将来の残余利益（利益－資本コスト相当額）の現在価値" },
@@ -1549,7 +1652,11 @@ addDividerSlide(pres, {
     overview: "コスト・マーケット・インカムの3アプローチ。「唯一の正しい企業価値」はない。",
     tag: "財務・会計",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  s.addText(
+    "M&Aでの企業評価額は1つに定まらない。貸借対照表を基準にするコストアプローチ、類似企業と比較するマーケットアプローチ、将来の稼ぐ力を基準にするインカムアプローチという3つの切り口で、それぞれ違う金額が算出されうる。",
+    { x: 0.55, y: 1.85, w: 12.25, h: 0.65, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  addRowList(s, 0.55, 2.6, 12.25, [
     { name: "コストアプローチ", tag: "純資産方式", desc: "貸借対照表上の（時価）純資産を基準。客観的だが将来の収益力を反映しにくい" },
     { name: "マーケットアプローチ", tag: "乗数法", desc: "類似上場企業のPER・PBR等の倍率を対象会社の利益・純資産に掛ける" },
     { name: "インカムアプローチ", tag: "収益還元法・DCF法", desc: "将来の利益・CFを基準に評価。収益還元法＝利益÷資本還元率" },
@@ -1572,6 +1679,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 7.6;
   let cy = 1.85;
+  s.addText(
+    "オプションは「買う権利」（コール）・「売る権利」（プット）の取引。権利なので買い手は不利なら行使せず、損失はプレミアムに限定される。",
+    { x: proseX, y: cy, w: proseW, h: 0.7, fontFace: F_BODY, fontSize: 9.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.78;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "コール", v: "あらかじめ決めた価格で「買う権利」" },
     { k: "プット", v: "あらかじめ決めた価格で「売る権利」" },
@@ -1616,6 +1728,11 @@ addDividerSlide(pres, {
   });
   const proseX = 0.55, proseW = 12.25;
   let cy = 1.85;
+  s.addText(
+    "同じデリバティブでも先物取引・為替予約・スワップは「権利」ではなく「義務」であり、B-33のオプションのように不利な条件を放棄することはできない点が本質的な違い。",
+    { x: proseX, y: cy, w: proseW, h: 0.45, fontFace: F_BODY, fontSize: 11, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 0.53;
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "先物取引", v: "将来の期日に、あらかじめ決めた価格・数量で売買を約束する（義務）" },
     { k: "為替予約", v: "将来の外貨受払いレートを固定し為替変動リスクをヘッジ" },

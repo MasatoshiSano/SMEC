@@ -32,6 +32,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
 .prose p{margin:0;font-size:calc(var(--cw)*0.92/100);line-height:1.6;color:var(--ink);}
 .prose p b{font-weight:700;}
 .prose .lede{font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
+.body>p.lede{flex:0 0 auto;margin:0 0 calc(var(--cw)*1/100) 0;font-size:calc(var(--cw)*0.92/100);font-weight:400;line-height:1.6;color:var(--ink-soft);}
 .prose .term-row{display:flex;gap:calc(var(--cw)*0.9/100);font-size:calc(var(--cw)*0.88/100);line-height:1.5;align-items:baseline;}
 .prose .term-row .k{flex:0 0 auto;font-weight:700;color:var(--ink);white-space:nowrap;padding-right:calc(var(--cw)*0.55/100);border-right:2px solid var(--line);}
 .prose .term-row .v{color:var(--ink-soft);}
@@ -237,6 +238,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">決算は年に1回、この5ステップを順番に踏んで初めて正しい財務諸表が完成する。特に③精算表は試算表→決算整理→P/L・B/Sの流れを1枚で確認できるため、この一連の手順そのものが試験で頻出する。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">①試算表</span><span class="desc">各勘定科目の残高を一覧化し、借方合計＝貸方合計になっているか検算する</span></div>
           <div class="row"><span class="name">②決算整理</span><span class="desc">減価償却など、期中の記録だけでは反映されない項目を修正する仕訳を行う</span></div>
@@ -317,6 +319,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">1年間の儲けは一段階では終わらない。本業の儲け、財務活動を含めた儲け、臨時的な損益を含めた儲けと、性質の異なる収益・費用を順番に差し引きながら5段階の利益を積み上げていく。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">①売上総利益</span><span class="combo">売上高－売上原価</span><span class="desc">いわゆる「粗利」</span></div>
           <div class="row"><span class="name">②営業利益</span><span class="combo">①－販管費</span><span class="desc">本業でどれだけ儲けたか</span></div>
@@ -517,6 +520,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">同じ決算内容でも、根拠となる法令（会社法・金融商品取引法・取引所規則）が異なる複数の書類で、速報性の高いものから順に段階的に開示される。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">決算短信</span><span class="combo">取引所規則</span><span class="desc">決算発表時に投資家へ最速で開示する速報資料</span></div>
           <div class="row"><span class="name">有価証券報告書</span><span class="combo">金融商品取引法</span><span class="desc">事業年度ごとの最も詳細で公的な開示書類（決算短信より遅い）</span></div>
@@ -661,6 +665,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">原価計算は1つの方法に決まっているわけではなく、「何を作るか」「いつ計算するか」「固定費を含めるか」という3つの独立した軸を組み合わせて選ぶ。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">個別 vs 総合</span><span class="desc">受注生産（造船・建設）は個別原価計算、大量見込生産（食品等）は総合原価計算</span></div>
           <div class="row"><span class="name">実際 vs 標準</span><span class="desc">実際にかかったコストを事後集計するのが実際原価計算、あらかじめ標準原価を決め差異分析するのが標準原価計算</span></div>
@@ -773,6 +778,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">「儲かっているか」を1つの指標だけで見るのではなく、分母の異なるROAとROEを使い分け、さらにROEをデュポン分解で3要素に切り分けることで、どこで稼いでいるかを読み解く。</p>
             <div class="term-row"><span class="k">ROA</span><span class="v">当期純利益 ÷ 総資産 × 100（総資産全体でどれだけ効率よく利益を生んだか）</span></div>
             <div class="term-row"><span class="k">ROE</span><span class="v">当期純利益 ÷ 自己資本 × 100（株主のお金でどれだけ効率よく利益を生んだか）</span></div>
             <div class="term-row"><span class="k">デュポン分解</span><span class="v">ROE ＝ 売上高純利益率 × 総資産回転率 × 財務レバレッジ</span></div>
@@ -814,6 +820,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">安全性分析は短期（流動比率・当座比率）と長期（自己資本比率・固定長期適合率）それぞれの視点から、倒産せず返済を続けられる財務体力を複数の指標で多面的にチェックする。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">流動比率</span><span class="combo">流動資産÷流動負債</span><span class="desc">短期の支払い能力。200％以上が望ましいとされる</span></div>
           <div class="row"><span class="name">当座比率</span><span class="combo">当座資産÷流動負債</span><span class="desc">棚卸資産を除いた厳しめの短期支払い能力</span></div>
@@ -856,6 +863,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">労働生産性は限られた人員でどれだけ付加価値を生み出せたかを測る指標で、控除法・加算法という2通りの計算方法があり、成長性分析（売上高増加率）と合わせて会社の伸びしろを評価する。</p>
             <div class="term-row"><span class="k">労働生産性</span><span class="v">付加価値額 ÷ 従業員数</span></div>
             <div class="term-row"><span class="k">控除法</span><span class="v">付加価値＝売上高－外部購入価値（材料費・外注費）</span></div>
             <div class="term-row"><span class="k">加算法</span><span class="v">付加価値＝経常利益＋人件費＋金融費用＋賃借料＋租税公課＋減価償却費</span></div>
@@ -900,6 +908,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="split-wrap">
           <div class="prose">
+            <p class="lede">売上高から変動費・固定費を差し引くと、損益分岐点・安全余裕率・営業レバレッジまで一連の指標を導ける。</p>
             <div class="term-row"><span class="k">限界利益</span><span class="v">売上高－変動費</span></div>
             <div class="term-row"><span class="k">損益分岐点売上高</span><span class="v">固定費 ÷ 限界利益率</span></div>
             <div class="term-row"><span class="k">安全余裕率</span><span class="v">1－損益分岐点比率</span></div>
@@ -1050,6 +1059,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">標準原価と実際原価のズレ（原価差異）は「予算より多くかかった」で終わらせず、単価が違ったのか（価格差異）、使った量が違ったのか（数量差異）に分解して原因を切り分ける。</p>
             <div class="term-row"><span class="k">価格差異</span><span class="v">(実際価格－標準価格) × 実際消費量</span></div>
             <div class="term-row"><span class="k">数量差異</span><span class="v">(実際消費量－標準消費量) × 標準価格</span></div>
             <p><span class="label">具体例</span><br>標準：1kgあたり500円、1個2kg。実際：520円、2.2kg消費。価格差異＝(520－500)×2.2kg＝44円（不利）。数量差異＝(2.2－2)×500円＝100円（不利）。</p>
@@ -1144,6 +1154,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">B-6で見た営業CFの計算に、設備投資による資金流出（投資CF）を反映させたものがFCF（自由に使える現金）。CCCは、その資金効率を売上債権・棚卸資産・仕入債務の回転日数から日数換算した指標。</p>
             <div class="term-row"><span class="k">FCF</span><span class="v">営業キャッシュ・フロー－投資キャッシュ・フロー（設備投資額）</span></div>
             <div class="term-row"><span class="k">CCC</span><span class="v">売上債権回転日数＋棚卸資産回転日数－仕入債務回転日数（短いほど資金効率が良い）</span></div>
             <p><span class="label">具体例</span><br>当期純利益1,000万・減価償却費200万・売上債権150万増加・仕入債務80万増加・設備投資300万→営業CF1,130万、FCF＝1,130－300＝830万円。</p>
@@ -1258,6 +1269,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">資金調達は「誰から集めるか（内部／外部）」と「どの経路で集めるか（直接／間接）」という独立した2つの軸で分類でき、どちらか一方だけでは整理できない。</p>
         <div class="quadrant-wrap">
           <div class="quadrant-grid">
             <div class="cell"><span class="label">内部金融</span><span class="sub">内部留保、減価償却費</span></div>
@@ -1303,6 +1315,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">会社の調達コストは負債と自己資本で性質が異なるため、まず個別に計算し、調達額の割合に応じて加重平均したものをWACC（会社全体の資本コスト）として使う。</p>
             <div class="term-row"><span class="k">負債コスト</span><span class="v">税引前負債コスト×(1－実効税率)（税引後で考える）</span></div>
             <div class="term-row"><span class="k">自己資本コスト</span><span class="v">配当割引モデル：1株当たり予想配当÷株価（成長率ゼロの場合）</span></div>
             <div class="term-row"><span class="k">WACC</span><span class="v">負債コスト×(負債／総資本)＋自己資本コスト×(自己資本／総資本)</span></div>
@@ -1450,6 +1463,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">株主への利益還元には、現金を直接渡す配当と、自社株買いで発行済株式数を減らし1株あたりの価値を高める方法の2通りがあり、還元の仕方が異なる。</p>
             <div class="term-row"><span class="k">配当</span><span class="v">利益の一部を現金で株主に分配する</span></div>
             <div class="term-row"><span class="k">自社株買い</span><span class="v">発行済株式数が減りEPS・BPSが向上する（株価上昇で還元）</span></div>
             <div class="term-row"><span class="k">配当性向</span><span class="v">配当金総額 ÷ 当期純利益 × 100</span></div>
@@ -1493,6 +1507,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">資本構成（負債と自己資本の比率）と企業価値の関係は、税金を考えないMM理論の無関連命題から出発し、節税効果を加えた修正MM理論、さらに倒産コストとのバランスを考えるトレードオフ理論へと議論が発展する。</p>
             <div class="term-row"><span class="k">MM理論（無税）</span><span class="v">資本構成を変えても企業価値は変化しない（無関連命題）</span></div>
             <div class="term-row"><span class="k">修正MM理論</span><span class="v">負債の節税効果の分だけ企業価値は増加する</span></div>
             <div class="term-row"><span class="k">トレードオフ理論</span><span class="v">節税効果と倒産コストが釣り合う点に最適資本構成がある</span></div>
@@ -1536,6 +1551,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="split-wrap">
           <div class="prose">
+            <p class="lede">将来のお金は今のお金より価値が低い（貨幣の時間価値）。この割引計算がB-26のNPV法・IRR法など投資評価の土台になる。</p>
             <div class="term-row"><span class="k">現在価値</span><span class="v">CFn ÷ (1＋r)^n（rは割引率、nは年数）</span></div>
             <p><span class="label">具体例</span><br>割引率6％、2年後の220万円→現在価値＝220万円×0.88（複利現価係数）＝193.6万円。</p>
             <p class="note"><b>ひっかけ：</b>「何年後のCFに何年の係数を掛けるか」の取り違えが多発。CFの発生タイミングを必ずタイムラインで整理してから計算する。</p>
@@ -1591,6 +1607,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">貨幣の時間価値を考慮しない分、計算が簡単な2つの簡便法。まず投資の妥当性を素早くスクリーニングし、より精緻な判断はB-26のNPV法等に譲る、という位置づけで理解するとよい。</p>
             <div class="term-row"><span class="k">回収期間法</span><span class="v">投資額 ÷ 年間キャッシュフロー（短いほど良いと判断）</span></div>
             <div class="term-row"><span class="k">会計的投資利益率法（ARR）</span><span class="v">平均年間利益 ÷ 平均（初期）投資額 × 100</span></div>
             <p><span class="label">具体例</span><br>投資案A：初期投資1,000万・年200万→回収期間5年。投資案B：初期投資600万・年150万→回収期間4年。単純比較ではBが優先される。</p>
@@ -1620,6 +1637,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">B-24の割引計算を投資判断の意思決定基準に発展させたのがこの3手法。割引後の金額差で判断するNPV法、割引率そのもので判断するIRR法、投資額あたりの効率で判断するPI法と、切り口が異なる。</p>
             <div class="term-row"><span class="k">NPV法</span><span class="v">将来CFの現在価値の合計－初期投資額。NPV＞0なら実行</span></div>
             <div class="term-row"><span class="k">IRR法</span><span class="v">NPV＝0になる割引率。IRR＞資本コストなら実行</span></div>
             <div class="term-row"><span class="k">収益性指数法（PI）</span><span class="v">将来CFの現在価値 ÷ 初期投資額。PI＞1なら実行</span></div>
@@ -1715,6 +1733,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">B-24〜B-26の投資評価は将来CFが確定している前提だったが、実際には不確実性を伴うため、確率で加重平均する期待値法、前提の変化への感度を見る感応度分析、意思決定の分岐を樹形図で整理するデシジョンツリー分析で判断を補強する。</p>
             <div class="term-row"><span class="k">期待値法</span><span class="v">複数シナリオの発生確率×CFの加重平均でNPV等を計算</span></div>
             <div class="term-row"><span class="k">感応度分析</span><span class="v">前提条件を変化させNPV等の変化を分析、リスク要因を特定</span></div>
             <div class="term-row"><span class="k">デシジョンツリー分析</span><span class="v">意思決定と不確実な事象を樹形図に整理し期待値で最適経路を探る</span></div>
@@ -1780,6 +1799,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">複数の証券を組み合わせて保有すると、個別銘柄固有のリスクは打ち消し合って減らせるが、市場全体が動くリスクだけはどれだけ分散しても消えずに残る。</p>
             <div class="term-row"><span class="k">分散投資効果</span><span class="v">組み合わせる証券の相関係数（－1〜＋1）が低いほど大きい</span></div>
             <div class="term-row"><span class="k">個別リスク</span><span class="v">分散投資で消せる、個別銘柄固有のリスク</span></div>
             <div class="term-row"><span class="k">市場リスク</span><span class="v">分散投資でも消せない、市場全体が動くリスク（システマティック・リスク）</span></div>
@@ -1821,6 +1841,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">効率的市場仮説は、株価にどこまでの情報が織り込まれているかによってウィーク型からストロング型まで3段階に分かれ、段階が進むほどより多くの情報を使っても超過収益を得ることが難しくなる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">ウィーク型</span><span class="desc">過去の株価・出来高情報。テクニカル分析でも超過収益は得られない</span></div>
           <div class="row"><span class="name">セミストロング型</span><span class="desc">公表されている全情報。ファンダメンタルズ分析でも超過収益は得られない</span></div>
@@ -1862,6 +1883,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">理論上の株価は将来受け取る配当の現在価値の合計（配当割引モデル）で計算できるが、実務ではより簡便なPER・PBRという相対指標も併用して割高・割安を判断する。</p>
             <div class="term-row"><span class="k">配当割引モデル</span><span class="v">株価＝来期予想配当 ÷ (株主資本コスト－配当成長率)</span></div>
             <div class="term-row"><span class="k">PER</span><span class="v">株価 ÷ 1株当たり利益（EPS）。低いほど割安とされることが多い</span></div>
             <div class="term-row"><span class="k">PBR</span><span class="v">株価 ÷ 1株当たり純資産（BPS）。1倍未満は解散価値割れ</span></div>
@@ -1905,6 +1927,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">会社全体の価値（企業価値）の評価法にはDCF法・残余利益モデルなど複数あるが、いずれの方法でも企業価値から有利子負債を差し引いて初めて株主だけの取り分（株主価値）になる、という関係は共通している。</p>
             <div class="term-row"><span class="k">DCF法</span><span class="v">将来FCFをWACCで割引いた事業価値＋非事業用資産＝企業価値</span></div>
             <div class="term-row"><span class="k">残余利益モデル</span><span class="v">現在の純資産＋将来の残余利益（利益－資本コスト相当額）の現在価値</span></div>
             <div class="term-row"><span class="k">株主価値</span><span class="v">企業価値 － 有利子負債</span></div>
@@ -1946,6 +1969,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
         <div class="tag">財務・会計</div>
       </div>
       <div class="body">
+        <p class="lede">M&amp;Aでの企業評価額は1つに定まらない。貸借対照表を基準にするコストアプローチ、類似企業と比較するマーケットアプローチ、将来の稼ぐ力を基準にするインカムアプローチという3つの切り口で、それぞれ違う金額が算出されうる。</p>
         <div class="matrix-rows">
           <div class="row"><span class="name">コストアプローチ</span><span class="combo">純資産方式</span><span class="desc">貸借対照表上の（時価）純資産を基準。客観的だが将来の収益力を反映しにくい</span></div>
           <div class="row"><span class="name">マーケットアプローチ</span><span class="combo">乗数法</span><span class="desc">類似上場企業のPER・PBR等の倍率を対象会社の利益・純資産に掛ける</span></div>
@@ -1987,6 +2011,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="split-wrap">
           <div class="prose">
+            <p class="lede">オプションは「買う権利」（コール）・「売る権利」（プット）の取引。権利なので買い手は不利なら行使せず、損失はプレミアムに限定される。</p>
             <div class="term-row"><span class="k">コール・オプション</span><span class="v">あらかじめ決めた価格で「買う権利」</span></div>
             <div class="term-row"><span class="k">プット・オプション</span><span class="v">あらかじめ決めた価格で「売る権利」</span></div>
             <div class="term-row"><span class="k">プレミアム</span><span class="v">本質的価値＋時間的価値（満期に近づくほど時間的価値は減る）</span></div>
@@ -2041,6 +2066,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
       <div class="body">
         <div class="icon-wrap">
           <div class="prose">
+            <p class="lede">同じデリバティブでも先物取引・為替予約・スワップは「権利」ではなく「義務」であり、B-33のオプションのように不利な条件を放棄することはできない点が本質的な違い。</p>
             <div class="term-row"><span class="k">先物取引</span><span class="v">将来の期日に、あらかじめ決めた価格・数量で売買を約束する（義務）</span></div>
             <div class="term-row"><span class="k">為替予約</span><span class="v">将来の外貨受払いレートを固定し為替変動リスクをヘッジ</span></div>
             <div class="term-row"><span class="k">スワップ取引</span><span class="v">2つのキャッシュフローを交換（金利スワップ、通貨スワップ）</span></div>
