@@ -6,7 +6,7 @@
 const path = require("path");
 const {
   newPres, addCoverSlide, addDividerSlide, addHeader, addFreqBar, mkYears,
-  addTermRows, addRowList, addExamQuestion,
+  addTermRows, addRowList, addExamQuestion, drawProcessStepsVertical,
   INK, INK_SOFT, RED, LINE, GHOST, F_HEAD, F_BODY, F_MONO,
 } = require("./lib");
 
@@ -403,21 +403,43 @@ addDividerSlide(pres, {
     overview: "税制優遇の多くは業種問わず資本金1億円以下で一律判定される。",
     tag: "中小企業経営・政策",
   });
-  const proseX = 0.55, proseW = 12.25;
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "中小企業は信用力が乏しく間接金融（借入）に依存しがちなため、信用保証協会が保証人になる信用保証制度（詳細はG-24）が整備されている。税制面では、右図のとおり「どの法律の基準で判定するか」を混同しないことが最大のポイント。",
+    { x: proseX, y: cy, w: proseW, h: 0.9, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 1.0;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "間接金融依存", v: "中小企業は担保力・情報開示力が乏しく、直接金融より銀行借入への依存度が高い" },
-    { k: "信用保証制度", v: "信用保証協会が公的な保証人になり、金融機関が融資をしやすくする仕組み（G-24）" },
-    { k: "中小企業基本法の基準", v: "業種ごとに資本金または従業員数のいずれかで判定（G-1）" },
-    { k: "租税特別措置法の基準", v: "業種問わず資本金1億円以下で一律判定（中小法人）。軽減税率や交際費特例等に適用" },
-  ], { fontSize: 10, labelW: 2.5, gap: 0.38 });
+    { k: "間接金融依存", v: "担保力・情報開示力が乏しく、直接金融より銀行借入への依存度が高い" },
+    { k: "信用保証制度", v: "信用保証協会が公的な保証人になり融資を後押しする仕組み" },
+  ], { fontSize: 9.5, labelW: 2.1, gap: 0.42 });
   cy += 0.08;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「中小企業基本法上の中小企業者」と「租税特別措置法上の中小法人」は判定基準が異なる別概念。税制の話は必ずどちらの基準か確認する。", options: { color: RED } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  const boxY = 1.9, boxH = 3.9, boxW = (diagW - 0.15) / 2;
+  s.addShape("rect", { x: diagX, y: boxY, w: boxW, h: boxH, fill: { color: GHOST }, line: { color: INK, width: 1 } });
+  s.addText([
+    { text: "中小企業基本法\n\n", options: { bold: true, fontSize: 11, color: INK, breakLine: true } },
+    { text: "業種ごとに\n資本金 or 従業員数\n\n", options: { fontSize: 8.5, color: INK_SOFT, breakLine: true } },
+    { text: "「中小企業者」\n", options: { bold: true, fontSize: 9.5, color: INK, breakLine: true } },
+    { text: "（業種別・G-1）", options: { fontSize: 7.5, color: INK_SOFT } },
+  ], { x: diagX + 0.05, y: boxY, w: boxW - 0.1, h: boxH, align: "center", valign: "middle", fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  const box2X = diagX + boxW + 0.15;
+  s.addShape("rect", { x: box2X, y: boxY, w: boxW, h: boxH, fill: { color: RED }, line: { type: "none" } });
+  s.addText([
+    { text: "租税特別措置法\n\n", options: { bold: true, fontSize: 11, color: "FFFFFF", breakLine: true } },
+    { text: "業種問わず\n資本金1億円以下\n\n", options: { fontSize: 8.5, color: "FFFFFF", breakLine: true } },
+    { text: "「中小法人」\n", options: { bold: true, fontSize: 9.5, color: "FFFFFF", breakLine: true } },
+    { text: "（一律・税制優遇）", options: { fontSize: 7.5, color: "FFFFFF" } },
+  ], { x: box2X + 0.05, y: boxY, w: boxW - 0.1, h: boxH, align: "center", valign: "middle", fontFace: F_BODY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  s.addText("判定基準が違う「別の中小企業」の話", { x: diagX, y: boxY + boxH + 0.1, w: diagW, h: 0.3, align: "center", fontFace: F_BODY, fontSize: 8.5, color: INK_SOFT, isTextBox: true, margin: 0 });
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
@@ -597,21 +619,31 @@ addDividerSlide(pres, {
     overview: "デジタイゼーション→デジタライゼーション→DXという段階の違いを意識する。",
     tag: "中小企業経営・政策",
   });
-  const proseX = 0.55, proseW = 12.25;
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "DXは「ITツールを導入すること」自体ではなく、デジタル技術を土台に業務プロセスやビジネスモデルそのものを変革し、競争優位を確立する取り組みを指す。右図の3段階のうち、どこまで進んでいるかが問われる。",
+    { x: proseX, y: cy, w: proseW, h: 0.85, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
+  );
+  cy += 0.95;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "DX", v: "デジタル技術で業務プロセス・ビジネスモデルを変革し競争優位を確立" },
-    { k: "段階の違い", v: "デジタイゼーション（単純デジタル化）→デジタライゼーション（業務効率化）→DX（事業変革）の順に広がる" },
     { k: "DX認定制度", v: "企業のDXへの取り組み方針を経済産業省が認定する制度" },
-    { k: "中小企業のDXの遅れ", v: "大企業に比べ人材・予算の制約から取り組みが遅れがちと白書で繰り返し指摘される" },
-  ], { fontSize: 9.5, labelW: 2.4, gap: 0.4 });
+    { k: "中小企業のDXの遅れ", v: "大企業に比べ人材・予算の制約から取り組みが遅れがち" },
+  ], { fontSize: 10, labelW: 2.3, gap: 0.4 });
   cy += 0.1;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "ツール導入自体はDXの手段の一つ。業務プロセス・事業モデルの変革を伴って初めてDXと呼べる。", options: { color: RED } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  drawProcessStepsVertical(s, diagX, 1.9, diagW, 4.0, [
+    { num: "①", label: "デジタイゼーション", desc: "紙を単純にデータ化するだけ" },
+    { num: "②", label: "デジタライゼーション", desc: "個々の業務プロセスを効率化" },
+    { num: "③", label: "DX（事業変革）", desc: "組織・ビジネスモデルを変革" },
+  ]);
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
@@ -1046,20 +1078,62 @@ addDividerSlide(pres, {
     overview: "一般保証とセーフティネット保証・小口零細企業保証は別の仕組み。",
     tag: "中小企業経営・政策",
   });
-  const proseX = 0.55, proseW = 12.25;
+  const proseX = 0.55, proseW = 7.4;
+  const diagX = 8.25, diagW = 4.05;
   let cy = 1.85;
+  s.addText(
+    "一般保証は「担保の有無」で2つの枠に分かれ、さらに小規模事業者向けにもう一段小さい枠がある。3種類の限度額の大小関係を右図のイメージで押さえておくと、名称の入れ替えに惑わされにくい。",
+    { x: proseX, y: cy, w: proseW, h: 0.95, fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
+  );
+  cy += 1.05;
   cy = addTermRows(s, proseX, cy, proseW, [
-    { k: "普通保証", v: "限度額2億円以内" },
-    { k: "無担保保証", v: "限度額8,000万円以内。担保不要" },
     { k: "日本政策金融公庫", v: "国民生活事業（個人・小規模）と中小企業事業の2部門" },
-  ], { fontSize: 11, labelW: 2.1, gap: 0.42 });
+  ], { fontSize: 10.5, labelW: 2.1, gap: 0.42 });
   cy += 0.08;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "普通保証・無担保保証・無担保無保証人保証（小口零細企業保証）の限度額と名称を正確に区別する。", options: { color: RED } },
-  ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+
+  // 3-bar comparison diagram: 普通保証(2億円) > 無担保保証(8,000万円) > 小口零細(具体的な限度額の記載なし)
+  {
+    const baseY = 1.9, baseH = 4.0;
+    const axisY = baseY + baseH - 0.35;
+    s.addShape("line", { x: diagX, y: axisY, w: diagW, h: 0, line: { color: INK, width: 1.25 } });
+    const bars = [
+      { label: "普通保証", amount: "2億円", h: 2.9, fill: RED, textColor: "FFFFFF", amountColor: RED },
+      { label: "無担保保証", amount: "8,000万円", h: 1.55, fill: GHOST, textColor: INK, amountColor: INK },
+      { label: "無担保無保証人\n（小口零細）", amount: "", h: 0.85, fill: GHOST, textColor: INK, amountColor: INK },
+    ];
+    const barW = 0.95, gap = (diagW - bars.length * barW) / (bars.length + 1);
+    let bx = diagX + gap;
+    bars.forEach((b) => {
+      const by = axisY - b.h;
+      s.addShape("rect", {
+        x: bx, y: by, w: barW, h: b.h,
+        fill: { color: b.fill }, line: b.fill === GHOST ? { color: INK, width: 1 } : { type: "none" },
+      });
+      if (b.amount) {
+        s.addText(b.amount, {
+          x: bx - 0.15, y: by - 0.32, w: barW + 0.3, h: 0.28,
+          fontFace: F_BODY, fontSize: 9.5, bold: true, color: b.amountColor,
+          align: "center", isTextBox: true, margin: 0,
+        });
+      }
+      s.addText(b.label, {
+        x: bx - 0.1, y: axisY + 0.06, w: barW + 0.2, h: 0.5,
+        fontFace: F_BODY, fontSize: 7.5, color: INK,
+        align: "center", isTextBox: true, margin: 0, lineSpacingMultiple: 1.1,
+      });
+      bx += barW + gap;
+    });
+    s.addText("一般保証の限度額イメージ（担保不要な枠ほど小さい）", {
+      x: diagX, y: axisY + 0.62, w: diagW, h: 0.3,
+      fontFace: F_BODY, fontSize: 8, color: INK_SOFT, align: "center", isTextBox: true, margin: 0,
+    });
+  }
 
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
