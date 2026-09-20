@@ -184,6 +184,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">補助記憶装置</span><span class="v">HDD・SSD等。電源を切ってもデータは消えない（不揮発性）</span></div>
             <div class="term-row"><span class="k">RAID1</span><span class="v">ミラーリング。1台故障しても継続稼働。実質容量は半分</span></div>
             <div class="term-row"><span class="k">RAID5／RAID6</span><span class="v">最低3台／4台必要。1台／2台までの故障に耐える</span></div>
+            <p><span class="label">具体例</span><br>製造業A社の基幹システムのディスクをRAID5構成（4台）にしたところ、1台が故障しても生産ラインの稼働記録を止めずに済み、交換後は自動的にデータが復旧した。</p>
             <p class="note"><b>ひっかけ：</b>「主記憶装置は不揮発性」は誤り。RAIDの最低必要台数・耐障害台数を数値で入れ替える出題に注意。</p>
           </div>
         </div>
@@ -227,6 +228,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">OS</span><span class="v">ハードウェアを管理し複数アプリが動く土台。メモリ管理・タスク管理を担う</span></div>
             <div class="term-row"><span class="k">ミドルウェア</span><span class="v">OSとアプリの中間層。DBMS・Webサーバソフト等、共通機能を提供</span></div>
             <div class="term-row"><span class="k">パッケージソフト</span><span class="v">既製品。オーダーメイド（個別開発）ソフトと対比される</span></div>
+            <p><span class="label">具体例</span><br>社内システム部門が会計システムを刷新した際、土台となるOS（Windows Server）はそのまま維持し、共通機能を提供するミドルウェア（DBMS）だけを入れ替え、その上で稼働する会計パッケージソフトを導入した。</p>
             <p class="note"><b>ひっかけ：</b>「ミドルウェアはOSの一部」は誤り。OSとは独立した中間層のソフトウェア。パッケージは既製機能の範囲内でのみカスタマイズ可能。</p>
           </div>
         </div>
@@ -270,6 +272,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">二分探索</span><span class="desc">データがソート済みである前提で範囲を半分ずつ絞り込む（線形探索より高速）</span></div>
           <div class="row"><span class="name">計算量</span><span class="combo">O(log n)&lt;O(n)&lt;O(n²)</span><span class="desc">データ量が増えたときの処理時間の増え方。左ほど効率が良い</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>小売チェーンのB社の在庫照会システムは、商品コードで五十音順に並んだ在庫データから二分探索で瞬時に目的の商品を探し出す一方、直近の操作履歴は「元に戻す」機能のためスタック（LIFO）で保持している。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -311,6 +314,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">カプセル化</span><span class="v">データと処理を1つのクラスにまとめ、外部から実装を隠す</span></div>
             <div class="term-row"><span class="k">継承</span><span class="v">親クラスの性質を子クラスが引き継ぐこと</span></div>
             <div class="term-row"><span class="k">ポリモーフィズム</span><span class="v">同じ名前の命令でもオブジェクトの種類により処理内容が異なる性質</span></div>
+            <p><span class="label">具体例</span><br>受注管理システムを開発するシステム会社が、「受注」クラスに共通処理（在庫確認・金額計算）をまとめ、これを継承した「特急受注」クラスに納期短縮処理だけを追加し、開発工数を抑えつつ機能を拡張した。</p>
             <p class="note"><b>ひっかけ：</b>「カプセル化＝複数クラスの統合」は誤り。「継承＝機能の呼び出し」も不正確（親の性質を引き継ぐ関係）。</p>
           </div>
         </div>
@@ -355,6 +359,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">P2P</span><span class="v">サーバを介さず対等なコンピュータ同士が直接通信</span></div>
             <div class="term-row"><span class="k">仮想化（ハイパーバイザー）</span><span class="v">1台の物理機に複数の独立した仮想環境を作る</span></div>
             <div class="term-row"><span class="k">コンテナ技術</span><span class="v">仮想化より軽量にアプリ実行環境を分離（例：Docker）</span></div>
+            <p><span class="label">具体例</span><br>製造業A社は自社データセンターの1台の物理サーバを仮想化し、生産管理用と人事管理用の仮想サーバを同時に稼働させることで、ハードウェアの導入台数を抑えている。</p>
             <p class="note"><b>ひっかけ：</b>「P2Pはクライアントサーバ方式の一種」は誤り。仮想化は「マルチタスク」とは異なる独立OS環境の技術。</p>
           </div>
         </div>
@@ -399,6 +404,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">分散処理</span><span class="v">複数台に処理を分散。柔軟だが管理は複雑</span></div>
             <div class="term-row"><span class="k">リアルタイム処理</span><span class="v">発生の都度即座に処理（例：ATM）</span></div>
             <div class="term-row"><span class="k">バッチ処理</span><span class="v">ためて一括処理（例：夜間の給与計算）</span></div>
+            <p><span class="label">具体例</span><br>小売チェーンのB社のPOSレジは会計のたびに即座に在庫を更新するリアルタイム処理だが、月末の売上集計や仕入先への支払データ作成は夜間にまとめて処理するバッチ処理としている。</p>
             <p class="note"><b>ひっかけ：</b>「バッチ処理は結果がすぐ得られ緊急業務向き」は誤り。即時性が要るのはリアルタイム処理。</p>
           </div>
         </div>
@@ -443,6 +449,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">アクセシビリティ</span><span class="v">誰もが情報・機能に到達し利用できるか（利用の公平性）</span></div>
             <div class="term-row"><span class="k">可逆圧縮</span><span class="v">完全に元通りに復元できる（例：ZIP、PNG）</span></div>
             <div class="term-row"><span class="k">非可逆圧縮</span><span class="v">情報を間引き高圧縮率を実現、元に戻せない（例：JPEG、MP3）</span></div>
+            <p><span class="label">具体例</span><br>通販サイトを運営するC社は商品写真をJPEG形式（非可逆圧縮）で軽量化しつつ、視覚に障がいのある利用者のために画像へ代替テキストを設定し、ユーザビリティとアクセシビリティの両方に配慮している。</p>
             <p class="note"><b>ひっかけ：</b>「JPEGは可逆圧縮」は誤り。「ユーザビリティが高ければアクセシビリティも自動的に満たされる」も誤り。</p>
           </div>
         </div>
@@ -486,6 +493,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">IaaS</span><span class="desc">サーバ・ストレージ等インフラのみ提供。利用者がOS以上すべて管理</span></div>
           <div class="row"><span class="name">OSS</span><span class="desc">ソースコード公開。ライセンス条件下で改変・再配布が可能なことが多い</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>中小企業G社は自社でメールサーバを構築する代わりにクラウド型メールサービス（SaaS）を利用し、独自の業務アプリを開発する際は開発基盤が整ったPaaSを利用することで、サーバの保守負担を大きく減らしている。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -858,6 +866,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">全体最適化計画</span><span class="v">会社全体の設計図。どの業務にどのシステムを配置するか</span></div>
             <div class="term-row"><span class="k">個別システム化計画</span><span class="v">全体最適化計画をもとに個別システムの開発を具体化</span></div>
             <div class="term-row"><span class="k">CIO</span><span class="v">最高情報責任者。経営戦略とIT戦略を橋渡しする役職</span></div>
+            <p><span class="label">具体例</span><br>製造業A社は「多品種少量生産への対応力強化」という経営戦略のもとCIOが全体最適化計画を策定し、そこから生産管理システム刷新という個別システム化計画へと落とし込んだ。</p>
             <p class="note"><b>ひっかけ：</b>情報システム戦略は「経営戦略との整合性」の話で、F-16／F-17の「個別開発の進め方」とは異なる次元の論点。</p>
           </div>
         </div>
@@ -902,6 +911,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">BPR</span><span class="v">既存業務を前提とせずゼロベースで業務プロセスを再設計</span></div>
             <div class="term-row"><span class="k">RPA</span><span class="v">定型的な事務作業をソフトウェアロボットに自動化させる</span></div>
             <div class="term-row"><span class="k">2025年の崖</span><span class="v">レガシーシステムを放置すると生じうる多額の経済損失という経産省の問題提起</span></div>
+            <p><span class="label">具体例</span><br>卸売業D社は紙の伝票をExcelに入力するだけの単なるデジタル化にとどまらず、取引先とのデータ連携・自動集計まで一体化し、発注判断をデータに基づいて行えるようビジネスの進め方自体を変えるDXに取り組んだ。</p>
             <p class="note"><b>ひっかけ：</b>「DX＝紙をデータ化すること」は不十分。デジタル化を土台にしつつビジネスモデルまで変革する広い概念。</p>
           </div>
         </div>
@@ -943,6 +953,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">内部統制</span><span class="desc">経営者自身の責任で整備・運用する社内のルール・仕組み（COSOフレームワーク）</span></div>
           <div class="row"><span class="name">システム監査</span><span class="desc">開発・運用から独立した第三者（監査人）が適切性を客観的に検証する活動</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>社内システム部門はシステムの利用権限を「申請→上長の承認→管理者が付与」という内部統制の手順にしている。この仕組みが機能しているかを、開発を担当した部門とは独立した監査人が定期的にチェックするのがシステム監査。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -983,6 +994,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">CRM</span><span class="desc">顧客の属性・購買履歴を一元管理し関係を強化・維持（顧客側）</span></div>
           <div class="row"><span class="name">SFA／POS</span><span class="desc">SFA＝営業支援／POS＝販売時点での実績記録</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>小売チェーンのB社はPOSで得た販売データを仕入先とも共有し、SCMを通じて発注・生産計画に反映させる一方、会員カードの購買履歴はCRMで分析し、顧客ごとに異なるクーポンを配信している。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -1295,6 +1307,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">完全性</span><span class="v">情報が正確で不正に改ざん・破壊されていない（例：改ざん検知）</span></div>
             <div class="term-row"><span class="k">可用性</span><span class="v">必要なときに情報・システムを使える（例：二重化、バックアップ）</span></div>
             <div class="term-row"><span class="k">リスク対応</span><span class="v">回避・低減・移転・受容の4方針</span></div>
+            <p><span class="label">具体例</span><br>顧客データベースへのアクセスを担当者のみに限定するのは機密性の確保、不正な書き換えを検知する仕組みは完全性の確保、災害時にも止まらないようサーバを複数拠点に分散するのは可用性の確保にそれぞれ当たる。</p>
             <p class="note"><b>ひっかけ：</b>「漏れない＝機密性」「正しい＝完全性」「使える＝可用性」で判断。バックアップは主に可用性だが完全性にも関わりうる。</p>
           </div>
         </div>
@@ -1423,6 +1436,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">品質特性</span><span class="v">機能性・信頼性・使用性・効率性・保守性・移植性</span></div>
             <div class="term-row"><span class="k">効率性</span><span class="v">限られた資源（処理時間・メモリ）で効率よく動作するか</span></div>
             <div class="term-row"><span class="k">ROI</span><span class="v">投資額に対する利益の割合（経済性評価の指標）</span></div>
+            <p><span class="label">具体例</span><br>小売チェーンのB社は新しい在庫管理システムの導入後、「入力ミスが減ったか」（機能性）「現場が迷わず操作できるか」（使用性）という品質面と、「削減できた在庫ロス額に対する導入費用」（ROI）という経済面の両方で効果を検証した。</p>
             <p class="note"><b>ひっかけ：</b>「効率性」（資源利用の良さ）と「効果性」（目的達成度）を取り違えない。品質面と経済面は異なる評価軸。</p>
           </div>
         </div>
@@ -1466,6 +1480,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">線形計画法</span><span class="v">制約条件下で利益最大化・コスト最小化する生産量の組合せを求める</span></div>
             <div class="term-row"><span class="k">デシジョンツリー分析</span><span class="v">選択肢と不確実な事象を樹木状に図示し期待値で判断</span></div>
             <div class="term-row"><span class="k">待ち行列理論</span><span class="v">窓口数やサービス時間から行列の長さ・待ち時間を予測</span></div>
+            <p><span class="label">具体例</span><br>町工場E社は2種類の製品の原材料在庫という制約条件のもとで利益を最大化する生産量の組み合わせを線形計画法で求め、新製品開発の可否は市場の好不調とその発生確率をデシジョンツリーに整理して期待値で判断した。</p>
             <p class="note"><b>ひっかけ：</b>意思決定者が選べる分岐点は□（四角）、確率に左右される分岐点は○（丸）。線形計画法を「利益最大化限定」と覚えない。</p>
           </div>
         </div>
@@ -1510,6 +1525,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">主成分分析</span><span class="v">多数の変数を情報量を保ったまま少数の合成変数に要約</span></div>
             <div class="term-row"><span class="k">因子分析</span><span class="v">観測変数の背後にある共通の要因（因子）を推定</span></div>
             <div class="term-row"><span class="k">クラスター分析</span><span class="v">性質の似ているもの同士をグループに分類</span></div>
+            <p><span class="label">具体例</span><br>小売チェーンのB社は来店客数と気温のデータから回帰分析で関係式を求める一方、購買データをクラスター分析でいくつかの顧客グループに分類し、その結果をBIツールでダッシュボード化して経営者に提示している。</p>
             <p class="note"><b>ひっかけ：</b>「相関があれば必ず因果関係がある」は誤り（見せかけの相関の可能性）。主成分分析と因子分析の目的の違いに注意。</p>
           </div>
         </div>
@@ -1554,6 +1570,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">教師なし学習</span><span class="v">正解データなしにデータ自体のパターン・構造を発見</span></div>
             <div class="term-row"><span class="k">LLM</span><span class="v">大量の文章データを学習し文章生成・要約・翻訳を行うAIモデル</span></div>
             <div class="term-row"><span class="k">ハルシネーション</span><span class="v">AIが事実に基づかない誤情報をもっともらしく生成する現象</span></div>
+            <p><span class="label">具体例</span><br>金融機関F社は過去の融資先データ（返済できたか）を使い新規申込者の延滞リスクを予測する教師あり学習モデルを構築する一方、生成AIチャットボットに自社製品を質問すると実在しない機能をもっともらしく回答したため、回答内容は必ず事実確認する運用にしている。</p>
             <p class="note"><b>ひっかけ：</b>「教師あり学習＝正解データなし」は誤り（それは教師なし学習）。ハルシネーションは情報漏洩とは別の問題。</p>
           </div>
         </div>
