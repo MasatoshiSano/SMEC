@@ -615,14 +615,20 @@ addDividerSlide(pres, {
     "ポーターの3つの基本戦略（C-7）が「戦い方の種類」を示すのに対し、コトラーの競争地位別戦略は業界内での自社の順位に応じてどの戦い方を選ぶべきかを示す。同じ土俵で戦うと体力のある上位企業が有利なため、地位に応じた向き合い方の使い分けが必要になる。",
     { x: 0.55, y: 1.85, w: 12.25, h: 0.4, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
   );
-  addRowList(s, 0.55, 2.35, 12.25, [
+  let c8cy = addRowList(s, 0.55, 2.35, 12.25, [
     { name: "リーダー", tag: "業界1位", desc: "市場全体を拡大させ、他社の攻撃を防ぐ「全方位戦略」" },
     { name: "チャレンジャー", tag: "2位以下・体力あり", desc: "リーダーとの「差別化」戦略。同じ土俵で戦うと体力負けするため" },
     { name: "ニッチャー", tag: "特定分野に特化", desc: "特定のセグメントに経営資源を集中する「集中」戦略" },
     { name: "フォロワー", tag: "シェア・体力とも劣る", desc: "リーダーの成功パターンを模倣し、低コストで生き残る" },
-  ], { nameW: 2.1, tagW: 2.3 });
+  ], { rowH: 0.78, nameW: 2.1, tagW: 2.3 });
+  c8cy += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "家電量販店業界で例えると、最大手のA社（リーダー）は品揃えとサービス網の全方位的な拡充で市場全体を底上げし、2位のB社（チャレンジャー）は独自のポイント制度や配送サービスでA社との差別化を図る。地域密着のC社（ニッチャー）は特定エリアの御用聞き営業に資源を集中し、D社（フォロワー）はA社の成功施策を後追いで模倣しコストを抑えて生き残る。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: c8cy, w: 12.25, h: 0.92, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  c8cy += 1.00;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: c8cy, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：チャレンジャーが取るべきは「同質化（真似）」ではなく「差別化」。同質化はむしろフォロワーの戦略に近い考え方であり、混同しないこと。",
     years: mkYears(new Set(["'16", "'22", "'23"])),
   });
@@ -1125,14 +1131,20 @@ addDividerSlide(pres, {
     "C-15で学んだ「分業」と「調整」は、実際の組織では4つの代表的な型に姿を変える。どう部門分けするかによって、専門性と部門間の連携のどちらを取りやすいかが変わる。",
     { x: 0.55, y: 1.85, w: 12.25, h: 0.4, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
   );
-  addRowList(s, 0.55, 2.35, 12.25, [
+  let c16cy = addRowList(s, 0.55, 2.35, 12.25, [
     { name: "職能別組織", tag: "機能ごとに部門化", desc: "専門性が高まり効率的。ただし部門間連携が悪化しがちで全社視点の人材が育ちにくい" },
     { name: "事業部制組織", tag: "製品・地域ごと", desc: "事業ごとの意思決定が速く経営者人材が育ちやすい。ただし機能重複でコストがかさむ" },
     { name: "マトリックス組織", tag: "職能×事業の二重報告", desc: "柔軟に人材活用できる。ただし指揮命令系統が二重化し混乱を招きやすい" },
     { name: "ネットワーク組織", tag: "独立組織が緩やかに連携", desc: "柔軟性が高い。ただし統制が効きにくい" },
-  ], { nameW: 2.3, tagW: 2.6 });
+  ], { rowH: 0.78, nameW: 2.3, tagW: 2.6 });
+  c16cy += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "総合家電メーカーのA社が「テレビ事業部」「白物家電事業部」のように製品ごとに部門を分け、各事業部が独立採算で損益に責任を持つのは事業部制組織の典型。一方、新製品開発のたびに営業・技術・製造の各部門から人を集めてプロジェクトチームを組む中堅メーカーB社の体制は、マトリックス組織的な運用といえる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: c16cy, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  c16cy += 0.83;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: c16cy, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「組織は戦略に従う」（チャンドラー）が有名だが、逆に「戦略は組織に従う」という視点もある。どちらか一方が絶対ではない。",
     years: mkYears(new Set(["'16", "'17", "'20", "'21", "'22", "'23", "'25"])),
   });
@@ -2062,7 +2074,7 @@ addDividerSlide(pres, {
     "C-30で確認した「顧客視点」を具体的な計画に落とし込む2大フレームワークがSTPと4P。STPで「誰に」売るかを絞り込み、4Pで「どう売るか」を組み立てる、という順序で使う。",
     { x: 0.55, y: 1.85, w: 12.25, h: 0.4, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
   );
-  addRowList(s, 0.55, 2.35, 12.25, [
+  let c31cy = addRowList(s, 0.55, 2.25, 12.25, [
     { name: "セグメンテーション", tag: "STP①", desc: "市場を年齢・地域・ライフスタイルなどの基準で細分化する" },
     { name: "ターゲティング", tag: "STP②", desc: "細分化した市場（セグメント）の中から、自社が狙う市場を選ぶ" },
     { name: "ポジショニング", tag: "STP③", desc: "選んだ市場の中で、競合と比べた自社商品の独自の位置づけを明確にする" },
@@ -2070,9 +2082,15 @@ addDividerSlide(pres, {
     { name: "Price", tag: "4P②", desc: "いくらで売るか（価格設定）" },
     { name: "Place", tag: "4P③", desc: "どこで売るか（流通・チャネル）" },
     { name: "Promotion", tag: "4P④", desc: "どう知らせ、購買を促すか（広告・販促）" },
-  ], { rowH: 0.52, nameW: 2.6, tagW: 1.2 });
+  ], { rowH: 0.43, nameW: 2.6, tagW: 1.2 });
+  c31cy += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "健康食品メーカーA社が新しい機能性ドリンクを売り出す場合、まず市場を「働き盛りの30〜40代」に絞り込み（セグメンテーション）、その中でも「デスクワーク中心で運動不足の層」を狙い（ターゲティング）、「手軽に飲めて集中力を高める」という独自の立ち位置を打ち出す（ポジショニング）のがSTP。その上でパッケージ・価格・コンビニ限定の販売チャネル・SNS広告を組み立てるのが4P。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: c31cy, w: 12.25, h: 0.92, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  c31cy += 0.98;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: c31cy, rank: "A", rankLabel: "最頻出論点",
     related: "関連：C-2 アンゾフの成長マトリクス（「誰に」「何を」の整理の仕方が共通する）。",
     years: mkYears(new Set(["'17", "'18", "'19", "'20", "'24"])),
   });
@@ -2223,14 +2241,20 @@ addDividerSlide(pres, {
     "ここからはマーケティングの考え方を特定分野へ応用する各論に入る（C-33のCRMに続く2つ目）。モノ（有形財）と違い、サービス（無形財）には4つの特有の性質があり、それぞれが独自の課題を生む。",
     { x: 0.55, y: 1.85, w: 12.25, h: 0.45, fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let c34cy = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "無形性", tag: "形がない", desc: "事前に確認・試すことができない" },
     { name: "同時性", tag: "生産＝消費", desc: "提供と消費が同時に起こる（例：美容院の施術）" },
     { name: "非均質性", tag: "ばらつく", desc: "提供者や状況によって品質にばらつきが出る" },
     { name: "消滅性", tag: "在庫できない", desc: "売れ残った提供機会は後から売ることができない（例：空席のまま出発した飛行機の座席）" },
-  ], { nameW: 2.0, tagW: 2.1 });
+  ], { rowH: 0.78, nameW: 2.0, tagW: 2.1 });
+  c34cy += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "美容サロンチェーンA社のカット技術は、その場で顧客に提供されると同時に消費され（同時性）、事前に試すことができない（無形性）。担当スタイリストによって仕上がりに差が出ることがあり（非均質性）、その日に予約が埋まらなかった時間枠は後から売ることができない（消滅性）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: c34cy, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  c34cy += 0.83;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: c34cy, rank: "A", rankLabel: "最頻出論点",
     related: "関連：近年は「製造業のサービス化」（機械を売るだけでなく稼働監視サービスまで提供する等）も重要テーマ。",
     years: mkYears(new Set(["'17", "'18", "'19", "'20", "'22", "'25"])),
   });
