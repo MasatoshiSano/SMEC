@@ -163,7 +163,11 @@ addDividerSlide(pres, {
     { name: "③経常利益", tag: "②＋営業外損益", desc: "本業＋財務活動を含めた通常の儲け" },
     { name: "④税引前当期純利益", tag: "③＋特別損益", desc: "臨時的な損益も含めた最終的な儲け" },
     { name: "⑤当期純利益", tag: "④－法人税等", desc: "株主に帰属する最終利益" },
-  ], { nameW: 2.7, tagW: 1.8, rowH: 0.78 });
+  ], { nameW: 2.7, tagW: 1.8, rowH: 0.58 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社：売上高5,000万円・売上原価2,000万円・販管費2,500万円・営業外収益10万円・営業外費用60万円・特別損失50万円・法人税等120万円→①3,000万円②500万円③450万円④400万円⑤280万円。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: 5.55, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「支払利息増で経常利益は落ちたが営業利益は好調」→本業は問題なく財務体質に課題、と読み解けるかがポイント。",
@@ -241,6 +245,11 @@ addDividerSlide(pres, {
     { k: "仕入債務の増加", v: "支払いを先延ばしできている → 加算" },
   ], { fontSize: 11.5, labelW: 2.3, gap: 0.4 });
   cy += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社：当期純利益300万円、減価償却費50万円、売上債権40万円増加、棚卸資産20万円増加、仕入債務30万円増加→営業CF＝300＋50－40－20＋30＝320万円。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.63;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -315,6 +324,10 @@ addDividerSlide(pres, {
     { name: "半期報告書", tag: "金商法", desc: "2024年4月以後、四半期報告書は廃止され第2四半期はこれに統合" },
     { name: "計算書類", tag: "会社法", desc: "株主総会に提出するB/S・P/L等（会社法上の開示義務）" },
   ], { nameW: 2.4, tagW: 1.6, rowH: 0.78 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "上場企業A社の決算発表当日、投資家はまず最も速報性が高い「決算短信」を確認し、詳細なリスク情報・役員報酬等を知りたい場合は後日提出される「有価証券報告書」で確認する、という使い分けが一般的。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: 5.6, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「根拠法令」と「開示タイミング」の対応関係が問われやすい。2024年度の四半期報告書廃止という制度変更も要注意。",
@@ -448,7 +461,11 @@ addDividerSlide(pres, {
     { name: "個別 vs 総合", desc: "受注生産（造船・建設）は個別原価計算、大量見込生産（食品等）は総合原価計算" },
     { name: "実際 vs 標準", desc: "実際にかかったコストを事後集計するのが実際原価計算、あらかじめ標準原価を決め差異分析するのが標準原価計算" },
     { name: "全部 vs 直接", desc: "固定費を製品原価に含めるのが全部原価計算（制度会計）、含めないのが直接原価計算（社内判断・CVP分析用）" },
-  ], { nameW: 2.3, rowH: 1.2 });
+  ], { nameW: 2.3, rowH: 1.0 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社が材料費200万円・労務費150万円・経費50万円をかけ10,000個生産→原価合計400万円、1個あたり400円。定番品は総合原価計算、少量受注の特注品は個別原価計算というように製品ごとに使い分ける。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: 5.5, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：全部＝固定費を含める、直接＝含めない、の一点に集約される違い。財務諸表作成には全部原価計算のみが認められる。",
@@ -567,6 +584,10 @@ addDividerSlide(pres, {
     { name: "自己資本比率", tag: "自己資本÷総資産", desc: "高いほど財務的に安定" },
     { name: "固定長期適合率", tag: "固定資産÷(自己資本+固定負債)", desc: "100％超は短期資金で固定資産を賄う危険な状態" },
   ], { nameW: 2.1, tagW: 3.1, rowH: 0.78 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売業A社（流動資産1,300万・流動負債500万・固定資産2,000万・固定負債1,000万・純資産1,800万・総資産3,300万）→流動比率260％、自己資本比率約54.5％、固定長期適合率約71.4％（100％以下で安全な状態）。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: 5.7, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：固定比率が100％超でも固定長期適合率が100％以下なら直ちに危険ではない。",
@@ -1553,7 +1574,11 @@ addDividerSlide(pres, {
     { name: "ウィーク型", desc: "過去の株価・出来高情報。テクニカル分析でも超過収益は得られない" },
     { name: "セミストロング型", desc: "公表されている全情報。ファンダメンタルズ分析でも超過収益は得られない" },
     { name: "ストロング型", desc: "未公表の内部情報も含む全情報。インサイダー情報でも超過収益は得られない" },
-  ], { nameW: 2.4, rowH: 1.2 });
+  ], { nameW: 2.4, rowH: 1.0 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売業A社の株価が公表済みの決算情報をすべて織り込んでいるなら（セミストロング型）、有価証券報告書を分析するだけで継続的に市場平均を上回る利益を得ることはできない。実際の株式市場はおおむねセミストロング型に近いとされる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: 5.55, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "CAPM：自己資本コスト＝リスクフリー・レート＋β×市場リスクプレミアム。具体例：2％＋1.5×(8％－2％)＝11％。",
