@@ -86,7 +86,12 @@ addDividerSlide(pres, {
     { k: "ERP", v: "会計・人事・生産・販売を1システムで統合管理" },
     { k: "SCM", v: "複数の会社をまたぐ調達〜販売の供給連鎖全体を最適化" },
   ], { fontSize: 11, labelW: 1.8, gap: 0.42 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "自動車部品メーカーA社は、組立ラインの部品置き場が減った分だけ「かんばん」を使って前工程の加工ラインに生産指示を出し、必要な部品を必要な量だけ供給させることで、工程間に仕掛品の山を作らずに済んでいる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -186,11 +191,16 @@ addDividerSlide(pres, {
     overview: "「いつ作るか」「どれだけまとめて作るか」「どう配置するか」の3軸。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy07 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "見込／受注生産", desc: "需要予測で先に作る（欠品・過剰在庫リスク）／注文後に作る（リードタイム長い）" },
     { name: "個別／ロット／連続生産", desc: "1個ずつ専用計画／まとまった数量で段取替え／同一製品を継続生産" },
     { name: "ライン／セル生産", desc: "大量生産向き・柔軟性低い／多能工が一連工程を担当し多品種少量に強い" },
   ], { nameW: 2.6, rowH: 1.2 });
+  cy07 += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "デジタル機器を組み立てる電子機器メーカーB社は、需要変動が大きく機種も多い主力製品の生産をコンベアラインからセル生産方式に切り替え、繁忙期は稼働セル数を増やし閑散期は減らす（少人化）ことで需要変動に柔軟に対応している。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy07, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：セル生産は多能工化（D-11）が前提。「少人化」と「省人化」は別概念。",
@@ -504,11 +514,16 @@ addDividerSlide(pres, {
     overview: "計画通りに実行できているかを日々チェック・調整する3つの管理。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy17 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "現品管理", tag: "モノ", desc: "仕掛品・材料・製品が今どこに・どれだけあるかを把握し紛失・取り違えを防ぐ" },
     { name: "余力管理", tag: "能力", desc: "職場・設備の保有能力と実際の負荷を比較し過負荷・手待ちを調整する" },
     { name: "進捗管理", tag: "スケジュール", desc: "計画に対する実際の進み具合を把握し、遅れていれば挽回策を打つ" },
   ], { nameW: 2.0, tagW: 1.6, rowH: 1.2 });
+  cy17 += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "部品加工を行う工場C社では、ある注文の納期遅れが心配なとき、仕掛品が今どの工程にどれだけあるかを確認するのが現品管理、他の職場に応援を頼めないか確認するのが余力管理、予定に対し実際に何％進んでいるかを確認するのが進捗管理にあたる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy17, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：3つの管理対象を入れ替えた誤答が定番。名称と対象を正確に対応させる。",
@@ -562,12 +577,17 @@ addDividerSlide(pres, {
     overview: "貯蔵（計画的）と滞留（計画外）の違いが頻出のひっかけ。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy19 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "○ 加工", desc: "形状・性質を変える作業" },
     { name: "⇒ 運搬", desc: "位置を移動させる" },
     { name: "□／◇ 検査", desc: "□数量検査（個数・重量）／◇品質検査（規格適合）" },
     { name: "▽／D 貯蔵・滞留", desc: "▽計画的にためる／D計画外のやむを得ない足止め" },
   ], { nameW: 2.5, rowH: 0.9 });
+  cy19 += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "部品加工工場D社が工程分析表を作成したところ、形状を変える「加工」の時間は全体のわずか2割で、残り8割は運搬と在庫としての貯蔵だったことが判明し、運搬経路の短縮とレイアウト見直し（D-16のSLP）による改善に着手した。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy19, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "動作分析：ギルブレス夫妻のサーブリッグ分析（つかむ・運ぶ・探す等に分解）。D-13につながる。",
@@ -598,6 +618,11 @@ addDividerSlide(pres, {
     { text: "身体の使用／作業場の配置／工具・設備の設計、の3分類でムダのない動き方・環境を作る。", options: { color: INK } },
   ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 10.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   cy += 0.48;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある組立ラインでは、部品を離れた棚まで毎回取りに歩いていたが、作業台のすぐ手の届く位置に部品を再配置（動作経済の原則「作業場の配置」）した結果、そもそも歩いて取りに行くという動作自体をなくす（ECRSの「E：排除」）ことができた。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -665,7 +690,12 @@ addDividerSlide(pres, {
     { k: "減価償却", v: "取得原価を耐用年数にわたり費用配分（定額法／定率法）" },
     { k: "耐用年数", v: "税法上定められた使用可能期間の目安（物理的限界とは別）" },
   ], { fontSize: 11, labelW: 1.6, gap: 0.42 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "金属加工工業E社は、税法上の耐用年数がまだ残る旧型設備で故障が頻発し稼働率が低下していたため、未償却残高にとらわれず、新型設備への更新で得られる稼働率・良品率の改善効果と投資額を比較して更新の可否を判断した。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -773,7 +803,12 @@ addDividerSlide(pres, {
     { k: "常備品", v: "多くの製品に共通し継続的に使う資材（ネジ等）。発注点方式で管理" },
     { k: "非常備品", v: "特定注文にのみ使う資材（特注部品）。都度手配" },
   ], { fontSize: 11, labelW: 1.7, gap: 0.42 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "精密機器メーカーF社は、多くの製品で共通して使うネジや潤滑油を常備品として在庫を持ち発注点方式で自動発注する一方、特定の大口顧客向けのカスタム部品は非常備品として注文が入った都度だけ手配している。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -843,12 +878,17 @@ addDividerSlide(pres, {
     overview: "ABC分析で重要度にメリハリをつけ、EOQで最適な発注量を求める。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy28 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "ABC分析", desc: "金額順に並べ累積構成比でA・B・Cにランク分け（パレートの法則）" },
     { name: "定量発注方式", tag: "発注量固定", desc: "発注点で発注、発注間隔は需要により変動。Cランク向き" },
     { name: "定期発注方式", tag: "発注時期固定", desc: "一定間隔で需要予測に基づき発注量を変動。Aランク向き" },
     { name: "EOQ", tag: "経済的発注量", desc: "√(2×年間需要量×発注コスト÷単位あたり保管コスト)" },
   ], { nameW: 2.3, tagW: 2.0, rowH: 0.9 });
+  cy28 += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売業G社は取扱商品を金額の大きい順にABC分析し、売上の大半を占めるAランク品目は定期発注方式でこまめに需要予測・発注を行う一方、重要度の低いCランク品目は定量発注方式（発注点到達で自動発注）で管理の手間を抑えている。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy28, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：安全係数は高くするほど欠品リスクが減る。ダブルビン方式の発注量は補充点相当量。",
@@ -938,10 +978,15 @@ addDividerSlide(pres, {
     overview: "扱うデータの種類で2つの道具群を使い分ける。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy31 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "QC7つ道具", tag: "数値データ", desc: "パレート図・特性要因図・ヒストグラム・チェックシート・散布図・層別・管理図" },
     { name: "新QC7つ道具", tag: "言語データ", desc: "連関図法・親和図法・系統図法・マトリックス図法・PDPC法・アロー図法" },
   ], { nameW: 2.3, tagW: 1.9, rowH: 1.3 });
+  cy31 += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食品工場H社は、不良発生状況を数値データとしてパレート図やヒストグラムで分析する一方、現場作業員の気づき（言語データ）は連関図法・親和図法で整理し、原因の絞り込みから改善の優先順位付けまでの2つの道具群を使い分けて進めている。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy31, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：名称と特徴の組み合わせ入替が頻出。TQM＝全社的品質管理、ISO9000＝品質国際規格。",
@@ -1030,7 +1075,12 @@ addDividerSlide(pres, {
     { k: "資源有効利用促進法", v: "3Rの考え方に基づき資源の有効利用・リサイクルを促す" },
     { k: "ISO14000シリーズ", v: "環境マネジメントシステムの国際規格（ISO9000＝品質とは分野が異なる）" },
   ], { fontSize: 11, labelW: 2.4, gap: 0.42 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "印刷業I社は、工場から出る廃液や紙くずなどの産業廃棄物の処理を専門業者に委託する際、マニフェストを交付し、その廃棄物が最終処分まで適正に処理されたことを自ら確認・記録することで、排出事業者としての責任を果たしている。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1054,11 +1104,16 @@ addDividerSlide(pres, {
     overview: "まちづくり三法。大店立地法は中小小売業の保護が目的ではない。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy35 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "大店立地法", desc: "1,000㎡超の店舗新設時、周辺の生活環境（交通・騒音・廃棄物）への配慮を義務付け" },
     { name: "都市計画法", desc: "用途地域ごとに建てられる建物の用途を規制" },
     { name: "中心市街地活性化法", desc: "郊外大型店の出店等で衰退した中心市街地を活性化する支援策" },
   ], { nameW: 2.6, rowH: 1.2 });
+  cy35 += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンJ社が郊外に延床面積2,000㎡のショッピングセンターを出店する際は、まず都市計画法上その土地が店舗を建設できる用途地域かを確認し、次に大店立地法に基づき周辺の交通渋滞対策・騒音対策について自治体への届出と住民説明を行う。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy35, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：大店立地法の目的を「中小小売業者の保護」と誤解しない（旧大店法との違い）。",
@@ -1205,7 +1260,12 @@ addDividerSlide(pres, {
     { k: "商店街", v: "特定地域に自然発生的に形成された独立店舗の集まり" },
     { k: "業種／業態", v: "何を売るか（酒屋・米屋）／どう売るか（コンビニ・専門店）" },
   ], { fontSize: 11, labelW: 2.8, gap: 0.42 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "電化製品を扱う町の個人商店（業種でいう「電器店」）と、同じ電化製品を扱う郊外型の家電量販店では、同じ商品を扱っていても品揃えの幅・価格戦略・接客方法が大きく異なり、後者は「ディスカウントストア」という業態として区別される。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.78;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1264,11 +1324,16 @@ addDividerSlide(pres, {
     overview: "在庫リスクを仕入先側が負う特殊な仕入形態。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy41 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "随時仕入", desc: "必要な都度、その時の状況に応じて仕入れる" },
     { name: "一括大量仕入", desc: "まとめて大量仕入で単価を下げる（在庫リスク増）" },
     { name: "消化（売上）仕入", desc: "店頭商品が実際に売れた時点で仕入が成立（百貨店等）" },
   ], { nameW: 2.6, rowH: 1.2 });
+  cy41 += 0.12;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "百貨店K社のアパレル売場では、店頭に並べた商品の所有権を売れるまで仕入先に残す「消化仕入」を採用しており、商品が実際に売れた時点で初めて仕入が成立する。百貨店側は在庫リスクを負わずに幅広い品揃えを実現できる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy41, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "B", rankLabel: "直近10年で2回出題",
     related: "ひっかけ：「店頭に並べた時点で仕入成立」は誤り。実際に販売された時点で成立する。",
@@ -1360,7 +1425,12 @@ addDividerSlide(pres, {
     { k: "店内プロモーション", v: "POP広告・実演・試食など来店後の追加購買を促す活動" },
     { k: "リベート・共同販促", v: "メーカーの販売奨励金、小売店とメーカーの共同キャンペーン" },
   ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売店L社は、新商品のチラシを近隣住宅にポスティングして来店を促す店外プロモーションと、来店客に試食コーナーで商品の魅力を直接伝える店内プロモーションを組み合わせ、来店から購買までの流れを一貫して設計している。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1453,10 +1523,15 @@ addDividerSlide(pres, {
     overview: "DC（在庫型）とTCクロスドッキング（通過型）の2タイプ。",
     tag: "運営管理",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy48 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "DC", tag: "在庫型", desc: "商品を一定期間在庫として保管し注文に応じ出荷。欠品対応力高いが保管コスト大" },
     { name: "TC", tag: "通過型", desc: "在庫を持たず届いた荷物をすぐ仕分け出荷（クロスドッキング）。生鮮・日配品向き" },
   ], { nameW: 1.3, tagW: 1.5, rowH: 1.4 });
+  cy48 += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "コンビニ向け食品卸M社は、鮮度が重要な弁当・惣菜は工場から届いた商品をすぐ仕分けて各店舗へ出荷するTC（クロスドッキング型）の物流拠点を使い、日持ちする加工食品・日用品は一定期間まとめて在庫するDC型の物流拠点で管理している。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy48, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「TCは在庫スペースを大きく確保」は誤り。DC・TCは「在庫を持つか」を軸に区別する。",
@@ -1594,6 +1669,11 @@ addDividerSlide(pres, {
     { k: "トレーサビリティ", v: "生産〜加工〜流通〜販売までの経路を追跡できる仕組み" },
   ], { fontSize: 10.5, labelW: 2.3, gap: 0.38 });
   cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食肉加工業N社は、パッケージのバーコードから、その肉がどの牧場で生産され、いつ加工され、どの経路で店頭に並んだかを消費者がたどれるトレーサビリティの仕組みを整備している。アパレル小売O社では商品1点ごとに電子タグを取り付け、レジで複数点を一括読取して会計を素早く済ませている。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.73;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([

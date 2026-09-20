@@ -239,6 +239,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">かんばん方式</span><span class="v">後工程が使った分だけ前工程に指示する情報伝達の道具（プル型）</span></div>
             <div class="term-row"><span class="k">ERP</span><span class="v">会計・人事・生産・販売を1システムで統合管理</span></div>
             <div class="term-row"><span class="k">SCM</span><span class="v">複数の会社をまたぐ調達〜販売の供給連鎖全体を最適化</span></div>
+            <p><span class="label">具体例</span><br>自動車部品メーカーA社は、組立ラインの部品置き場が減った分だけ「かんばん」を使って前工程の加工ラインに生産指示を出し、必要な部品を必要な量だけ供給させることで、工程間に仕掛品の山を作らずに済んでいる。</p>
             <p class="note"><b>ひっかけ：</b>かんばん方式はJITを実現する道具であり、JITそのものではない。JIT（プル型）とMRP（D-8、プッシュ型）は対照的な考え方で混同しない。</p>
           </div>
         </div>
@@ -381,6 +382,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">個別／ロット／連続生産</span><span class="desc">1個ずつ専用計画／まとまった数量で段取替え／同一製品を継続生産（コスト低下、柔軟性低下）</span></div>
           <div class="row"><span class="name">ライン／セル生産</span><span class="desc">大量生産向き・柔軟性低い／多能工が一連工程を担当し多品種少量に強い</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>デジタル機器を組み立てる電子機器メーカーB社は、需要変動が大きく機種も多い主力製品の生産をコンベアラインからセル生産方式に切り替え、繁忙期は稼働セル数を増やし閑散期は減らす（少人化）ことで需要変動に柔軟に対応している。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -736,6 +738,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">余力管理</span><span class="combo">能力</span><span class="desc">職場・設備の保有能力と実際の負荷を比較し過負荷・手待ちを調整する</span></div>
           <div class="row"><span class="name">進捗管理</span><span class="combo">スケジュール</span><span class="desc">計画に対する実際の進み具合を把握し、遅れていれば挽回策を打つ</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>部品加工を行う工場C社では、ある注文の納期遅れが心配なとき、仕掛品が今どの工程にどれだけあるかを確認するのが現品管理、他の職場に応援を頼めないか確認するのが余力管理、予定に対し実際に何％進んでいるかを確認するのが進捗管理にあたる。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -821,6 +824,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">□／◇ 検査</span><span class="desc">□数量検査（個数・重量）／◇品質検査（規格適合）</span></div>
           <div class="row"><span class="name">▽ 貯蔵／D 滞留</span><span class="desc">▽計画的にためる／D計画外のやむを得ない足止め</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>部品加工工場D社が工程分析表を作成したところ、形状を変える「加工」の時間は全体のわずか2割で、残り8割は運搬と在庫としての貯蔵だったことが判明し、運搬経路の短縮とレイアウト見直し（D-16のSLP）による改善に着手した。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -863,6 +867,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">R：交換</span><span class="v">作業の順序・場所を入れ替えられないか</span></div>
             <div class="term-row"><span class="k">S：簡素化</span><span class="v">より簡単な方法にできないか</span></div>
             <p><span class="label">動作経済の原則</span>身体の使用／作業場の配置／工具・設備の設計、の3分類でムダのない動き方・環境を作る。</p>
+            <p><span class="label">具体例</span><br>ある組立ラインでは、部品を離れた棚まで毎回取りに歩いていたが、作業台のすぐ手の届く位置に部品を再配置（動作経済の原則「作業場の配置」）した結果、そもそも歩いて取りに行くという動作自体をなくす（ECRSの「E：排除」）ことができた。</p>
             <p class="note"><b>ひっかけ：</b>「まず簡素化を検討し、それでも難しければ排除を検討する」のように順序を入れ替えた記述は誤り。</p>
           </div>
         </div>
@@ -951,6 +956,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">稼働率</span><span class="v">実際生産量 ÷ 標準（基準）生産量 × 100</span></div>
             <div class="term-row"><span class="k">減価償却</span><span class="v">取得原価を耐用年数にわたり費用配分（定額法／定率法）</span></div>
             <div class="term-row"><span class="k">耐用年数</span><span class="v">税法上定められた使用可能期間の目安（物理的限界とは別）</span></div>
+            <p><span class="label">具体例</span><br>金属加工工業E社は、税法上の耐用年数がまだ残る旧型設備で故障が頻発し稼働率が低下していたため、未償却残高にとらわれず、新型設備への更新で得られる稼働率・良品率の改善効果と投資額を比較して更新の可否を判断した。</p>
             <p class="note"><b>ひっかけ：</b>「耐用年数＝実際に使用できる物理的限界」は誤り。老朽化による稼働率・良品率低下、修理費増加も総合的に考慮して更新判断する。</p>
           </div>
         </div>
@@ -1081,6 +1087,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <p class="lede">資材は「多くの製品に共通し繰り返し使うか」で管理方法が分かれる。常備品は在庫を持って継続的に管理し、非常備品は注文が来るたびに個別に手配する。</p>
             <div class="term-row"><span class="k">常備品</span><span class="v">多くの製品に共通し継続的に使う資材（ネジ等）。発注点方式で管理</span></div>
             <div class="term-row"><span class="k">非常備品</span><span class="v">特定注文にのみ使う資材（特注部品）。都度手配</span></div>
+            <p><span class="label">具体例</span><br>精密機器メーカーF社は、多くの製品で共通して使うネジや潤滑油を常備品として在庫を持ち発注点方式で自動発注する一方、特定の大口顧客向けのカスタム部品は非常備品として注文が入った都度だけ手配している。</p>
             <p class="note"><b>ひっかけ：</b>常備品は在庫を持って継続管理、非常備品は注文ごとに個別手配、という対応を正確に覚える。</p>
           </div>
         </div>
@@ -1189,6 +1196,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">定期発注方式</span><span class="combo">発注時期固定</span><span class="desc">一定間隔で需要予測に基づき発注量を変動。Aランク向き</span></div>
           <div class="row"><span class="name">EOQ</span><span class="combo">経済的発注量</span><span class="desc">√(2×年間需要量×発注コスト÷単位あたり保管コスト)</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>小売業G社は取扱商品を金額の大きい順にABC分析し、売上の大半を占めるAランク品目は定期発注方式でこまめに需要予測・発注を行う一方、重要度の低いCランク品目は定量発注方式（発注点到達で自動発注）で管理の手間を抑えている。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -1281,6 +1289,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">QC7つ道具</span><span class="combo">数値データ</span><span class="desc">パレート図・特性要因図・ヒストグラム・チェックシート・散布図・層別・管理図</span></div>
           <div class="row"><span class="name">新QC7つ道具</span><span class="combo">言語データ</span><span class="desc">連関図法・親和図法・系統図法・マトリックス図法・PDPC法・アロー図法（マトリックス・データ解析法のみ数値）</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>食品工場H社は、不良発生状況を数値データとしてパレート図やヒストグラムで分析する一方、現場作業員の気づき（言語データ）は連関図法・親和図法で整理し、原因の絞り込みから改善の優先順位付けまでの2つの道具群を使い分けて進めている。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -1375,6 +1384,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">廃棄物処理法</span><span class="v">適正処理を義務付け。産廃委託時はマニフェスト（管理票）交付・保管が必須</span></div>
             <div class="term-row"><span class="k">資源有効利用促進法</span><span class="v">3Rの考え方に基づき資源の有効利用・リサイクルを促す</span></div>
             <div class="term-row"><span class="k">ISO14000シリーズ</span><span class="v">環境マネジメントシステムの国際規格（ISO9000＝品質とは分野が異なる）</span></div>
+            <p><span class="label">具体例</span><br>印刷業I社は、工場から出る廃液や紙くずなどの産業廃棄物の処理を専門業者に委託する際、マニフェストを交付し、その廃棄物が最終処分まで適正に処理されたことを自ら確認・記録することで、排出事業者としての責任を果たしている。</p>
             <p class="note"><b>ひっかけ：</b>「処理業者に委託すれば排出事業者の責任は完全に終わる」は誤り。最終処分までの適正処理を確認する責任は排出事業者に残る。</p>
           </div>
         </div>
@@ -1417,6 +1427,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">都市計画法</span><span class="desc">用途地域ごとに建てられる建物の用途を規制</span></div>
           <div class="row"><span class="name">中心市街地活性化法</span><span class="desc">郊外大型店の出店等で衰退した中心市街地を活性化する支援策</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>小売チェーンJ社が郊外に延床面積2,000㎡のショッピングセンターを出店する際は、まず都市計画法上その土地が店舗を建設できる用途地域かを確認し、次に大店立地法に基づき周辺の交通渋滞対策・騒音対策について自治体への届出と住民説明を行う。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -1572,6 +1583,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">ショッピングセンター（SC）</span><span class="v">デベロッパーが計画的に開発・運営する複数テナント施設</span></div>
             <div class="term-row"><span class="k">商店街</span><span class="v">特定地域に自然発生的に形成された独立店舗の集まり</span></div>
             <div class="term-row"><span class="k">業種／業態</span><span class="v">何を売るか（酒屋・米屋）／どう売るか（コンビニ・専門店）</span></div>
+            <p><span class="label">具体例</span><br>電化製品を扱う町の個人商店（業種でいう「電器店」）と、同じ電化製品を扱う郊外型の家電量販店では、同じ商品を扱っていても品揃えの幅・価格戦略・接客方法が大きく異なり、後者は「ディスカウントストア」という業態として区別される。</p>
             <p class="note"><b>ひっかけ：</b>「業種」と「業態」を逆に覚えない。コンビニ・ドラッグストア・ネットスーパーの台頭は「業態」の多様化。</p>
           </div>
         </div>
@@ -1657,6 +1669,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">一括大量仕入</span><span class="desc">まとめて大量仕入で単価を下げる（在庫リスク増）</span></div>
           <div class="row"><span class="name">消化（売上）仕入</span><span class="desc">店頭商品が実際に売れた時点で仕入が成立（百貨店等）</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>百貨店K社のアパレル売場では、店頭に並べた商品の所有権を売れるまで仕入先に残す「消化仕入」を採用しており、商品が実際に売れた時点で初めて仕入が成立する。百貨店側は在庫リスクを負わずに幅広い品揃えを実現できる。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">B</span><span class="rank-label">直近10年で2回出題</span></div>
@@ -1802,6 +1815,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">店外プロモーション</span><span class="v">チラシ・屋外広告・SNS広告など来店を促す活動</span></div>
             <div class="term-row"><span class="k">店内プロモーション</span><span class="v">POP広告・実演・試食など来店後の追加購買を促す活動</span></div>
             <div class="term-row"><span class="k">リベート・共同販促</span><span class="v">メーカーの販売奨励金、小売店とメーカーの共同キャンペーン</span></div>
+            <p><span class="label">具体例</span><br>小売店L社は、新商品のチラシを近隣住宅にポスティングして来店を促す店外プロモーションと、来店客に試食コーナーで商品の魅力を直接伝える店内プロモーションを組み合わせ、来店から購買までの流れを一貫して設計している。</p>
             <p class="note"><b>ひっかけ：</b>店外プロモーション（来店促進）と店内プロモーション（購買促進）は狙う効果の段階が異なる点を区別する。</p>
           </div>
         </div>
@@ -1928,6 +1942,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
           <div class="row"><span class="name">DC</span><span class="combo">在庫型</span><span class="desc">商品を一定期間在庫として保管し注文に応じ出荷。欠品対応力高いが保管コスト大</span></div>
           <div class="row"><span class="name">TC</span><span class="combo">通過型</span><span class="desc">在庫を持たず届いた荷物をすぐ仕分け出荷（クロスドッキング）。生鮮・日配品向き</span></div>
         </div>
+        <div class="prose" style="flex:0 0 auto;margin-top:calc(var(--cw)*0.6/100);"><p><span class="label">具体例</span><br>コンビニ向け食品卸M社は、鮮度が重要な弁当・惣菜は工場から届いた商品をすぐ仕分けて各店舗へ出荷するTC（クロスドッキング型）の物流拠点を使い、日持ちする加工食品・日用品は一定期間まとめて在庫するDC型の物流拠点で管理している。</p></div>
         <div class="freq-section">
           <div class="freq-top">
             <div class="rank"><span class="rank-chip">A</span><span class="rank-label">最頻出論点</span></div>
@@ -2061,6 +2076,7 @@ body{background:#f4f4f4;color:var(--ink);font-family:"Noto Sans JP",sans-serif;m
             <div class="term-row"><span class="k">電子タグ（RFID）</span><span class="v">ICチップ＋アンテナ。複数タグを離れた場所から一括読取できる</span></div>
             <div class="term-row"><span class="k">EPC</span><span class="v">GS1識別コード＋個体別シリアル番号。同じ商品でも1点ずつ識別可能</span></div>
             <div class="term-row"><span class="k">トレーサビリティ</span><span class="v">生産〜加工〜流通〜販売までの経路を追跡できる仕組み</span></div>
+            <p><span class="label">具体例</span><br>食肉加工業N社は、パッケージのバーコードから、その肉がどの牧場で生産され、いつ加工され、どの経路で店頭に並んだかを消費者がたどれるトレーサビリティの仕組みを整備している。アパレル小売O社では商品1点ごとに電子タグを取り付け、レジで複数点を一括読取して会計を素早く済ませている。</p>
             <p class="note"><b>ひっかけ：</b>「電子タグも1つずつ近づけて読み取る必要がある」は誤り。バーコードと違い複数タグを離れた場所から一括読取できる点が最大の利点。</p>
           </div>
         </div>
