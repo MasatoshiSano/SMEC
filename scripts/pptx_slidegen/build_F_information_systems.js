@@ -60,9 +60,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「主記憶装置は不揮発性」は誤り。RAIDの最低必要台数・耐障害台数を数値で入れ替える出題に注意。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社の基幹システムのディスクをRAID5構成（4台）にしたところ、1台が故障しても生産ラインの稼働記録を止めずに済み、交換後は自動的にデータが復旧した。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.62;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-11 システム評価（信頼性設計の考え方全般）。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'23", "'25"])),
   });
@@ -91,9 +97,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「ミドルウェアはOSの一部」は誤り。OSとは独立した中間層のソフトウェア。パッケージは既製機能の範囲内でのみカスタマイズ可能。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "社内システム部門が会計システムを刷新した際、土台となるOS（Windows Server）はそのまま維持し、共通機能を提供するミドルウェア（DBMS）だけを入れ替え、その上で稼働する会計パッケージソフトを導入した。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-8 外部情報資源の活用（クラウドで提供される範囲との対比）。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'24"])),
   });
@@ -108,14 +120,20 @@ addDividerSlide(pres, {
     overview: "二分探索は事前にソート済みであることが前提。",
     tag: "経営情報システム",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy05 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "スタック", tag: "LIFO", desc: "後から入れたものを先に取り出す。積み重ねたお皿のイメージ" },
     { name: "キュー", tag: "FIFO", desc: "先に入れたものを先に取り出す。レジの待ち行列のイメージ" },
     { name: "二分探索", desc: "データがソート済みである前提で範囲を半分ずつ絞り込む（線形探索より高速）" },
     { name: "計算量", tag: "O(logn)<O(n)<O(n²)", desc: "データ量が増えたときの処理時間の増え方。左ほど効率が良い" },
   ], { nameW: 1.7, tagW: 2.3, rowH: 0.9 });
+  cy05 += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンのB社の在庫照会システムは、商品コードで五十音順に並んだ在庫データから二分探索で瞬時に目的の商品を探し出す一方、直近の操作履歴は「元に戻す」機能のためスタック（LIFO）で保持している。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: cy05, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy05 += 0.83;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy05 + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：LIFO/FIFOの入出力順序、計算量の大小関係を逆に覚える誤りに注意。",
     years: mkYears(new Set(["'17", "'21", "'22", "'23"])),
   });
@@ -145,9 +163,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「カプセル化＝複数クラスの統合」は誤り。「継承＝機能の呼び出し」も不正確（親の性質を引き継ぐ関係）。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "受注管理システムを開発するシステム会社が、「受注」クラスに共通処理（在庫確認・金額計算）をまとめ、これを継承した「特急受注」クラスに納期短縮処理だけを追加し、開発工数を抑えつつ機能を拡張した。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-16／F-17 情報システム開発（開発プロセスとの関係）。",
     years: mkYears(new Set(["'18", "'20", "'21", "'22", "'23", "'24"])),
   });
@@ -177,9 +201,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「P2Pはクライアントサーバ方式の一種」は誤り。仮想化は「マルチタスク」とは異なる独立OS環境の技術。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社は自社データセンターの1台の物理サーバを仮想化し、生産管理用と人事管理用の仮想サーバを同時に稼働させることで、ハードウェアの導入台数を抑えている。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.62;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-8 外部情報資源の活用（クラウドは仮想化技術を土台にする）。",
     years: mkYears(new Set(["'19", "'20", "'21", "'22", "'23", "'25"])),
   });
@@ -209,9 +239,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「バッチ処理は結果がすぐ得られ緊急業務向き」は誤り。即時性が要るのはリアルタイム処理。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンのB社のPOSレジは会計のたびに即座に在庫を更新するリアルタイム処理だが、月末の売上集計や仕入先への支払データ作成は夜間にまとめて処理するバッチ処理としている。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    y: Math.max(cy + 0.1, 6.55), rank: "C", rankLabel: "出題実績あり",
     related: "関連：F-9 データベース（トランザクション管理もリアルタイム性と関連）。",
     years: mkYears(new Set(["'19"])),
   });
@@ -241,9 +277,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「JPEGは可逆圧縮」は誤り。「ユーザビリティが高ければアクセシビリティも自動的に満たされる」も誤り。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "通販サイトを運営するC社は商品写真をJPEG形式（非可逆圧縮）で軽量化しつつ、視覚に障がいのある利用者のために画像へ代替テキストを設定し、ユーザビリティとアクセシビリティの両方に配慮している。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-15 情報システムの適用領域（Webシステムのユーザ体験設計）。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'23", "'24", "'25"])),
   });
@@ -258,14 +300,20 @@ addDividerSlide(pres, {
     overview: "SaaS/PaaS/IaaSは「どこまで自分で管理するか」の範囲で区別する。",
     tag: "経営情報システム",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy10 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "SaaS", desc: "アプリケーションソフトそのものを提供。利用者はデータの入力・利用のみ" },
     { name: "PaaS", desc: "開発・実行の基盤（OS・DB等）を提供。利用者は自社アプリを用意" },
     { name: "IaaS", desc: "サーバ・ストレージ等インフラのみ提供。利用者がOS以上すべて管理" },
     { name: "OSS", desc: "ソースコード公開。ライセンス条件下で改変・再配布が可能なことが多い" },
   ], { nameW: 1.4, tagW: 0, rowH: 0.9 });
+  cy10 += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "中小企業G社は自社でメールサーバを構築する代わりにクラウド型メールサービス（SaaS）を利用し、独自の業務アプリを開発する際は開発基盤が整ったPaaSを利用することで、サーバの保守負担を大きく減らしている。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: cy10, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy10 += 0.83;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy10 + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「SaaSは利用者が自らアプリを開発して稼働させる」はPaaSの説明で誤り。OSSは改変・再配布が一律禁止ではない。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'21", "'22", "'24"])),
   });
@@ -624,9 +672,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "情報システム戦略は「経営戦略との整合性」の話で、F-16／F-17の「個別開発の進め方」とは異なる次元の論点。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社は「多品種少量生産への対応力強化」という経営戦略のもとCIOが全体最適化計画を策定し、そこから生産管理システム刷新という個別システム化計画へと落とし込んだ。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-13 経営革新と情報システム（DXとの連続性）。",
     years: mkYears(new Set(["'17", "'18", "'24"])),
   });
@@ -656,9 +710,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「DX＝紙をデータ化すること」は不十分。デジタル化を土台にしつつビジネスモデルまで変革する広い概念。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "卸売業D社は紙の伝票をExcelに入力するだけの単なるデジタル化にとどまらず、取引先とのデータ連携・自動集計まで一体化し、発注判断をデータに基づいて行えるようビジネスの進め方自体を変えるDXに取り組んだ。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-24 データサイエンス（AI活用もDXの重要な手段）。",
     years: mkYears(new Set(["'17", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
@@ -673,12 +733,18 @@ addDividerSlide(pres, {
     overview: "内部統制＝自己点検の仕組み、システム監査＝独立した第三者の検証。",
     tag: "経営情報システム",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy23 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "内部統制", desc: "経営者自身の責任で整備・運用する社内のルール・仕組み（COSOフレームワーク）" },
     { name: "システム監査", desc: "開発・運用から独立した第三者（監査人）が適切性を客観的に検証する活動" },
   ], { nameW: 2.3, tagW: 0, rowH: 1.3 });
+  cy23 += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "社内システム部門はシステムの利用権限を「申請→上長の承認→管理者が付与」という内部統制の手順にしている。この仕組みが機能しているかを、開発を担当した部門とは独立した監査人が定期的にチェックするのがシステム監査。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: cy23, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy23 += 0.83;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy23 + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「システム監査はシステム部門が自ら行う」は独立性の観点から誤り。",
     years: mkYears(new Set(["'16", "'20", "'25"])),
   });
@@ -693,14 +759,20 @@ addDividerSlide(pres, {
     overview: "ERPは特定1業務ではなく複数の基幹業務を横断的に統合する点が特徴。",
     tag: "経営情報システム",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy24 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "ERP", desc: "会計・人事・生産・販売等の基幹業務データを一元管理・連携させる" },
     { name: "SCM", desc: "調達〜生産〜物流〜販売を企業の垣根を越えて最適化（供給側）" },
     { name: "CRM", desc: "顧客の属性・購買履歴を一元管理し関係を強化・維持（顧客側）" },
     { name: "SFA／POS", desc: "SFA＝営業支援／POS＝販売時点での実績記録" },
   ], { nameW: 1.6, tagW: 0, rowH: 0.9 });
+  cy24 += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンのB社はPOSで得た販売データを仕入先とも共有し、SCMを通じて発注・生産計画に反映させる一方、会員カードの購買履歴はCRMで分析し、顧客ごとに異なるクーポンを配信している。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: 0.55, y: cy24, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy24 += 0.83;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy24 + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「SCMとCRMは同じ概念」は誤り。対象範囲・向いている方向が異なる。",
     years: mkYears(new Set(["'16", "'19", "'24", "'25"])),
   });
@@ -1004,9 +1076,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「漏れない＝機密性」「正しい＝完全性」「使える＝可用性」で判断。バックアップは主に可用性だが完全性にも関わりうる。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "顧客データベースへのアクセスを担当者のみに限定するのは機密性の確保、不正な書き換えを検知する仕組みは完全性の確保、災害時にも止まらないようサーバを複数拠点に分散するのは可用性の確保にそれぞれ当たる。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
+    y: Math.max(cy + 0.1, 6.55), rank: "－", rankLabel: "直近10年単独出題なし",
     related: "関連：F-20 情報セキュリティ管理・対策（CIAを守る具体的な技術・対策）。",
     years: mkYears(new Set([])),
   });
@@ -1138,9 +1216,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「効率性」（資源利用の良さ）と「効果性」（目的達成度）を取り違えない。品質面と経済面は異なる評価軸。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンのB社は新しい在庫管理システムの導入後、「入力ミスが減ったか」（機能性）「現場が迷わず操作できるか」（使用性）という品質面と、「削減できた在庫ロス額に対する導入費用」（ROI）という経済面の両方で効果を検証した。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "B", rankLabel: "頻出論点",
     related: "関連：F-11 システム評価（信頼性・経済性の指標と重複）。",
     years: mkYears(new Set(["'19", "'23"])),
   });
@@ -1169,9 +1253,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "意思決定者が選べる分岐点は□（四角）、確率に左右される分岐点は○（丸）。線形計画法を「利益最大化限定」と覚えない。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "町工場E社は2種類の製品の原材料在庫という制約条件のもとで利益を最大化する生産量の組み合わせを線形計画法で求め、新製品開発の可否は市場の好不調とその発生確率をデシジョンツリーに整理して期待値で判断した。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    y: Math.max(cy + 0.1, 6.55), rank: "C", rankLabel: "出題実績あり",
     related: "関連：F-18 組織と人材（PERT図・クリティカルパスは本論点とも共通）。",
     years: mkYears(new Set(["'18"])),
   });
@@ -1201,9 +1291,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「相関があれば必ず因果関係がある」は誤り（見せかけの相関の可能性）。主成分分析と因子分析の目的の違いに注意。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンのB社は来店客数と気温のデータから回帰分析で関係式を求める一方、購買データをクラスター分析でいくつかの顧客グループに分類し、その結果をBIツールでダッシュボード化して経営者に提示している。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.83;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-24 データサイエンス（教師なし学習としてのクラスター分析）。",
     years: mkYears(new Set(["'16", "'17", "'19", "'20", "'21", "'22", "'23", "'25"])),
   });
@@ -1233,9 +1329,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「教師あり学習＝正解データなし」は誤り（それは教師なし学習）。ハルシネーションは情報漏洩とは別の問題。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.6;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "金融機関F社は過去の融資先データ（返済できたか）を使い新規申込者の延滞リスクを予測する教師あり学習モデルを構築する一方、生成AIチャットボットに自社製品を質問すると実在しない機能をもっともらしく回答したため、回答内容は必ず事実確認する運用にしている。", options: { fontFace: F_BODY, fontSize: 10.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.95, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 1.02;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy + 0.1, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：F-13 経営革新と情報システム（AI活用はDXの重要な手段）。",
     years: mkYears(new Set(["'16", "'17", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
