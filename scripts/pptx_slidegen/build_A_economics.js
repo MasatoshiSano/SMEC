@@ -49,12 +49,16 @@ addDividerSlide(pres, {
     "GDP・GNI（GNP）・NNP・NIは無関係な4つの用語ではなく、GDPを起点に「集計範囲を国民ベースに変える」「減価償却を引く」「間接税・補助金を調整する」という一連の計算でつながる所得概念の連鎖。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy03 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "GDP", tag: "国内総生産", desc: "国内で生産された付加価値の合計（国籍を問わない）" },
     { name: "GNI／GNP", tag: "国民総所得", desc: "自国民（居住者）が生み出した所得の合計。GNI＝GDP＋海外からの純所得受取" },
     { name: "NNP", tag: "国民純生産", desc: "GNP（GNI）から固定資本減耗（減価償却相当）を差し引いたもの" },
     { name: "NI", tag: "国民所得", desc: "NNPから間接税を差し引き、補助金を加えたもの" },
-  ], { nameW: 1.7, tagW: 2.0 });
+  ], { nameW: 1.7, tagW: 2.0, rowH: 0.75 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "海外に生産拠点を持つ製造業A社の場合、国内工場の生産額はGDPに算入されるが海外子会社の生産額は算入されない。一方、海外子会社からの配当・利子収入（純所得受取）はGNIには算入される、という違いが決算上も生じる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy03 + 0.12, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：GDPは一定期間の「フロー」概念。ある時点の資産総額を示す「ストック」（国富等）と混同しないこと。中古品・株式の売買はGDPに計上されない。",
@@ -112,11 +116,15 @@ addDividerSlide(pres, {
     "3つの物価指数の違いは「何を測るか（対象範囲）」だけでなく、CPIとGDPデフレーターでは「どうウェイトを付けるか（計算方式）」も異なる点が試験で問われる、2つの軸の組み合わせ。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy05 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "CPI", tag: "消費者物価指数", desc: "総務省公表。消費者が購入する財・サービスの価格変動（ラスパイレス方式）" },
     { name: "CGPI", tag: "企業物価指数", desc: "日本銀行公表。企業間で取引される商品（原材料・中間財）の価格変動" },
     { name: "GDPデフレーター", tag: "名目GDP÷実質GDP×100", desc: "経済全体（消費・投資・政府支出・輸出入）の物価動向（パーシェ方式に近い）" },
   ], { rowH: 1.0, nameW: 2.6, tagW: 2.6 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "小売チェーンのB社は販売価格の値上げ幅を検討する際に消費者が体感する消費者物価指数（CPI）を参考にする一方、製造業A社は仕入れる原材料・部品のコスト上昇を把握するために企業物価指数（CGPI）を確認する、というように立場によって参照すべき指数が異なる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy05 + 0.1, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：CPI（ラスパイレス方式＝基準年数量固定）は代替効果を反映できず物価上昇率を実態より高めに示す傾向。CPIとGDPデフレーターは算出方式が異なる点が頻出。",
@@ -174,12 +182,16 @@ addDividerSlide(pres, {
     "M1〜M3の違いは「通貨の種類」ではなく「対象とする金融機関の範囲の広さ」。ゆうちょ銀行・信用組合などを含むかどうかで段階的に範囲が広がっていく。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy07 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "M1", tag: "現金＋預金通貨", desc: "いつでも引き出せる現金通貨と普通・当座預金" },
     { name: "M2", tag: "M1＋準通貨＋CD", desc: "対象は国内銀行・信用金庫等に限定（ゆうちょ銀行等は含まない）" },
     { name: "M3", tag: "範囲を拡大", desc: "ゆうちょ銀行・信用組合・農協なども含む全預金取扱機関が対象" },
     { name: "広義流動性", tag: "最も広い範囲", desc: "M3に金銭信託・投資信託・国債・外債等の金融商品を加えたもの" },
   ], { rowH: 0.75, nameW: 2.0, tagW: 2.2 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社の経理部が全社の余資を複数の金融機関に分散して預けている場合、都市銀行・地方銀行の預金はM2に含まれるが、系列の信用組合や農協の口座はM2には含まれずM3で初めて捕捉される。全社の資金繰りを把握するにはより広い範囲の統計を見る必要が生じる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy07 + 0.1, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：M1〜M3の違いは通貨の種類でなく対象金融機関の広さ。マネタリーベース（日銀が直接供給する通貨）とマネーストックは別概念で、両者は信用乗数を介した間接的な関係。",
@@ -444,14 +456,18 @@ addDividerSlide(pres, {
     "6つの手段は歴史的に発展した順に並ぶ。政策金利操作・公開市場操作・預金準備率操作という伝統的な手段だけでは金利がゼロに近づくと打つ手がなくなるため、量的緩和・マイナス金利・YCCという非伝統的な手段が追加されてきた。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy16 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "公開市場操作", tag: "オペレーション", desc: "国債等の売買で資金量を調整。買いオペ＝資金供給（緩和）、売りオペ＝資金吸収（引締）" },
     { name: "政策金利操作", tag: "無担保コールレート", desc: "中央銀行が誘導目標とする短期金利を操作" },
     { name: "預金準備率操作", tag: "準備率", desc: "金融機関が中央銀行に預け入れる比率を上下させ貸出余力を調整" },
     { name: "量的緩和政策", tag: "QE", desc: "政策金利がほぼゼロになった後、資金供給「量」そのものを拡大" },
     { name: "マイナス金利政策", tag: "", desc: "日銀当座預金の一部にマイナス金利を適用し貸出・投資を促す" },
     { name: "イールドカーブ・コントロール", tag: "YCC", desc: "長期金利（長期国債利回り）にも誘導目標を設定" },
-  ], { rowH: 0.62, nameW: 3.3, tagW: 1.9 });
+  ], { rowH: 0.52, nameW: 3.3, tagW: 1.9 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "設備投資を計画する製造業A社にとって、日銀が政策金利を引き上げれば借入金利が上昇し投資判断は慎重になりやすい一方、量的緩和や利下げの局面では資金調達コストが下がり、投資に踏み切りやすくなる。金融政策の方向転換は企業の資金計画に直接影響する。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy16 + 0.08, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「買いオペは資金を吸収する」は誤り。買いオペは資金を「供給する」緩和的な政策。売りオペとの方向を逆に覚えないこと。",
@@ -722,12 +738,16 @@ addDividerSlide(pres, {
     "為替レートが「なぜ動くか」を説明する理論（購買力平価説・金利平価説）と、「動いた結果、貿易収支がどうなるか」を判定する条件（マーシャル＝ラーナー条件）は別の話。後者はさらに短期と長期で結果が違う（Jカーブ効果）点まで押さえる。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy25 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "購買力平価説", tag: "PPP", desc: "二国間の物価上昇率の差で為替レートが決まる。自国の物価上昇率が高いほど自国通貨は減価" },
     { name: "金利平価説", tag: "", desc: "内外の金利差が為替レートの予想変化率と等しくなるよう調整される" },
     { name: "マーシャル＝ラーナー条件", tag: "弾力性の和＞1", desc: "輸出入の価格弾力性の和が1超なら円安は貿易収支を改善、＝1なら不変、＜1なら悪化" },
     { name: "Jカーブ効果", tag: "", desc: "円安直後は数量が反応せず貿易収支が一時悪化し、時間経過とともに改善する現象" },
   ], { rowH: 0.85, nameW: 2.9, tagW: 2.1 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "輸出型の製造業A社は急な円安局面でも、契約済みの受注分の輸出数量をすぐには増やせないため円換算の売上高は当面あまり伸びず、数量ベースでの受注増加が本格化するのは半年〜1年後、というJカーブ効果を実務でも経験する。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy25 + 0.05, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：弾力性の和＝1のケースを「悪化する」とする誤りが典型。正しくは「変化しない（中立）」。",
@@ -885,11 +905,15 @@ addDividerSlide(pres, {
     "古典派の3つの考え方は別々の主張ではなく、いずれも「市場メカニズム（価格の伸縮性）を信頼すれば自動的に完全雇用が実現する」という一つの立場から出てくる帰結。ケインズ理論（A-18）とは正反対の前提に立つ点が対比の軸になる。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy31 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "セイの法則", tag: "供給が需要を創造", desc: "生産物は生産者の所得となりそのまま支出に回るため、需要不足の不況は本来生じない" },
     { name: "価格の伸縮性", tag: "自動調整", desc: "失業が発生しても賃金が下がり労働需要が回復、市場メカニズムで自動的に完全雇用が実現する" },
     { name: "古典派の二分法", tag: "貨幣の中立性", desc: "実物部門と貨幣部門は独立。貨幣供給量の変化は物価水準のみに影響し実物変数には影響しない" },
   ], { rowH: 1.0, nameW: 2.6, tagW: 2.3 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "人件費を抑えたい小売チェーンのB社が「不況なら賃金を下げれば人員整理をせずに済む」と考えるのは、賃金の伸縮性で自動的に均衡が回復するという古典派に近い発想。しかし実際には賃下げへの抵抗が大きく、市場任せでは失業が長期化しうる（ケインズ派の立場）という対立が人事戦略の前提にも現れる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy31 + 0.1, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "C", rankLabel: "出題実績あり",
     related: "ひっかけ：「貨幣供給量の変化は実物変数にも影響する」は誤り。古典派の二分法（貨幣の中立性）では物価水準のみに影響する。",
@@ -1091,12 +1115,16 @@ addDividerSlide(pres, {
     "完全競争市場ならA-23の総余剰最大化（パレート効率性）が実現するはずだが、現実にはそれを崩す要因が4つある。うち独占・寡占と情報の非対称性は、A-31・A-29でそれぞれ詳しく扱う内容の入口にあたる。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy38 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "外部性", tag: "外部不経済／外部経済", desc: "対価のやり取りなしに第三者に影響。悪影響（公害）は生産過大、良い影響（受粉）は過少になりがち" },
     { name: "公共財", tag: "非競合性・非排除性", desc: "フリーライダー問題により民間市場だけでは十分な量が供給されにくい" },
     { name: "独占・寡占", tag: "A-31参照", desc: "少数の供給者が価格支配力を持つと生産量過少・価格過大になる" },
     { name: "情報の非対称性", tag: "A-29参照", desc: "取引当事者間の情報格差" },
   ], { rowH: 0.85, nameW: 2.3, tagW: 2.7 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "化学メーカーのA社が排水処理コストを十分に負担しないまま生産すると、周辺住民への健康被害という外部不経済が発生し、社会的に望ましい水準より生産が過大になる。政府はこうした外部性を是正するため、排出量に応じた環境税（ピグー税）を課すことがある。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy38 + 0.08, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：公共財の「非競合性」（消費の奪い合いにならない）と「非排除性」（対価を払わない人を締め出せない）は別の性質。ピグー税・コースの定理も頻出。",
@@ -1161,11 +1189,15 @@ addDividerSlide(pres, {
     "価格が下がったとき需要量が増えるか減るかは、代替効果と所得効果という2つの力の合成で決まる。財の分類（上級財・下級財・ギッフェン財）は、この2つの力がどちらの向きに、どれだけ強く働くかの違いを表している。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy41 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "上級財（正常財）", tag: "所得↑→需要↑", desc: "代替効果・所得効果とも需要量を増やす方向。需要曲線は右下がり" },
     { name: "下級財（劣等財）", tag: "所得↑→需要↓", desc: "所得効果は需要を減らす方向だが通常は代替効果が上回り、やはり右下がり" },
     { name: "ギッフェン財", tag: "下級財の例外", desc: "所得効果が代替効果を上回る特殊な例外。価格が下がると需要量が減る（右上がり）" },
   ], { rowH: 1.0, nameW: 2.4, tagW: 2.1 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食品メーカーのA社が主力商品を値下げすると、通常は代替効果・所得効果とも需要量を押し上げる方向に働き販売数量は増える。値下げで浮いた予算がより高級な代替品に回り、逆に自社商品の販売数量が減ることがある特殊なケースがギッフェン財として議論される。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy41 + 0.1, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「下級財は必ず右上がり」は誤り。下級財でも通常は右下がりで、代替効果を所得効果が上回る特殊例のみギッフェン財。",
@@ -1186,12 +1218,16 @@ addDividerSlide(pres, {
     "労働を増やすほど追加的な生産量がだんだん小さくなる「限界生産力逓減の法則」が、短期の費用曲線がU字型を描く理由の土台。TC・AC・AVC・MCは互いに計算式でつながっている。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy42 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "総費用（TC）", tag: "固定費用＋可変費用", desc: "固定費用は生産量ゼロでも発生し、生産量に応じて変わらない" },
     { name: "平均費用（AC）", tag: "TC÷生産量", desc: "1単位あたりの総費用。限界生産力逓減の結果、短期はU字型になりやすい" },
     { name: "平均可変費用（AVC）", tag: "可変費用÷生産量", desc: "1単位あたりの可変費用" },
     { name: "限界費用（MC）", tag: "生産量+1の追加費用", desc: "平均費用曲線の最低点を通過する（MC＜ACならAC低下中、MC＞ACならAC上昇中）" },
   ], { rowH: 0.75, nameW: 2.3, tagW: 2.3 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食品加工工場を持つ製造業A社が同じ設備のまま作業員だけを増やしていくと、当初は増員分だけ生産量が伸びるが、設備の処理能力に近づくにつれ1人追加あたりの生産量の伸びはだんだん小さくなる（限界生産力逓減）。その結果、増員を続けるほど1個あたりの平均費用はある時点から上昇に転じる。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy42 + 0.08, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「固定費用も生産量に応じて増減する」は誤り。固定費用は生産量ゼロでも発生し金額は変わらない。",
@@ -1363,12 +1399,16 @@ addDividerSlide(pres, {
     "独占企業もMR＝MCで生産量を決める点は完全競争と同じだが、右下がりの需要曲線に直面するため生産量過少・価格過大になる（独占の弊害）。企業が複数いる寡占市場では、これに企業同士の駆け引き（数量か価格か）と協調行動が加わる。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.5, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy48 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "独占の弊害", tag: "価格支配者", desc: "完全競争と比べ生産量過少・価格過大。総余剰が減少し死荷重が発生" },
     { name: "クールノー・モデル", tag: "数量競争", desc: "各企業が相手企業の生産量を所与として自社の最適生産量を決定" },
     { name: "ベルトラン・モデル", tag: "価格競争", desc: "各企業が相手企業の価格を所与として自社の最適価格を決定" },
     { name: "価格の下方硬直性", tag: "屈折需要曲線", desc: "値上げは追随されず顧客減、値下げは追随され値下げ競争になるため現状維持しがち" },
   ], { rowH: 0.75, nameW: 2.5, tagW: 1.9 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "家電量販店のように大手数社が価格を意識し合う寡占市場では、A社が値下げに踏み切ると他社も追随し値下げ競争になりやすい一方、A社が値上げしても他社が追随しなければA社だけ顧客を失うため、各社とも値上げには踏み切りにくい（価格の下方硬直性）。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy48 + 0.08, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：独占企業の価格はMRでなく需要曲線の高さで決まる。「独占企業はP＝MCで生産」は完全競争の条件。",
@@ -1524,11 +1564,15 @@ addDividerSlide(pres, {
     "市場に任せた結果生じる所得格差（A-34）を政府が是正する手段は、大きく「税でならす」（累進課税）と「給付でならす」（社会保障・負の所得税）の2系統に整理できる。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy53 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "累進課税制度", tag: "垂直的公平", desc: "所得が高いほど税率も高くなる仕組み。所得税・相続税が代表例" },
     { name: "社会保障制度", tag: "", desc: "年金・医療保険・生活保護・失業給付などを通じた所得移転" },
     { name: "負の所得税", tag: "", desc: "一定所得を下回る世帯に給付を行う（マイナスの税を課す）という制度案" },
   ], { rowH: 1.0, nameW: 2.5, tagW: 1.7 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "製造業A社の給与計算担当者は、累進課税により高所得の管理職ほど源泉徴収の税率区分（限界税率）が上がる点を踏まえて手取り額を説明する必要がある。企業が負担する厚生年金・健康保険料も、社会保障制度を通じた所得再分配の一部を企業側が担っている側面がある。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy53 + 0.1, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「消費税は高所得者ほど負担割合が高い累進的な税」は誤り。消費税は低所得者ほど所得に対する負担割合が高い逆進的な税。",
