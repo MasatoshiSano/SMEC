@@ -49,11 +49,15 @@ addDividerSlide(pres, {
     "個人事業と法人の違いは、突き詰めると「登記の要否」ではなく「責任の範囲」に行き着く。表の3つの観点はすべて、開業のしやすさとリスクの大きさのトレードオフという1つの構図の表れ。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy03 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "設立手続", desc: "個人事業：開業届のみ／法人：定款作成・認証・設立登記が必要" },
     { name: "責任の範囲", desc: "個人事業：無限責任（個人財産で返済義務）／法人：出資額の範囲の有限責任" },
     { name: "税金", desc: "個人事業：所得税（累進課税）／法人：法人税" },
-  ], { nameW: 2.0, tagW: 0, rowH: 1.1 });
+  ], { nameW: 2.0, tagW: 0, rowH: 0.95 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "個人で飲食店を開業する場合、税務署に開業届を提出すればその日から営業できるが、経営が悪化し借金を返せなくなれば、事業主は自宅等の個人財産を売ってでも返済する義務を負う（無限責任）。同じ事業を株式会社として始めていれば、原則として出資した金額を失うだけで済む（有限責任）。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy03 + 0.05, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
     related: "ひっかけ：「登記が不要で簡単」と「無限責任か有限責任か」は別の話。簡単に始められる代わりにリスクが大きい表裏の関係。",
@@ -82,7 +86,12 @@ addDividerSlide(pres, {
     { k: "定款認証", v: "株式会社は公証人の認証が必要（合同会社は不要）" },
     { k: "設立登記", v: "登記により会社が法的に成立する（成立要件）" },
   ], { fontSize: 11.5, labelW: 2.1, gap: 0.4 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "IT系の受託開発を手がけるベンチャー企業を3名の発起人で設立する場合、定款に「目的：ソフトウェアの企画・開発及び販売」「商号」等の絶対的記載事項を記載し公証人の認証を受けた後、出資金の払込み・設立時取締役の選任を経て法務局で設立登記を行えば会社が成立する。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.75;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -117,7 +126,12 @@ addDividerSlide(pres, {
     { k: "許認可", v: "飲食業（保健所）、建設業（建設業許可）、古物商（公安委員会）等" },
     { k: "労働・社会保険", v: "従業員雇用時は労災・雇用保険、健康保険・厚生年金への加入手続" },
   ], { fontSize: 11.5, labelW: 2.3, gap: 0.45 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "飲食店を新規開業するA社は、会社の設立登記を終えていても、保健所への営業許可を受けなければ店舗を開けない。無許可営業は食品衛生法違反となる。従業員を新たに雇用する際は、労働基準監督署・公共職業安定所での労働保険加入手続もあわせて必要になる。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.6, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.65;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -267,11 +281,15 @@ addDividerSlide(pres, {
     "会社が立ち行かなくなったときの手続は、会社を存続させる「再建型」と会社をたたむ「清算型」に大別される。同じ再建型でも民事再生と会社更生では対象と経営権の帰趨が異なる点が最大のひっかけ。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy09 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "民事再生法", tag: "再建型", desc: "株式会社に限らず利用可。現経営陣が続投し再建（DIP型）" },
     { name: "会社更生法", tag: "再建型・株式会社限定", desc: "更生管財人が経営権を握り現経営陣は原則退任。大企業向け" },
     { name: "破産法", tag: "清算型", desc: "破産管財人が財産を換価し配当後、会社を消滅させる" },
-  ], { nameW: 1.8, tagW: 2.3, rowH: 1.2 });
+  ], { nameW: 1.8, tagW: 2.3, rowH: 1.0 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "地方で旅館業を営むA社が経営難に陥った場合、事業に将来性があると判断されれば、現経営陣が引き続き経営しながら再建を目指す民事再生を申し立てることが多い。逆に規模が大きく利害関係者の多い大企業では、裁判所の管理下でより強力に再建を進める会社更生が選ばれることがある（会社更生は株式会社しか利用できない）。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy09 + 0.05, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：対象（株式会社限定か否か）と経営権の帰趨（続投か退任か）の違いが頻出。",
@@ -555,7 +573,12 @@ addDividerSlide(pres, {
     { k: "著作者人格権", v: "氏名表示権・同一性保持権等。一身専属で譲渡できない" },
     { k: "職務著作", v: "会社の発意・従業員が職務上作成・会社名義公表なら会社が著作者" },
   ], { fontSize: 11.5, labelW: 2.3, gap: 0.4 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ソフトウェア会社A社の社員が、会社の指示で業務時間中に業務用プログラムを作成した場合、就業規則に特段の定めがなければそのプログラムの著作者はA社自身になる（職務著作）。一方、その社員が休日に趣味で書いた小説の著作者は、あくまで社員個人である。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.75;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -603,7 +626,12 @@ addDividerSlide(pres, {
     { k: "映画の著作物", v: "公表後70年" },
     { k: "権利侵害への措置", v: "差止請求・損害賠償請求・名誉回復措置の請求ができる" },
   ], { fontSize: 11, labelW: 2.3, gap: 0.36 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある作家が2020年に死亡した場合、その作品の著作権は原則として死後70年、つまり2090年まで保護される。一方、企業A社が組織として発表した広報用パンフレットの文章（法人名義の著作物）は、公表から70年間保護される。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.7;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -631,11 +659,15 @@ addDividerSlide(pres, {
     "知的財産権は譲渡もライセンスもできるが、「著作権譲渡は一部権利が留保推定される」「実施権は登録の要否が種類で異なる」という、似て非なる2つの制度が同じ論点の中に同居している。E-6の職務発明の法定通常実施権も、この「通常実施権は登録不要」という原則の一例。",
     { x: 0.55, y: 1.68, w: 12.25, h: 0.55, valign: "top", fontFace: F_BODY, fontSize: 10, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.25 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy20 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "著作権譲渡契約", desc: "「著作権を譲渡する」とのみ記載すると翻訳権・翻案権等は譲渡人に留保されたと推定される" },
     { name: "専用実施権", tag: "登録が効力発生要件", desc: "独占的な実施権。設定範囲では特許権者自身も実施不可。自ら差止請求も可能" },
     { name: "通常実施権", tag: "登録不要", desc: "非独占的で複数の相手に重ねて許諾可。当事者間の契約のみで効力発生" },
-  ], { nameW: 2.0, tagW: 2.2, rowH: 1.2 });
+  ], { nameW: 2.0, tagW: 2.2, rowH: 0.9 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "特許技術を保有する製造業A社が特定の取引先にのみ独占的に実施させたい場合は専用実施権を設定する（特許庁への登録が必要）。複数の企業に同時にライセンスして幅広くロイヤリティ収入を得たい場合は、登録不要で効力が生じる通常実施権を許諾する形が適している。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: 0.55, y: cy20 + 0.05, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "関連：E-6 特許権（職務発明の法定通常実施権も「登録不要」の原則に沿う）。",
@@ -665,7 +697,12 @@ addDividerSlide(pres, {
     { k: "非公知性", v: "一般に知られておらず容易に知ることができない状態" },
     { k: "パリ条約", v: "内国民待遇・優先権制度（特許/実用新案12か月、意匠/商標6か月）" },
   ], { fontSize: 11, labelW: 2.0, gap: 0.36 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食品メーカーA社が独自に開発した調味料の配合レシピは、特許出願すると内容が公開されてしまうため、あえて出願せず社内で厳重にアクセス制限をかけて管理する（営業秘密として保護する）選択がよく取られる。退職した従業員がレシピを持ち出し競合他社で使用した場合、3要件を満たしていれば差止請求・損害賠償請求が可能。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  cy += 0.7;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -729,12 +766,16 @@ addDividerSlide(pres, {
     "中小企業の実務でよく登場する4つの契約類型は、それぞれ何を約束し何を約束しないかが異なる。特にシステム開発契約は「請負か準委任か」で受託側が負う義務の重さが変わる点が頻出。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy23 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "秘密保持契約", tag: "NDA", desc: "M&A検討・共同開発の前段階でほぼ必ず締結。目的外使用・第三者開示を禁止" },
     { name: "請負契約", desc: "成果物の完成を約束。完成義務を負う（システム開発の仕様確定後の工程）" },
     { name: "準委任契約", desc: "業務の遂行を約束。完成義務までは負わない（要件定義等の上流工程）" },
     { name: "フランチャイズ契約", desc: "商標・ノウハウ使用の対価にロイヤリティ。独禁法（優越的地位の濫用）とも関連" },
-  ], { nameW: 2.2, tagW: 1.2, rowH: 0.9 });
+  ], { nameW: 2.2, tagW: 1.2, rowH: 0.72 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "地域のパン店A社が大手コンビニチェーンのフランチャイズに加盟する場合、本部の商標・ノウハウを使う許可を得る代わりに、毎月の売上に応じたロイヤリティを本部に支払う。契約前には、本部が加盟希望者に契約内容やロイヤリティの算定方法等を記載した書面（法定開示書面）を交付する義務がある。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: 0.55, y: cy23 + 0.05, w: 12.25, h: 0.55, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "B", rankLabel: "頻出論点",
     related: "ひっかけ：「準委任契約なのに完成義務を負う」といった誤った組み合わせに注意。",
@@ -764,7 +805,12 @@ addDividerSlide(pres, {
     { k: "完全合意条項", v: "契約書の内容が完全な合意。それ以前の合意は効力を失う" },
     { k: "不可抗力条項", v: "天災地変等、当事者の責によらない事由での免責" },
   ], { fontSize: 11, labelW: 2.0, gap: 0.36 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "日本のメーカーA社が海外の卸売業者と継続的な取引基本契約を結ぶ際、「本契約に関する紛争は第三国における仲裁により最終的に解決する」という仲裁条項を入れておけば、トラブルが生じても両国の裁判所ではなく中立的な第三国での仲裁で解決を図ることができる。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  cy += 0.7;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -792,12 +838,16 @@ addDividerSlide(pres, {
     "紛争解決の4手続は「公開か非公開か」「審級があるか」「合意による解決か判断による解決か」という3つの軸の組み合わせで整理できる。少額訴訟は訴訟の中でも簡易・迅速な特別ルールという位置づけ。",
     { x: 0.55, y: 1.72, w: 12.25, h: 0.4, valign: "top", fontFace: F_BODY, fontSize: 10.5, color: INK_SOFT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 }
   );
-  addRowList(s, 0.55, 2.4, 12.25, [
+  let cy25 = addRowList(s, 0.55, 2.4, 12.25, [
     { name: "訴訟", desc: "裁判所が判決で強制的に解決。原則公開、控訴・上告の審級制度あり" },
     { name: "少額訴訟", tag: "60万円以下", desc: "簡易裁判所。原則1回の期日で審理、即日判決。同一裁判所で年10回まで" },
     { name: "民事調停", desc: "話し合いによる合意で解決。調停調書は確定判決と同様の効力" },
     { name: "仲裁", desc: "仲裁人の判断で解決するADR。非公開・原則一審制" },
-  ], { nameW: 1.7, tagW: 1.6, rowH: 0.9 });
+  ], { nameW: 1.7, tagW: 1.6, rowH: 0.72 });
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "取引先との間で30万円程度の未払い代金トラブルが生じたA社が、通常の訴訟よりも簡易・迅速に解決したい場合は、簡易裁判所の少額訴訟制度を利用する方法が考えられる。一方、当事者双方が対立を避けて柔軟な解決を望む場合には、民事調停の利用が向いている。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: 0.55, y: cy25 + 0.05, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "C", rankLabel: "出題実績あり",
     related: "ひっかけ：少額訴訟の対象額「60万円以下」を正確に覚える。仲裁・調停・訴訟の性質の違いに注意。",
@@ -1039,7 +1089,12 @@ addDividerSlide(pres, {
     { k: "取締役の義務", v: "善管注意義務・忠実義務。利益相反取引・競業取引は取締役会の承認が必要" },
     { k: "株価算定", v: "純資産価額方式・類似業種比準方式・DCF方式（インカムアプローチ）" },
   ], { fontSize: 10.5, labelW: 1.9, gap: 0.36 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある取締役が、自分が個人的に経営する別会社に対し、勤務先のA社の商品を優先的に有利な条件で卸すよう手配した場合、これは会社との利益相反行為（間接取引）にあたりうる。取締役会の承認を得ていなければ、A社に対する善管注意義務・忠実義務違反として損害賠償責任を問われる可能性がある。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  cy += 0.7;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1086,7 +1141,12 @@ addDividerSlide(pres, {
     { k: "継続開示", v: "上場会社等が事業年度ごとに提出する有価証券報告書等" },
     { k: "インサイダー取引規制", v: "未公表の重要事実を知る会社関係者による株式売買を禁止" },
   ], { fontSize: 11.5, labelW: 2.4, gap: 0.4 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "上場企業A社の役員が、公表前の業績の大幅下方修正という重要事実を知った上で、公表前に自社株を売り抜けた場合、インサイダー取引規制に違反する可能性がある。発行開示・継続開示のいずれも、こうした投資家保護の土台として機能している。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.75;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1218,7 +1278,12 @@ addDividerSlide(pres, {
     { k: "消費者契約法", v: "不実告知・断定的判断の提供・不退去等があれば契約を取り消せる" },
     { k: "景品表示法", v: "優良誤認表示・有利誤認表示を禁止" },
   ], { fontSize: 10.5, labelW: 2.0, gap: 0.36 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "家電メーカーA社が製造した電気ケトルの製造工程での不具合（製造上の欠陥）が原因で発火し、利用者が火傷を負った場合、利用者はPL法に基づきA社の過失を証明しなくても損害賠償を請求できる。生命・身体への損害なので、損害と賠償義務者を知った時から5年間、この請求権は存続する。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  cy += 0.7;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1325,7 +1390,12 @@ addDividerSlide(pres, {
     { k: "ウィーン売買条約（CISG）", v: "国際的な物品売買契約に適用されるルールを統一する条約" },
     { k: "準拠法条項との関係", v: "契約書で準拠法を定めていないと、両国が加盟国なら適用されうる" },
   ], { fontSize: 11.5, labelW: 3.2, gap: 0.45 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "日本企業A社がアメリカ企業と国際物品売買契約を結ぶ際、契約書に準拠法条項を明記していないと、両国がともにウィーン売買条約の加盟国であれば同条約が適用される可能性がある。実務上はこうした不確実性を避けるため、契約書で準拠法や条約の適用排除を明記することが一般的。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.75;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1361,7 +1431,12 @@ addDividerSlide(pres, {
     { k: "直接金融", v: "株式・社債を発行して投資家から直接資金を集める" },
     { k: "上場のメリット・コスト", v: "知名度・信用力向上の一方、継続開示義務と株主関与の受け入れが必要" },
   ], { fontSize: 11.5, labelW: 2.3, gap: 0.4 });
-  cy += 0.1;
+  cy += 0.08;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "創業間もない企業A社が、銀行融資（間接金融）だけでなくベンチャーキャピタルからの出資（直接金融）を受け入れることで、返済義務のない資金を調達しつつ経営のアドバイスも得られるというメリットがある。", options: { fontFace: F_BODY, fontSize: 9.5, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  cy += 0.75;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1397,7 +1472,12 @@ addDividerSlide(pres, {
     { k: "有価証券報告書", v: "継続開示。事業年度終了後原則3か月以内に提出" },
     { k: "提出義務の範囲", v: "上場会社だけでなく、過去の届出書提出会社や株主数一定以上の非上場会社にも及ぶ" },
   ], { fontSize: 11, labelW: 2.3, gap: 0.42 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "上場企業A社が決算を発表する際、まず速報性の高い決算短信を公表し、その後、より詳細な内容を記載した有価証券報告書を事業年度終了後3か月以内に提出する、という2段階の開示を行うのが一般的。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.4, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  cy += 0.45;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
@@ -1433,7 +1513,12 @@ addDividerSlide(pres, {
     { k: "社債管理者", v: "社債権者保護のため一定の場合に設置が必要（銀行・信託会社等）" },
     { k: "上場審査基準", v: "形式基準（株主数・時価総額・事業継続年数等）＋実質基準（健全性・ガバナンス等）" },
   ], { fontSize: 11, labelW: 1.9, gap: 0.42 });
-  cy += 0.08;
+  cy += 0.06;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "急成長中のITベンチャーA社が証券取引所のグロース市場への上場を目指す場合、株主数や流通株式時価総額等の形式基準を満たすことに加え、実質基準として「企業経営の健全性」「コーポレート・ガバナンス及び内部管理体制の有効性」等が審査される。", options: { fontFace: F_BODY, fontSize: 9, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.1 });
+  cy += 0.7;
   s.addShape("line", { x: proseX, y: cy, w: proseW, h: 0, line: { color: LINE, width: 1 } });
   cy += 0.08;
   s.addText([
