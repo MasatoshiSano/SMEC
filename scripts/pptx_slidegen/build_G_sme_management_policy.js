@@ -180,9 +180,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「中小企業性業種＝衰退産業」は誤り。酒蔵・陶磁器産地のようにブランド・地域性・匠の技術で高収益を実現する企業も存在する。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "伝統的な酒蔵や陶磁器の窯元は、地域固有の原材料・技術・ブランドに依存するため大企業が同じやり方で大量生産に乗り出しにくく、零細な蔵元・窯元が中心的な担い手であり続けている。中小企業性業種の典型例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-4 地域社会・地域産業（産地・企業城下町の形成）。",
     years: mkYears(new Set(["'16", "'18", "'20", "'22", "'25"])),
   });
@@ -197,13 +203,19 @@ addDividerSlide(pres, {
     overview: "地域資源活用・農商工連携も近年重視される取り組み。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy08 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "産地", desc: "同業種の中小企業が特定地域に集積し、調達〜製造〜販売の分業体制を構築（例：眼鏡フレーム、刃物の産地）" },
     { name: "企業城下町", desc: "特定の大企業（親工場）を中心に下請企業群が地域に集積する型の産業集積" },
     { name: "地域資源活用・農商工連携", desc: "地域外の企業・大学・金融機関と連携し、農産品・観光資源・伝統技術を活かした新事業を創出する近年の取り組み" },
   ], { nameW: 3.4, tagW: 0, rowH: 0.9 });
+  cy08 += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある地方都市では、金属加工の中小企業数十社が「切削」「メッキ」「組立」など異なる工程を分業して受け持ち、地域全体で一つの製造ラインのような機能を果たしている。産地型の産業集積の典型例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy08, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy08 += 0.9;
   addFreqBar(s, {
-    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    y: Math.max(cy08, 6.55), rank: "B", rankLabel: "頻出論点",
     related: "ひっかけ：「産地」と「企業城下町」の構造の違い（同業種集積か、親工場中心の下請構造か）を混同しない。",
     years: mkYears(new Set(["'16", "'24"])),
   });
@@ -350,14 +362,20 @@ addDividerSlide(pres, {
     overview: "業種別の課題を取り違えないよう白書の業種別分析を押さえる。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy13 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "建設業", desc: "元請・下請・孫請の重層構造。価格転嫁・工期管理が難しい。担い手不足" },
     { name: "製造業", desc: "系列・下請依存が多い。下請からの脱却（自社製品開発）が課題" },
     { name: "卸売業", desc: "メーカー直接取引拡大・EC化による「中抜き」の脅威" },
     { name: "サービス業", desc: "労働集約的な業種が多く、労働生産性向上が大きな政策課題" },
   ], { nameW: 1.8, tagW: 0, rowH: 0.9 });
+  cy13 += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある建設業の中小企業が大手ゼネコンの下請として工事の一部を受注している場合、資材価格が高騰しても元請との契約上、価格転嫁が思うようにできないことがある。重層下請構造ゆえの建設業特有の課題。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy13, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy13 += 0.75;
   addFreqBar(s, {
-    y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
+    y: Math.max(cy13, 6.55), rank: "－", rankLabel: "直近10年単独出題なし",
     related: "関連：G-23 経営サポート（取引・官公需支援は下請問題への対応）。",
     years: mkYears(new Set([])),
   });
@@ -386,9 +404,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「グローバル化＝海外進出推進が常に望ましい」ではなく、リスク分散・強靱化の文脈で語られる点に注意。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "海外の特定国からの部品調達に依存していた製造業の中小企業が、感染症流行や国際情勢の変化で部品が届かなくなった経験から、調達先を複数の国・地域に分散させ一部の生産を国内に戻すのは、サプライチェーン強靱化の典型例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "B", rankLabel: "頻出論点",
+    y: Math.max(cy, 6.55), rank: "B", rankLabel: "頻出論点",
     related: "関連：G-15 海外展開（企業レベルの海外展開の進め方）。",
     years: mkYears(new Set(["'23", "'24"])),
   });
@@ -570,9 +594,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「負担が増えるだけ」という一面的理解は誤り。取引喪失リスクとコスト削減機会の両面から出題される。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "大手自動車メーカーがサプライチェーン全体のCO2排出量削減を取引先に求めるようになると、部品を供給する中小企業も自社工場の省エネ化やCO2排出量の把握・開示への対応を迫られる。大企業の環境対応方針が中小企業にも波及する例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "－", rankLabel: "直近10年単独出題なし",
+    y: Math.max(cy, 6.55), rank: "－", rankLabel: "直近10年単独出題なし",
     related: "関連：G-8 中小企業の経営環境（サプライチェーン強靱化と同時に語られる）。",
     years: mkYears(new Set([])),
   });
@@ -661,13 +691,19 @@ addDividerSlide(pres, {
     overview: "第三者承継（M&A）が政策的に強く後押しされている。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy22 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "親族内承継", desc: "経営者の子など親族に引き継ぐ" },
     { name: "親族外承継", tag: "従業員承継", desc: "役員・従業員に引き継ぐ" },
     { name: "社外への引継ぎ", tag: "M&A・第三者承継", desc: "外部の企業・個人に譲渡。近年最も政策的に後押しされている" },
   ], { nameW: 2.0, tagW: 2.3, rowH: 1.2 });
+  cy22 += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "後継者のいない金属加工業の経営者が、廃業して従業員を解雇するのではなく、同業の企業に会社を売却（M&A）することで雇用と技術を存続させるケースが近年増加している。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy22, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy22 += 0.75;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy22, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-25 財務サポート（事業承継税制、税負担の軽減策）。",
     years: mkYears(new Set(["'17", "'18", "'20", "'21", "'22", "'23"])),
   });
@@ -696,9 +732,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "いきなり現地生産ではなく、輸出から始め市場の反応を見る手堅いアプローチが重視される。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "国内市場の縮小に直面した地方の食品メーカーが、まずJETROの支援を受けて海外の見本市に出展し、輸出による海外販路開拓から着手するのが中小企業の典型的な海外展開のステップ。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-22 経営サポート（海外展開支援の具体的施策）。",
     years: mkYears(new Set(["'16", "'17", "'20", "'22", "'24"])),
   });
@@ -727,9 +769,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "創業支援策の対象が「新規開業者」か「既存企業の新事業展開（第二創業）」かを区別する。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "大学発のベンチャー企業が、大学の研究成果（技術シーズ）を事業化するために起業し、公的な創業支援策や投資家からの出資を受けながら成長していくのは、アントレプレナーシップと創業支援策が結びついた典型例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-19 経営サポート（創業・ベンチャー支援の具体施策）。",
     years: mkYears(new Set(["'18", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
@@ -758,9 +806,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "特許権・商標権の制度要件はE科目の範囲。G科目は「経営における活用のあり方」というより経営寄りの視点で問われる。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "地方の伝統工芸品の産地組合が、産地の名称を冠したブランド（地域団体商標）を取得し、模倣品との差別化や産地全体のブランド価値向上に活用するのは、無形資産を経営に活かす典型例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-21 経営サポート（知的財産支援策）。",
     years: mkYears(new Set(["'20", "'21", "'23"])),
   });
@@ -786,13 +840,19 @@ addDividerSlide(pres, {
     overview: "名称が似た3つの法律の役割を区別する。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy27 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "中小企業基本法", desc: "中小企業政策の理念・基本方針を定める「憲法」。中小企業者の定義もここに規定" },
     { name: "中小企業支援法", desc: "都道府県等中小企業支援センター等、支援体制の整備を定める" },
     { name: "中小企業等経営強化法", desc: "経営革新計画・経営力向上計画等、個々の企業の取り組みを認定・支援する枠組み" },
   ], { nameW: 2.6, tagW: 0, rowH: 1.2 });
+  cy27 += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "ある中小企業が新しい事業活動に取り組む計画を都道府県に申請し承認を受けると（経営革新計画、中小企業等経営強化法に基づく）、日本政策金融公庫の低利融資や信用保証の特例を受けられる。中小企業基本法という理念法の下に個別の実施法がある構造の一例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy27, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy27 += 0.75;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy27, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：3つの法律名は似ているが役割が異なる別の法律。「理念・定義」「支援体制」「個別計画認定」で区別する。",
     years: mkYears(new Set(["'16", "'17", "'18", "'20", "'22", "'24"])),
   });
@@ -922,9 +982,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「新規性＝全国初でなければならない」は誤り。既に他社が採用済みでも自社にとって新しければ対象。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "食品加工業の中小企業が新しい味付けの商品開発を経営革新計画として都道府県に申請し承認を受けると、日本政策金融公庫の特別貸付や信用保証の特例といった資金面の支援を受けられる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-12 経営革新・事業創造（「稼ぐ力」向上との連続性）。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
@@ -1004,13 +1070,19 @@ addDividerSlide(pres, {
     overview: "M&A支援は事業承継・引継ぎ支援センターと役割の重心が異なる。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.9, 12.25, [
+  let cy34 = addRowList(s, 0.55, 1.9, 12.25, [
     { name: "知的財産支援", desc: "中小企業が特許出願する際の審査請求料・特許料の減免制度等、コスト面での支援" },
     { name: "中小企業活性化協議会", desc: "各都道府県に設置。資金繰りに窮した企業の相談を受け、専門家とともに再生計画策定・金融機関との調整を支援（旧：中小企業再生支援協議会）" },
     { name: "事業承継・引継ぎ支援センター", desc: "各都道府県に設置。事業承継の第三者承継（M&A）を支援する専門機関" },
-  ], { nameW: 3.2, tagW: 0, rowH: 1.5 });
+  ], { nameW: 3.2, tagW: 0, rowH: 1.0 });
+  cy34 += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "業績が悪化し金融機関への返済負担が重くなった中小企業が、中小企業活性化協議会に相談し、専門家の支援を受けながら返済条件の見直し（リスケジュール）を含む経営改善計画を策定するのは、再生支援の典型的な活用例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy34, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy34 += 0.9;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy34, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「再生支援＝活性化協議会」「M&Aマッチング＝引継ぎ支援センター」を対応させて覚える。連携はするが役割の重心が違う。",
     years: mkYears(new Set(["'16", "'18", "'19"])),
   });
@@ -1057,13 +1129,19 @@ addDividerSlide(pres, {
     overview: "相手方が民間か国・自治体かで対象法律が異なる。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy36 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "下請代金支払遅延等防止法", desc: "親事業者の支払遅延・不当減額・買いたたき等を規制（民間の取引）" },
     { name: "官公需法", desc: "国・地方公共団体の調達で中小企業者の受注機会確保に努力義務" },
     { name: "小規模企業振興基本法", desc: "2014年制定。小規模企業の持続的発展を支える政策の柱" },
   ], { nameW: 3.0, tagW: 0, rowH: 0.9 });
+  cy36 += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "大手メーカーが下請の部品メーカーに対し、発注後に一方的に代金を減額したり支払いを長期間遅延させたりする行為は、下請代金支払遅延等防止法で禁止される典型的な違反行為。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy36, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy36 += 0.75;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy36, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：価格交渉促進月間・パートナーシップ構築宣言も取引適正化の一環。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
@@ -1230,9 +1308,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "特例措置は「特例承継計画」の事前提出という手続き要件がある点を見落としやすい。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "多額の相続税負担が事業承継の障害になっていた非上場の製造業で、先代経営者が特例承継計画を提出した上で自社株式を後継者に贈与すれば、上限なし・猶予割合100％の特例措置により贈与税の負担を実質ゼロにしたまま経営権を引き継げる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-14 事業承継・M&A（承継の3方式との関連）。",
     years: mkYears(new Set(["'17", "'18", "'20", "'21", "'22", "'23", "'25"])),
   });
@@ -1247,13 +1331,19 @@ addDividerSlide(pres, {
     overview: "郊外大型店の出店増加で衰退した中心市街地の再生を図る。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy41 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "大規模小売店舗立地法", desc: "大型店の立地環境（周辺の生活環境）を整備" },
     { name: "中心市街地活性化法", desc: "郊外化で衰退した中心市街地の再生を図る" },
     { name: "改正都市計画法", desc: "広域的な土地利用規制" },
   ], { nameW: 2.8, tagW: 0, rowH: 0.9 });
+  cy41 += 0.15;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "郊外に大型ショッピングモールが出店したことで衰退した中心市街地の商店街が、空き店舗を活用したチャレンジショップ（新規開業者向けの低家賃店舗）の誘致やイベント開催を通じて回遊性・にぎわいの回復を図るのは、商業・地域サポートの典型例。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy41, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy41 += 0.9;
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy41, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：3法の目的（立地環境整備／中心市街地再生／広域土地利用規制）を取り違えない。",
     years: mkYears(new Set(["'16", "'18", "'19", "'20", "'23", "'24"])),
   });
@@ -1282,9 +1372,15 @@ addDividerSlide(pres, {
     { text: "ひっかけ：", options: { bold: true, color: RED } },
     { text: "「商工会」と「商工会議所」は名前が似ているが根拠法・管轄・所管が異なる別組織。", options: { color: RED } },
   ], { x: proseX, y: cy, w: proseW, h: 0.5, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.55;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "創業を考えている個人が、まず地元の商工会議所で記帳や税務の基礎知識を相談し、より専門的な販路開拓やITツール活用は「よろず支援拠点」で無料相談を受ける、というように複数の支援機関を目的に応じて使い分けられる。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: proseX, y: cy, w: proseW, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy += 0.9;
 
   addFreqBar(s, {
-    y: 6.55, rank: "A", rankLabel: "最頻出論点",
+    y: Math.max(cy, 6.55), rank: "A", rankLabel: "最頻出論点",
     related: "関連：G-18 中小企業関連法規（中小企業支援法との関係）。",
     years: mkYears(new Set(["'21", "'22", "'23", "'25"])),
   });
@@ -1299,12 +1395,18 @@ addDividerSlide(pres, {
     overview: "1999年の抜本改正で中小企業の位置づけが大きく変わった。",
     tag: "中小企業経営・政策",
   });
-  addRowList(s, 0.55, 1.95, 12.25, [
+  let cy43 = addRowList(s, 0.55, 1.95, 12.25, [
     { name: "1963年 制定", tag: "格差是正型", desc: "大企業と中小企業の「二重構造」是正が目的。弱者保護の発想" },
     { name: "1999年 抜本改正", tag: "自立支援型", desc: "「多様な事業活動を行い経済の基盤を形成する存在」へ位置づけ直し" },
   ], { nameW: 2.2, tagW: 1.8, rowH: 1.4 });
+  cy43 += 0.1;
+  s.addText([
+    { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
+    { text: "1963年の基本法は「大企業に比べ生産性が低く格差があるので是正すべき」という発想が土台だったが、1999年の改正後は「中小企業は画一的な弱者ではなく、それぞれ多様な強みを持つ経済の担い手であり、その自主的な取り組みを支援する」という発想に転換した。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
+  ], { x: 0.55, y: cy43, w: 12.25, h: 0.9, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
+  cy43 += 0.95;
   addFreqBar(s, {
-    y: 6.55, rank: "C", rankLabel: "出題実績あり",
+    y: Math.max(cy43, 6.55), rank: "C", rankLabel: "出題実績あり",
     related: "ひっかけ：年号そのものより「制定時＝弱者保護、改正後＝自立支援」という理念転換の方向性を理解することが重要。",
     years: mkYears(new Set(["'21"])),
   });
