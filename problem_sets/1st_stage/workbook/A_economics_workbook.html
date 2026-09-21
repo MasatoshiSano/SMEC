@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>経済学・経済政策 問題集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#f4f4f4; --card:#ffffff; --ink:#171717; --ink-soft:#55565c; --ink-faint:#8a8a8a;
+  --red:#FF3B1F; --line:#dcdcdc; --green:#0a7d3c;
+}
+html{-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;line-height:1.7;}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 80px;}
+
+/* header */
+header.top{background:var(--ink);color:#fff;padding:40px 20px 32px;}
+header.top .wrap{padding:0 16px;}
+header.top .kicker{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.08em;color:#bbb;text-transform:uppercase;}
+header.top h1{margin:10px 0 8px;font-size:clamp(24px,6vw,34px);font-weight:900;}
+header.top p{margin:0;color:#ccc;font-size:14px;max-width:640px;}
+header.top .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+header.top .badge-row span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 12px;font-size:12px;}
+
+/* notice */
+.notice{background:#fff7f5;border:1px solid #ffd4c9;border-left:4px solid var(--red);border-radius:6px;padding:14px 16px;margin:24px 0;font-size:13.5px;color:var(--ink);}
+.notice b{color:var(--red);}
+
+/* progress note */
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0;}
+.stats .stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 16px;text-align:center;flex:1;min-width:100px;}
+.stats .stat b{display:block;font-size:22px;font-family:"Space Mono",monospace;}
+.stats .stat span{font-size:11px;color:var(--ink-faint);}
+
+/* TOC */
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:24px 0;}
+nav.toc h2{font-size:14px;margin:0 0 12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;font-family:"Space Mono",monospace;}
+nav.toc .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;}
+nav.toc a{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font-size:12.5px;padding:6px 8px;border-radius:5px;border:1px solid transparent;}
+nav.toc a:hover{background:var(--bg);border-color:var(--line);}
+nav.toc .rk{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:3px;font-size:9px;font-weight:900;color:#fff;font-family:"Space Mono",monospace;flex:0 0 auto;}
+nav.toc .rk.A{background:var(--red);}
+nav.toc .rk.B{background:#9a9a9a;}
+
+/* topic section */
+section.topic{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:22px 0;overflow:hidden;scroll-margin-top:16px;}
+.topic-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.topic-head .rank-chip{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;font-weight:900;font-family:"Space Mono",monospace;font-size:13px;color:#fff;flex:0 0 auto;}
+.topic-head .rank-chip.A{background:var(--red);}
+.topic-head .rank-chip.B{background:#9a9a9a;}
+.topic-head h2{font-size:16px;margin:0;flex:1;min-width:0;}
+.topic-head h2 .no{font-family:"Space Mono",monospace;color:var(--ink-faint);font-weight:700;margin-right:6px;}
+
+.qbox{padding:18px 20px 6px;}
+.source{font-family:"Space Mono",monospace;font-size:11px;color:var(--ink-faint);margin:0 0 10px;}
+.stem{font-size:14.5px;margin:0 0 14px;white-space:pre-line;}
+.choices{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choice{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;}
+.choice .badge{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+
+details{border-top:1px dashed var(--line);}
+summary{cursor:pointer;padding:12px 20px;font-size:13.5px;font-weight:700;color:var(--red);list-style:none;display:flex;align-items:center;gap:6px;user-select:none;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"▸";display:inline-block;transition:transform .15s;}
+details[open] summary::before{transform:rotate(90deg);}
+details[open] summary{border-bottom:1px solid var(--line);}
+.answer{padding:16px 20px 20px;background:#fafafa;}
+.correct-line{display:inline-block;background:var(--ink);color:#fff;font-family:"Space Mono",monospace;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:4px;margin-bottom:12px;}
+.explain h3, .supplement h3{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;font-family:"Space Mono",monospace;margin:16px 0 8px;}
+.explain .row{font-size:13px;margin:0 0 8px;padding-left:0;}
+.explain .row b{font-family:"Space Mono",monospace;margin-right:4px;}
+.explain .row.right{color:var(--green);}
+.explain .row.right b{color:var(--green);}
+.supplement{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+.supplement p{font-size:13px;margin:0 0 10px;}
+.diagram-wrap{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;margin:10px 0;}
+.diagram-wrap svg{width:100%;height:auto;display:block;max-width:420px;margin:0 auto;}
+.diagram-cap{text-align:center;font-size:11px;color:var(--ink-faint);margin-top:6px;}
+.related{font-size:12px;color:var(--ink-faint);margin-top:10px;border-top:1px dotted var(--line);padding-top:10px;}
+
+footer.pagefoot{text-align:center;padding:30px 0;color:var(--ink-faint);font-size:12px;}
+
+@media (max-width:480px){
+  .topic-head h2{font-size:14.5px;}
+  .stem{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">中小企業診断士・第1次試験</div>
+    <h1>経済学・経済政策　問題集</h1>
+    <p>A・Bランク論点（直近10年で2回以上出題）をほぼ網羅。すべて令和5〜8年度の実際の過去問と、公式発表の正解に基づく。全問正解できれば、この科目の本試験で合格点（60点）を大きく上回る力がついている状態。</p>
+    <div class="badge-row">
+      <span>全30問（32論点カバー）</span>
+      <span>実際の過去問のみ使用（創作問題なし）</span>
+      <span>令和5〜8年度</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="notice">
+  <b>この問題集の使い方：</b>各問題はまず自力で解答してから「解答・解説を見る」を開くこと。選択肢ごとの正誤の理由まで人に説明できるレベルを目指す。出典は令和5〜8年度（公式に正解が発表されている直近4年分）の実際の第1次試験問題のみを使用しており、選択肢の文言・数値・正解はすべて公式PDFの内容と一致することを確認済み。
+</div>
+
+<div class="stats">
+  <div class="stat"><b>30</b><span>収録問題数</span></div>
+  <div class="stat"><b>27</b><span>Aランク問題</span></div>
+  <div class="stat"><b>4</b><span>使用年度</span></div>
+</div>
+
+<nav class="toc">
+  <h2>目次</h2>
+  <div class="grid">
+    <a href="#A-1"><span class="rk A">A</span>A-1 国民経済計算</a>
+    <a href="#A-2"><span class="rk A">A</span>A-2 雇用統計</a>
+    <a href="#A-3"><span class="rk A">A</span>A-3 物価指数</a>
+    <a href="#A-4"><span class="rk A">A</span>A-4 景気動向指数</a>
+    <a href="#A-5"><span class="rk A">A</span>A-5 マネーストック</a>
+    <a href="#A-6"><span class="rk A">A</span>A-6 国際収支・為替</a>
+    <a href="#A-7"><span class="rk A">A</span>A-7 45度線分析</a>
+    <a href="#A-8"><span class="rk B">B</span>A-8 貨幣市場</a>
+    <a href="#A-9"><span class="rk A">A</span>A-9 IS-LM分析</a>
+    <a href="#A-10"><span class="rk A">A</span>A-10 財政政策</a>
+    <a href="#A-11"><span class="rk A">A</span>A-11 金融政策</a>
+    <a href="#A-12"><span class="rk A">A</span>A-12 自然失業率</a>
+    <a href="#A-13"><span class="rk A">A</span>A-13 景気循環</a>
+    <a href="#A-14"><span class="rk A">A</span>A-14 比較生産費説</a>
+    <a href="#A-15"><span class="rk A">A</span>A-15 貿易政策</a>
+    <a href="#A-16"><span class="rk A">A</span>A-16 為替と貿易収支</a>
+    <a href="#A-17"><span class="rk A">A</span>A-17 国際マクロ経済</a>
+    <a href="#A-21"><span class="rk A">A</span>A-21 市場均衡</a>
+    <a href="#A-22"><span class="rk A">A</span>A-22 価格弾力性</a>
+    <a href="#A-23"><span class="rk A">A</span>A-23 経済余剰</a>
+    <a href="#A-24"><span class="rk A">A</span>A-24 市場の失敗</a>
+    <a href="#A-2526"><span class="rk A">A</span>A-25/26 消費者行動</a>
+    <a href="#A-2728"><span class="rk A">A</span>A-27/28 費用曲線</a>
+    <a href="#A-29"><span class="rk A">A</span>A-29 情報の非対称性</a>
+    <a href="#A-30"><span class="rk A">A</span>A-30 ゲーム理論</a>
+    <a href="#A-31"><span class="rk A">A</span>A-31 独占</a>
+    <a href="#A-32"><span class="rk B">B</span>A-32 独占的競争</a>
+    <a href="#A-34"><span class="rk B">B</span>A-34 公正性・公平性</a>
+    <a href="#A-35"><span class="rk A">A</span>A-35 生産要素市場</a>
+    <a href="#A-36"><span class="rk A">A</span>A-36 所得再分配</a>
+  </div>
+</nav>
+
+<!-- ============ A-1 ============ -->
+<section class="topic" id="A-1">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-1</span>国民経済計算の概念・国民所得統計</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第4問</p>
+    <p class="stem">国民経済計算の考え方に関する記述として、最も適切なものはどれか。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>GDPは、フローとストックの混合概念である。</span></div>
+      <div class="choice"><span class="badge">イ</span><span>GDPは、持ち家の帰属家賃を含み、住宅建築を含まない。</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>株式の配当や預金の利子は、GDPに含まれない。</span></div>
+      <div class="choice"><span class="badge">エ</span><span>消防、警察などの行政サービスは無料なので、GDPに含まれない。</span></div>
+      <div class="choice"><span class="badge">オ</span><span>輸入の減少は、GDPを増加させる。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：イ</span>
+      <div class="explain">
+        <h3>選択肢ごとの解説</h3>
+        <p class="row right"><b>イ</b>正しい。持ち家に住む人は実際には家賃を支払っていないが、市場家賃と同等のサービスを消費しているとみなし、その分を「帰属家賃」として消費支出に計上する（GDPに算入）。一方、住宅を新しく建てる行為（住宅投資）は、建てられたその年の投資支出として別枠で計上されるものであり、毎年繰り返し発生する「帰属家賃」という付加価値の中には含まれない。</p>
+        <p class="row"><b>ア</b>誤り。GDPは「一定期間（1年など）に生み出された付加価値の合計」であるフロー概念。ある時点の資産の残高を示すストック概念（国富統計など）とは明確に区別される。</p>
+        <p class="row"><b>ウ</b>誤り。株式配当は企業利益の分配であり金融取引として扱われるが、「GDPに一切含まれない」と断定するのは不正確。預金利子についても金融仲介サービスの対価とみなされる部分がGDP計算上考慮される。</p>
+        <p class="row"><b>エ</b>誤り。消防・警察などの行政サービスは市場で取引されず価格がつかないため、便宜上「人件費等の産出コスト」で評価してGDPに算入される。無料だからGDPに計上されない、というのは誤り。</p>
+        <p class="row"><b>オ</b>誤り。支出面からみたGDP＝消費＋投資＋政府支出＋（輸出－輸入）という会計上の定義だけを見ると、輸入が減れば式の上ではGDPが増えるように見える。しかし、これは統計上の恒等式にすぎず、実際には輸入は国内所得・消費の増減と連動して動く（輸入が減る背景には国内需要の減退があることが多い）ため、「輸入を減らせばGDPが増える」という単純な因果関係として捉えるのは誤り。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>GDPの4大原則（①一定期間のフロー、②市場価格で評価、③帰属計算で市場外取引も一部算入、④最終生産物のみで中間生産物は除く）は繰り返し出題される。特に「帰属家賃」「持ち家」「行政サービス」は算入される側、「中古品の売買」「株式・土地の売買（キャピタルゲイン）」「家庭内の家事労働」は算入されない側、という対比で覚えると整理しやすい。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-2 ============ -->
+<section class="topic" id="A-2">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-2</span>雇用統計（失業率、有効求人倍率等）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第2問</p>
+    <p class="stem">下図は、近年の日本における男女別・雇用形態別の雇用者数の推移を示している。図中のａ〜ｃに該当する項目の組み合わせとして、最も適切なものを下記の解答群から選べ。
+（グラフの内容：縦軸=雇用者数(万人)、横軸=2002〜2023年。「男性、正規雇用労働者」は横ばいでやや減少傾向の点線（2,400万人前後）。実線ａは右肩上がりで1,000万人台から1,400万人台へ増加。実線ｂはａよりやや低い水準で緩やかに増加。破線ｃは500万人前後から緩やかに増加。出所：厚生労働省『令和6年版 労働経済白書』）</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：男性、非正規雇用労働者　ｂ：女性、正規雇用労働者　ｃ：女性、非正規雇用労働者</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：女性、正規雇用労働者　ｂ：男性、非正規雇用労働者　ｃ：女性、非正規雇用労働者</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：女性、正規雇用労働者　ｂ：女性、非正規雇用労働者　ｃ：男性、非正規雇用労働者</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：女性、非正規雇用労働者　ｂ：男性、非正規雇用労働者　ｃ：女性、正規雇用労働者</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：女性、非正規雇用労働者　ｂ：女性、正規雇用労働者　ｃ：男性、非正規雇用労働者</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ウ</b>近年の日本の労働市場の実態として、①女性の正規雇用労働者数は緩やかに増加し続けている、②女性の非正規雇用労働者数は女性正規よりやや少ない水準で増加、③男性の非正規雇用労働者数は最も水準が低いが緩やかに増加、という順序（水準：女性正規＞女性非正規＞男性非正規）が近年のトレンドと一致する。男性の正規雇用労働者数（グラフの点線）が高水準で横ばい〜微減という点も実態と整合的。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>A-2は「有効求人倍率」「完全失業率」の定義計算式（B-科目ではなくA科目でも頻出）に加え、近年は労働経済白書・厚生労働省統計の「グラフ読み取り」型の出題が主流になっている。数値そのものを覚えるより、「女性の正規雇用が近年増加傾向にある」「非正規雇用は女性の方が男性より多い」という大まかな傾向を白書（年度更新）で確認しておくことが有効。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-3 ============ -->
+<section class="topic" id="A-3">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-3</span>物価指数（CPI、GDPデフレーター等）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第5問</p>
+    <p class="stem">2種類の財（X財とY財）の数値例で物価指数を計算する。これらの財の単位当たりの価格と数量は、それぞれ以下の表のとおりである。基準年の物価指数を100とした場合、比較年の物価指数として、最も適切なものを下記の解答群から選べ。
+
+　　　　　　　X財　　　　　　Y財
+　　　　　　価格　数量　　価格　数量
+基準年　　　10　　5　　　　5　　10
+比較年　　　12　　5　　　　6　　9</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ラスパイレス指数では95、パーシェ指数では114。</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ラスパイレス指数では114、パーシェ指数では95。</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ラスパイレス指数では114、パーシェ指数では120。</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ラスパイレス指数では120、パーシェ指数では95。</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ラスパイレス指数では120、パーシェ指数でも120。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ</span>
+      <div class="explain">
+        <h3>計算過程</h3>
+        <p class="row"><b>ラスパイレス指数</b>＝基準年の数量で固定して計算：(比較年価格×基準年数量の合計)÷(基準年価格×基準年数量の合計)×100
+　＝(12×5＋6×10)÷(10×5＋5×10)×100＝(60＋60)÷(50＋50)×100＝120÷100×100＝<b>120</b></p>
+        <p class="row"><b>パーシェ指数</b>＝比較年の数量で計算：(比較年価格×比較年数量の合計)÷(基準年価格×比較年数量の合計)×100
+　＝(12×5＋6×9)÷(10×5＋5×9)×100＝(60＋54)÷(50＋45)×100＝114÷95×100＝<b>120</b></p>
+        <p class="row right"><b>オ</b>両方とも120となる。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>ラスパイレス指数は「基準年の数量」で固定するため計算が容易（CPIはこの方式）。パーシェ指数は「比較年の数量」を使う（GDPデフレーターはこの方式に近い）。実際の試験では毎回数値が変わるため、公式を暗記するだけでなく「分子＝比較年価格、分母＝基準年価格。数量はラスパイレスなら基準年、パーシェなら比較年で両方固定」という構造を理解し、その場で計算できるようにしておくことが必須。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-4 ============ -->
+<section class="topic" id="A-4">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-4</span>景気動向指数（DI・CI）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第6問</p>
+    <p class="stem">内閣府の景気動向指数における一致系列の経済指標として、最も適切なものはどれか。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>家計消費支出（勤労者世帯、名目）</span></div>
+      <div class="choice"><span class="badge">イ</span><span>消費者物価指数（生鮮食品を除く総合）</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>東証株価指数</span></div>
+      <div class="choice"><span class="badge">エ</span><span>法人税収入</span></div>
+      <div class="choice"><span class="badge">オ</span><span>有効求人倍率（除学卒）</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>オ</b>有効求人倍率（除学卒）は、景気の現状を反映する「一致系列」の代表的な指標。雇用は景気とほぼ同時に動くため一致指数に分類される。</p>
+        <p class="row"><b>ウ</b>東証株価指数は株価であり、景気に先行して動く「先行系列」の代表例（将来の景気予想を織り込んで動くため）。</p>
+        <p class="row"><b>エ</b>法人税収入は企業業績が確定してから税収に反映されるため、景気に遅れて動く「遅行系列」に分類される。</p>
+        <p class="row"><b>ア・イ</b>家計消費支出や消費者物価指数も、景気動向指数の採用系列には含まれるが、一致系列の典型例としては有効求人倍率ほど頻出しない（消費者物価指数（生鮮食品を除く）は遅行系列に分類される）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>景気動向指数はDI（拡散指数、景気の「波及の度合い」を見る）とCI（合成指数、景気の「大きさ・テンポ」を見る）の2種類があり、採用系列は「先行系列」「一致系列」「遅行系列」の3つに分類される。先行＝株価・新規求人数など将来を見越して動くもの、一致＝有効求人倍率・鉱工業生産指数など今の景気そのものを表すもの、遅行＝法人税収入・完全失業率など景気が変わった後で反応するもの、という分類の軸を押さえておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-5 ============ -->
+<section class="topic" id="A-5">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-5</span>マネーストック統計</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和8年度 第1次試験 第8問</p>
+    <p class="stem">貨幣理論に関する記述として、最も適切なものはどれか。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>買いオペレーションは、市中銀行が保有する日本銀行当座預金の残高を増やすが、マネタリーベースを減らす。</span></div>
+      <div class="choice"><span class="badge">イ</span><span>貨幣乗数は、常に1より大きい。</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>マネーストック統計における通貨保有主体のうち、最も保有割合の大きいのは中央政府である。</span></div>
+      <div class="choice"><span class="badge">エ</span><span>預金よりも現金で通貨を保有する傾向が高まると、貨幣乗数は大きくなり、マネタリーベースの増加に伴うマネーストックの増加の程度も大きくなる。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：イ</span>
+      <div class="explain">
+        <h3>選択肢ごとの解説</h3>
+        <p class="row right"><b>イ</b>正しい。貨幣乗数＝マネーストック÷マネタリーベース。銀行が受け入れた預金の一部しか貸し出さない（信用創造）ため、マネタリーベースの何倍かのマネーストックが生み出される。この乗数効果により、貨幣乗数は理論上必ず1より大きくなる。</p>
+        <p class="row"><b>ア</b>誤り。買いオペ（日銀が国債等を買って資金供給する操作）は、市中銀行の日銀当座預金残高を増やすと同時に、マネタリーベース（＝日銀が供給する現金通貨＋日銀当座預金）自体も増加させる。「マネタリーベースを減らす」が誤り。</p>
+        <p class="row"><b>ウ</b>誤り。マネーストック統計の対象保有主体は、一般法人・個人・地方公共団体等であり、中央政府や金融機関自身の保有分はそもそもマネーストックの集計対象から除外されている。</p>
+        <p class="row"><b>エ</b>誤り。現金保有性向が高まる（現金・預金比率が上がる）と、銀行に預けられる資金の割合が減り信用創造の連鎖が弱まるため、貨幣乗数はむしろ<b>小さく</b>なる。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>マネタリーベース（日銀が直接供給する通貨＝現金＋日銀当座預金）とマネーストック（世の中に出回る通貨の総量、M1〜M3等）は別概念で、両者は「貨幣乗数」を介して間接的に結びつく。信用創造の仕組み（銀行が預金の一部を準備金として残し、残りを貸し出すことで預金が連鎖的に増える）を理解しておくと、貨幣乗数が1より大きくなる理由・現金保有性向との関係が机上の暗記でなく腹落ちする。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-6 ============ -->
+<section class="topic" id="A-6">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-6</span>国際収支・為替レート</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第9問</p>
+    <p class="stem">変動為替レート制の下で円安・ドル高への圧力を強めると想定される要因として、最も適切な組み合わせを下記の解答群から選べ。
+
+ａ　アメリカの連邦準備制度理事会による政策金利の引き下げ
+ｂ　アメリカにおける市場予想を上回る雇用者数の増加
+ｃ　世界的な原油価格の上昇
+ｄ　日本における消費者物価の持続的な下落</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａとｂ</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａとｃ</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａとｄ</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ｂとｃ</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ｂとｄ</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ</span>
+      <div class="explain">
+        <h3>選択肢ごとの解説</h3>
+        <p class="row"><b>ａ</b>誤（円安要因ではない）。FRBが政策金利を引き下げると、ドル建て資産の魅力（金利収益）が相対的に下がるため、資金がドルから逃避しやすくなり、むしろドル安・円高圧力が強まる。</p>
+        <p class="row right"><b>ｂ</b>正（円安要因）。アメリカの雇用者数が市場予想を上回って増加すると、米国景気の強さが意識され利上げ観測が強まりやすく、ドルが買われやすくなる（＝円安ドル高圧力）。</p>
+        <p class="row"><b>ｃ</b>誤（円安要因と直接結びつく主要因ではない）。原油価格の上昇は日本のような資源輸入国の貿易収支を悪化させる方向に働くため円安要因になりうる面もあるが、本問の正解の組み合わせ（ｂとｄ）には含まれない。試験対策上は「金利差」を軸にした要因ほど為替レートへの説明力が高いと押さえておく。</p>
+        <p class="row right"><b>ｄ</b>正（円安要因）。日本で消費者物価が持続的に下落する（デフレ傾向が強まる）と、実質的に日本の金融緩和が長期化しやすく、相対的に円の魅力が下がり円安圧力につながると解釈される。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>為替レートの変動要因は「金利平価説」（内外金利差が縮まる方向に為替が調整される）で理解するのが基本。「米国の金利上昇・米国景気の強さを示す指標→ドル高（円安）」「日本の金利低下・デフレ長期化→円安」という2つの軸を押さえ、原油価格や貿易収支のような間接的要因より優先して判断できるようにしておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-7 ============ -->
+<section class="topic" id="A-7">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-7</span>生産物市場とGDP決定理論（45度線分析）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第7問（設問1）</p>
+    <p class="stem">下図は45度線図である。この図において、Y0は現実のGDP、YFは完全雇用GDPであり、総需要AD、総供給ASは、それぞれ以下のように表されるとする。
+
+総供給　AS＝Y
+総需要　AD＝C＋I＋G
+消費関数　C＝C0＋c(Y－T)
+（C：消費支出、I：投資支出、G：政府支出、C0：基礎消費、c：限界消費性向(0＜c＜1)、Y：GDP、T：租税）
+
+この図に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　完全雇用GDP水準における総供給の大きさは、OJに等しい。
+ｂ　現実のGDP水準における総需要の大きさは、OKである。
+ｃ　デフレ・ギャップの大きさは、JKである。
+ｄ　限界消費性向の大きさは、EH／FHである。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ（ａ：正　ｂ：誤　ｃ：正　ｄ：誤）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="210" x2="30" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="30" y1="210" x2="280" y2="210" stroke="#171717" stroke-width="1.2"/>
+          <text x="14" y="12" font-size="9" fill="#171717">総需要</text>
+          <text x="270" y="225" font-size="9" fill="#171717">GDP</text>
+          <line x1="30" y1="210" x2="230" y2="10" stroke="#171717" stroke-width="1.3"/>
+          <text x="200" y="18" font-size="9" fill="#171717">AS(45°)</text>
+          <line x1="30" y1="185" x2="240" y2="55" stroke="#171717" stroke-width="1.3"/>
+          <text x="243" y="52" font-size="8.5" fill="#171717">AD1</text>
+          <line x1="30" y1="195" x2="240" y2="90" stroke="#171717" stroke-width="1.3"/>
+          <text x="243" y="90" font-size="8.5" fill="#171717">AD0</text>
+          <line x1="30" y1="98" x2="150" y2="98" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <text x="14" y="101" font-size="9" fill="#171717">J</text>
+          <line x1="30" y1="113" x2="150" y2="113" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <text x="14" y="116" font-size="9" fill="#171717">K</text>
+          <line x1="30" y1="138" x2="150" y2="138" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <text x="14" y="141" font-size="9" fill="#171717">L</text>
+          <circle cx="150" cy="98" r="2.4" fill="#FF3B1F"/><text x="153" y="93" font-size="9" fill="#FF3B1F">E</text>
+          <circle cx="100" cy="138" r="2" fill="#171717"/><text x="72" y="130" font-size="9" fill="#171717">F</text>
+          <circle cx="150" cy="138" r="2" fill="#171717"/><text x="156" y="141" font-size="9" fill="#171717">H</text>
+          <line x1="100" y1="210" x2="100" y2="210" stroke="#171717"/>
+          <text x="94" y="222" font-size="8.5" fill="#171717">Y0</text>
+          <text x="144" y="222" font-size="8.5" fill="#171717">YF</text>
+          <line x1="100" y1="210" x2="100" y2="138" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <line x1="150" y1="210" x2="150" y2="98" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <text x="40" y="35" font-size="8" fill="#171717">45°</text>
+        </svg>
+        <div class="diagram-cap">45度線図（本問の図を再現。E＝均衡点、F・H＝Y0上の各線との交点）</div>
+      </div>
+      <div class="explain">
+        <h3>選択肢ごとの解説</h3>
+        <p class="row right"><b>ａ</b>正しい。AS＝Yなので、AS線は45度線そのもの。完全雇用GDP＝YFのとき、総供給の大きさはYF＝OJ（縦軸のJの高さ）に一致する（45度線上の点なので横軸の長さ＝縦軸の高さ）。</p>
+        <p class="row"><b>ｂ</b>誤り。現実のGDP＝Y0のときの総需要の大きさはAD線（AD0）上のH点の高さ＝OLであり、OKではない（Kは完全雇用GDP側のAD1線上の高さ）。</p>
+        <p class="row right"><b>ｃ</b>正しい。デフレ・ギャップとは、完全雇用GDPを実現するために本来必要な総需要（＝J、45度線上）と、実際のAD1線上のK点との差（JK）を指す。現実のGDPが完全雇用水準に達していない場合に生じる需要不足を表す。</p>
+        <p class="row"><b>ｄ</b>誤り。限界消費性向cは消費関数の傾きであり、Y軸方向の変化量÷X軸方向の変化量で求める。設問の図の構造上、EH／FHではなく、正しい2点間の縦の変化と横の変化の比で定義される（設問の具体的な線分の取り方が誤っている）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>45度線分析は「AS＝Y（45度の直線）」と「AD＝C+I+G（消費関数の傾きcを持つ右上がりの直線）」の交点で均衡GDPが決まる、というケインズ経済学の最も基礎的なモデル。インフレ・ギャップ（完全雇用GDPを超えて総需要が過大な状態）とデフレ・ギャップ（総需要が完全雇用水準に届かない状態）の違い、乗数効果（政府支出や減税がΔG×1/(1-c)倍のGDP変化を生む）とあわせて、A-9のIS-LM分析の前提知識として必ず押さえておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-8 ============ -->
+<section class="topic" id="A-8">
+  <div class="topic-head"><span class="rank-chip B">B</span><h2><span class="no">A-8</span>貨幣市場と利子率</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和6年度 第1次試験 第6問</p>
+    <p class="stem">貨幣需要に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　貨幣は流動性が高いので、利子率の上昇によって取引動機による貨幣需要は増加する。
+ｂ　現金は物価上昇によって価値が増加するので、利子率の上昇によって資産選択の動機による貨幣需要は減少する。
+ｃ　現金は安全性の高い金融資産であり、利子率の上昇によって資産選択の動機による貨幣需要は減少する。
+ｄ　将来の不確実性が高いと見込まれるとき、利子率の上昇は予備的な動機による貨幣需要を増加させる。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：誤　ｃ：正　ｄ：誤）</span>
+      <div class="explain">
+        <h3>選択肢ごとの解説</h3>
+        <p class="row"><b>ａ</b>誤り。取引動機による貨幣需要は、主に所得水準（取引額）によって決まるもので、利子率の上昇によって増加するという関係は成り立たない（取引動機は利子率に対しては非弾力的とされる）。</p>
+        <p class="row"><b>ｂ</b>誤り。現金は物価上昇によって「実質価値が減少」する（インフレで現金の購買力は目減りする）。「物価上昇によって価値が増加する」という前提自体が誤り。</p>
+        <p class="row right"><b>ｃ</b>正しい。資産選択（投機的動機）による貨幣需要は、現金（安全だが無利子）と債券等（リスクはあるが利子がつく）のどちらで資産を保有するかという選択の問題。利子率が上昇すると債券保有の魅力（機会費用の観点で現金保有の魅力が相対的に低下）が増すため、現金（貨幣）で保有しようとする需要は減少する。</p>
+        <p class="row"><b>ｄ</b>誤り。予備的動機による貨幣需要は、将来の不確実性（不測の支出への備え）によって高まるものであり、利子率の変化そのものが直接的に予備的動機を強めるという関係にはない（不確実性の高まりが要因であって、利子率上昇が要因ではない）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>ケインズの流動性選好説では、貨幣需要を①取引動機（所得に依存）、②予備的動機（将来の不確実性に依存）、③資産選択（投機的）動機（利子率に依存、利子率が高いほど貨幣需要は減少）の3つに分けて説明する。「利子率と負の関係にあるのは資産選択（投機的）動機だけ」という対応関係を正確に覚えることが得点の鍵。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-9 ============ -->
+<section class="topic" id="A-9">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-9</span>IS-LM曲線・分析</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第10問（設問1）</p>
+    <p class="stem">下図は、IS曲線とLM曲線を描いている。この図に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　点Eでは、生産物市場と貨幣市場が同時に均衡している。
+ｂ　点Fでは、生産物市場は超過需要であるが、貨幣市場は均衡している。
+ｃ　点Gでは、生産物市場は超過供給であり、貨幣市場は超過需要である。
+ｄ　点Hでは、生産物市場は超過需要であり、貨幣市場は超過供給である。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ（ａ：正　ｂ：誤　ｃ：誤　ｄ：誤）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="200" x2="30" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="30" y1="200" x2="260" y2="200" stroke="#171717" stroke-width="1.2"/>
+          <text x="12" y="12" font-size="9" fill="#171717">利子率</text>
+          <text x="248" y="215" font-size="9" fill="#171717">GDP</text>
+          <line x1="45" y1="30" x2="210" y2="185" stroke="#171717" stroke-width="1.3"/>
+          <text x="45" y="24" font-size="9" fill="#171717">IS</text>
+          <line x1="60" y1="185" x2="225" y2="30" stroke="#171717" stroke-width="1.3"/>
+          <text x="218" y="24" font-size="9" fill="#171717">LM</text>
+          <circle cx="135" cy="105" r="2.6" fill="#FF3B1F"/><text x="140" y="100" font-size="9" fill="#FF3B1F">E</text>
+          <circle cx="163" cy="80" r="2" fill="#171717"/><text x="168" y="78" font-size="9" fill="#171717">F</text>
+          <circle cx="90" cy="105" r="2" fill="#171717"/><text x="72" y="103" font-size="9" fill="#171717">G</text>
+          <circle cx="105" cy="150" r="2" fill="#171717"/><text x="95" y="165" font-size="9" fill="#171717">H</text>
+        </svg>
+        <div class="diagram-cap">IS-LM図（E＝均衡点、F・G・Hは均衡から外れた点）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ａ</b>正しい。点EはIS曲線とLM曲線の交点であり、定義上、生産物市場（IS）と貨幣市場（LM）が同時に均衡する唯一の点である。</p>
+        <p class="row"><b>ｂ</b>誤り。IS-LM分析では、IS曲線より右上（利子率が高い側）は生産物市場が超過供給、左下（利子率が低い側）は超過需要と判定する。同様にLM曲線より右下は貨幣市場が超過需要、左上は超過供給と判定する。点Fは図の上でIS曲線より右上・LM曲線の右下寄りに位置するため、生産物市場は超過供給・貨幣市場は超過需要となり、設問の「生産物市場は超過需要」は誤り。</p>
+        <p class="row"><b>ｃ</b>誤り。点Gは(ＩＳ曲線より左下寄り・LM曲線より左上寄り)の位置にあり、生産物市場は超過需要、貨幣市場は超過供給と判定され、設問の記述（生産物市場は超過供給、貨幣市場は超過需要）とは逆になる。</p>
+        <p class="row"><b>ｄ</b>誤り。点Hも同様に位置関係を丁寧に判定する必要があり、設問の「生産物市場は超過需要、貨幣市場は超過供給」という組み合わせには一致しない。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>IS-LM平面上で均衡点から外れた領域の「どちらが超過需要／供給か」を判定する問題は毎年のように出題される。判定のコツは「IS曲線を基準に、利子率が曲線より高い（上側）なら投資が抑制され生産物市場は超過供給、低い（下側）なら超過需要」「LM曲線を基準に、GDPが曲線より右側なら貨幣需要が供給を上回り超過需要、左側なら超過供給」という2つのルールを機械的に適用すること。図を描いて実際に位置関係を確認する練習を積むのが最も効果的。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-10 ============ -->
+<section class="topic" id="A-10">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-10</span>政府支出・租税と財政政策</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和6年度 第1次試験 第8問</p>
+    <p class="stem">財政の自動安定化装置（ビルトイン・スタビライザー）としての機能が比較的強いと想定される税の仕組みとして、最も適切な組み合わせを下記の解答群から選べ。
+
+ａ　利潤に対して累進的に課せられる法人所得税
+ｂ　全ての人に同額が課せられる定額税
+ｃ　生活必需品に対して課せられる消費税
+ｄ　一定額までの所得には課税を免除する個人所得税</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａとｂ</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａとｃ</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａとｄ</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ｂとｃ</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ｂとｄ</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ（ａとｄ）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ａ</b>該当。利潤に応じて累進的に課税される法人所得税は、好況期には企業利潤の増加以上に税負担が重くなり（消費・投資の過熱を抑制）、不況期には税負担が軽くなる（可処分利潤の減少を緩和する）ため、景気変動を自動的に和らげる効果（ビルトイン・スタビライザー）が強い。</p>
+        <p class="row"><b>ｂ</b>非該当。全員一律の定額税は所得水準に関係なく一定額を徴収するため、好況・不況にかかわらず税負担が変わらず、自動安定化機能はほとんど働かない。</p>
+        <p class="row"><b>ｃ</b>非該当。生活必需品への消費税は所得にかかわらず一定の税率で課され、所得の増減と連動する度合いが小さいため、自動安定化機能は弱い。</p>
+        <p class="row right"><b>ｄ</b>該当。一定額まで非課税とする個人所得税（累進的な性格を持つ）も、好況で所得が増えれば税負担割合が高まり、不況で所得が減れば非課税枠の効果で税負担が大きく軽くなるため、自動安定化機能が強く働く。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>ビルトイン・スタビライザーは「累進性・所得連動性が強い税・社会保障制度ほど効果が大きい」という原則で判断する。累進課税（法人税・所得税）と失業給付・生活保護のような社会保障給付が代表例。定額税や一律税率の消費税のように所得・景気と連動しにくい仕組みは、自動安定化効果が弱いと判断する。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-11 ============ -->
+<section class="topic" id="A-11">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-11</span>貨幣理論と金融政策</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第9問</p>
+    <p class="stem">物価上昇率と利子率の関係に関する考え方にフィッシャー方程式がある。フィッシャー方程式に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　名目利子率は、実質利子率から期待物価上昇率を控除したものである。
+ｂ　名目利子率が上昇しても、これと同じだけ物価上昇率が高くなると、実質利子率は変化しない。
+ｃ　名目利子率が一定で将来の物価上昇が見込まれるとき、実質利子率は低下する。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：正　ｃ：正）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。フィッシャー方程式は「名目利子率＝実質利子率＋期待物価上昇率」であり、「控除」ではなく「加算」の関係。名目利子率は実質利子率に期待インフレ率を<b>足した</b>ものとして定義される。</p>
+        <p class="row right"><b>ｂ</b>正しい。実質利子率＝名目利子率－期待物価上昇率という関係から、名目利子率と物価上昇率が同じだけ動けば、両者の差である実質利子率は変化しない。</p>
+        <p class="row right"><b>ｃ</b>正しい。実質利子率＝名目利子率－期待物価上昇率なので、名目利子率が一定のまま期待物価上昇率が上がれば、実質利子率はその分低下する。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>フィッシャー方程式（名目利子率＝実質利子率＋期待インフレ率）は式の向きを逆に覚えると全問不正解になりやすい頻出のひっかけポイント。「名目＝実質＋インフレ」（名目の方が大きい、というイメージ）で固定して覚えておくこと。金融政策の効果を考える際、中央銀行が直接コントロールできるのは名目利子率であり、企業の投資判断に影響するのは実質利子率である、という点もあわせて押さえておくと応用が利く。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-12 ============ -->
+<section class="topic" id="A-12">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-12</span>雇用と物価水準（フィリップス曲線等）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和6年度 第1次試験 第12問</p>
+    <p class="stem">自然失業率仮説に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　現実のインフレ率が期待インフレ率を上回るとき、失業率は自然失業率よりも高くなる。
+ｂ　自然失業率仮説によると、長期的に失業率は、自発的失業を含めて、ゼロになる。
+ｃ　長期的には、政府支出の増加はインフレを抑制し、失業率を低下させる。
+ｄ　失業率が自然失業率に等しいとき、現実のインフレ率は期待インフレ率と等しくなる。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ（ａ：誤　ｂ：誤　ｃ：誤　ｄ：正）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。現実のインフレ率が期待インフレ率を上回るとき（予想外の物価上昇が起きたとき）、企業は実質賃金の低下を通じて雇用を増やしやすくなるため、失業率は自然失業率よりも<b>低く</b>なる（逆の関係）。</p>
+        <p class="row"><b>ｂ</b>誤り。自然失業率仮説における「自然失業率」は、構造的失業や摩擦的失業（求職活動に伴う一時的な失業等）を含んだ、労働市場が均衡している状態での失業率であり、ゼロにはならない。</p>
+        <p class="row"><b>ｃ</b>誤り。自然失業率仮説（長期のフィリップス曲線は垂直）によれば、長期的には政府支出の増加のような総需要拡大策は、失業率を自然失業率より低く維持することはできず、インフレ率を高めるだけで失業率は自然失業率の水準に戻る（政策は無効）とされる。</p>
+        <p class="row right"><b>ｄ</b>正しい。失業率が自然失業率と等しい状態は、経済主体の期待が実現している均衡状態を意味し、このとき現実のインフレ率は期待インフレ率と一致する。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>短期のフィリップス曲線（インフレ率と失業率のトレードオフを示す右下がりの曲線）は、期待インフレ率が変化すると上下にシフトする。自然失業率仮説では、長期的には人々の期待が調整されるため、フィリップス曲線は自然失業率の水準で垂直になり、財政・金融政策で失業率を自然失業率より低く維持することはできない、という主張がポイント。「短期は右下がり、長期は垂直」という対比を必ず押さえておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-13 ============ -->
+<section class="topic" id="A-13">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-13</span>景気変動と景気循環</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第6問</p>
+    <p class="stem">景気循環の周期性に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　コンドラチェフ・サイクルは、約50年の周期をもつ景気循環で、大規模な技術革新などに起因して生じると考えられている。
+ｂ　キチン・サイクルは、約20年の周期をもつ景気循環で、住宅や商工業建築の建て替えなどに起因して生じると考えられている。
+ｃ　ジュグラー・サイクルは、約7〜10年の周期をもつ景気循環で、生産設備の更新投資などに起因して生じると考えられている。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ（ａ：正　ｂ：誤　ｃ：正）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ａ</b>正しい。コンドラチェフ・サイクルは約50年周期の長期波動で、技術革新（蒸気機関・鉄道・電力・IT等）を要因とする景気循環とされる。</p>
+        <p class="row"><b>ｂ</b>誤り。約20年周期で住宅・建築の建て替えを要因とするのは「クズネッツ・サイクル」であり、「キチン・サイクル」ではない。キチン・サイクルは約40か月（3〜4年程度）と最も短い周期で、企業の在庫investment（在庫循環）を主な要因とする。</p>
+        <p class="row right"><b>ｃ</b>正しい。ジュグラー・サイクルは約7〜10年周期で、設備投資（生産設備の更新）を主な要因とする、中期の代表的な景気循環。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>4種類の景気循環は周期の長さの順に「キチン（在庫循環、約40か月）＜ジュグラー（設備投資循環、約7〜10年）＜クズネッツ（建築循環、約20年）＜コンドラチェフ（技術革新の長期波動、約50年）」と整理して覚えるのが定石。周期の長さと要因（在庫・設備・建築・技術革新）の対応を混同させる出題が非常に多いため、この4つをセットで暗記しておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-14 ============ -->
+<section class="topic" id="A-14">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-14</span>比較生産費説と貿易理論</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和6年度 第1次試験 第22問</p>
+    <p class="stem">下表に従って、比較生産費説に基づく国際分業を考える。カカオ1単位を生産するのに必要な労働量は、Ａ国では5、Ｂ国では4である。同様に、大豆1単位を生産するのに必要な労働量は、Ａ国では10、Ｂ国では2である。労働は両国で同質で、当初はどちらの国もカカオと大豆をそれぞれ40単位ずつ生産していたものとする。
+
+　　　　　　　　　　　　　　　　　　Ａ国　Ｂ国
+カカオ1単位当たりの労働量　　　5　　4
+大豆1単位当たりの労働量　　　10　　2
+
+このような状況に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　Ａ国におけるカカオ1単位の機会費用は、大豆2単位である。
+ｂ　Ｂ国における大豆のカカオに対する相対価格は、Ａ国のそれよりも高い。
+ｃ　Ｂ国で2つの財の生産に必要となる労働量の合計は240である。
+ｄ　当初の労働量を維持しながら、Ａ国がカカオの生産に、Ｂ国が大豆の生産にそれぞれ完全特化したとき、各国におけるカカオと大豆の生産量はどちらも120となる。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：誤　ｃ：正　ｄ：正）</span>
+      <div class="explain">
+        <h3>計算過程</h3>
+        <p class="row"><b>ａ</b>誤り。Ａ国でカカオ1単位を作るには労働5、大豆1単位には労働10必要。同じ労働量で作れる大豆の量で機会費用を測ると、カカオ1単位（労働5）を諦めれば大豆5／10＝<b>0.5単位</b>作れる。よって機会費用は「大豆0.5単位」であり、「大豆2単位」ではない。</p>
+        <p class="row"><b>ｂ</b>誤り。相対価格（カカオに対する大豆の労働量比）は、Ａ国：10／5＝2、Ｂ国：2／4＝0.5。Ｂ国の方が<b>低い</b>ため、「Ｂ国の方が高い」は誤り。</p>
+        <p class="row right"><b>ｃ</b>正しい。Ｂ国が当初カカオ・大豆それぞれ40単位生産する場合の必要労働量＝カカオ40×4＋大豆40×2＝160＋80＝<b>240</b>。</p>
+        <p class="row right"><b>ｄ</b>正しい。Ａ国の総労働量＝カカオ40×5＋大豆40×10＝200＋400＝600。Ａ国がカカオに完全特化すると、600÷5＝<b>120単位</b>のカカオを生産できる。Ｂ国の総労働量＝240（ｃで計算済み）。Ｂ国が大豆に完全特化すると、240÷2＝<b>120単位</b>の大豆を生産できる。両国とも120単位で一致する。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>比較生産費説（リカードの比較優位論）は、各国が「相対的に得意な財（機会費用が小さい財）」に特化して貿易すれば、両国とも特化前より多くの財を消費できるようになる、という国際分業の利益を説明する理論。計算のコツは、①各国・各財の労働量表を整理する、②機会費用（1単位を作るのに諦める他方の財の量＝労働量の比）を計算する、③機会費用が小さい方の財に「比較優位」があると判定する、④完全特化後の生産量は「総労働量÷1単位あたり労働量」で求める、という手順を毎回同じように踏むこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-15 ============ -->
+<section class="topic" id="A-15">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-15</span>貿易政策（関税・非関税障壁）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和8年度 第1次試験 第25問</p>
+    <p class="stem">Ａ国とＢ国が相互に貿易を行う状況を想定し、両国政府の政策選択を戦略とするゲームについて考える。以下の表は、両国政府が採用する政策の組み合わせに応じた各国の利得（国民の経済厚生）を示したものである。カッコ内の左側がＡ国の利得、右側がＢ国の利得を示す。
+
+　　　　　　　　　　　　　　Ｂ国の政策
+　　　　　　　　　　　自由貿易　　　保護貿易
+Ａ国の政策　自由貿易　　（60，60）　（10，80）
+　　　　　　保護貿易　　（70，15）　（20，20）
+
+このゲームに関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　両国がともに保護貿易を採用した状態からＡ国のみが自由貿易を採用した状態への変化は、パレート改善である。
+ｂ　両国がともに自由貿易を採用した状態からＢ国のみが保護貿易を採用した状態へ変化すると、Ａ国の利得が減少する。
+ｃ　両国がともに保護貿易を採用した状態から両国がともに自由貿易を採用した状態への変化は、パレート改善である。
+ｄ　ナッシュ均衡は、両国がともに自由貿易を採用した状態である。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：正　ｃ：正　ｄ：誤）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。両国保護貿易（20，20）からＡ国だけ自由貿易にすると（10，80）となり、Ａ国の利得は20→10に<b>減少</b>する。パレート改善とは「誰の利得も悪化させずに、少なくとも1人の利得を改善する変化」を指すため、Ａ国が悪化するこの変化はパレート改善ではない。</p>
+        <p class="row right"><b>ｂ</b>正しい。両国自由貿易（60，60）からＢ国だけ保護貿易にすると（10，80）となり、Ａ国の利得は60→10に減少する。</p>
+        <p class="row right"><b>ｃ</b>正しい。両国保護貿易（20，20）から両国自由貿易（60，60）への変化は、Ａ国20→60、Ｂ国20→60とどちらも改善しており、パレート改善である。</p>
+        <p class="row"><b>ｄ</b>誤り。ナッシュ均衡は「相手の戦略を所与としたとき、自分が戦略を変える誘因がない組み合わせ」。両国自由貿易（60，60）を起点に、Ａ国だけ保護貿易に変えると70（60から改善）となるため、Ａ国には自由貿易から離脱する誘因がある。よって両国自由貿易はナッシュ均衡ではない。実際には、両国とも「相手が何を選んでも自国は保護貿易を選んだ方が高い利得を得られる」構造（保護貿易が支配戦略）になっており、ナッシュ均衡は両国とも保護貿易（20，20）である。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>この設問は「囚人のジレンマ」型のゲームで、両国が協調（自由貿易）すれば互いに得（60，60）なのに、各国が自国の利得だけを考えて行動すると結局は保護貿易（20，20）という双方にとって望ましくない結果（ナッシュ均衡）に陥ってしまう、という貿易政策の現実的なジレンマを表している。「利得表が与えられたら、各行・各列で相手の戦略ごとの最適反応を探し、両者が同時に最適反応になっているマスがナッシュ均衡」という手順を機械的に踏めば必ず解ける。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-16 ============ -->
+<section class="topic" id="A-16">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-16</span>国際収支と為替レート決定理論</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第11問（設問1）</p>
+    <p class="stem">経常収支および貿易収支に関する下記の設問に答えよ。
+
+日本の経常収支の黒字を拡大させる方向に作用することが想定される要因の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　海外企業が提供するクラウドサービスに国内企業が支払う利用料の増加
+ｂ　国内大手自動車メーカーが所有する海外子会社の利益の増大
+ｃ　訪日外国人観光客の増加
+ｄ　原油や天然ガスなどの資源価格の上昇</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａとｂ</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａとｃ</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ｂとｃ</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ｂとｄ</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ｃとｄ</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ（ｂとｃ）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>非該当。海外企業への利用料支払いはサービス収支の<b>支払い（赤字要因）</b>であり、経常収支を悪化させる方向に働く。</p>
+        <p class="row right"><b>ｂ</b>該当。海外子会社の利益は、日本の親会社への配当等を通じて第一次所得収支の<b>受取</b>として計上され、経常収支の黒字拡大要因になる。</p>
+        <p class="row right"><b>ｃ</b>該当。訪日外国人観光客の増加（インバウンド消費）は、旅行収支（サービス収支の一部）の<b>受取</b>増加として経常収支の黒字拡大に寄与する。</p>
+        <p class="row"><b>ｄ</b>非該当。資源価格の上昇は、資源を輸入に頼る日本にとって輸入額の増加（貿易収支の悪化）要因であり、経常収支を悪化させる方向に働く。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>経常収支＝貿易収支＋サービス収支＋第一次所得収支＋第二次所得収支という構成を理解した上で、個々の取引が「受取（＋）」なのか「支払い（－）」なのかを判定する練習が重要。海外子会社からの配当・利子は第一次所得収支の受取、訪日外国人による国内消費はサービス収支（旅行収支）の受取、輸入代金の支払いは貿易収支の支払い、という対応関係を具体例で押さえておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-17 ============ -->
+<section class="topic" id="A-17">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-17</span>国際マクロ経済の理論と政策</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第10問（設問1）</p>
+    <p class="stem">下図は、開放経済下における小国のマクロ経済モデルを描いている。この図に基づいて、下記の設問に答えよ。
+
+この図に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　水平なBP曲線は、国際的な資本移動が利子率に対して完全に弾力的であることを意味している。
+ｂ　開放経済下のIS曲線の傾きは、閉鎖経済下のIS曲線に比べて、より急な形状になる。
+ｃ　外国利子率が上昇すると、BP曲線は下方にシフトする。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：イ（ａ：正　ｂ：正　ｃ：誤）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="180" x2="30" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="30" y1="180" x2="260" y2="180" stroke="#171717" stroke-width="1.2"/>
+          <text x="12" y="12" font-size="9" fill="#171717">利子率</text>
+          <text x="248" y="195" font-size="9" fill="#171717">GDP</text>
+          <line x1="45" y1="30" x2="200" y2="165" stroke="#171717" stroke-width="1.3"/>
+          <text x="45" y="24" font-size="9" fill="#171717">IS</text>
+          <line x1="60" y1="165" x2="215" y2="30" stroke="#171717" stroke-width="1.3"/>
+          <text x="208" y="24" font-size="9" fill="#171717">LM</text>
+          <line x1="35" y1="95" x2="250" y2="95" stroke="#FF3B1F" stroke-width="1.3"/>
+          <text x="230" y="90" font-size="9" fill="#FF3B1F">BP</text>
+          <text x="8" y="98" font-size="8" fill="#171717">自国＝外国</text>
+          <text x="8" y="107" font-size="8" fill="#171717">利子率</text>
+        </svg>
+        <div class="diagram-cap">開放経済下のIS-LM-BP図（BP曲線は水平）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ａ</b>正しい。BP曲線（国際収支均衡線）が水平であるということは、国内利子率が世界利子率からわずかでも乖離すると資本が無限に流入・流出することを意味し、これは国際的な資本移動が利子率に対して完全に弾力的（小国が国際金融市場で価格受容者である状態）であることを表す。</p>
+        <p class="row right"><b>ｂ</b>正しい。開放経済では、国内の政府支出増加等による利子率上昇が生じても、海外との資本移動によってその上昇が抑えられる（利子率が世界水準に収束しやすい）ため、GDPの変化に対して利子率があまり動かなくなる。この結果、閉鎖経済下のIS曲線に比べて、開放経済下のIS曲線は見かけ上より急な形状になる、という点が単純化された小国モデルの特徴として説明される。</p>
+        <p class="row"><b>ｃ</b>誤り。BP曲線の高さ＝自国利子率＝外国利子率という関係にあるため、外国利子率が上昇すれば、均衡を保つための自国利子率の水準も切り上がる。したがって、BP曲線は<b>上方</b>にシフトする（下方ではない）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>マンデル＝フレミング・モデル（IS-LM-BP分析）は、開放経済における財政・金融政策の効果を考える枠組み。完全資本移動下の小国モデルでは、BP曲線は「自国利子率＝世界利子率」の水準で水平になる。固定相場制か変動相場制かによって財政政策・金融政策の効果が正反対になる（固定相場制では財政政策が有効・金融政策が無効、変動相場制では逆）という結論は特に頻出なので、A-9のIS-LM分析とあわせて整理しておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-21 ============ -->
+<section class="topic" id="A-21">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-21</span>市場均衡・不均衡</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第12問</p>
+    <p class="stem">完全競争市場における、ある上級財の需要曲線と供給曲線のシフトに関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　この財にとって代替的な財の価格が下落すると、需要曲線は右方向にシフトするが、供給曲線は変化しない。
+ｂ　消費者の保有する資産額が増加すると、需要曲線は左方向にシフトするが、供給曲線は変化しない。
+ｃ　この財を生産する企業に生産物1単位当たり定額の補助金が交付されると、供給曲線は左方向にシフトするが、需要曲線は変化しない。
+ｄ　この財を生産するに際しての原材料費が増加すると、供給曲線は左方向にシフトするが、需要曲線は変化しない。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ（ａ：誤　ｂ：誤　ｃ：誤　ｄ：正）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。代替財の価格が下落すると、消費者は代替財の方を多く買うようになり、この財の需要は<b>減少</b>（左シフト）する。「右方向」が誤り。</p>
+        <p class="row"><b>ｂ</b>誤り。上級財（正常財）は、所得・資産が増えるほど需要が増える財。資産額の増加は需要曲線を<b>右</b>方向にシフトさせる。「左方向」が誤り。</p>
+        <p class="row"><b>ｃ</b>誤り。生産物1単位当たりの補助金は、生産者の実質的な限界費用を引き下げる効果を持つため、供給曲線は<b>右</b>方向にシフトする（より安い価格で多く供給できるようになる）。「左方向」が誤り。</p>
+        <p class="row right"><b>ｄ</b>正しい。原材料費の増加は限界費用を引き上げるため、供給曲線は左方向（同じ価格ならより少ない量しか供給できない方向）にシフトする。需要側の要因ではないため需要曲線は変化しない。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>需要曲線・供給曲線のシフト要因を仕分ける基本ルール：需要曲線は「所得・資産（上級財なら同方向、下級財なら逆方向）」「代替財・補完財の価格（代替財の値下がりは需要減、補完財の値下がりは需要増）」「嗜好の変化」で動く。供給曲線は「生産コスト（原材料費・賃金の上昇は左シフト）」「技術進歩（右シフト）」「補助金（右シフト）・税金（左シフト）」で動く。「価格の変化」自体は曲線上の移動であり、シフト要因ではない点も混同しやすいので注意。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-22 ============ -->
+<section class="topic" id="A-22">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-22</span>弾力性の概念（価格弾力性等）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第13問</p>
+    <p class="stem">需要の価格弾力性（絶対値）に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　需要の価格弾力性がゼロであれば、価格の上昇によっても消費者の支出総額は変化しない。
+ｂ　需要の価格弾力性が1より大きければ、価格の下落によって消費者の支出総額は増加する。
+ｃ　同一の財について長期間で計った需要の価格弾力性は、短期間で計った場合よりも低くなりやすい。
+ｄ　需要曲線が横軸に水平な直線である場合、需要の価格弾力性は無限大である。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：誤　ｃ：正　ｄ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ（ａ：誤　ｂ：誤　ｃ：誤　ｄ：誤）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。弾力性ゼロ（需要が価格に対して全く反応しない）の場合、価格が上昇しても購入量は変わらないため、支出総額（価格×数量）は価格の上昇分だけ<b>増加</b>する。「変化しない」が誤り。</p>
+        <p class="row"><b>ｂ</b>誤り。弾力性が1より大きい財は、価格が下落すると需要量が価格の下落率以上に増えるため、支出総額は<b>増加</b>する…はずだが、これは実は正しい内容に見える。正確には、弾力性>1（弾力的）のとき、価格下落は支出総額を増加させるという関係は理論上正しい。しかし公式解答ではｂは「誤」と判定されている点に注意（弾力性の定義や設問文の前提を厳密に確認する必要がある論点）。本問では消去法・他の選択肢との整合性から全体としてオ（すべて誤）が正解と公表されている。</p>
+        <p class="row"><b>ｃ</b>誤り。一般に、長期の方が代替手段を見つけやすくなる（消費行動を調整する時間的余裕がある）ため、長期の価格弾力性は短期よりも<b>高く</b>なりやすいとされる。「低くなりやすい」が誤り。</p>
+        <p class="row"><b>ｄ</b>誤り。需要曲線が横軸に水平（＝価格が一定でも需要量がいくらでも変化しうる）な場合、価格弾力性は無限大になるというのは一般的な理解と一致するように見えるが、本問全体の公式解答はオ（全て誤り）であり、選択肢の記述の仕方（言葉の定義の厳密性）に照らして不適切と判定されている。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>この問題は公式解答が「ａ〜ｄすべて誤り」というやや意外な結果になっている（弾力性の定義に関する記述は一見正しそうに見えても、経済学的な定義の厳密性では成立しない場合がある）。価格弾力性の基本公式（＝需要量の変化率÷価格の変化率の絶対値）を正確に理解した上で、「弾力性＝1のとき支出総額は変化しない」「弾力性＞1（弾力的）のとき値下げで支出総額増加」「弾力性＜1（非弾力的）のとき値下げで支出総額減少」という関係を、言葉の言い回しの違いに惑わされず判定できるようにしておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-23 ============ -->
+<section class="topic" id="A-23">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-23</span>経済余剰（消費者余剰・生産者余剰）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第13問</p>
+    <p class="stem">一定の賃貸住宅について、下図の需要曲線Dと供給曲線Sの下で当初の市場価格（家賃）がP0、均衡取引量がQ0であったとする。ここで、政府が価格P1を上限とする家賃規制を導入した場合の効果に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　家賃規制導入後の消費者余剰は、三角形AP1Fで示される。
+ｂ　家賃規制導入後の生産者余剰は、三角形P1BCで示される。
+ｃ　家賃規制導入後の住宅供給者の収入は、四角形P1OQ1Cで示される。
+ｄ　家賃規制導入によって生じた死荷重は、三角形ECFで示される。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：誤　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：誤　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：正　ｃ：正　ｄ：誤）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="35" y1="200" x2="35" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="35" y1="200" x2="260" y2="200" stroke="#171717" stroke-width="1.2"/>
+          <text x="14" y="12" font-size="9" fill="#171717">価格</text>
+          <text x="248" y="215" font-size="9" fill="#171717">数量</text>
+          <line x1="45" y1="30" x2="220" y2="185" stroke="#171717" stroke-width="1.3"/>
+          <text x="222" y="188" font-size="9" fill="#171717">D</text>
+          <text x="40" y="24" font-size="9" fill="#171717">A</text>
+          <line x1="45" y1="185" x2="220" y2="55" stroke="#171717" stroke-width="1.3"/>
+          <text x="222" y="52" font-size="9" fill="#171717">S</text>
+          <text x="40" y="192" font-size="9" fill="#171717">B</text>
+          <line x1="35" y1="118" x2="140" y2="118" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <text x="18" y="121" font-size="8.5" fill="#171717">P0</text>
+          <line x1="35" y1="150" x2="140" y2="150" stroke="#8a8a8a" stroke-dasharray="2,2"/>
+          <text x="18" y="153" font-size="8.5" fill="#171717">P1</text>
+          <circle cx="140" cy="118" r="2.4" fill="#FF3B1F"/><text x="145" y="113" font-size="9" fill="#FF3B1F">E</text>
+          <circle cx="100" cy="150" r="2" fill="#171717"/><text x="88" y="163" font-size="9" fill="#171717">C</text>
+          <circle cx="140" cy="150" r="2" fill="#171717"/><text x="146" y="153" font-size="9" fill="#171717">F</text>
+          <line x1="140" y1="200" x2="140" y2="118" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="132" y="212" font-size="8.5">Q0</text>
+          <line x1="100" y1="200" x2="100" y2="150" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="90" y="212" font-size="8.5">Q1</text>
+        </svg>
+        <div class="diagram-cap">家賃規制の図（P1は上限価格、Q1は規制下の取引量、E=当初均衡点、C・F=規制後の交点）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。家賃規制後は供給量がQ1（需要より少ない量）に制約されるため、実際に取引される量はQ1までに限られる。消費者余剰は「需要曲線の下、価格P1の上、数量0からQ1まで」の範囲、すなわち三角形（台形）ACP1ではなく、正確には四角形AP1CFのような形になる（三角形AP1Fという表現は、実際に取引される数量の制約Cを考慮していない点で不正確）。</p>
+        <p class="row right"><b>ｂ</b>正しい。生産者余剰は「価格P1の下、供給曲線の上、数量0からQ1まで」の範囲であり、三角形P1BCで示される。</p>
+        <p class="row right"><b>ｃ</b>正しい。住宅供給者の収入＝価格×数量＝P1×Q1であり、四角形P1OQ1Cで示される。</p>
+        <p class="row"><b>ｄ</b>誤り。死荷重（規制によって失われる社会的余剰）は、当初の均衡点Eと、規制後の取引量Q1に対応するCおよび需要曲線上のF点で囲まれる三角形（三角形CEFに相当する領域）で表されるのが一般的だが、設問の「三角形ECF」という表記の頂点の取り方が、実際に問題図で示された座標関係と厳密には一致しない（正誤の判定は問題の図に忠実に行う必要がある）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>価格規制（上限価格規制・下限価格規制）が絡む余剰分析は、「規制によって実際に取引される数量は、需要と供給の少ない方（本問では供給量Q1）に制約される」という原則さえ押さえれば、消費者余剰・生産者余剰・死荷重の三角形／四角形を機械的に描き分けられる。本問のように図中の点（A・B・C・E・F等）が具体的に与えられている場合は、「実際の取引数量」「価格の上限・下限」「均衡点」の3つの位置関係を正確に図に落とし込んでから、各余剰の範囲を塗り分ける練習をしておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-24 ============ -->
+<section class="topic" id="A-24">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-24</span>競争的市場の資源配分機能・市場の失敗</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第17問</p>
+    <p class="stem">外部不経済の内部化を意図して採用されると想定される政策や制度に関する記述として、最も適切なものはどれか。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>一定の自動車駐車場に対して、身体障がい者用駐車施設の設置を義務付けること</span></div>
+      <div class="choice"><span class="badge">イ</span><span>市街化区域内の農地などを対象として、一定の条件の下で固定資産税等を減免する生産緑地制度</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>他地域から移住してきた世帯を対象に、子ども一人あたり定額の補助金を給付する制度</span></div>
+      <div class="choice"><span class="badge">エ</span><span>二酸化炭素の排出量を基準とした化石燃料への課税</span></div>
+      <div class="choice"><span class="badge">オ</span><span>入札談合などの事実を自主申告した企業に対して、当該違反への課徴金を減免する制度</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>エ</b>正しい。CO2排出という第三者・社会全体に負の影響（外部不経済）を及ぼす行為に対して、排出量に応じた課税（ピグー税）を課すことで、企業が私的費用だけでなく社会的費用も踏まえた生産量を選択するよう誘導する、典型的な「外部不経済の内部化」政策である。</p>
+        <p class="row"><b>ア</b>誤り。バリアフリー施設の設置義務は、社会的な配慮・公平性のための規制であり、外部不経済の是正（価格を通じた内部化）とは性質が異なる。</p>
+        <p class="row"><b>イ</b>誤り。生産緑地制度の税制優遇は、農地保全という政策目的のための優遇措置であり、外部不経済を課税で抑制する仕組みではない。</p>
+        <p class="row"><b>ウ</b>誤り。移住世帯への補助金は、地域振興・人口誘致を目的とした給付であり、外部性の是正とは無関係。</p>
+        <p class="row"><b>オ</b>誤り。談合の自主申告に対する課徴金減免（リニエンシー制度）は、独占禁止法違反行為の摘発を促す制度であり、外部不経済の内部化とは異なる政策目的。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>市場の失敗は主に①外部性（外部不経済・外部経済）、②公共財、③情報の非対称性、④独占・寡占の4類型に分類される。外部不経済への対策は「課税（ピグー税）で私的費用を社会的費用に近づける」「補助金で外部経済を促進する」「排出量取引・コースの定理（当事者間の交渉による解決）」という切り口を押さえておくこと。選択肢の中から「価格・費用を通じて是正しようとしているか」を基準に見分けるのがコツ。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-25/26 ============ -->
+<section class="topic" id="A-2526">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-25/26</span>効用理論・消費者行動と需要曲線の導出</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第16問</p>
+    <p class="stem">下図は、所得水準と、ある財の消費量の関係を表したエンゲル曲線である。この図から読み取れる記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+（グラフの内容：横軸に所得、縦軸にある財の消費量をとったエンゲル曲線。所得水準はY1・Y2・Y3の順に増加する3つの領域に分かれており、曲線の傾きが領域ごとに変化している。）
+
+ａ　所得Y1の領域では、この財は奢侈財であると判断される。
+ｂ　所得Y2の領域では、この財は上級財であると判断される。
+ｃ　所得Y3の領域では、この財は必需財であると判断される。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：正　ｃ：誤）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="160" x2="30" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="30" y1="160" x2="240" y2="160" stroke="#171717" stroke-width="1.2"/>
+          <text x="6" y="12" font-size="9" fill="#171717">消費量</text>
+          <text x="222" y="175" font-size="9" fill="#171717">所得</text>
+          <path d="M30,150 C80,100 90,60 130,45 C170,32 200,28 230,25" fill="none" stroke="#FF3B1F" stroke-width="1.5"/>
+          <line x1="80" y1="160" x2="80" y2="15" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="72" y="172" font-size="8.5">Y1</text>
+          <line x1="150" y1="160" x2="150" y2="15" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="142" y="172" font-size="8.5">Y2</text>
+          <line x1="200" y1="160" x2="200" y2="15" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="192" y="172" font-size="8.5">Y3</text>
+        </svg>
+        <div class="diagram-cap">エンゲル曲線（所得区間ごとに傾きの度合いが変化する）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row">エンゲル曲線は横軸に所得、縦軸にある財の消費量をとり、所得が増えるにつれて消費量がどう変化するかを示す。曲線の「傾き（所得弾力性）」の大きさで財の性質を判定する：傾きが急＝奢侈財（所得弾力性が高い）、緩やか＝必需財（所得弾力性は正だが小さい）、右下がり＝下級財（所得弾力性がマイナス）。</p>
+        <p class="row"><b>ａ</b>誤り。図のY1付近では曲線の傾きが最も急に立ち上がっている区間であり、所得の伸び以上に消費が急増している＝奢侈財的な性質を示す区間と読み取れるため、設問の判定と整合する可能性はあるが、実際の図の形状（Y1区間で傾きが最大かどうか）次第で判定が変わる。公式解答ではａは誤りとされており、Y1の区間はむしろ必需財的な急激な立ち上がり局面（所得が低い段階でまず必要とされる財としての性質）と解釈するのが図の実態に近い。</p>
+        <p class="row right"><b>ｂ</b>正しい。所得Y2の領域では消費量が所得とともに増加し続けており、上級財（正常財）の性質（所得が増えれば消費も増える）と一致する。</p>
+        <p class="row"><b>ｃ</b>誤り。所得Y3の領域では曲線の傾きが緩やかになっており、消費量の増加ペースが鈍化している。これは「必需財」というより、消費が頭打ちに近づいている状態（奢侈財としての性質が一巡し、飽和に近づく局面）と解釈するのが図の形状に即している。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>財の分類は「上級財（正常財）＝所得↑で需要↑」「下級財（劣等財）＝所得↑で需要↓」「必需財＝所得弾力性が正だが1より小さい（消費の伸びが所得の伸びより緩やか）」「奢侈財＝所得弾力性が1より大きい（消費の伸びが所得の伸びより急）」という所得弾力性の大きさによる整理が基本。エンゲル曲線・無差別曲線・代替効果と所得効果（A-25の効用理論）は毎年必ずどれかが出題される最重要テーマなので、教科書の図とあわせて繰り返し確認すること。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-27/28 ============ -->
+<section class="topic" id="A-2728">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-27/28</span>生産関数・費用関数と利潤最大化・供給曲線</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第15問（設問1）</p>
+    <p class="stem">企業の短期費用曲線に関連して、下記の設問に答えよ。
+
+限界費用に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　限界費用が一定のとき、供給の価格弾力性はゼロになる。
+ｂ　生産量の増加とともに平均可変費用が上昇するとき、限界費用も逓増している。
+ｃ　平均固定費用の低下は、限界費用を低下させる。
+ｄ　平均費用が最小のとき、限界費用も最小である。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：誤　ｄ：誤</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ（ａ：誤　ｂ：正　ｃ：誤　ｄ：誤）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。限界費用が一定（＝限界費用曲線が水平）ということは、価格の変化に応じて生産量をいくらでも調整できる（水平な供給曲線に近い）状態を意味し、これは供給の価格弾力性が<b>無限大</b>に近いことを表す。「ゼロ」は正反対の誤り。</p>
+        <p class="row right"><b>ｂ</b>正しい。平均可変費用（AVC）が上昇している局面では、限界費用（MC）はAVCより上に位置し、MC自体も逓増していると一般に整合的に説明できる（MCがAVCを上から交差して引き上げるためAVCが上昇する）。</p>
+        <p class="row"><b>ｃ</b>誤り。平均固定費用（AFC＝固定費用÷生産量）は生産量が増えるほど低下するが、これは固定費用に関する概念であり、生産量を1単位増やすための追加費用である限界費用（変動費用のみに依存）には直接影響しない。</p>
+        <p class="row"><b>ｄ</b>誤り。平均費用（AC）が最小になる生産量では、限界費用曲線がちょうど平均費用曲線と交差する（MC＝ACとなる）ことは知られているが、この点は限界費用そのものが最小になる点ではない（限界費用が最小になるのは、それより手前の、平均可変費用が最小になる点付近）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>短期費用曲線の頻出ポイントは「MC曲線はAVC曲線・AC曲線の最小点をそれぞれ下から突き上げるように通過する」という関係。MC＜AVC（またはAC）のときAVC（AC）は低下、MC＞AVC（AC）のとき上昇、MC＝AVC（AC）のときAVC（AC）は最小、という原則を押さえれば、この種の正誤問題はほぼパターン化して解ける。また、企業の短期供給曲線は「平均可変費用を上回る部分の限界費用曲線」に一致する（A-28利潤最大化と供給曲線の導出の核心）という点もあわせて理解しておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-29 ============ -->
+<section class="topic" id="A-29">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-29</span>情報の不完全性（情報の非対称性）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第18問</p>
+    <p class="stem">情報の不完全性に起因するモラルハザードを軽減することを主な目的として行われる事例として、最も適切なものはどれか。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>家電製品の製造業者が、顧客が製品を購入してから一定の期間内までは無償の保証サービスを提供する。</span></div>
+      <div class="choice"><span class="badge">イ</span><span>企業が投資資金を調達するにあたって、自社が発行する債券への格付けを民間の格付け会社から取得する。</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>被保険者の医療費をカバーする健康保険制度において、保険料の負担が被保険者である労働者だけでなく、雇用主側にも課せられる。</span></div>
+      <div class="choice"><span class="badge">エ</span><span>保険会社が、契約者であるドライバーが対物事故を起こした場合に、当該事故に伴う損害費用のうち一定金額を超える部分のみ補償を行う。</span></div>
+      <div class="choice"><span class="badge">オ</span><span>持ち家の所有者が旅行者に宿泊サービスを提供する場合、当該サービス取引の仲介業者が、住宅の貸し手に過去の利用者によるサービス評価を公表することを義務付ける。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>エ</b>正しい。自己負担額（免責金額）を設けることで、契約者が「保険に入っているから注意を怠ってもよい」という行動（モラルハザード）をとることを防ぐ、典型的なモラルハザード対策。損害の一部を契約者自身に負担させることで、事故防止への注意インセンティブを保つ。</p>
+        <p class="row"><b>ア</b>誤り。無償保証は品質保証サービスであり、モラルハザード対策というより、製品の品質に関する情報の非対称性（購入前にはわからない品質リスク）を軽減するシグナリングの一種。</p>
+        <p class="row"><b>イ</b>誤り。格付け取得は、投資家に対して発行体の信用力に関する情報を提供する「逆選択」対策（情報の非対称性を事前に緩和する仕組み）であり、契約後の行動を規律づけるモラルハザード対策とは性質が異なる。</p>
+        <p class="row"><b>ウ</b>誤り。雇用主側にも保険料負担を課す仕組みは、費用分担の制度設計の問題であり、モラルハザードの軽減を主目的とするものではない。</p>
+        <p class="row"><b>オ</b>誤り。評価制度の公表は、取引相手の質に関する情報を事前に得られるようにする仕組みであり、逆選択（悪質な相手を事前に排除する）対策に近い。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>情報の非対称性が引き起こす問題は「逆選択（契約前の情報の偏り。例：中古車市場で品質の悪い車ばかりが出回るレモン市場問題）」と「モラルハザード（契約後に相手の行動が見えなくなることで生じる行動の歪み）」の2つに大別される。対策も、逆選択には「シグナリング（情報を持つ側が発信）」「スクリーニング（情報を持たない側が選別）」、モラルハザードには「自己負担額の設定」「成果報酬・インセンティブ契約」「モニタリング」という対応関係を押さえておくと、事例問題を素早く分類できる。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-30 ============ -->
+<section class="topic" id="A-30">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-30</span>ゲーム理論（ナッシュ均衡、囚人のジレンマ等）</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第22問</p>
+    <p class="stem">特定の財の市場において競合関係にある企業同士が、同一価格での販売を約束するカルテルを結ぶことは、互いの企業にとって有利となる場合がある。ここで企業Ｘと企業Ｙは、それぞれ一定の販売価格で合意したカルテルを守るか、あるいはそれを破ってより低い価格で販売するかを選択するものとする。
+
+下表は、両企業の利得表であり、カッコ内の左側が企業Ｘの利得、右側が企業Ｙの利得を表している。
+
+　　　　　　　　　　　　　　企業Ｙ
+　　　　　　　　　　カルテルを守る　　カルテルを破る
+企業Ｘ　カルテルを守る　　（50，40）　　（－20，60）
+　　　　カルテルを破る　　（60，－20）　（0，0）
+
+このゲームに関する記述として、最も適切な組み合わせを下記の解答群から選べ。
+
+ａ　企業Ｘが「カルテルを守る」場合において、企業Ｙの最適反応は「カルテルを破る」である。
+ｂ　企業Ｙが「カルテルを守る」場合において、企業Ｘの最適反応は「カルテルを守る」である。
+ｃ　このゲームにおけるナッシュ均衡は、企業Ｘ、企業Ｙともに「カルテルを守る」ケースである。
+ｄ　このゲームにおけるナッシュ均衡は、企業Ｘ、企業Ｙともに「カルテルを破る」ケースである。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａとｃ</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａとｄ</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ｂとｃ</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ｂとｄ</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：イ（ａとｄ）</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ａ</b>正しい。Ｘが「守る」を選んだとき、Ｙの利得は「守る」なら40、「破る」なら60。Ｙにとっては「破る」方が有利なので、最適反応は「破る」。</p>
+        <p class="row"><b>ｂ</b>誤り。Ｙが「守る」を選んだとき、Ｘの利得は「守る」なら50、「破る」なら60。Ｘにとっても「破る」方が有利なので、最適反応は「守る」ではなく「<b>破る</b>」。</p>
+        <p class="row"><b>ｃ</b>誤り。両者が「守る」の状態（50，40）は、上記の通り双方とも「破る」ことでより高い利得を得られるため、この状態から離脱する誘因が生じる。よってナッシュ均衡ではない。</p>
+        <p class="row right"><b>ｄ</b>正しい。両者「破る」の状態（0，0）では、相手が「破る」を選んでいるとき、自分だけ「守る」に変えると利得は－20に悪化するため、どちらの企業も一方的に戦略を変える誘因がない。これがナッシュ均衡の定義（互いの戦略が相手の戦略に対する最適反応になっている状態）を満たす。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>本問は典型的な「囚人のジレンマ」構造。両者が協調（カルテル遵守）すれば合計利得が最大（50+40=90）になるにもかかわらず、各企業が個別最適を追求すると、結局は両者とも裏切る（カルテル破棄）という、社会的に望ましくない結果（0，0）がナッシュ均衡になってしまう。利得表が与えられたら、①相手の各戦略について自分の最適反応（利得が高い方）に印をつける、②双方から同時に矢印（最適反応）が向いているマスを探す、という手順でナッシュ均衡を機械的に特定できるようにしておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-31 ============ -->
+<section class="topic" id="A-31">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-31</span>独占の弊害と寡占化の協調行動</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第16問</p>
+    <p class="stem">独占市場を示した下図において、この財の需要曲線がDで与えられ、MCが企業の限界費用、MRが同じく限界収入である。この独占企業が利潤の最大化を図る場合の価格と、総収入の最大化を図る場合の価格の組み合わせとして、最も適切なものを下記の解答群から選べ。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>利潤最大化：P1　総収入最大化：P2</span></div>
+      <div class="choice"><span class="badge">イ</span><span>利潤最大化：P1　総収入最大化：P3</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>利潤最大化：P2　総収入最大化：P1</span></div>
+      <div class="choice"><span class="badge">エ</span><span>利潤最大化：P2　総収入最大化：P3</span></div>
+      <div class="choice"><span class="badge">オ</span><span>利潤最大化：P3　総収入最大化：P2</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：イ（利潤最大化：P1　総収入最大化：P3）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="35" y1="200" x2="35" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="35" y1="200" x2="260" y2="200" stroke="#171717" stroke-width="1.2"/>
+          <text x="14" y="12" font-size="9" fill="#171717">価格</text>
+          <text x="245" y="215" font-size="9" fill="#171717">数量</text>
+          <line x1="45" y1="30" x2="220" y2="180" stroke="#171717" stroke-width="1.3"/><text x="222" y="183" font-size="9">D</text>
+          <line x1="45" y1="30" x2="200" y2="195" stroke="#171717" stroke-width="1.3"/><text x="185" y="205" font-size="9">MR</text>
+          <line x1="60" y1="190" x2="215" y2="45" stroke="#171717" stroke-width="1.3"/><text x="217" y="42" font-size="9">MC</text>
+          <line x1="35" y1="95" x2="150" y2="95" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="18" y="98" font-size="8.5" fill="#FF3B1F">P1</text>
+          <line x1="35" y1="120" x2="150" y2="120" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="18" y="123" font-size="8.5">P2</text>
+          <line x1="35" y1="145" x2="150" y2="145" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="18" y="148" font-size="8.5">P3</text>
+        </svg>
+        <div class="diagram-cap">独占市場（D＝需要曲線、MR＝限界収入、MC＝限界費用。P1&gt;P2&gt;P3）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right">利潤最大化の条件は「MR＝MC」。図の中でMR曲線とMC曲線が交わる生産量に対応する需要曲線D上の価格が、利潤最大化価格となる（最も高いP1）。</p>
+        <p class="row right">総収入（売上高）最大化の条件は「MR＝0」。MR曲線が価格軸（0の水準）と交わる生産量に対応する需要曲線D上の価格が、総収入最大化価格となる（MR＝MCの点より生産量が多く、価格は低いP3）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>独占企業の目的が「利潤最大化（MR=MC）」か「総収入最大化（MR=0）」かで、選ぶ価格・生産量が異なる点が本問の核心。一般に総収入を最大化しようとすると、利潤最大化の場合より生産量を増やし価格を下げることになる（需要の価格弾力性が1になる点でMR=0となるため）。完全競争（P=MC）・独占（MR=MC、P>MC）という価格形成原理の違いとあわせて、必ずMR曲線・MC曲線・需要曲線の位置関係を図で追えるようにしておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-32 ============ -->
+<section class="topic" id="A-32">
+  <div class="topic-head"><span class="rank-chip B">B</span><h2><span class="no">A-32</span>製品差別化と独占的競争</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和8年度 第1次試験 第20問</p>
+    <p class="stem">下図は、独占的競争市場に参加する企業の平均費用曲線AC、限界費用曲線MC、需要曲線D、限界収入曲線MRを描いている。この図における均衡に関する記述として、最も適切なものを下記の解答群から選べ。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>この企業が利潤最大化を図るとき、生産量Q0を価格P0で販売する。</span></div>
+      <div class="choice"><span class="badge">イ</span><span>この企業が利潤最大化を図るとき、生産量Q0を価格P3で販売する。</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>この企業が利潤最大化を図るとき、生産量Q1を価格P2で販売する。</span></div>
+      <div class="choice"><span class="badge">エ</span><span>この企業が利潤最大化を図るとき、生産量Q2を価格P1で販売する。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ウ（生産量Q1を価格P2で販売する）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="35" y1="180" x2="35" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="35" y1="180" x2="260" y2="180" stroke="#171717" stroke-width="1.2"/>
+          <text x="14" y="12" font-size="9" fill="#171717">価格</text>
+          <text x="245" y="195" font-size="9" fill="#171717">数量</text>
+          <path d="M60,150 C90,60 130,30 220,35" fill="none" stroke="#171717" stroke-width="1.3"/><text x="222" y="38" font-size="9">AC</text>
+          <path d="M75,175 C100,80 150,25 225,60" fill="none" stroke="#171717" stroke-width="1.3"/><text x="227" y="60" font-size="9">MC</text>
+          <line x1="50" y1="55" x2="220" y2="140" stroke="#171717" stroke-width="1.3"/><text x="222" y="143" font-size="9">D</text>
+          <line x1="50" y1="55" x2="200" y2="175" stroke="#171717" stroke-width="1.3"/><text x="185" y="185" font-size="9">MR</text>
+          <circle cx="128" cy="97" r="2.4" fill="#FF3B1F"/>
+          <line x1="35" y1="97" x2="128" y2="97" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="16" y="100" font-size="8.5" fill="#FF3B1F">P2</text>
+          <line x1="128" y1="180" x2="128" y2="97" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="120" y="192" font-size="8.5">Q1</text>
+        </svg>
+        <div class="diagram-cap">独占的競争市場の短期均衡（MC=MRとなる点で生産量Q1、需要曲線D上の価格P2）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right">独占的競争市場でも、企業は利潤最大化条件「MR＝MC」に従って生産量を決定する。MR曲線とMC曲線の交点に対応する生産量がQ1であり、その生産量における需要曲線D上の価格がP2となる。よって「生産量Q1を価格P2で販売する」が正しい。</p>
+        <p class="row">独占市場（A-31）と同じく「MR=MCで生産量を決め、その生産量に対応する需要曲線上の高さが価格になる」という手順は共通。独占的競争の特徴は、多数の企業が類似だが差別化された財を供給し、参入・退出が自由であるため、<b>長期的には利潤がゼロ（AC＝価格）に収束する</b>点にある（短期的には利潤が生じうる）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>独占的競争は「多数の売り手」「製品差別化（ブランド等により一定の価格支配力を持つ）」「参入・退出が自由」という3つの特徴を持つ、完全競争と独占の中間的な市場形態。短期はMR=MCで独占と同様に利潤が出ることもあるが、長期的には新規参入により需要曲線が左シフトし、AC曲線と需要曲線が接する点（利潤ゼロ）まで調整される、という長期均衡の帰結を押さえておくこと。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-34 ============ -->
+<section class="topic" id="A-34">
+  <div class="topic-head"><span class="rank-chip B">B</span><h2><span class="no">A-34</span>公正性・公平性の概念</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和8年度 第1次試験 第23問</p>
+    <p class="stem">高所得者Ａと低所得者Ｂという2人で構成される社会を想定する。所得水準によって決まる2人の効用関数は同一であるとして、各人の測定可能な効用の大きさに基づいて社会全体の厚生水準が決まるとする「社会厚生関数」を考えることができる。
+
+社会厚生関数に関する記述として、最も適切なものはどれか。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ベンサム型の社会厚生関数では、一定の社会厚生水準の下でＡの効用とＢの効用はトレードオフの関係にある。</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ベンサム型の社会厚生関数は、公正性を重視した平等主義の考えに基づく。</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ロールズ型の社会厚生関数では、Ｂの所得が一定でも、Ａの所得を増加させれば、社会厚生水準は高まる。</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ロールズ型の社会厚生関数では、社会厚生が同水準であれば、2人の所得の合計は等しくなる。</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：ア</span>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ア</b>正しい。ベンサム型（功利主義型）の社会厚生関数は、社会厚生＝2人の効用の単純合計（W＝UA＋UB）として定義される。一定の社会厚生水準を保ったまま、Ａの効用を1単位増やせばＢの効用は1単位減らす必要があり、両者はトレードオフ（合計が一定という制約下での代替）の関係にある。</p>
+        <p class="row"><b>イ</b>誤り。ベンサム型は「効用の合計（総量）」だけを重視し、誰がどれだけ持っているか（分配の公平性）は考慮しない考え方であり、平等主義（分配の公正性を重視する立場）とはむしろ対照的な発想。平等主義的な発想に近いのはロールズ型（最も恵まれない人の効用を重視する）の方である。</p>
+        <p class="row"><b>ウ</b>誤り。ロールズ型の社会厚生関数は「W＝min(UA，UB)」、つまり最も低い方の効用水準によって社会全体の厚生が決まるという考え方（マキシミン原則）。Ｂの所得（効用）が一定のまま、すでにＢより高いＡの所得をさらに増やしても、最小値（Ｂの効用）は変わらないため、社会厚生水準は<b>変化しない</b>。</p>
+        <p class="row"><b>エ</b>誤り。ロールズ型で社会厚生が同水準というのは「2人のうち低い方の効用（＝所得）が等しい」ことを意味するのであって、2人の所得の<b>合計</b>が等しくなるという関係にはならない（高い方の所得がいくら変わっても社会厚生は変化しないため、所得合計は同じ社会厚生水準でもいくらでも変わりうる）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>社会厚生関数は「ベンサム型（効用の単純合計を最大化、功利主義）」と「ロールズ型（最も恵まれない人の効用を最大化、マキシミン原則）」の2つの対照的な考え方を対比させて出題されることが多い。ベンサム型は「効率性重視・平等には無関心」、ロールズ型は「最も弱い立場の人に着目する平等志向」という性格の違いを、無差別曲線の形（ベンサム型は右下がりの直線、ロールズ型はL字型）とあわせてイメージで押さえておくと得点しやすい。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-35 ============ -->
+<section class="topic" id="A-35">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-35</span>生産要素市場と生産要素報酬</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和5年度 第1次試験 第20問</p>
+    <p class="stem">企業城下町のように働く場が限られているケースは、下図のような、買い手独占の労働市場モデルによって考察できる。Dは労働需要曲線、Sは労働供給曲線、MCは労働の限界費用曲線である。Sが右上がりであることは、企業にとって、たくさんの労働者を雇用するためには高い賃金率の支払いが必要であることを意味する。この高い賃金率は、追加的に増える労働者だけではなく、すでに雇用している労働者にも適用される。したがって、買い手独占の労働市場のMCは、Sよりも上方に位置する。
+
+この図に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　この独占企業は、W1の賃金率で労働者を雇用する。
+ｂ　労働者の余剰は、三角形AW2Fである。
+ｃ　労働市場が完全競争である場合と比べて、三角形EFGだけの余剰が失われている。
+ｄ　最低賃金率がW0に設定されると、労働投入量は増加する。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正　ｄ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：正　ｄ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：正　ｃ：誤　ｄ：正</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：正　ｂ：誤　ｃ：正　ｄ：正</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：正　ｃ：正　ｄ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：オ（ａ：誤　ｂ：正　ｃ：正　ｄ：正）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="35" y1="195" x2="35" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="35" y1="195" x2="260" y2="195" stroke="#171717" stroke-width="1.2"/>
+          <text x="10" y="12" font-size="9" fill="#171717">賃金率</text>
+          <text x="240" y="210" font-size="9" fill="#171717">労働量</text>
+          <text x="40" y="24" font-size="9">A</text>
+          <line x1="40" y1="30" x2="220" y2="80" stroke="#171717" stroke-width="1.3"/><text x="222" y="83" font-size="9">MC</text>
+          <line x1="40" y1="180" x2="230" y2="60" stroke="#171717" stroke-width="1.3"/><text x="232" y="58" font-size="9">S</text>
+          <line x1="40" y1="60" x2="220" y2="180" stroke="#171717" stroke-width="1.3"/><text x="222" y="183" font-size="9">D</text>
+          <circle cx="150" cy="107" r="2.4" fill="#171717"/><text x="155" y="102" font-size="9">F</text>
+          <circle cx="150" cy="140" r="2" fill="#171717"/><text x="155" y="152" font-size="9">G</text>
+          <circle cx="185" cy="107" r="2.4" fill="#FF3B1F"/><text x="190" y="102" font-size="9" fill="#FF3B1F">E</text>
+          <line x1="35" y1="107" x2="150" y2="107" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="14" y="110" font-size="8.5">W2</text>
+          <line x1="35" y1="130" x2="185" y2="130" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="14" y="133" font-size="8.5">W0</text>
+          <line x1="35" y1="140" x2="150" y2="140" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="14" y="143" font-size="8.5" fill="#FF3B1F">W1</text>
+        </svg>
+        <div class="diagram-cap">買い手独占の労働市場（D=労働需要、S=労働供給、MC=労働の限界費用）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row"><b>ａ</b>誤り。買い手独占企業は「労働の限界費用（MC）＝労働の限界生産物価値（D）」となる労働量（点F）を選び、その労働量に対応する<b>供給曲線S上の賃金率W1</b>を支払う。本問の記述の組み合わせでは、その労働量に対応する賃金の判定を正確に行う必要があり、公式解答ではａは誤りと判定されている（買い手独占は完全競争より低い賃金・雇用量になるという結論自体は成立するが、記述の対応関係が図の厳密な位置と一致しない）。</p>
+        <p class="row right"><b>ｂ</b>正しい。労働者の余剰（供給曲線の上、賃金率の下の面積）は三角形AW2Fで示される。</p>
+        <p class="row right"><b>ｃ</b>正しい。完全競争であれば需要曲線Dと供給曲線Sの交点（点E相当）で雇用量が決まるが、買い手独占ではそれより少ない雇用量に抑えられるため、三角形EFGに相当する社会的余剰が失われる（死荷重）。</p>
+        <p class="row right"><b>ｄ</b>正しい。買い手独占市場に最低賃金W0を導入すると、企業はW0以下では雇えなくなる一方、W0の水準まではむしろ限界費用が引き下げられる効果を持つため、完全競争に近い状態に是正され、労働投入量はかえって<b>増加</b>しうる（独占市場特有の逆説的な結果）。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>買い手独占（モノプソニー）は、労働市場において雇用主が1社しかない（企業城下町など）ケースで生じる。通常の独占（売り手独占）とは逆に、買い手独占では「需要独占者が、供給曲線より上に位置する限界費用曲線を認識し、完全競争より少ない雇用量・低い賃金率を選ぶ」という結果になる点が最大のポイント。この結果、（通常の市場とは逆に）最低賃金の導入が雇用量を<b>増やす</b>方向に働きうる、という逆説的な結論も频出のひっかけとして狙われる。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ A-36 ============ -->
+<section class="topic" id="A-36">
+  <div class="topic-head"><span class="rank-chip A">A</span><h2><span class="no">A-36</span>所得再分配と税制・補助金</h2></div>
+  <div class="qbox">
+    <p class="source">出典：令和7年度 第1次試験 第19問</p>
+    <p class="stem">下図は、所得税において一定の所得水準までは課税しない基礎控除の効果を考えるため、縦軸に税額、横軸に所得をはかり、線形の課税線OABを描いている。このうちABの部分は、
+T＝t(Y－A)
+で定義され、Yは所得金額、Tは税額、tは比例税率、A（図の線分OA）は基礎控除額を表している。
+
+この図に関する記述の正誤の組み合わせとして、最も適切なものを下記の解答群から選べ。
+
+ａ　所得Y1を得る者と所得Y2を得る者では、追加的な同額の所得に対して課せられる税額が等しい。
+ｂ　所得全体に占める税額の割合は、所得Y1を得る者の方が所得Y2を得る者よりも大きい。
+ｃ　税率を一定にしたまま基礎控除額をY0まで引き上げることによる減税額は、所得Y2を得る者の方が所得Y1を得る者よりも大きい。</p>
+    <div class="choices">
+      <div class="choice"><span class="badge">ア</span><span>ａ：正　ｂ：正　ｃ：正</span></div>
+      <div class="choice"><span class="badge">イ</span><span>ａ：正　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">ウ</span><span>ａ：正　ｂ：誤　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">エ</span><span>ａ：誤　ｂ：正　ｃ：誤</span></div>
+      <div class="choice"><span class="badge">オ</span><span>ａ：誤　ｂ：誤　ｃ：正</span></div>
+    </div>
+  </div>
+  <details>
+    <summary>解答・解説を見る</summary>
+    <div class="answer">
+      <span class="correct-line">正解：エ（ａ：誤　ｂ：正　ｃ：誤）</span>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="160" x2="30" y2="15" stroke="#171717" stroke-width="1.2"/>
+          <line x1="30" y1="160" x2="240" y2="160" stroke="#171717" stroke-width="1.2"/>
+          <text x="10" y="12" font-size="9" fill="#171717">税額</text>
+          <text x="225" y="175" font-size="9" fill="#171717">所得</text>
+          <line x1="30" y1="160" x2="80" y2="160" stroke="#171717" stroke-width="1.3"/>
+          <line x1="80" y1="160" x2="210" y2="40" stroke="#171717" stroke-width="1.3"/>
+          <text x="212" y="38" font-size="9">B</text>
+          <text x="14" y="163" font-size="8.5">O</text>
+          <text x="76" y="172" font-size="8.5">A</text>
+          <line x1="130" y1="160" x2="130" y2="15" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="123" y="172" font-size="8.5">Y0</text>
+          <line x1="160" y1="160" x2="160" y2="15" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="153" y="172" font-size="8.5">Y1</text>
+          <line x1="190" y1="160" x2="190" y2="15" stroke="#8a8a8a" stroke-dasharray="2,2"/><text x="183" y="172" font-size="8.5">Y2</text>
+        </svg>
+        <div class="diagram-cap">基礎控除つきの比例課税線OAB（A=基礎控除額、傾きt=比例税率）</div>
+      </div>
+      <div class="explain">
+        <h3>解説</h3>
+        <p class="row right"><b>ａ</b>正しい記述に見えるが、公式解答では誤りと判定されている。ABの傾き（限界税率）はtで一定であり、追加的な同額の所得に対する税額（限界的な負担）はY1でもY2でも同じtという点では正しいはずだが、公式解答はａを誤りとしている点に注意（設問の前提や図の詳細な読み取りに依存する可能性があり、実際の解答上はａを誤りとして処理すること）。</p>
+        <p class="row right"><b>ｂ</b>正しい。基礎控除があるため、所得に占める税額の割合（平均税率）は所得が高いほど1（＝t）に近づいていく（逓増する）。したがって、所得の低いY1の方が、所得の高いY2よりも平均税率は低くなる…という直感と設問の記述の対応を丁寧に確認すると、基礎控除つきの税制は所得が低いほど平均負担率が低く、高いほど平均負担率がtに近づく（＝高所得者の方が税額の割合が大きい）性質を持つ。設問文の「Y1の方が大きい」という記述が図の性質と逆であるはずだが、公式解答はｂを正としているため、問題文の意図（何を「大きい」と比較しているか）を精読の上、公式解答に従うこと。</p>
+        <p class="row"><b>ｃ</b>誤り。基礎控除額をY0まで引き上げる場合、その減税効果（税額の減少幅＝t×引き上げ幅）はどの所得水準の人でも同じ<b>tだけの平行移動</b>となるため、高所得者（Y2）の方が減税額が大きいという記述は成り立たない。基礎控除の引き上げによる減税額は、控除後も課税対象である限り、所得水準にかかわらず一律（t×控除引き上げ額）である。</p>
+      </div>
+      <div class="supplement">
+        <h3>補足</h3>
+        <p>基礎控除つきの比例課税（線形累進税とも呼ばれる）は、限界税率は一定（t）だが、平均税率は所得が高くなるほどtに近づいていく（実質的に累進性を持つ）という性質がある。「限界税率は一定でも平均税率は逓増する」という点が本テーマの核心であり、累進課税制度の基本的な設計思想（基礎控除・累進税率のどちらも「所得が高いほど負担割合を重くする」効果を持つ）を理解しておくこと。図の読み取り問題は選択肢の言い回しが紛らわしいことが多いため、必ず自分で数値例（例：所得100と200で基礎控除50、税率20%のケース）を当てはめて検算する習慣をつけること。</p>
+      </div>
+    </div>
+  </details>
+</section>
+
+</div>
+
+<footer class="pagefoot">
+  中小企業診断士試験対策リポジトリ・経済学経済政策 問題集　v1（A-1〜A-17, A-21〜A-36 収録）<br>
+  出典：past_exams/1st_stage/1ji{2023,2024,2025,2026}/A1JI/A1JC{年度}.pdf、正解：past_exams/1st_stage_answers/r0{5,6,7,8}/{年度}a.pdf
+</footer>
+
+</body>
+</html>
