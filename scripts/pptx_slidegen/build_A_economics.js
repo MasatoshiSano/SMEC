@@ -61,7 +61,7 @@ addDividerSlide(pres, {
   ], { x: 0.55, y: cy03 + 0.12, w: 12.25, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "ひっかけ：GDPは一定期間の「フロー」概念。ある時点の資産総額を示す「ストック」（国富等）と混同しないこと。中古品・株式の売買はGDPに計上されない。",
+    related: "ひっかけ：GDPは一定期間の「フロー」概念。ストック（国富等）と混同しないこと。行政サービスは無料でも産出コストでGDPに算入される。",
     years: mkYears(new Set(["'16", "'17", "'18", "'19", "'20", "'21", "'22", "'23", "'24", "'25"])),
   });
 }
@@ -194,7 +194,7 @@ addDividerSlide(pres, {
   ], { x: 0.55, y: cy07 + 0.1, w: 12.25, h: 0.85, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "ひっかけ：M1〜M3の違いは通貨の種類でなく対象金融機関の広さ。マネタリーベース（日銀が直接供給する通貨）とマネーストックは別概念で、両者は信用乗数を介した間接的な関係。",
+    related: "ひっかけ：M1〜M3は通貨の種類でなく対象金融機関の広さ。貨幣乗数＝マネーストック÷マネタリーベースは信用創造により常に1より大きい。",
     years: mkYears(new Set(["'17", "'19", "'20", "'21", "'23"])),
   });
 }
@@ -219,6 +219,7 @@ addDividerSlide(pres, {
     { k: "経常収支", v: "貿易・サービス収支、第一次所得収支（配当・利子）、第二次所得収支（無償の資金移動）の合計", gap: 0.55 },
     { k: "資本移転等収支", v: "対価を伴わない資本の移転（インフラ無償援助等）", gap: 0.4 },
     { k: "金融収支", v: "対外的な金融資産・負債の増減。海外への投資（資産の増加）はプラスとして計上", gap: 0.5 },
+    { k: "為替レートとの関係", v: "内外の金利差が拡大すると資金がより高い利回りを求めて動き、金利が高い方の通貨は高くなりやすい（金利平価説、詳細はA-16）", gap: 0.55 },
   ], { fontSize: 11.5, labelW: 2.1 });
   cy += 0.1;
   s.addText([
@@ -470,7 +471,7 @@ addDividerSlide(pres, {
   ], { x: 0.55, y: cy16 + 0.08, w: 12.25, h: 0.65, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "ひっかけ：「買いオペは資金を吸収する」は誤り。買いオペは資金を「供給する」緩和的な政策。売りオペとの方向を逆に覚えないこと。",
+    related: "ひっかけ：「買いオペは資金を吸収する」は誤り。買いオペは資金を「供給する」緩和的な政策。フィッシャー方程式（名目＝実質＋期待インフレ率）も頻出。",
     years: mkYears(new Set(["'19", "'20", "'21"])),
   });
 }
@@ -720,7 +721,7 @@ addDividerSlide(pres, {
   ], { x: proseX, y: cy, w: proseW, h: 0.75, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "関連：A-23 経済余剰（死荷重の考え方の土台）。",
+    related: "関連：A-23 経済余剰（死荷重の考え方）。貿易政策は各国の利得表を使ったゲーム理論（ナッシュ均衡、A-30参照）としても出題される。",
     years: mkYears(new Set(["'17", "'18", "'19", "'21", "'23", "'25"])),
   });
 }
@@ -835,7 +836,7 @@ addDividerSlide(pres, {
       { pos: "bl", label: "固定相場制×財政政策", sublabel: "効果は増幅。為替介入が金融緩和と同様の効果を持つ" },
       { pos: "br", label: "固定相場制×金融政策", sublabel: "効果は無効。為替介入で緩和効果が打ち消される" },
     ],
-    axisCaption: "資本移動が自由な小国が前提。「変動相場制→財政無効・金融有効」「固定相場制→財政有効・金融無効」という対応関係が最重要。",
+    axisCaption: "資本移動が自由な小国が前提。「変動相場制→財政無効・金融有効」「固定相場制→財政有効・金融無効」が最重要。BP曲線（国際収支均衡線）は自国利子率＝世界利子率で水平になり、外国利子率が上昇するとBP曲線は上方にシフトする。",
   });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
@@ -974,8 +975,9 @@ addDividerSlide(pres, {
     { text: "超過需要", options: { bold: true } }, { text: "：価格が均衡より低く需要量＞供給量（品不足）。通常は価格上昇で解消\n\n", options: {} },
     { text: "超過供給", options: { bold: true } }, { text: "：価格が均衡より高く供給量＞需要量（売れ残り）。通常は価格下落で解消\n\n", options: {} },
     { text: "上限規制", options: { bold: true, color: RED } }, { text: "（家賃統制等）→超過需要が解消されない\n\n", options: {} },
-    { text: "下限規制", options: { bold: true, color: RED } }, { text: "（最低賃金等）→超過供給（失業）が解消されない", options: {} },
-  ], { x: 8.25, y: 2.0, w: 4.05, h: 4.0, fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
+    { text: "下限規制", options: { bold: true, color: RED } }, { text: "（最低賃金等）→超過供給（失業）が解消されない\n\n", options: {} },
+    { text: "曲線のシフト", options: { bold: true } }, { text: "：価格の変化は曲線上の移動。需要は所得・代替財の価格、供給は生産コスト・補助金（右）・税金（左）で動く", options: {} },
+  ], { x: 8.25, y: 2.0, w: 4.05, h: 4.5, fontFace: F_BODY, fontSize: 10, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：「超過需要が発生すると価格は下落する」は逆。超過需要は価格の上昇によって解消される。",
@@ -1093,8 +1095,9 @@ addDividerSlide(pres, {
   s.addText([
     { text: "■ 消費者余剰", options: { bold: true, color: "2E5495" } }, { text: "：買い手が得する部分（払ってもよい額－実際の支払額）\n\n", options: {} },
     { text: "■ 生産者余剰", options: { bold: true, color: "6B6B6B" } }, { text: "：売り手が得する部分（受取額－最低売りたい額）\n\n", options: {} },
-    { text: "■ 死荷重", options: { bold: true, color: RED } }, { text: "：数量規制等で取引量が減ったとき失われる余剰", options: {} },
-  ], { x: 8.25, y: 2.3, w: 4.05, h: 3.0, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.4 });
+    { text: "■ 死荷重", options: { bold: true, color: RED } }, { text: "：数量規制等で取引量が減ったとき失われる余剰\n\n", options: {} },
+    { text: "取引量の制約", options: { bold: true } }, { text: "：価格規制下で実際に取引される数量は、需要量・供給量のうち少ない方に制約される", options: {} },
+  ], { x: 8.25, y: 2.3, w: 4.05, h: 3.7, fontFace: F_BODY, fontSize: 10.5, color: INK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.4 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
     related: "ひっかけ：死荷重は「消費者余剰・生産者余剰の減少分の合計」ではなく、その減少分から税収等で社会に残った部分を差し引いた「純粋に失われた部分」。",
@@ -1193,7 +1196,8 @@ addDividerSlide(pres, {
     { name: "上級財（正常財）", tag: "所得↑→需要↑", desc: "代替効果・所得効果とも需要量を増やす方向。需要曲線は右下がり" },
     { name: "下級財（劣等財）", tag: "所得↑→需要↓", desc: "所得効果は需要を減らす方向だが通常は代替効果が上回り、やはり右下がり" },
     { name: "ギッフェン財", tag: "下級財の例外", desc: "所得効果が代替効果を上回る特殊な例外。価格が下がると需要量が減る（右上がり）" },
-  ], { rowH: 1.0, nameW: 2.4, tagW: 2.1 });
+    { name: "必需財／奢侈財", tag: "所得弾力性の大きさ", desc: "必需財は所得弾力性0〜1（消費の伸びが緩やか）、奢侈財は1超（消費の伸びが急）。エンゲル曲線の傾きで判定" },
+  ], { rowH: 0.75, nameW: 2.4, tagW: 2.1 });
   s.addText([
     { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
     { text: "食品メーカーのA社が主力商品を値下げすると、通常は代替効果・所得効果とも需要量を押し上げる方向に働き販売数量は増える。値下げで浮いた予算がより高級な代替品に回り、逆に自社商品の販売数量が減ることがある特殊なケースがギッフェン財として議論される。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
@@ -1411,7 +1415,7 @@ addDividerSlide(pres, {
   ], { x: 0.55, y: cy48 + 0.08, w: 12.25, h: 0.7, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "ひっかけ：独占企業の価格はMRでなく需要曲線の高さで決まる。「独占企業はP＝MCで生産」は完全競争の条件。",
+    related: "ひっかけ：独占の価格はMRでなく需要曲線の高さで決まる。総収入最大化（MR＝0）は利潤最大化（MR＝MC）より生産量が多く価格は低い。",
     years: mkYears(new Set(["'16", "'18", "'19", "'20", "'21", "'23", "'24", "'25"])),
   });
 }
@@ -1501,6 +1505,7 @@ addDividerSlide(pres, {
     { k: "ローレンツ曲線", v: "完全平等なら45度の均等分配線に一致。不平等なほど均等分配線より下に膨らむ", gap: 0.4 },
     { k: "ジニ係数", v: "均等分配線とローレンツ曲線に囲まれた面積から算出。0（完全平等）〜1（完全不平等）", gap: 0.4 },
     { k: "垂直的公平／水平的公平", v: "異なる状況の人には異なる扱い（累進課税）／同じ状況の人には同じ扱い", gap: 0.4 },
+    { k: "社会厚生関数", v: "ベンサム型：効用の単純合計（W＝UA＋UB）を最大化。ロールズ型：最も低い効用（W＝min(UA,UB)）を最大化するマキシミン原則", gap: 0.55 },
   ], { fontSize: 11, labelW: 2.3 });
   cy += 0.1;
   s.addText([
@@ -1509,7 +1514,7 @@ addDividerSlide(pres, {
   ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "B", rankLabel: "頻出論点",
-    related: "関連：A-36 所得再分配と税制（ジニ係数は再分配政策の効果測定にも使われる）。",
+    related: "関連：A-36 所得再分配と税制。ベンサム型は効用の合計のみ重視し分配には無関心、平等志向はロールズ型。",
     years: mkYears(new Set(["'20", "'25"])),
   });
 }
@@ -1533,6 +1538,7 @@ addDividerSlide(pres, {
   cy = addTermRows(s, proseX, cy, proseW, [
     { k: "労働の限界生産力価値", v: "労働を1単位追加で雇うことで得られる収入の増加分（限界生産物×製品価格）", gap: 0.45 },
     { k: "限界生産力説", v: "賃金率＝労働の限界生産力価値。生産要素への報酬はその要素が生む追加的価値で決まる", gap: 0.45 },
+    { k: "買い手独占（モノプソニー）", v: "雇用主が1社のみの労働市場。限界費用曲線が供給曲線より上に位置し、完全競争より雇用量・賃金とも低くなる", gap: 0.55 },
   ], { fontSize: 11.5, labelW: 2.3 });
   cy += 0.1;
   s.addText([
@@ -1546,7 +1552,7 @@ addDividerSlide(pres, {
   ], { x: proseX, y: cy, w: proseW, h: 0.4, fontFace: F_BODY, fontSize: 9.5, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2 });
   addFreqBar(s, {
     y: 6.55, rank: "A", rankLabel: "最頻出論点",
-    related: "関連：A-28 利潤最大化（MR＝MCの考え方を生産要素市場に応用したもの）。",
+    related: "関連：A-28 利潤最大化の応用。買い手独占では最低賃金の導入がかえって雇用量を増やしうる逆説的な結果に注意。",
     years: mkYears(new Set(["'16", "'17", "'18", "'20", "'21", "'23", "'24"])),
   });
 }
@@ -1568,7 +1574,8 @@ addDividerSlide(pres, {
     { name: "累進課税制度", tag: "垂直的公平", desc: "所得が高いほど税率も高くなる仕組み。所得税・相続税が代表例" },
     { name: "社会保障制度", tag: "", desc: "年金・医療保険・生活保護・失業給付などを通じた所得移転" },
     { name: "負の所得税", tag: "", desc: "一定所得を下回る世帯に給付を行う（マイナスの税を課す）という制度案" },
-  ], { rowH: 1.0, nameW: 2.5, tagW: 1.7 });
+    { name: "基礎控除つき比例税", tag: "限界税率一定", desc: "限界税率（傾き）は一定でも、平均税率（税額÷所得）は所得が高いほど限界税率に近づいていく" },
+  ], { rowH: 0.75, nameW: 2.5, tagW: 1.7 });
   s.addText([
     { text: "具体例\n", options: { fontFace: F_MONO, fontSize: 8.5, bold: true, color: INK_SOFT, breakLine: true } },
     { text: "製造業A社の給与計算担当者は、累進課税により高所得の管理職ほど源泉徴収の税率区分（限界税率）が上がる点を踏まえて手取り額を説明する必要がある。企業が負担する厚生年金・健康保険料も、社会保障制度を通じた所得再分配の一部を企業側が担っている側面がある。", options: { fontFace: F_BODY, fontSize: 10, color: INK } },
